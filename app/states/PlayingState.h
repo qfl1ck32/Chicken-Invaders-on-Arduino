@@ -46,21 +46,13 @@ class PlayingState : public State {
         //         new Chicken(0, 5);
         //         break;
         // }
-
-        show("START!!!");
     }
 
     void handle() {
-        // show("Fac handle.");
         joystick->handleJoystickMovements();
-        // show("Gata joystick.");
         gameEngine->run();
-        // show("Gata engine.");
-
         gameStatus->show(gameEngine->score, spaceship->lifes, this->startTime);
-        // show("Gata game status.");
         graphicsEngine->renderChanges(gameEngine->changes);
-        // show("Gata graphics.");
     }
 
     void cleanup() {

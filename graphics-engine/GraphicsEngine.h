@@ -33,8 +33,6 @@ void GraphicsEngine::renderChanges(LinkedList<PixelChange> *changes) {
     while (changes->size()) {
         PixelChange change = changes->remove(0);
 
-        // show(change.x, ", ", change.y, ", ", change.state);
-
         this->matrix->setLed(0, change.x, change.y, change.state);
     }
 }

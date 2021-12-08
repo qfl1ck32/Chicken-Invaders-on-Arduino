@@ -24,8 +24,6 @@ class LeaderboardState : public State {
         // while (scores->size()) {
         //     String entry = scores->get(0);
 
-        //     show("Da, am size, iau string-ul: ", entry);
-
         //     scores->remove(0);
 
         //     messages[index] = String(index);
@@ -39,8 +37,6 @@ class LeaderboardState : public State {
         if (index == 1) {
             messages[index] = "No high scores";
         }
-
-        // show("Gata, am mesajele, lungime: ", numberOfHighscores);
 
         // free(scores);
 

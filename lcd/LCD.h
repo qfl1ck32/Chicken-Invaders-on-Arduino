@@ -53,7 +53,7 @@ class LCD : public LiquidCrystal {
     void setup(short, short);
     void scrollDisplayLeft();
 
-    void scrollRow(int);
+    void scrollRow(int row, int skip);
 
     void clearRow(int);
 };
@@ -77,14 +77,10 @@ void LCD::printOnRow(String str, int row, int startAtColumn = 0) {
         return;
     }
 
-    // show("Current: '", current, "', replace: '", str, "', sunt egale: ", current == str, ", start at: ", startAtColumn);
-
     // FIXME: not working how it's supposed to
     if (this->lastStrings[row].length() <= startAtColumn) {
-        // show("Intra in primul!");
         this->lastStrings[row].concat(str);
     } else {
-        // show("Intra in al doile!");
         this->lastStrings[row].replace(current, str);
     }
 
@@ -97,7 +93,8 @@ void LCD::printOnRow(String str, int row, int startAtColumn = 0) {
     this->scrollOffsets[row] = 0;
 }
 
-void LCD::scrollRow(int row) {
+// TODO: implement the "skip" part
+void LCD::scrollRow(int row, int skip = 0) {
     String word = this->lastStrings[row];
 
     int scrollOffset = this->scrollOffsets[row];
@@ -105,6 +102,8 @@ void LCD::scrollRow(int row) {
     this->setCursor(0, row);
 
     String wordToShow = "";
+
+    show(word);
 
     // FIXME: inefficient?
     if (scrollOffset < word.length()) {

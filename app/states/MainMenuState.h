@@ -3,11 +3,11 @@
 class MainMenuState : public State {
    public:
     MainMenuState(int state) : State(state) {
-        const char *messages[] = {"Play", "Settings", "Leaderboard", "Reset"};
+        const char *messages[] = {"Play", "Settings", "Leaderboard", "About"};
 
         mainMenu->setMessages(messages, sizeof(messages) / sizeof(char *));
 
-        HandlerFunction handlers[] = {MainMenuState::goToPlay, MainMenuState::goToSettings, MainMenuState::goToLeaderboard};
+        HandlerFunction handlers[] = {MainMenuState::goToPlay, MainMenuState::goToSettings, MainMenuState::goToLeaderboard, MainMenuState::goToAbout};
         mainMenu->setHandlers(handlers, sizeof(handlers) / sizeof(HandlerFunction));
     }
 
@@ -52,5 +52,9 @@ class MainMenuState : public State {
 
     static void goToLeaderboard() {
         stateManager->changeState(leaderboardMenuStateId);
+    }
+
+    static void goToAbout() {
+        stateManager->changeState(aboutMenuStateId);
     }
 };

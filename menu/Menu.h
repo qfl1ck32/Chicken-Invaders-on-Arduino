@@ -1,5 +1,7 @@
 #pragma once
 
+#include "../delayer/Delayer.h"
+
 class Menu {
    public:
     LCD *lcd;
@@ -12,6 +14,8 @@ class Menu {
     int numberOfMessages;
     int numberOfHandlers;
 
+    Delayer scrollDelayer = Delayer(400);
+
     Menu(LCD *lcd) {
         this->lcd = lcd;
 
@@ -23,7 +27,7 @@ class Menu {
 
     void setMessages(const char **, int);
 
-    void run();
+    void run(bool shouldScrollCurrentRow);
 
     void goUp();
 
@@ -65,7 +69,7 @@ void Menu::setHandlers(HandlerFunction handlers[], int numberOfHandlers) {
     this->numberOfHandlers = numberOfHandlers;
 }
 
-void Menu::run() {
+void Menu::run(bool shouldScrollCurrentRow = false) {
     int i = this->currentRow >= this->lcd->rows ? this->currentRow - this->lcd->rows + 1 : 0;
 
     int row = 0;
@@ -80,6 +84,11 @@ void Menu::run() {
         strcat(result, this->messages[i + row]);
 
         this->lcd->printOnRow(result, row);
+
+        if (shouldScrollCurrentRow && row && row == this->currentRow - i && this->scrollDelayer.canRun()) {
+            this->lcd->scrollRow(row, 2);
+        }
+
         row++;
     }
 }

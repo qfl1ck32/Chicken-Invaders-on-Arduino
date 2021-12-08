@@ -14,6 +14,7 @@ class WelcomeState : public State {
 
     void cleanup() {
         button->clearHandler();
+        lcd->clear();
     }
 
     static void moveToEnterYourNameState() {
