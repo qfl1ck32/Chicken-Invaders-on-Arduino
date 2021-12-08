@@ -28,6 +28,7 @@ Menu *mainMenu = new Menu(lcd);
 Menu *settingsMenu = new Menu(lcd);
 
 Menu *leaderboardMenu = new Menu(lcd);
+Menu *aboutMenu = new Menu(lcd);
 
 Button *button = new Button(buttonPin);
 

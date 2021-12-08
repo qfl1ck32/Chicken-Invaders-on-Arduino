@@ -2,6 +2,7 @@
 // #include <avr_debugger.h>
 
 #include "./app/app.h"
+#include "./app/states/AboutMenuState.h"
 #include "./app/states/GameOverState.h"
 #include "./app/states/LeaderboardState.h"
 #include "./app/states/MainMenuState.h"
@@ -23,7 +24,6 @@ void handleButtonStateChange() {
 }
 
 void setup() {
-    show("Fac setup.");
     Serial.begin(baudRate);
 
     joystick->setup(handleSw);
@@ -44,15 +44,16 @@ void setup() {
 
     stateManager->addState(new LeaderboardState(leaderboardMenuStateId));
 
+    stateManager->addState(new AboutMenuState(aboutMenuStateId));
+
+    // TODO: remove all links to playingState -> ...
     stateManager->addState(playingState);
 
     stateManager->addState(new GameOverState(gameOverStateId));
 
     stateManager->addState(new YouWonState(youWonStateId));
 
-    stateManager->changeState(playingStateId);
-
-    show("Start.");
+    stateManager->changeState(aboutMenuStateId);
 }
 
 void loop() {
