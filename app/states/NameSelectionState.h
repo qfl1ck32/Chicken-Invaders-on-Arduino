@@ -2,7 +2,8 @@
 
 class NameSelectionState : public State {
    public:
-    NameSelectionState(int state) : State(state) {}
+    NameSelectionState(int state) : State(state) {
+    }
 
     void handle() {
         joystick->handleJoystickMovementOnAxisX();

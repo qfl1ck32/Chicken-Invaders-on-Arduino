@@ -3,26 +3,28 @@
 class AboutMenuState : public State {
    public:
     AboutMenuState(int state) : State(state) {
-        const char *messages[] = {"Back", "-Chicken Invaders-.", "Programmer: Rusu", "Designer: Rusu", "NoSleeper: Rusu"};
-
-        aboutMenu->setMessages(messages, sizeof(messages) / sizeof(char *));
-
-        HandlerFunction handlers[] = {AboutMenuState::goBack};
-        aboutMenu->setHandlers(handlers, sizeof(handlers) / sizeof(HandlerFunction));
     }
 
     void setup() {
+        const char *messages[] = {"Back", "App Name: Chicken Invaders", "Programmer: Rusu Andrei-Cristian",
+                                  "Github: https://github.com/qfl1ck32/Chicken-Invaders-on-Arduino"};
+
+        menu->setMessages(messages, sizeof(messages) / sizeof(char *));
+
+        HandlerFunction handlers[] = {AboutMenuState::goBack};
+        menu->setHandlers(handlers, sizeof(handlers) / sizeof(HandlerFunction));
+
         joystick->clearHandlers();
         button->clearHandler();
 
-        joystick->setHandlerOnYAxisChangeUp(goUp);
-        joystick->setHandlerOnYAxisChangeDown(goDown);
+        joystick->setHandlerOnYAxisChangeUp(menuGoUp);
+        joystick->setHandlerOnYAxisChangeDown(menuGoDown);
 
-        joystick->setHandlerSwStateChange(AboutMenuState::select);
+        joystick->setHandlerSwStateChange(menuSelect);
     }
 
     void handle() {
-        aboutMenu->run(true);
+        menu->run(true);
         joystick->handleJoystickMovements();
     }
 
@@ -31,18 +33,6 @@ class AboutMenuState : public State {
         button->clearHandler();
 
         lcd->clear();
-    }
-
-    static void goUp() {
-        aboutMenu->goUp();
-    }
-
-    static void goDown() {
-        aboutMenu->goDown();
-    }
-
-    static void select() {
-        aboutMenu->select();
     }
 
     static void goBack() {

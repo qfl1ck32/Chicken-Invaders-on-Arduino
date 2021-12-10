@@ -3,42 +3,31 @@
 class SettingsMenuState : public State {
    public:
     SettingsMenuState(int state) : State(state) {
-        const char *messages[] = {"Go back", "Contrast -", "Contrast +", "Backlight -", "Backlight +"};
+    }
 
-        settingsMenu->setMessages(messages, sizeof(messages) / sizeof(char *));
+    void setup() {
+        const char *messages[] = {"Go back", "Contrast -", "Contrast +", "Backlight -", "Backlight +", "Matrix light +", "Matrix light -"};
+
+        menu->setMessages(messages, sizeof(messages) / sizeof(char *));
 
         HandlerFunction handlers[] = {SettingsMenuState::goBack, SettingsMenuState::decreaseContrast, SettingsMenuState::increaseContrast,
                                       SettingsMenuState::decreaseBacklight, SettingsMenuState::increaseBacklight};
 
-        settingsMenu->setHandlers(handlers, sizeof(handlers) / sizeof(HandlerFunction));
-    }
+        menu->setHandlers(handlers, sizeof(handlers) / sizeof(HandlerFunction));
 
-    void setup() {
-        joystick->setHandlerOnYAxisChangeUp(SettingsMenuState::goUp);
-        joystick->setHandlerOnYAxisChangeDown(SettingsMenuState::goDown);
+        joystick->setHandlerOnYAxisChangeUp(menuGoUp);
+        joystick->setHandlerOnYAxisChangeDown(menuGoDown);
 
-        joystick->setHandlerSwStateChange(SettingsMenuState::select);
+        joystick->setHandlerSwStateChange(menuSelect);
     }
 
     void handle() {
-        settingsMenu->run();
+        menu->run();
         joystick->handleJoystickMovements();
     }
 
     void cleanup() {
         joystick->clearHandlers();
-    }
-
-    static void goUp() {
-        settingsMenu->goUp();
-    }
-
-    static void goDown() {
-        settingsMenu->goDown();
-    }
-
-    static void select() {
-        settingsMenu->select();
     }
 
     static void goBack() {

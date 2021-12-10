@@ -18,6 +18,6 @@ class WelcomeState : public State {
     }
 
     static void moveToEnterYourNameState() {
-        stateManager->changeState(nameSelectionStateId);
+        stateManager->changeState(mainMenuStateId);
     }
 };

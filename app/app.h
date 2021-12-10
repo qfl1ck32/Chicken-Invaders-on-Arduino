@@ -24,11 +24,19 @@ Joystick *joystick = new Joystick(pinSW, pinX, pinY);
 
 NameSelector *nameSelector = new NameSelector(lcd, 1);
 
-Menu *mainMenu = new Menu(lcd);
-Menu *settingsMenu = new Menu(lcd);
+Menu *menu = new Menu(lcd);
 
-Menu *leaderboardMenu = new Menu(lcd);
-Menu *aboutMenu = new Menu(lcd);
+void menuGoUp() {
+    menu->goUp();
+}
+
+void menuGoDown() {
+    menu->goDown();
+}
+
+void menuSelect() {
+    menu->select();
+}
 
 Button *button = new Button(buttonPin);
 

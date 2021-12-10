@@ -10,7 +10,7 @@ class Spaceship : public Unit {
     short lifes;
 
     Spaceship(short x, short y) : Unit(x, y) {
-        this->lifes = 1;
+        this->lifes = 3;
     }
 
     static Pixel* contour;

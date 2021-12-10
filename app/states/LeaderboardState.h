@@ -3,9 +3,12 @@
 class LeaderboardState : public State {
    public:
     LeaderboardState(int state) : State(state) {
+    }
+
+    void setup() {
         HandlerFunction handlers[] = {LeaderboardState::goBack};
 
-        leaderboardMenu->setHandlers(handlers, sizeof(handlers) / sizeof(HandlerFunction));
+        menu->setHandlers(handlers, sizeof(handlers) / sizeof(HandlerFunction));
 
         // LinkedList<String> *scores = leaderboard->get();
 
@@ -40,18 +43,16 @@ class LeaderboardState : public State {
 
         // free(scores);
 
-        leaderboardMenu->setMessages(messages, sizeof(messages) / sizeof(char *));
-    }
+        menu->setMessages(messages, sizeof(messages) / sizeof(char *));
 
-    void setup() {
-        joystick->setHandlerOnYAxisChangeUp(LeaderboardState::goUp);
-        joystick->setHandlerOnYAxisChangeDown(LeaderboardState::goDown);
+        joystick->setHandlerOnYAxisChangeUp(menuGoUp);
+        joystick->setHandlerOnYAxisChangeDown(menuGoDown);
 
-        joystick->setHandlerSwStateChange(LeaderboardState::select);
+        joystick->setHandlerSwStateChange(menuSelect);
     }
 
     void handle() {
-        leaderboardMenu->run();
+        menu->run();
         joystick->handleJoystickMovements();
     }
 
@@ -59,18 +60,6 @@ class LeaderboardState : public State {
         lcd->clear();
 
         joystick->clearHandlers();
-    }
-
-    static void goUp() {
-        leaderboardMenu->goUp();
-    }
-
-    static void goDown() {
-        leaderboardMenu->goDown();
-    }
-
-    static void select() {
-        leaderboardMenu->select();
     }
 
     static void goBack() {

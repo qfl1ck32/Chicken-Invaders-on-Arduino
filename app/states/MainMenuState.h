@@ -3,23 +3,24 @@
 class MainMenuState : public State {
    public:
     MainMenuState(int state) : State(state) {
-        const char *messages[] = {"Play", "Settings", "Leaderboard", "About"};
-
-        mainMenu->setMessages(messages, sizeof(messages) / sizeof(char *));
-
-        HandlerFunction handlers[] = {MainMenuState::goToPlay, MainMenuState::goToSettings, MainMenuState::goToLeaderboard, MainMenuState::goToAbout};
-        mainMenu->setHandlers(handlers, sizeof(handlers) / sizeof(HandlerFunction));
     }
 
     void setup() {
-        joystick->setHandlerOnYAxisChangeUp(MainMenuState::goUp);
-        joystick->setHandlerOnYAxisChangeDown(MainMenuState::goDown);
+        const char *messages[] = {"Play", "Settings", "Leaderboard", "About"};
 
-        joystick->setHandlerSwStateChange(MainMenuState::select);
+        menu->setMessages(messages, sizeof(messages) / sizeof(char *));
+
+        HandlerFunction handlers[] = {MainMenuState::goToPlay, MainMenuState::goToSettings, MainMenuState::goToLeaderboard, MainMenuState::goToAbout};
+        menu->setHandlers(handlers, sizeof(handlers) / sizeof(HandlerFunction));
+
+        joystick->setHandlerOnYAxisChangeUp(menuGoUp);
+        joystick->setHandlerOnYAxisChangeDown(menuGoDown);
+
+        joystick->setHandlerSwStateChange(menuSelect);
     }
 
     void handle() {
-        mainMenu->run();
+        menu->run();
         joystick->handleJoystickMovements();
     }
 
@@ -28,18 +29,6 @@ class MainMenuState : public State {
         button->clearHandler();
 
         lcd->clear();
-    }
-
-    static void goUp() {
-        mainMenu->goUp();
-    }
-
-    static void goDown() {
-        mainMenu->goDown();
-    }
-
-    static void select() {
-        mainMenu->select();
     }
 
     static void goToPlay() {

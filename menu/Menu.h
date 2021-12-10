@@ -6,7 +6,7 @@ class Menu {
    public:
     LCD *lcd;
 
-    int currentRow = 0;
+    int currentRow;
 
     const char **messages = nullptr;
     HandlerFunction *handlers = nullptr;
@@ -21,6 +21,8 @@ class Menu {
 
         this->numberOfMessages = 0;
         this->numberOfHandlers = 0;
+
+        this->currentRow = 0;
     }
 
     void setHandlers(HandlerFunction *, int);
@@ -37,15 +39,10 @@ class Menu {
 };
 
 void Menu::setMessages(const char **messages, int numberOfMessages) {
-    // if (this->messages != nullptr) {
-    //     for (int i = 0; i < this->numberOfMessages; ++i) {
-    //         free(this->messages[i]);
-    //     }
+    if (this->messages != nullptr) {
+        delete[] this->messages;
+    }
 
-    //     free(this->messages);
-    // }
-
-    // FIXME: this->messages = messages; ?
     this->messages = new const char *[numberOfMessages];
 
     for (int i = 0; i < numberOfMessages; ++i) {
@@ -53,6 +50,9 @@ void Menu::setMessages(const char **messages, int numberOfMessages) {
     }
 
     this->numberOfMessages = numberOfMessages;
+
+    // TODO: this assumes that you actually set the messages when switching menus
+    this->currentRow = 0;
 }
 
 void Menu::setHandlers(HandlerFunction handlers[], int numberOfHandlers) {

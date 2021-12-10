@@ -16,6 +16,9 @@ class GameOverState : public State {
         // TODO: add logic to first show the person another screen
         // if he has the highest score
         button->setOnStateChange(GameOverState::goToMainMenu);
+
+        // TODO: not here
+        matrix->clear();
     }
 
     void handle() {

@@ -13,6 +13,9 @@ class YouWonState : public State {
         lcd->clear();
         joystick->clearHandlers();
         button->setOnStateChange(YouWonState::goToNextLevel);
+
+        // TODO: not here
+        matrix->clear();
     }
 
     void handle() {
