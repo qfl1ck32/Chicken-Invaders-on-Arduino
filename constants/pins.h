@@ -1,27 +1,27 @@
-const char RS = 13;
-const char enable = A5;
-const char d4 = 5;
-const char d5 = 4;
-const char d6 = 8;
-const char d7 = 7;
+const byte RS = 13;
+const byte enable = A5;
+const byte d4 = 5;
+const byte d5 = 4;
+const byte d6 = 8;
+const byte d7 = 7;
 
-const char contrast = 9;
-const char backlight = 6;
+const byte contrast = 9;
+const byte backlight = 6;
 
-const char pinSW = 2;
-const char pinX = A0;
-const char pinY = A1;
+const byte pinSW = 2;
+const byte pinX = A0;
+const byte pinY = A1;
 
-const char buttonPin = 3;
+const byte buttonPin = 3;
 
-const char ledRows = 2;
-const char ledColumns = 16;
+const byte ledRows = 2;
+const byte ledColumns = 16;
 
-const char dinPin = 12;
-const char clockPin = 11;
-const char loadPin = 10;
+const byte dinPin = 12;
+const byte clockPin = 11;
+const byte loadPin = 10;
 
-const char matrixRows = 8;
-const char matrixCols = 8;
+const byte matrixRows = 8;
+const byte matrixCols = 8;
 
 const short baudRate = 9600;
