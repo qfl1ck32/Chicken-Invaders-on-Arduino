@@ -2,45 +2,85 @@
 
 class EEPROMHandler {
    public:
+    short startAt, limit, writeIndex, readIndex;
+
     EEPROMHandler(int startAt, int limit) {
         this->startAt = startAt;
         this->limit = limit;
+
+        this->readIndex = startAt;
+
+        for (int i = 0; i < 1024; ++i) {
+            if (EEPROM.read(i) == 255) {
+                this->writeIndex = i;
+                break;
+            }
+        }
     }
 
-    int startAt;
-    int limit;
+    char* readString(int);
 
-    String readString(int);
+    char* readNext();
 
-    void writeString(int, const String &);
+    void writeString(const char*, int, int);
+
+    void resetReadHead();
 
     void clear();
 
     byte read(int);
 };
 
-void EEPROMHandler::writeString(int offset, const String &str) {
-    byte length = str.length();
+void EEPROMHandler::resetReadHead() {
+    this->readIndex = this->startAt;
+}
+
+void EEPROMHandler::writeString(const char* str, int length, int offset = -1) {
+    if (this->writeIndex + length > limit) return;
+
+    if (offset == -1) {
+        offset = this->writeIndex;
+    }
 
     EEPROM.write(offset, length);
 
     for (int i = 0; i < length; ++i) EEPROM.write(offset + i + 1, str[i]);
+
+    this->writeIndex += (length + 1);
 }
 
-String EEPROMHandler::readString(int position) {
+char* EEPROMHandler::readString(int position) {
     byte length = EEPROM.read(position);
 
-    String str = "";
+    char* str = new char[length + 1];
 
-    for (int i = 0; i < length; ++i) str.concat((char)EEPROM.read(position + 1 + i));
+    for (int i = 0; i < length; ++i) str[i] = (char)EEPROM.read(position + 1 + i);
+
+    str[length] = '\0';
 
     return str;
 }
 
+char* EEPROMHandler::readNext() {
+    byte oldIndex = this->readIndex;
+
+    byte length = EEPROM.read(this->readIndex);
+
+    if (length == 255) return nullptr;
+
+    this->readIndex += length + 1;
+
+    char* ans = this->readString(oldIndex);
+
+    return ans;
+}
+
 void EEPROMHandler::clear() {
-    for (int i = 0; i < 1024; ++i) EEPROM.write(i, 255);
+    for (int i = 0; i < this->limit; ++i) EEPROM.write(i, 255);
 }
 
 byte EEPROMHandler::read(int offset) {
+    if (offset > this->limit) return 0;
+
     return EEPROM.read(offset);
 }

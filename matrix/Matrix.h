@@ -1,5 +1,6 @@
 #pragma once
 
+#include "EEPROM.h"
 #include "LedControl.h"
 
 class Matrix : public LedControl {
@@ -7,9 +8,20 @@ class Matrix : public LedControl {
     short rows;
     short columns;
 
+    short intensity;
+
     Matrix(int dataPin, int clkPin, int csPin, int numDevices, int rows, int columns) : LedControl(dataPin, clkPin, csPin, numDevices) {
         this->rows = rows;
         this->columns = columns;
+
+        // TODO: addr
+        this->setIntensity(0, 15);
+
+        byte savedIntensity = EEPROM.read(EEPROM_MATRIX_INTENSITY_INDEX);
+
+        this->intensity = savedIntensity == 255 ? 8 : savedIntensity;
+
+        this->increaseIntensity(0);
     }
 
     void setup();
@@ -17,11 +29,22 @@ class Matrix : public LedControl {
     void setLed(int, int, int, boolean);
 
     void clear();
+
+    void increaseIntensity(short);
 };
 
+void Matrix::increaseIntensity(short amount) {
+    this->intensity = constrain(this->intensity + amount, 0, 15);
+
+    // TODO: addr
+    this->setIntensity(0, this->intensity);
+
+    EEPROM.write(EEPROM_MATRIX_INTENSITY_INDEX, this->intensity);
+}
+
 void Matrix::setup() {
+    // TODO: addr
     this->shutdown(0, false);
-    this->setIntensity(0, 2);
     this->clearDisplay(0);
 }
 

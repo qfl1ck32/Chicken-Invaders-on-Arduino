@@ -2,7 +2,7 @@
 
 #include "../state/State.h"
 
-#define MAX_STATES 8
+#define MAX_STATES 12
 
 class StateManager {
    public:
@@ -18,6 +18,8 @@ class StateManager {
 
     void addState(State *);
 
+    void addStates(State *[], int);
+
     void changeState(short);
     void handle();
 };
@@ -26,6 +28,14 @@ void StateManager::addState(State *state) {
     this->states[this->numberOfStates] = state;
 
     ++this->numberOfStates;
+}
+
+void StateManager::addStates(State *states[], int numberOfStates) {
+    for (int i = 0; i < numberOfStates; ++i) {
+        this->states[this->numberOfStates + i] = states[i];
+    }
+
+    this->numberOfStates += numberOfStates;
 }
 
 void StateManager::handle() {

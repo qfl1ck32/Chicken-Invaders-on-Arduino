@@ -1,82 +1,93 @@
 #pragma once
 
 #include "../../eeprom-handler/EEPROMHandler.h"
+#include "../../utils/utils.h"
+#include "./NameAndScore.h"
+#include "LinkedList.h"
 
 class Leaderboard {
    public:
-    EEPROMHandler* eeprom;
+    EEPROMHandler *eeprom;
 
-    int currentPosition;
-
-    static String nameAndScoreDelimiter;
-    static String entryDelimiter;
+    static const char *nameAndScoreDelimiter;
 
     static int size;
 
     Leaderboard() {
-        this->eeprom = new EEPROMHandler(0, 256);
+        this->eeprom = new EEPROMHandler(EEPROM_LEADERBOARD_START_INDEX, 256);
 
-        this->eeprom->clear();
+        // this->eeprom->clear();
+    }
 
-        if (this->eeprom->read(0) != 255) {
-            int i = 1;
+    LinkedList<NameAndScore> *get();
 
-            while (this->eeprom->read(i) && i < 256) {
-                ++i;
-            }
+    void write(const char *, int);
 
-            this->currentPosition = i;
-        }
+    int getHighscore();
+};
 
-        else {
-            this->currentPosition = 0;
+const char *Leaderboard::nameAndScoreDelimiter = "|";
+
+int Leaderboard::size = 3;
+
+int Leaderboard::getHighscore() {
+    LinkedList<NameAndScore> *scores = this->get();
+    int maxScore = 0;
+
+    while (scores->size()) {
+        NameAndScore element = scores->remove(0);
+
+        if (element.score > maxScore) {
+            maxScore = element.score;
         }
     }
 
-    char** get();
+    free(scores);
 
-    void write(String, float);
-};
-
-String Leaderboard::nameAndScoreDelimiter = "|";
-String Leaderboard::entryDelimiter = ";";
-int Leaderboard::size = 10;
-
-char** Leaderboard::get() {
-    // LinkedList<String> *leaderboard = new LinkedList<String>();
-
-    // int position = 0;
-
-    // while (this->eeprom->read(position) != 255 && position < this->eeprom->limit) {
-    //     String str = this->eeprom->readString(position);
-
-    //     int delimiterIndex = str.indexOf(Leaderboard::nameAndScoreDelimiter);
-
-    //     String name = str.substring(0, delimiterIndex);
-
-    //     String score = str.substring(delimiterIndex + 1);
-
-    //     String entry = name;
-
-    //     entry.concat(" | ");
-
-    //     entry.concat(score);
-
-    //     leaderboard->add(entry);
-
-    //     position += str.length();
-    // }
-
-    // return leaderboard;
+    return maxScore;
 }
 
-void Leaderboard::write(String name, float score) {
-    String entry = name;
+LinkedList<NameAndScore> *Leaderboard::get() {
+    LinkedList<NameAndScore> *leaderboard = new LinkedList<NameAndScore>();
 
-    entry.concat(Leaderboard::nameAndScoreDelimiter);
-    entry.concat(score);
+    char *str;
 
-    this->eeprom->writeString(this->currentPosition, entry);
+    while ((str = this->eeprom->readNext())) {
+        char *pointerToDelimiter = strchr(str, Leaderboard::nameAndScoreDelimiter[0]);
 
-    this->currentPosition += entry.length();
+        int delimiterIndex = pointerToDelimiter - str + 1;
+
+        char *name = new char[delimiterIndex];
+
+        strncpy(name, str, delimiterIndex);
+
+        name[delimiterIndex - 1] = '\0';
+
+        short score = atoi(str + delimiterIndex);
+
+        leaderboard->add(NameAndScore(name, score));
+
+        free(str);
+    }
+
+    this->eeprom->resetReadHead();
+
+    return leaderboard;
+}
+
+void Leaderboard::write(const char *name, int score) {
+    char entry[strlen(name) + getNumberOfDigits(score) + 2];
+
+    strncpy(entry, name, strlen(name));
+
+    strncpy(entry + strlen(name), Leaderboard::nameAndScoreDelimiter, 1);
+
+    sprintf(entry + strlen(name) + 1, "%d", score);
+
+    Serial.println(entry);
+    Serial.println(strlen(entry));
+
+    Serial.println("Done writing.");
+
+    this->eeprom->writeString(entry, strlen(entry));
 }

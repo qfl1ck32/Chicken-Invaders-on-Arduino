@@ -4,6 +4,11 @@
 
 typedef void (*HandlerFunction)();
 
+#define EEPROM_MATRIX_INTENSITY_INDEX 0
+#define EEPROM_LCD_BACKLIGHT_INDEX 1
+#define EEPROM_LCD_CONTRAST_INDEX 2
+#define EEPROM_LEADERBOARD_START_INDEX 3
+
 #include "../button/Button.h"
 #include "../constants/pins.h"
 #include "../joystick/Joystick.h"

@@ -23,6 +23,8 @@ GameEngine::GameEngine(Matrix *&matrix) {
 void GameEngine::resetState() {
     this->matrix->clear();
 
+    this->finalScore = this->score;
+
     this->score = 0;
 
     this->numberOfUnits = 0;
@@ -45,14 +47,6 @@ void GameEngine::resetState() {
     }
 }
 
-// void GameEngine::handleGameOver() {
-//     // leaderboard->write(nameSelector->name, this->score);
-
-//     stateManager->changeState(gameOverStateId);
-
-//     this->resetState();
-// }
-
 void GameEngine::run() {
     for (int i = 0; i < this->numberOfUnits; ++i) {
         this->unitArray[i]->action();
@@ -63,23 +57,27 @@ void GameEngine::run() {
     }
 
     for (int i = 0; i < this->numberOfUnits; ++i) {
-        if (!this->unitArray[i]->isAlive) {
-            int x = this->unitArray[i]->x;
-            int y = this->unitArray[i]->y;
-
-            this->unitMatrix[x][y] = 0;
-            delete this->unitArray[i];
-            this->unitArray[i] = 0;
-
-            for (int j = i + 1; j < this->numberOfUnits; ++j) {
-                this->unitArray[j - 1] = this->unitArray[j];
-            }
-
-            this->changes->add(PixelChange(x, y, false));
-
-            --this->numberOfUnits;
-            --i;
+        if (this->unitArray[i]->isAlive) {
+            continue;
         }
+
+        int x = this->unitArray[i]->x;
+        int y = this->unitArray[i]->y;
+
+        this->unitMatrix[x][y] = 0;
+
+        delete this->unitArray[i];
+
+        this->unitArray[i] = 0;
+
+        for (int j = i + 1; j < this->numberOfUnits; ++j) {
+            this->unitArray[j - 1] = this->unitArray[j];
+        }
+
+        this->changes->add(PixelChange(x, y, false));
+
+        --this->numberOfUnits;
+        --i;
     }
 }
 

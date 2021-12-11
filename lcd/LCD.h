@@ -2,6 +2,7 @@
 
 #include "../serial/printer/SerialPrinter.h"
 #include "../strings/utils.h"
+#include "EEPROM.h"
 
 byte heartCharArray[8] = {
     0b00000,
@@ -37,12 +38,17 @@ class LCD : public LiquidCrystal {
         pinMode(this->contrastPin, OUTPUT);
         pinMode(this->backlightPin, OUTPUT);
 
-        this->contrast = 0;
+        byte savedContrast = EEPROM.read(EEPROM_LCD_CONTRAST_INDEX);
 
-        this->backlight = 0;
+        // TODO: "== 255" <=> "== EEPROM_MISSING_VALUE"
+        this->contrast = savedContrast == 255 ? 100 : savedContrast;
 
-        this->changeContrast(100);
-        this->changeBacklight(50);
+        byte savedBacklight = EEPROM.read(EEPROM_LCD_BACKLIGHT_INDEX);
+
+        this->backlight = savedBacklight == 255 ? 50 : savedBacklight;
+
+        this->changeContrast(0);
+        this->changeBacklight(0);
     }
 
     void changeContrast(int);
@@ -62,12 +68,16 @@ void LCD::changeContrast(int value) {
     this->contrast = constrain(this->contrast + value, 20, 240);
 
     analogWrite(this->contrastPin, this->contrast);
+
+    EEPROM.write(EEPROM_LCD_CONTRAST_INDEX, this->contrast);
 }
 
 void LCD::changeBacklight(int value) {
     this->backlight = constrain(this->backlight + value, 10, 140);
 
     analogWrite(this->backlightPin, this->backlight);
+
+    EEPROM.write(EEPROM_LCD_BACKLIGHT_INDEX, this->backlight);
 }
 
 void LCD::printOnRow(String str, int row, int startAtColumn = 0) {

@@ -6,12 +6,12 @@ class SettingsMenuState : public State {
     }
 
     void setup() {
-        const char *messages[] = {"Go back", "Contrast -", "Contrast +", "Backlight -", "Backlight +", "Matrix light +", "Matrix light -"};
+        const char *messages[] = {"Go back", "Level", "LCD", "Matrix"};
 
         menu->setMessages(messages, sizeof(messages) / sizeof(char *));
 
-        HandlerFunction handlers[] = {SettingsMenuState::goBack, SettingsMenuState::decreaseContrast, SettingsMenuState::increaseContrast,
-                                      SettingsMenuState::decreaseBacklight, SettingsMenuState::increaseBacklight};
+        HandlerFunction handlers[] = {SettingsMenuState::goBack, SettingsMenuState::goToLevel, SettingsMenuState::goToLCD,
+                                      SettingsMenuState::goToMatrix};
 
         menu->setHandlers(handlers, sizeof(handlers) / sizeof(HandlerFunction));
 
@@ -34,19 +34,15 @@ class SettingsMenuState : public State {
         stateManager->changeState(mainMenuStateId);
     }
 
-    static void increaseContrast() {
-        lcd->changeContrast(-20);
+    static void goToLevel() {
+        // TODO
     }
 
-    static void decreaseContrast() {
-        lcd->changeContrast(20);
+    static void goToLCD() {
+        stateManager->changeState(settingsLCDMenuStateId);
     }
 
-    static void increaseBacklight() {
-        lcd->changeBacklight(10);
-    }
-
-    static void decreaseBacklight() {
-        lcd->changeBacklight(-10);
+    static void goToMatrix() {
+        stateManager->changeState(settingsMatrixMenuStateId);
     }
 };

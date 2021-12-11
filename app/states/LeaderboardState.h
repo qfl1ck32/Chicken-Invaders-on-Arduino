@@ -10,38 +10,42 @@ class LeaderboardState : public State {
 
         menu->setHandlers(handlers, sizeof(handlers) / sizeof(HandlerFunction));
 
-        // LinkedList<String> *scores = leaderboard->get();
+        LinkedList<NameAndScore> *scores = leaderboard->get();
 
-        // int numberOfHighscores = scores->size();
+        int numberOfHighscores = scores->size();
 
-        int numberOfHighscores = 0;
+        const char *messages[numberOfHighscores == 0 ? 2 : 1 + numberOfHighscores];
 
-        // String messages[numberOfHighscores == 0 ? 2 : numberOfHighscores];
-
-        const char *messages[] = {"Go back", "No haiscors"};
-
-        // messages[0] = "Go back";
+        messages[0] = "Go back";
 
         int index = 1;
 
-        // while (scores->size()) {
-        //     String entry = scores->get(0);
+        while (scores->size()) {
+            NameAndScore entry = scores->remove(0);
 
-        //     scores->remove(0);
+            // char leaderboardEntry[strlen(entry.name) + getNumberOfDigits(entry.score) + getNumberOfDigits(index) + 7];
 
-        //     messages[index] = String(index);
+            // sprintf(messages[index], "%d. %s - %d", index, entry.name, entry.score);
 
-        //     messages[index].concat(". ");
-        //     messages[index].concat(entry);
+            // TODO: come back and format w/ score too
+            messages[index] = entry.name;
 
-        //     ++index;
-        // }
+            // TODO: feels stupid
+            // free(entry.name);
+
+            // show("Bag fix asta:::", entry.name);
+
+            ++index;
+        }
 
         if (index == 1) {
             messages[index] = "No high scores";
         }
 
-        // free(scores);
+        Serial.println(messages[0]);
+        Serial.println(messages[1]);
+
+        free(scores);
 
         menu->setMessages(messages, sizeof(messages) / sizeof(char *));
 

@@ -8,6 +8,8 @@
 #include "./app/states/MainMenuState.h"
 #include "./app/states/NameSelectionState.h"
 #include "./app/states/PlayingState.h"
+#include "./app/states/SettingsLCDMenuState.h"
+#include "./app/states/SettingsMatrixMenuState.h"
 #include "./app/states/SettingsMenuState.h"
 #include "./app/states/WelcomeState.h"
 #include "./app/states/YouWonState.h"
@@ -34,6 +36,27 @@ void setup() {
 
     matrix->setup();
 
+    // leaderboard->write("GigiNormal", 32.0);
+    // leaderboard->write("MataInPizda", 69.69);
+
+    // LinkedList<char *> *lb = leaderboard->get();
+
+    // while (lb->size()) {
+    //     Serial.println("Merge: ");
+
+    //     char *msg = lb->remove(0);
+
+    //     Serial.println(msg);
+
+    //     free(msg);
+    // }
+
+    // Serial.println("Gata...");
+
+    // free(lb);
+
+    // leaderboard->write("Gigi", 32);
+
     stateManager->addState(new WelcomeState(welcomeStateId));
 
     stateManager->addState(new NameSelectionState(nameSelectionStateId));
@@ -41,6 +64,10 @@ void setup() {
     stateManager->addState(new MainMenuState(mainMenuStateId));
 
     stateManager->addState(new SettingsMenuState(settingsMenuStateId));
+
+    stateManager->addState(new SettingsLCDMenuState(settingsLCDMenuStateId));
+
+    stateManager->addState(new SettingsMatrixMenuState(settingsMatrixMenuStateId));
 
     stateManager->addState(new LeaderboardState(leaderboardMenuStateId));
 
@@ -51,9 +78,9 @@ void setup() {
 
     stateManager->addState(new GameOverState(gameOverStateId));
 
-    stateManager->addState(new YouWonState(youWonStateId));
+    // stateManager->addState(new YouWonState(youWonStateId));
 
-    stateManager->changeState(aboutMenuStateId);
+    stateManager->changeState(leaderboardMenuStateId);
 }
 
 void loop() {

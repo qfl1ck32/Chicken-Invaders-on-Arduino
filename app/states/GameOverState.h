@@ -4,10 +4,9 @@
 
 class GameOverState : public State {
    public:
-    Delayer *delayer;
+    Delayer delayer = Delayer(500);
 
     GameOverState(int state) : State(state) {
-        this->delayer = new Delayer(500);
     }
 
     void setup() {
@@ -15,7 +14,7 @@ class GameOverState : public State {
 
         // TODO: add logic to first show the person another screen
         // if he has the highest score
-        button->setOnStateChange(GameOverState::goToMainMenu);
+        button->setOnStateChange(GameOverState::goToNextStep);
 
         // TODO: not here
         matrix->clear();
@@ -32,7 +31,7 @@ class GameOverState : public State {
         lcd->printOnRow(gameOverMessage, 0);
         lcd->printOnRow(F("Press X to continue."), 1);
 
-        if (this->delayer->canRun()) {
+        if (this->delayer.canRun()) {
             lcd->scrollRow(0);
             lcd->scrollRow(1);
         }
@@ -45,7 +44,15 @@ class GameOverState : public State {
         button->clearHandler();
     }
 
-    static void goToMainMenu() {
-        stateManager->changeState(mainMenuStateId);
+    static void goToNextStep() {
+        // TODO: please do something, lol
+        if (gameEngine->score + 5 > leaderboard->getHighscore()) {
+            leaderboard->write("Rusu, lol", gameEngine->score + 5);
+            stateManager->changeState(nameSelectionStateId);
+        }
+
+        else {
+            stateManager->changeState(mainMenuStateId);
+        }
     }
 };

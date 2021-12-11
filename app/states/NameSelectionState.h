@@ -2,8 +2,7 @@
 
 class NameSelectionState : public State {
    public:
-    NameSelectionState(int state) : State(state) {
-    }
+    NameSelectionState(int state) : State(state) {}
 
     void handle() {
         joystick->handleJoystickMovementOnAxisX();
@@ -19,7 +18,7 @@ class NameSelectionState : public State {
         joystick->setHandlerOnYAxisChangeDown(NameSelectionState::goDown);
         joystick->setHandlerSwStateChange(NameSelectionState::handleSwStateChange);
 
-        button->setOnStateChange(NameSelectionState::moveToPlayingState);
+        button->setOnStateChange(NameSelectionState::finish);
     }
 
     void cleanup() {
@@ -51,8 +50,10 @@ class NameSelectionState : public State {
         nameSelector->select();
     }
 
-    static void moveToPlayingState() {
+    static void finish() {
         if (nameSelector->finish()) {
+            // TODO: update logic
+            leaderboard->write(nameSelector->name, gameEngine->score);
             stateManager->changeState(mainMenuStateId);
         }
     }
