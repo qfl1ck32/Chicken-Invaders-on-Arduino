@@ -17,7 +17,7 @@ class GameStatus {
 };
 
 void GameStatus ::show(short score, short lifes, unsigned long startTime) {
-    char scoreMessage[getNumberOfDigits(score) + strlen("Score: ") + 1];
+    char scoreMessage[getNumberOfDigits(score) + 8];
     sprintf(scoreMessage, "Score: %d", score);
 
     this->lcd->printOnRow(scoreMessage, 0);

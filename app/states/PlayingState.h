@@ -16,8 +16,6 @@ class PlayingState : public State {
     void setup() {
         this->startTime = millis();
 
-        gameEngine->resetState();
-
         joystick->setHandlerOnYAxisChangeUp(PlayingState::moveUp);
         joystick->setHandlerOnYAxisChangeDown(PlayingState::moveDown);
 

@@ -54,5 +54,7 @@ class GameOverState : public State {
         else {
             stateManager->changeState(mainMenuStateId);
         }
+
+        gameEngine->resetState();
     }
 };

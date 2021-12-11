@@ -78,9 +78,9 @@ void setup() {
 
     stateManager->addState(new GameOverState(gameOverStateId));
 
-    // stateManager->addState(new YouWonState(youWonStateId));
+    stateManager->addState(new YouWonState(youWonStateId));
 
-    stateManager->changeState(leaderboardMenuStateId);
+    stateManager->changeState(playingStateId);
 }
 
 void loop() {

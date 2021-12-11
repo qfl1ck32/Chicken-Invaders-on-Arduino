@@ -15,13 +15,13 @@ class Bullet : public Unit {
     void action() {
         if (!this->delayer.canRun()) return;
 
-        if (this->engine->unitMatrix[this->x - 1][this->y] != 0 && this->engine->unitMatrix[this->x - 1][this->y]->getType() == CHICKEN_TYPE) {
-            this->sendMessage(KILL, *this->engine->unitMatrix[this->x - 1][this->y]);
+        if (this->x == 0) {
             this->die();
             return;
         }
 
-        if (this->x == 1) {
+        if (this->engine->unitMatrix[this->x - 1][this->y] != 0 && this->engine->unitMatrix[this->x - 1][this->y]->getType() == CHICKEN_TYPE) {
+            this->sendMessage(KILL, *this->engine->unitMatrix[this->x - 1][this->y]);
             this->die();
             return;
         }

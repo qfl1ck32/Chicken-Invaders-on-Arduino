@@ -26,8 +26,12 @@ class Egg : public Unit {
         this->move(1, 0);
     };
 
-    void behaviour(short action){
-
+    void behaviour(short action) {
+        switch (action) {
+            case KILL:
+                this->die();
+                break;
+        }
     };
 
     unsigned char getType() {

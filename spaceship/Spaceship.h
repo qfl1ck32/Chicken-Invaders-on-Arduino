@@ -27,6 +27,17 @@ class Spaceship : public Unit {
     };
 
     void attack() {
+        // TODO: dry
+        if (this->x - 1 < 0) return;
+
+        if (this->engine->unitMatrix[this->x - 1][this->y] != 0) {
+            if (this->engine->unitMatrix[this->x - 1][this->y]->getType() == CHICKEN_TYPE) {
+                this->sendMessage(KILL, *this->engine->unitMatrix[this->x - 1][this->y]);
+            }
+
+            return;
+        }
+
         new Bullet(this->x - 2, this->y);
     }
 
@@ -42,6 +53,24 @@ class Spaceship : public Unit {
                 return;
         }
     };
+
+    void move(short dx, short dy) {
+        if (!this->isValidPosition(this->x + dx, this->y + dy)) return;
+
+        // TODO: DRY
+        if (this->engine->unitMatrix[this->x + dx][this->y + dy] &&
+            (this->engine->unitMatrix[this->x + dx][this->y + dy]->getType() == EGG_TYPE || this->engine->unitMatrix[this->x + dx][this->y + dy]->getType() == CHICKEN_TYPE)) {
+            // we don't wanna hurt chickens
+            if (this->engine->unitMatrix[this->x + dx][this->y + dy]->getType() == EGG_TYPE) {
+                this->sendMessage(KILL, *this->engine->unitMatrix[this->x + dx][this->y + dy]);
+            }
+
+            this->sendMessage(KILL, *this->engine->unitMatrix[this->x][this->y]);
+            return;
+        }
+
+        Unit::move(dx, dy);
+    }
 
     unsigned char getType() {
         return SPACESHIP_TYPE;
