@@ -4,7 +4,7 @@
 
 #include "../../../chicken/Chicken.cpp"
 #include "../../../spaceship/Spaceship.cpp"
-#include "../../app.h"
+#include "../../globals.h"
 
 Spaceship *spaceship = 0;
 

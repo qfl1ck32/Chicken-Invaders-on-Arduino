@@ -1,7 +1,7 @@
 // #include <app_api.h>
 // #include <avr_debugger.h>
 
-#include "./app/app.h"
+#include "./app/globals.h"
 #include "./app/states/PlayingState/PlayingState.cpp"
 #include "./app/states/WelcomeState/WelcomeState.cpp"
 

@@ -2,7 +2,7 @@
 
 #include <LinkedList.h>
 
-#include "../app/app.h"
+#include "../app/globals.h"
 #include "../pixel-change/PixelChange.h"
 
 #define MAX_SPACESHIP_SHOTS 10
