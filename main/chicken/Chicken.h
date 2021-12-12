@@ -6,7 +6,8 @@
 
 class Chicken : public Unit {
    public:
-    Delayer eggDelayer = Delayer(3000);
+    Delayer eggDelayer = Delayer(2000);
+    Delayer moveDelayer = Delayer(1250);
 
     Chicken(short x, short y) : Unit(x, y) {}
 

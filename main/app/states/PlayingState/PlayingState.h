@@ -1,9 +1,12 @@
 #pragma once
 
+#include "../../../modules/game/Game.h"
 #include "../../../state/State.h"
 
 class PlayingState : public State {
    public:
+    static Game *game;
+
     void setup();
     void handle();
     void cleanup();

@@ -7,12 +7,26 @@ void Chicken::action() {
     if (this->eggDelayer.canRun()) {
         new Egg(this->x + 1, this->y);
     }
+
+    short rand = random(2);
+
+    short direction = rand == 0 ? -1 : 1;
+
+    return;
+
+    if (this->moveDelayer.canRun()) {
+        if (!this->engine->isValidPosition(this->x, this->y + direction) || this->engine->unitMatrix[this->x][this->y + direction] != 0) {
+            return;
+        }
+
+        this->move(0, direction);
+    }
 };
 
 void Chicken::behaviour(short action) {
     switch (action) {
         case KILL:
-            this->engine->score += 5;
+            PlayingState::game->score += 5;
 
             this->die();
 

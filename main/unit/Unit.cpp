@@ -59,9 +59,7 @@ Unit::Unit(short x, short y) {
         messages[i] = 0;
     }
 
-    // TODO: remove hardcoded 5
-    // if (Unit::engine.unitMatrix[x][y] == NULL && Unit::engine.numberOfUnits < 5) {
-    if (true) {
+    if (Unit::engine->unitMatrix[x][y] == NULL && Unit::engine->numberOfUnits < MAX_UNITS) {
         Unit::engine->unitArray[Unit::engine->numberOfUnits++] = this;
         Unit::engine->unitMatrix[x][y] = this;
     }

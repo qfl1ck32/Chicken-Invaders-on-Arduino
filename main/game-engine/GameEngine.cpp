@@ -6,8 +6,6 @@ GameEngine::GameEngine(short rows, short columns) {
     this->rows = rows;
     this->columns = columns;
 
-    this->score = 0;
-
     this->unitMatrix = new Unit**[rows];
 
     for (int i = 0; i < rows; ++i) {
@@ -30,18 +28,14 @@ GameEngine::GameEngine(short rows, short columns) {
 }
 
 void GameEngine::resetState() {
-    this->finalScore = this->score;
-
-    this->score = 0;
-
     this->numberOfUnits = 0;
 
     // TODO: why
-    // for (int i = 0; i < MAX_UNITS; ++i) {
-    //     if (this->unitArray[i] != 0) {
-    //         delete this->unitArray[i];
-    //     }
-    // }
+    for (int i = 0; i < MAX_UNITS; ++i) {
+        if (this->unitArray[i] != 0) {
+            delete this->unitArray[i];
+        }
+    }
 
     for (int i = 0; i < this->rows; ++i) {
         for (int j = 0; j < this->columns; ++j) {

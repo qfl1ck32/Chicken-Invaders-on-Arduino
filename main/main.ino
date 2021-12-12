@@ -3,7 +3,6 @@
 
 #include "./app/globals.h"
 #include "./app/states/PlayingState/PlayingState.cpp"
-#include "./app/states/WelcomeState/WelcomeState.cpp"
 
 Delayer buttonDelayer = Delayer(150);
 Delayer swDelayer = Delayer(150);
@@ -28,8 +27,13 @@ void setup() {
     matrix->setup();
 
     stateManager->changeState<PlayingState>();
+
+    // TODO: maybe create a class?
+    // 0 is not connected
+    randomSeed(analogRead(0));
 }
 
 void loop() {
+    Serial.println(millis());
     stateManager->handle();
 }

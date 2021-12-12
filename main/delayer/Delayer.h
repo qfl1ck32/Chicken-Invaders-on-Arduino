@@ -13,6 +13,8 @@ class Delayer {
     }
 
     bool canRun();
+
+    void updateInterval(unsigned long);
 };
 
 bool Delayer::canRun() {
@@ -31,4 +33,8 @@ bool Delayer::canRun() {
     this->isInCooldown = true;
 
     return false;
+}
+
+void Delayer::updateInterval(unsigned long newInterval) {
+    this->interval = newInterval;
 }

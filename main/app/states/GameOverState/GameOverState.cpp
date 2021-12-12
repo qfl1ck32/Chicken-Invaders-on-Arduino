@@ -5,6 +5,7 @@
 #include "../../../utils/utils.cpp"
 #include "../MainMenuState/MainMenuState.cpp"
 #include "../NameSelectionState/NameSelectionState.cpp"
+#include "../PlayingState/PlayingState.cpp"
 
 class MainMenuState;
 
@@ -17,15 +18,17 @@ void GameOverState::setup() {
 
     // TODO: not here
     matrix->clear();
+
+    PlayingState::game->needsInitialisation = true;
 }
 
 void GameOverState::handle() {
     // TODO: modularization
-    int numberOfDigitsInScore = getNumberOfDigits(gameEngine->score);
+    int numberOfDigitsInScore = getNumberOfDigits(PlayingState::game->score);
 
     char gameOverMessage[20 + numberOfDigitsInScore];
 
-    sprintf(gameOverMessage, "Game over. Score: %d.", gameEngine->score);
+    sprintf(gameOverMessage, "Game over. Score: %d.", PlayingState::game->score);
 
     lcd->printOnRow(gameOverMessage, 0);
     lcd->printOnRow(F("Press X to continue."), 1);
@@ -45,8 +48,8 @@ void GameOverState::cleanup() {
 
 void GameOverState::goToNextStep() {
     // TODO: please do something, lol
-    if (gameEngine->score + 5 > leaderboard->getHighscore()) {
-        leaderboard->write("Rusu, lol", gameEngine->score + 5);
+    if (PlayingState::game->score + 5 > leaderboard->getHighscore()) {
+        leaderboard->write("Rusu, lol", PlayingState::game->score + 5);
         stateManager->changeState<NameSelectionState>();
     }
 

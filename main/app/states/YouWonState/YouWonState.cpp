@@ -39,8 +39,9 @@ void YouWonState::cleanup() {
 }
 
 void YouWonState::goToNextLevel() {
-    // FIXME
-    // ++playingState->level;
-    // FIXME: why
+    PlayingState::game->goToNextLevel();
+
     stateManager->changeState<PlayingState>();
+
+    gameEngine->resetState();
 }

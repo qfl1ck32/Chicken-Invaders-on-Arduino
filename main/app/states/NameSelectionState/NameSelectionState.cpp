@@ -2,6 +2,8 @@
 
 #include "./NameSelectionState.h"
 
+#include "../PlayingState/PlayingState.cpp"
+
 void NameSelectionState::handle() {
     joystick->handleJoystickMovementOnAxisX();
     joystick->handleJoystickMovementOnAxisY();
@@ -51,7 +53,7 @@ void NameSelectionState::handleSwStateChange() {
 void NameSelectionState::finish() {
     if (nameSelector->finish()) {
         // TODO: update logic
-        leaderboard->write(nameSelector->name, gameEngine->score);
+        leaderboard->write(nameSelector->name, PlayingState::game->score);
         stateManager->changeState<MainMenuState>();
     }
 }

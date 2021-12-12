@@ -84,10 +84,5 @@ void Leaderboard::write(const char *name, int score) {
 
     sprintf(entry + strlen(name) + 1, "%d", score);
 
-    Serial.println(entry);
-    Serial.println(strlen(entry));
-
-    Serial.println("Done writing.");
-
     this->eeprom->writeString(entry, strlen(entry));
 }

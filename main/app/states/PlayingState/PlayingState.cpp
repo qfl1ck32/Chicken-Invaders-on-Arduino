@@ -2,11 +2,10 @@
 
 #include "./PlayingState.h"
 
-#include "../../../chicken/Chicken.cpp"
-#include "../../../spaceship/Spaceship.cpp"
+#include "../../../modules/game/Game.cpp"
 #include "../../globals.h"
 
-Spaceship *spaceship = 0;
+Game* PlayingState::game = new Game();
 
 void PlayingState::setup() {
     joystick->setHandlerOnYAxisChangeUp(PlayingState::moveUp);
@@ -17,26 +16,13 @@ void PlayingState::setup() {
 
     button->setOnStateChange(PlayingState::attack);
 
-    if (spaceship != 0) {
-        delete spaceship;
+    if (PlayingState::game->needsInitialisation) {
+        PlayingState::game->needsInitialisation = false;
+
+        this->game->setSpaceship(7, 3);
     }
 
-    spaceship = new Spaceship(7, 3);
-
-    new Chicken(0, 3);
-
-    new Chicken(0, 5);
-
-    // TODO: create a nice handler for the level
-    // switch (this->level) {
-    //     case 1:
-    //         new Chicken(0, 3);
-    //         break;
-    //     case 2:
-    //         new Chicken(0, 3);
-    //         new Chicken(0, 5);
-    //         break;
-    // }
+    new Chicken(0, PlayingState::game->level);
 }
 
 void PlayingState::handle() {
@@ -44,7 +30,7 @@ void PlayingState::handle() {
     gameEngine->run();
 
     // TODO: add startTime
-    gameStatus->show(gameEngine->score, spaceship->lifes, 0);
+    gameStatus->show(this->game->score, this->game->spaceship->lifes, 0);
     graphicsEngine->renderChanges(gameEngine->changes);
 }
 
@@ -54,21 +40,21 @@ void PlayingState::cleanup() {
 }
 
 void PlayingState::moveUp() {
-    spaceship->move(-1, 0);
+    PlayingState::game->spaceship->move(-1, 0);
 }
 
 void PlayingState::moveRight() {
-    spaceship->move(0, 1);
+    PlayingState::game->spaceship->move(0, 1);
 }
 
 void PlayingState::moveDown() {
-    spaceship->move(1, 0);
+    PlayingState::game->spaceship->move(1, 0);
 }
 
 void PlayingState::moveLeft() {
-    spaceship->move(0, -1);
+    PlayingState::game->spaceship->move(0, -1);
 }
 
 void PlayingState::attack() {
-    spaceship->attack();
+    PlayingState::game->spaceship->attack();
 }

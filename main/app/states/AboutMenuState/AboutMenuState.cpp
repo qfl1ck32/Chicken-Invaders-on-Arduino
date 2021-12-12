@@ -5,8 +5,10 @@
 #include "../MainMenuState/MainMenuState.cpp"
 
 void AboutMenuState::setup() {
-    const char *messages[] = {"Back", "App Name: Chicken Invaders", "Programmer: Rusu Andrei-Cristian",
-                              "Github: https://github.com/qfl1ck32/Chicken-Invaders-on-Arduino"};
+    // const char *messages[] = {"Back", "App Name: Chicken Invaders", "Programmer: Rusu Andrei-Cristian",
+    //   "Github: https://github.com/qfl1ck32/Chicken-Invaders-on-Arduino"};
+
+    const char *messages[] = {"Back", ":)"};
 
     menu->setMessages(messages, sizeof(messages) / sizeof(char *));
 

@@ -5,9 +5,7 @@
 #include "../app/globals.h"
 #include "../pixel-change/PixelChange.h"
 
-#define MAX_SPACESHIP_SHOTS 10
-
-#define MAX_UNITS 15
+#define MAX_UNITS 10
 
 class Unit;
 
@@ -21,11 +19,6 @@ class GameEngine {
     LinkedList<PixelChange> *changes;
 
     int numberOfUnits;
-
-    // FIXME: should be somewhere else...
-    int score;
-
-    int finalScore;
 
     GameEngine(short, short);
 

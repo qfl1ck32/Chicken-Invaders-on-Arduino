@@ -41,9 +41,6 @@ void LeaderboardState::setup() {
         messages[index] = "No high scores";
     }
 
-    Serial.println(messages[0]);
-    Serial.println(messages[1]);
-
     free(scores);
 
     menu->setMessages(messages, sizeof(messages) / sizeof(char *));
