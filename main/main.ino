@@ -4,8 +4,8 @@
 #include "./app/globals.h"
 #include "./app/states/WelcomeState/WelcomeState.cpp"
 
-Delayer buttonDelayer = Delayer(150);
-Delayer swDelayer = Delayer(150);
+Delayer buttonDelayer = Delayer(300);
+Delayer swDelayer = Delayer(300);
 
 void handleSw() {
     if (swDelayer.canRun()) Joystick::swHandler(joystick);
@@ -34,6 +34,6 @@ void setup() {
 }
 
 void loop() {
-    Serial.println(millis());
+    // Serial.println(millis());
     stateManager->handle();
 }

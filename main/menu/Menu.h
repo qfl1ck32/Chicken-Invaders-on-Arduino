@@ -14,7 +14,7 @@ class Menu {
     int numberOfMessages;
     int numberOfHandlers;
 
-    Delayer scrollDelayer = Delayer(400);
+    Delayer scrollDelayer = Delayer(200);
 
     Menu(LCD *lcd) {
         this->lcd = lcd;

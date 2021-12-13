@@ -54,13 +54,14 @@ class LCD : public LiquidCrystal {
     void changeContrast(int);
     void changeBacklight(int);
 
-    void printOnRow(const char *msg, int row, int startAtColumn);
+    void printOnRow(const char *msg, int row, int startAtColumn, bool resetPreviousString);
     void setup(short, short);
     void scrollDisplayLeft();
 
     void scrollRow(int row, int skip);
 
     void clearRow(int, bool);
+    void clearRow(int, int, bool);
 };
 
 void LCD::changeContrast(int value) {
@@ -79,15 +80,15 @@ void LCD::changeBacklight(int value) {
     EEPROM.write(EEPROM_LCD_BACKLIGHT_INDEX, this->backlight);
 }
 
-void LCD::printOnRow(const char *msg, int row, int startAtColumn = 0) {
+void LCD::printOnRow(const char *msg, int row, int startAtColumn = 0, bool resetPreviousString = true) {
     short messageLength = strlen(msg);
 
     short stringLength = strlen(this->lastStrings[row]);
 
-    if (stringLength < startAtColumn + messageLength) {
+    if (stringLength < startAtColumn + messageLength || strncmp(this->lastStrings[row] + startAtColumn, msg, messageLength) != 0 && resetPreviousString) {
         const int newLength = startAtColumn + messageLength;
 
-        char *newString = new char[newLength];
+        char *newString = new char[newLength + 1];
 
         for (int i = stringLength; i < newLength; ++i) {
             newString[i] = ' ';
@@ -95,7 +96,9 @@ void LCD::printOnRow(const char *msg, int row, int startAtColumn = 0) {
 
         newString[newLength] = '\0';
 
-        strncpy(newString, this->lastStrings[row], stringLength);
+        if (!resetPreviousString) {
+            strncpy(newString, this->lastStrings[row], stringLength);
+        }
 
         delete[] this->lastStrings[row];
 
@@ -115,35 +118,50 @@ void LCD::printOnRow(const char *msg, int row, int startAtColumn = 0) {
 
     this->setCursor(startAtColumn, row);
 
-    this->print(msg);
+    short numberOfCharsToDisplay = min(strlen(msg), this->columns);
+
+    char toDisplay[numberOfCharsToDisplay + 1];
+
+    strncpy(toDisplay, msg, numberOfCharsToDisplay);
+
+    toDisplay[numberOfCharsToDisplay] = '\0';
+
+    this->print(toDisplay);
 
     this->scrollOffsets[row] = 0;
 }
 
-// TODO: implement the "skip" part
 void LCD::scrollRow(int row, int skip = 0) {
-    char *str = this->lastStrings[row];
+    char *str = this->lastStrings[row] + skip;
 
-    if (this->scrollOffsets[row] == strlen(str) + this->columns) {
+    if (this->scrollOffsets[row] == strlen(str) + this->columns - skip) {
         this->scrollOffsets[row] = 0;
+        return;
     }
 
     // TODO: be smarter, only turn off positions that are currently used
-    this->clearRow(row, false);
+    this->clearRow(row, skip, false);
 
     if (this->scrollOffsets[row] < strlen(str)) {
         char *msg = str + this->scrollOffsets[row];
 
-        this->setCursor(0, row);
+        this->setCursor(skip, row);
         this->print(msg);
     }
 
     else {
-        int numberOfCharsToShow = min(this->scrollOffsets[row] - strlen(str) + 1, strlen(str));
         int startAt = this->columns - this->scrollOffsets[row] + strlen(str) - 1;
+        int numberOfCharsToDisplay = min(strlen(str), this->columns - startAt + 1);
+
+        char toDisplay[numberOfCharsToDisplay + 1];
+
+        strncpy(toDisplay, str, numberOfCharsToDisplay);
+
+        toDisplay[numberOfCharsToDisplay] = '\0';
 
         this->setCursor(startAt, row);
-        this->print(str);
+
+        this->print(toDisplay);
     }
 
     ++this->scrollOffsets[row];
@@ -169,7 +187,11 @@ void LCD::setup(short rows, short columns) {
 }
 
 void LCD::clearRow(int row, bool deleteLastString = false) {
-    for (int column = 0; column < this->columns; ++column) {
+    this->clearRow(row, 0, deleteLastString);
+}
+
+void LCD::clearRow(int row, int startAtColumn, bool deleteLastString = false) {
+    for (int column = startAtColumn; column < this->columns; ++column) {
         this->setCursor(column, row);
         this->print(" ");
     }
