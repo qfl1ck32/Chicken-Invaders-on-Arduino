@@ -9,7 +9,7 @@ class Leaderboard {
    public:
     EEPROMHandler *eeprom;
 
-    static const char *nameAndScoreDelimiter;
+    static const char *const nameAndScoreDelimiter;
 
     static int size;
 
@@ -26,7 +26,7 @@ class Leaderboard {
     int getHighscore();
 };
 
-const char *Leaderboard::nameAndScoreDelimiter = "|";
+const char *const Leaderboard::nameAndScoreDelimiter PROGMEM = "|";
 
 int Leaderboard::size = 3;
 

@@ -17,7 +17,7 @@ void Egg::action() {
     this->move(1, 0);
 };
 
-void Egg::behaviour(short action) {
+void Egg::behaviour(byte action) {
     switch (action) {
         case KILL:
             this->die();

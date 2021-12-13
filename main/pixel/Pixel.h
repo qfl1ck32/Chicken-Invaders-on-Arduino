@@ -2,11 +2,11 @@
 
 class Pixel {
    public:
-    short x, y;
+    byte x, y;
 
     Pixel(){};
 
-    Pixel(short x, short y) {
+    Pixel(byte x, byte y) {
         this->x = x;
         this->y = y;
     }

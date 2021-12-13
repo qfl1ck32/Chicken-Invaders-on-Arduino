@@ -3,9 +3,13 @@
 
 #include "./app/globals.h"
 #include "./app/states/WelcomeState/WelcomeState.cpp"
+#include "./modules/music-player/MusicPlayer.h"
+#include "./modules/music-player/songs.h"
 
-Delayer buttonDelayer = Delayer(300);
+Delayer buttonDelayer = Delayer(150);
 Delayer swDelayer = Delayer(300);
+
+MusicPlayer musicPlayer = MusicPlayer(songBuzzer);
 
 void handleSw() {
     if (swDelayer.canRun()) Joystick::swHandler(joystick);
@@ -28,12 +32,15 @@ void setup() {
 
     stateManager->changeState<MainMenuState>();
 
-    // TODO: maybe create a class?
-    // 0 is not connected
+    musicPlayer.setSong(merryChristmas, sizeof(merryChristmas) / sizeof(int));
+
+    musicPlayer.setRepeat(true);
+
+    // TODO:  maybe create a class ? 0 is not connected
     randomSeed(analogRead(0));
 }
 
 void loop() {
-    // Serial.println(millis());
+    musicPlayer.play();
     stateManager->handle();
 }

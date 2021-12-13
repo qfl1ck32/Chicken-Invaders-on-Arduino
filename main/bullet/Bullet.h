@@ -6,7 +6,7 @@
 
 class Bullet : public Unit {
    public:
-    Bullet(short x, short y) : Unit(x, y) {}
+    Bullet(byte x, byte y) : Unit(x, y) {}
 
     Delayer delayer = Delayer(250);
 
@@ -14,7 +14,7 @@ class Bullet : public Unit {
 
     void action();
 
-    void behaviour(short);
+    void behaviour(byte);
 
     unsigned char getType();
 };

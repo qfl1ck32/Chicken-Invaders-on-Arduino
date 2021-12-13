@@ -7,7 +7,7 @@
 #include "../SettingsMatrixMenuState/SettingsMatrixMenuState.cpp"
 
 void SettingsMenuState::setup() {
-    const char *messages[] = {"Go back", "Level", "LCD", "Matrix"};
+    static const char *const messages[] PROGMEM = {"Back", "Lvl", "LCD", "Matrix"};
 
     menu->setMessages(messages, sizeof(messages) / sizeof(char *));
 

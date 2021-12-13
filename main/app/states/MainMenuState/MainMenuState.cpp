@@ -8,7 +8,7 @@
 #include "../SettingsMenuState/SettingsMenuState.cpp"
 
 void MainMenuState::setup() {
-    const char *messages[] = {"Play", "Settings", "Leaderboard", "About"};
+    static const char *const messages[] PROGMEM = {"Play", "Settings", "Leaderboard", "About"};
 
     menu->setMessages(messages, sizeof(messages) / sizeof(char *));
 

@@ -120,12 +120,14 @@ bool NameSelector::finish() {
 
 void NameSelector::handleInvalidFinish() {
     if (this->errorDelayer.canRun()) {
-        this->lcd->printOnRow("Invalid name.", 1);
+        // this->lcd->printOnRow("Invalid name.", 1);
     }
 }
 
 void NameSelector::main() {
-    this->lcd->printOnRow("Enter your name:", 0);
+    static const char *const msg PROGMEM = "Enter your name:";
+
+    this->lcd->printOnRow(msg, 0);
 
     this->isInvalid = false;
 

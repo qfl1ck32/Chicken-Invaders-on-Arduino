@@ -17,11 +17,11 @@ class Unit {
 
     virtual unsigned char getType() = 0;
 
-    short x, y, numberOfMessages;
+    byte x, y, numberOfMessages;
 
     bool isAlive;
 
-    short *messages;
+    byte *messages;
 
     Unit() {}
 
@@ -29,18 +29,18 @@ class Unit {
         delete[] this->messages;
     }
 
-    Unit(short, short);
+    Unit(byte, byte);
 
     void die();
 
-    void move(short, short);
+    void move(byte, byte);
 
-    bool isValidPosition(short, short);
+    bool isValidPosition(byte, byte);
 
-    void sendMessage(short, Unit &);
+    void sendMessage(byte, Unit &);
 
     virtual void action() = 0;
-    virtual void behaviour(short) = 0;
+    virtual void behaviour(byte) = 0;
 
     void react();
 };

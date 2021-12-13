@@ -23,11 +23,9 @@ void YouWonState::handle() {
 
     // sprintf(message, "You won level %d!", playingState->level);
 
-    const char *message = "You won!";
+    const char* const youWon PROGMEM = "You won!";
 
-    const char *pressXToContinue PROGMEM = "Press X to continue.";
-
-    lcd->printOnRow(message, 0);
+    lcd->printOnRow(youWon, 0);
     lcd->printOnRow(pressXToContinue, 1);
 
     if (this->delayer.canRun()) {

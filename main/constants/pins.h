@@ -12,13 +12,16 @@ const byte pinSW = 2;
 const byte pinX = A0;
 const byte pinY = A1;
 
+const byte songBuzzerPin = 11;
+const byte gameSoundsBuzzerPin = A3;
+
 const byte buttonPin = 3;
 
 const byte ledRows = 2;
 const byte ledColumns = 16;
 
 const byte dinPin = 12;
-const byte clockPin = 11;
+const byte clockPin = A2;  // 11
 const byte loadPin = 10;
 
 const byte matrixRows = 8;

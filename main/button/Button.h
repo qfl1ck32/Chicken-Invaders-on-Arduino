@@ -1,13 +1,13 @@
 class Button {
    public:
-    int pin;
+    byte pin;
 
     bool previousButtonState = LOW;
     bool state = LOW;
 
     void (*onStateChange)();
 
-    Button(int pin) {
+    Button(byte pin) {
         this->pin = pin;
 
         this->onStateChange = nullptr;

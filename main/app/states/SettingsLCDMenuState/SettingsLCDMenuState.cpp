@@ -5,7 +5,7 @@
 #include "../SettingsMenuState/SettingsMenuState.cpp"
 
 void SettingsLCDMenuState::setup() {
-    const char *messages[] = {"Go back", "Contrast -", "Contrast +", "Backlight -", "Backlight +"};
+    static const char *const messages[] PROGMEM = {"Go back", "Contrast -", "Contrast +", "Backlight -", "Backlight +"};
 
     menu->setMessages(messages, sizeof(messages) / sizeof(char *));
 

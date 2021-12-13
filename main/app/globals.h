@@ -10,6 +10,7 @@ typedef void (*HandlerFunction)();
 #define EEPROM_LEADERBOARD_START_INDEX 3
 
 #include "../button/Button.h"
+#include "../buzzer/Buzzer.h"
 #include "../constants/pins.h"
 #include "../game-engine/GameEngine.cpp"
 #include "../graphics-engine/GraphicsEngine.h"
@@ -22,6 +23,10 @@ typedef void (*HandlerFunction)();
 #include "../modules/leaderboard/Leaderboard.h"
 #include "../modules/name-selection/NameSelector.h"
 #include "../state-manager/StateManager.h"
+
+const char *const pressXToContinue PROGMEM = "Press X to continue";
+
+const char *const welcome PROGMEM = "Welcome!";
 
 StateManager *stateManager = new StateManager();
 
@@ -47,11 +52,14 @@ void menuSelect() {
 
 Button *button = new Button(buttonPin);
 
-Greeter *greeter = new Greeter(lcd, "Welcome!", "Press X to continue.");
+Greeter *greeter = new Greeter(lcd, welcome, pressXToContinue);
 
 Matrix *matrix = new Matrix(dinPin, clockPin, loadPin, 1, matrixRows, matrixCols);
 
 Leaderboard *leaderboard = new Leaderboard();
+
+Buzzer *songBuzzer = new Buzzer(songBuzzerPin);
+Buzzer *gameSoundsBuzzer = new Buzzer(gameSoundsBuzzerPin);
 
 // TODO: constants
 GameEngine *gameEngine = new GameEngine(8, 8);

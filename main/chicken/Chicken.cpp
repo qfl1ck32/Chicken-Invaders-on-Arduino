@@ -23,7 +23,7 @@ void Chicken::action() {
     }
 };
 
-void Chicken::behaviour(short action) {
+void Chicken::behaviour(byte action) {
     switch (action) {
         case KILL:
             PlayingState::game->score += 5;

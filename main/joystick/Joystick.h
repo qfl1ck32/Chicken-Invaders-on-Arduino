@@ -1,10 +1,10 @@
 class Joystick {
    public:
-    int pinSw;
-    int pinX;
-    int pinY;
+    byte pinSw;
+    short pinX;
+    short pinY;
 
-    Joystick(int pinSw, int pinX, int pinY) {
+    Joystick(byte pinSw, short pinX, short pinY) {
         this->pinSw = pinSw;
         this->pinX = pinX;
         this->pinY = pinY;

@@ -5,7 +5,7 @@
 #include "../SettingsMenuState/SettingsMenuState.cpp"
 
 void SettingsMatrixMenuState::setup() {
-    const char *messages[] = {"Go back", "Intensity +", "Intensity -"};
+    static const char *const messages[] PROGMEM = {"Back", "+", "-"};
 
     menu->setMessages(messages, sizeof(messages) / sizeof(char *));
 

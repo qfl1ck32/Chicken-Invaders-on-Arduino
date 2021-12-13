@@ -7,10 +7,10 @@ class Egg : public Unit {
    public:
     Delayer delayer = Delayer(500);
 
-    Egg(short x, short y) : Unit(x, y) {}
+    Egg(byte x, byte y) : Unit(x, y) {}
 
     void action();
-    void behaviour(short);
+    void behaviour(byte);
 
     unsigned char getType();
 };

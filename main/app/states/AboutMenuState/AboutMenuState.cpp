@@ -5,14 +5,14 @@
 #include "../MainMenuState/MainMenuState.cpp"
 
 void AboutMenuState::setup() {
-    const char *messages[] PROGMEM = {
+    static const char* const messages[] PROGMEM = {
         "Back",
         "App Name: Chicken Invaders",
         "Programmer: Rusu Andrei-Cristian",
         // "Github: https://github.com/qfl1ck32/Chicken-Invaders-on-Arduino",
     };
 
-    menu->setMessages(messages, sizeof(messages) / sizeof(char *));
+    menu->setMessages(messages, sizeof(messages) / sizeof(char*));
 
     HandlerFunction handlers[] = {AboutMenuState::goBack};
     menu->setHandlers(handlers, sizeof(handlers) / sizeof(HandlerFunction));

@@ -19,11 +19,11 @@ void Unit::react() {
 }
 
 // TODO: this is overridable (just a notice, not a todo, lol)
-bool Unit::isValidPosition(short x, short y) {
+bool Unit::isValidPosition(byte x, byte y) {
     return Unit::engine->isValidPosition(x, y);
 }
 
-void Unit::move(short dx, short dy) {
+void Unit::move(byte dx, byte dy) {
     if (!this->isValidPosition(this->x + dx, this->y + dy)) {
         return;
     }
@@ -38,13 +38,13 @@ void Unit::move(short dx, short dy) {
     Unit::engine->changes->add(PixelChange(this->x, this->y, true));
 }
 
-void Unit::sendMessage(short message, Unit& unit) {
+void Unit::sendMessage(byte message, Unit& unit) {
     if (unit.numberOfMessages != MAX_MESSAGES) {
         unit.messages[unit.numberOfMessages++] = message;
     }
 }
 
-Unit::Unit(short x, short y) {
+Unit::Unit(byte x, byte y) {
     isAlive = true;
 
     this->x = x;
@@ -52,7 +52,7 @@ Unit::Unit(short x, short y) {
 
     this->numberOfMessages = 0;
 
-    this->messages = new short[MAX_MESSAGES];
+    this->messages = new byte[MAX_MESSAGES];
 
     // TODO: needs init.?
     for (int i = 0; i < MAX_MESSAGES; ++i) {

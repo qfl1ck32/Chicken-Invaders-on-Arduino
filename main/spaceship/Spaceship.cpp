@@ -23,7 +23,7 @@ void Spaceship::attack() {
     new Bullet(this->x - 2, this->y);
 }
 
-void Spaceship::behaviour(short action) {
+void Spaceship::behaviour(byte action) {
     switch (action) {
         case KILL:
             --this->lifes;
@@ -36,7 +36,7 @@ void Spaceship::behaviour(short action) {
     }
 };
 
-void Spaceship::move(short dx, short dy) {
+void Spaceship::move(byte dx, byte dy) {
     if (!this->isValidPosition(this->x + dx, this->y + dy)) return;
 
     // TODO: DRY

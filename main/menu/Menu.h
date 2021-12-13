@@ -8,7 +8,7 @@ class Menu {
 
     int currentRow;
 
-    const char **messages = nullptr;
+    const char *const *messages = nullptr;
     HandlerFunction *handlers = nullptr;
 
     int numberOfMessages;
@@ -27,7 +27,7 @@ class Menu {
 
     void setHandlers(HandlerFunction *, int);
 
-    void setMessages(const char **, int);
+    void setMessages(const char *const *, int);
 
     void run(bool shouldScrollCurrentRow);
 
@@ -38,16 +38,9 @@ class Menu {
     void select();
 };
 
-void Menu::setMessages(const char **messages, int numberOfMessages) {
-    if (this->messages != nullptr) {
-        delete[] this->messages;
-    }
-
-    this->messages = new const char *[numberOfMessages];
-
-    for (int i = 0; i < numberOfMessages; ++i) {
-        this->messages[i] = messages[i];
-    }
+void Menu::setMessages(const char *const *messages, int numberOfMessages) {
+    // TODO: works????
+    this->messages = messages;
 
     this->numberOfMessages = numberOfMessages;
 

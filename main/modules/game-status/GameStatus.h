@@ -7,9 +7,9 @@
 
 class GameStatus {
    public:
-    LCD *lcd;
+    LCD* lcd;
 
-    GameStatus(LCD *lcd) {
+    GameStatus(LCD* lcd) {
         this->lcd = lcd;
     }
 
@@ -18,7 +18,10 @@ class GameStatus {
 
 void GameStatus ::show(short score, short lifes, unsigned long startTime) {
     char scoreMessage[getNumberOfDigits(score) + 8];
-    sprintf(scoreMessage, "Score: %d", score);
+
+    static const char* const scoreStr PROGMEM = "Score";
+
+    sprintf(scoreMessage, "%s: %d", scoreStr, score);
 
     this->lcd->printOnRow(scoreMessage, 0);
 

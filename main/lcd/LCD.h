@@ -1,10 +1,8 @@
 #pragma once
 
-#include "../serial/printer/SerialPrinter.h"
-#include "../strings/utils.h"
 #include "EEPROM.h"
 
-byte heartCharArray[8] = {
+const byte heartCharArray[8] PROGMEM = {
     0b00000,
     0b01010,
     0b11111,
@@ -18,17 +16,17 @@ byte heartChar = 1;
 
 class LCD : public LiquidCrystal {
    public:
-    short rows;
-    short columns;
+    byte rows;
+    byte columns;
 
-    short contrastPin;
-    short contrast;
+    byte contrastPin;
+    byte contrast;
 
-    short backlightPin;
-    short backlight;
+    byte backlightPin;
+    byte backlight;
 
     char **lastStrings;
-    short *scrollOffsets;
+    byte *scrollOffsets;
 
     LCD(uint8_t rs, uint8_t enable,
         uint8_t d0, uint8_t d1, uint8_t d2, uint8_t d3, int contrast, int backlight) : LiquidCrystal(rs, enable, d0, d1, d2, d3) {
@@ -54,15 +52,25 @@ class LCD : public LiquidCrystal {
     void changeContrast(int);
     void changeBacklight(int);
 
-    void printOnRow(const char *msg, int row, int startAtColumn, bool resetPreviousString);
-    void setup(short, short);
+    void printOnRow(const char *, int, int, bool);
+    void setup(byte, byte);
     void scrollDisplayLeft();
 
     void scrollRow(int row, int skip);
 
     void clearRow(int, bool);
     void clearRow(int, int, bool);
+
+    void createChar(uint8_t, const byte *);
 };
+
+void LCD::createChar(uint8_t location, const byte *charMap) {
+    location &= 0x7;  // we only have 8 locations 0-7
+    command(LCD_SETCGRAMADDR | (location << 3));
+    for (int i = 0; i < 8; i++) {
+        write(pgm_read_byte_near(charMap++));  // reading from progmem
+    }
+}
 
 void LCD::changeContrast(int value) {
     this->contrast = constrain(this->contrast + value, 20, 240);
@@ -167,11 +175,11 @@ void LCD::scrollRow(int row, int skip = 0) {
     ++this->scrollOffsets[row];
 }
 
-void LCD::setup(short rows, short columns) {
+void LCD::setup(byte rows, byte columns) {
     LiquidCrystal::begin(columns, rows);
 
     this->lastStrings = new char *[rows];
-    this->scrollOffsets = new short[rows];
+    this->scrollOffsets = new byte[rows];
 
     this->rows = rows;
     this->columns = columns;

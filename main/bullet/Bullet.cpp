@@ -17,7 +17,7 @@ void Bullet::action() {
     this->move(-1, 0);
 };
 
-void Bullet::behaviour(short action){
+void Bullet::behaviour(byte action){
 
 };
 

@@ -28,9 +28,9 @@ void GameOverState::handle() {
 
     char gameOverMessage[20 + numberOfDigitsInScore];
 
-    sprintf(gameOverMessage, "Game over. Score: %d.", PlayingState::game->score);
+    const char* const gameOverMsg PROGMEM = "Game over. Score:";
 
-    const char* pressXToContinue PROGMEM = "Press X to continue.";
+    sprintf(gameOverMessage, "%s: %d.", gameOverMsg, PlayingState::game->score);
 
     lcd->printOnRow(gameOverMessage, 0);
     lcd->printOnRow(pressXToContinue, 1);
@@ -51,7 +51,8 @@ void GameOverState::cleanup() {
 void GameOverState::goToNextStep() {
     // TODO: please do something, lol
     if (PlayingState::game->score + 5 > leaderboard->getHighscore()) {
-        leaderboard->write("Rusu, lol", PlayingState::game->score + 5);
+        // TODO: add logic
+        // leaderboard->write(nameSelector->name, PlayingState::game->score + 5);
         stateManager->changeState<NameSelectionState>();
     }
 

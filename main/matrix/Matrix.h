@@ -5,12 +5,12 @@
 
 class Matrix : public LedControl {
    public:
-    short rows;
-    short columns;
+    byte rows;
+    byte columns;
 
-    short intensity;
+    byte intensity;
 
-    Matrix(int dataPin, int clkPin, int csPin, int numDevices, int rows, int columns) : LedControl(dataPin, clkPin, csPin, numDevices) {
+    Matrix(int dataPin, int clkPin, int csPin, int numDevices, byte rows, byte columns) : LedControl(dataPin, clkPin, csPin, numDevices) {
         this->rows = rows;
         this->columns = columns;
 
@@ -19,6 +19,7 @@ class Matrix : public LedControl {
 
         byte savedIntensity = EEPROM.read(EEPROM_MATRIX_INTENSITY_INDEX);
 
+        // FIXME: hackish
         this->intensity = savedIntensity == 255 ? 8 : savedIntensity;
 
         this->increaseIntensity(0);
