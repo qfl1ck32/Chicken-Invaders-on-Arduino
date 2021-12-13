@@ -30,8 +30,10 @@ void GameOverState::handle() {
 
     sprintf(gameOverMessage, "Game over. Score: %d.", PlayingState::game->score);
 
+    const char* pressXToContinue PROGMEM = "Press X to continue.";
+
     lcd->printOnRow(gameOverMessage, 0);
-    lcd->printOnRow(F("Press X to continue."), 1);
+    lcd->printOnRow(pressXToContinue, 1);
 
     if (this->delayer.canRun()) {
         lcd->scrollRow(0);

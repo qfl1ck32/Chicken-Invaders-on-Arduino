@@ -25,8 +25,10 @@ void YouWonState::handle() {
 
     const char *message = "You won!";
 
+    const char *pressXToContinue PROGMEM = "Press X to continue.";
+
     lcd->printOnRow(message, 0);
-    lcd->printOnRow(F("Press X to continue."), 1);
+    lcd->printOnRow(pressXToContinue, 1);
 
     if (this->delayer.canRun()) {
         lcd->scrollRow(0);

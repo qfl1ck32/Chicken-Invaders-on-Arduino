@@ -2,7 +2,7 @@
 // #include <avr_debugger.h>
 
 #include "./app/globals.h"
-#include "./app/states/PlayingState/PlayingState.cpp"
+#include "./app/states/WelcomeState/WelcomeState.cpp"
 
 Delayer buttonDelayer = Delayer(150);
 Delayer swDelayer = Delayer(150);
@@ -26,7 +26,7 @@ void setup() {
 
     matrix->setup();
 
-    stateManager->changeState<PlayingState>();
+    stateManager->changeState<MainMenuState>();
 
     // TODO: maybe create a class?
     // 0 is not connected

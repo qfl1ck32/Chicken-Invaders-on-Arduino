@@ -30,5 +30,5 @@ void GameStatus ::show(short score, short lifes, unsigned long startTime) {
 
     this->lcd->printOnRow(lifesMessage, 1);
 
-    this->lcd->printOnRowAndColumn(heartChar, 1, strlen(lifesMessage) + 1, true);
+    // this->lcd->printOnRowAndColumn(heartChar, 1, strlen(lifesMessage) + 1, true);
 }

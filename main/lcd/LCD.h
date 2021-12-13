@@ -27,7 +27,7 @@ class LCD : public LiquidCrystal {
     short backlightPin;
     short backlight;
 
-    String *lastStrings;
+    char **lastStrings;
     short *scrollOffsets;
 
     LCD(uint8_t rs, uint8_t enable,
@@ -54,14 +54,13 @@ class LCD : public LiquidCrystal {
     void changeContrast(int);
     void changeBacklight(int);
 
-    void printOnRow(String str, int row, int startAtColumn);
-    void printOnRowAndColumn(char, int, int, bool);
+    void printOnRow(const char *msg, int row, int startAtColumn);
     void setup(short, short);
     void scrollDisplayLeft();
 
     void scrollRow(int row, int skip);
 
-    void clearRow(int);
+    void clearRow(int, bool);
 };
 
 void LCD::changeContrast(int value) {
@@ -80,100 +79,106 @@ void LCD::changeBacklight(int value) {
     EEPROM.write(EEPROM_LCD_BACKLIGHT_INDEX, this->backlight);
 }
 
-void LCD::printOnRow(String str, int row, int startAtColumn = 0) {
-    String current = this->lastStrings[row].substring(startAtColumn, startAtColumn + str.length());
+void LCD::printOnRow(const char *msg, int row, int startAtColumn = 0) {
+    short messageLength = strlen(msg);
 
-    if (current == str) {
+    short stringLength = strlen(this->lastStrings[row]);
+
+    if (stringLength < startAtColumn + messageLength) {
+        const int newLength = startAtColumn + messageLength;
+
+        char *newString = new char[newLength];
+
+        for (int i = stringLength; i < newLength; ++i) {
+            newString[i] = ' ';
+        }
+
+        newString[newLength] = '\0';
+
+        strncpy(newString, this->lastStrings[row], stringLength);
+
+        delete[] this->lastStrings[row];
+
+        this->lastStrings[row] = newString;
+    }
+
+    char *previous = (this->lastStrings[row] + startAtColumn);
+
+    if (strncmp(previous, msg, messageLength) == 0) {
         return;
     }
 
-    // FIXME: not working how it's supposed to
-    if (this->lastStrings[row].length() <= startAtColumn) {
-        this->lastStrings[row].concat(str);
-    } else {
-        this->lastStrings[row].replace(current, str);
-    }
+    // TODO: why. you should only clear the interval left from the prev. message
+    this->clearRow(row, false);
 
-    this->clearRow(row);
+    strncpy(this->lastStrings[row] + startAtColumn, msg, messageLength);
 
     this->setCursor(startAtColumn, row);
 
-    this->print(str);
+    this->print(msg);
 
     this->scrollOffsets[row] = 0;
 }
 
 // TODO: implement the "skip" part
 void LCD::scrollRow(int row, int skip = 0) {
-    String word = this->lastStrings[row];
+    char *str = this->lastStrings[row];
 
-    int scrollOffset = this->scrollOffsets[row];
+    if (this->scrollOffsets[row] == strlen(str) + this->columns) {
+        this->scrollOffsets[row] = 0;
+    }
 
-    this->setCursor(0, row);
+    // TODO: be smarter, only turn off positions that are currently used
+    this->clearRow(row, false);
 
-    String wordToShow = "";
+    if (this->scrollOffsets[row] < strlen(str)) {
+        char *msg = str + this->scrollOffsets[row];
 
-    show(word);
-
-    // FIXME: inefficient?
-    if (scrollOffset < word.length()) {
-        wordToShow.concat(word.substring(scrollOffset));
-        wordToShow.concat(generateEmptyString(word.length() - scrollOffset - 1));
+        this->setCursor(0, row);
+        this->print(msg);
     }
 
     else {
-        wordToShow.concat(generateEmptyString(this->columns - scrollOffset + word.length()));
-        wordToShow.concat(word);
-        wordToShow.concat(generateEmptyString(this->columns - word.length()));
+        int numberOfCharsToShow = min(this->scrollOffsets[row] - strlen(str) + 1, strlen(str));
+        int startAt = this->columns - this->scrollOffsets[row] + strlen(str) - 1;
+
+        this->setCursor(startAt, row);
+        this->print(str);
     }
 
-    this->print(wordToShow);
-
-    if (scrollOffset == word.length() + this->columns) {
-        this->scrollOffsets[row] = -1;
-    }
-
-    this->scrollOffsets[row] += 1;
-}
-
-void LCD::printOnRowAndColumn(char chr, int row, int column, bool ignoreLastString = false) {
-    if (this->lastStrings[row].charAt(column) == chr) return;
-
-    if (!ignoreLastString) {
-        this->lastStrings[row] = setCharAtSafe(this->lastStrings[row], chr, column);
-    }
-
-    this->setCursor(column, row);
-
-    this->print(chr);
+    ++this->scrollOffsets[row];
 }
 
 void LCD::setup(short rows, short columns) {
     LiquidCrystal::begin(columns, rows);
 
-    this->lastStrings = new String[rows];
+    this->lastStrings = new char *[rows];
     this->scrollOffsets = new short[rows];
 
     this->rows = rows;
     this->columns = columns;
 
     for (size_t i = 0; i < rows; ++i) {
-        this->lastStrings[i] = "";
+        // TODO: minimum size? works?
+        this->lastStrings[i] = new char[1];
+
+        this->lastStrings[i][0] = '\0';
+
         this->scrollOffsets[i] = 0;
     }
 }
 
-void LCD::scrollDisplayLeft() {
-    for (int i = 0; i < this->rows; ++i) {
-        this->lastStrings[i].remove(0);
-    }
-
-    LiquidCrystal::scrollDisplayLeft();
-}
-
-void LCD::clearRow(int row) {
+void LCD::clearRow(int row, bool deleteLastString = false) {
     for (int column = 0; column < this->columns; ++column) {
         this->setCursor(column, row);
         this->print(" ");
+    }
+
+    if (deleteLastString) {
+        delete[] this->lastStrings[row];
+
+        this->lastStrings[row] = new char[1];
+
+        this->lastStrings[row][0] = '\0';
     }
 }
