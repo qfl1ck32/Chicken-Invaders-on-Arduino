@@ -17,8 +17,6 @@ class Leaderboard {
 
     Leaderboard() {
         this->eeprom = new EEPROMHandler(EEPROM_LEADERBOARD_START_INDEX, 256);
-
-        // this->eeprom->clear();
     }
 
     LinkedList<NameAndScore> *get();

@@ -1,8 +1,15 @@
 #include "./Menu.h"
 
 void Menu::setMessages(const char *const *messages, int numberOfMessages) {
-    // TODO: works????
-    this->messages = messages;
+    if (this->messages) {
+        delete[] this->messages;
+    }
+
+    this->messages = new const char *[numberOfMessages];
+
+    for (int i = 0; i < numberOfMessages; ++i) {
+        this->messages[i] = messages[i];
+    }
 
     this->numberOfMessages = numberOfMessages;
 

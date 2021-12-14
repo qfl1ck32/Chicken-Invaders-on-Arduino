@@ -3,10 +3,10 @@
 #include "../../globals.h"
 
 void AboutMenuState::setup() {
-    static const char* const messages[] PROGMEM = {
+    static const char* const messages[] = {
         "Back",
-        "App Name: Chicken Invaders",
-        "Programmer: Rusu Andrei-Cristian",
+        // "App Name: Chicken Invaders",
+        // "Programmer: Rusu Andrei-Cristian",
         // "Github: https://github.com/qfl1ck32/Chicken-Invaders-on-Arduino",
     };
 

@@ -1,15 +1,10 @@
 #ifndef PlayingState_h
 #define PlayingState_h
 
-#include "../../../modules/game/Game.h"
 #include "../../../state/State.h"
-
-class Game;
 
 class PlayingState : public State {
    public:
-    static Game *game;
-
     void setup();
     void handle();
     void cleanup();

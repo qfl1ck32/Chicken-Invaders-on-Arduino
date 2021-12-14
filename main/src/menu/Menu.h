@@ -12,7 +12,7 @@ class Menu {
 
     int currentRow;
 
-    const char *const *messages = nullptr;
+    const char **messages = nullptr;
     HandlerFunction *handlers = nullptr;
 
     int numberOfMessages;

@@ -13,6 +13,7 @@
 #include "../matrix/Matrix.H"
 #include "../menu/Menu.h"
 #include "../modules/game-status/GameStatus.h"
+#include "../modules/game/Game.h"
 #include "../modules/greeter/Greeter.h"
 #include "../modules/leaderboard/Leaderboard.h"
 #include "../modules/name-selection/NameSelector.h"
@@ -52,5 +53,7 @@ extern GameEngine *gameEngine;
 extern GraphicsEngine *graphicsEngine;
 
 extern GameStatus *gameStatus;
+
+extern Game *game;
 
 #endif

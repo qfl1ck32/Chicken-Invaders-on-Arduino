@@ -20,7 +20,7 @@ void YouWonState::handle() {
 
     // sprintf(message, "You won level %d!", playingState->level);
 
-    const char* const youWon PROGMEM = "You won!";
+    const char* const youWon = "You won!";
     const char* const pressXToContinue = "Press X to continue.";
 
     lcd->printOnRow(youWon, 0);
@@ -37,7 +37,7 @@ void YouWonState::cleanup() {
 }
 
 void YouWonState::goToNextLevel() {
-    PlayingState::game->goToNextLevel();
+    game->goToNextLevel();
 
     stateManager->changeState<PlayingState>();
 

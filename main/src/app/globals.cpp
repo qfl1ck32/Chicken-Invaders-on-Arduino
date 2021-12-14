@@ -2,9 +2,9 @@
 
 #include "../constants/app.h"
 
-const char *const pressXToContinue PROGMEM = "Press X to continue";
+const char *const pressXToContinue = "Press X to continue";
 
-const char *const welcome PROGMEM = "Welcome!";
+const char *const welcome = "Welcome!";
 
 StateManager *stateManager = new StateManager();
 
@@ -32,6 +32,8 @@ GameEngine *gameEngine = new GameEngine(MATRIX_ROWS, MATRIX_COLUMNS);
 GraphicsEngine *graphicsEngine = new GraphicsEngine(matrix);
 
 GameStatus *gameStatus = new GameStatus(lcd);
+
+Game *game = new Game();
 
 void menuGoUp() {
     menu->goUp();

@@ -51,7 +51,7 @@ void NameSelectionState::handleSwStateChange() {
 void NameSelectionState::finish() {
     if (nameSelector->finish()) {
         // TODO: update logic
-        leaderboard->write(nameSelector->name, PlayingState::game->score);
+        leaderboard->write(nameSelector->name, game->score);
         stateManager->changeState<MainMenuState>();
     }
 }

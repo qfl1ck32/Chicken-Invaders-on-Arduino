@@ -2,8 +2,6 @@
 
 #include "../../globals.h"
 
-Game* PlayingState::game = new Game();
-
 void PlayingState::setup() {
     joystick->setHandlerOnYAxisChangeUp(PlayingState::moveUp);
     joystick->setHandlerOnYAxisChangeDown(PlayingState::moveDown);
@@ -13,20 +11,19 @@ void PlayingState::setup() {
 
     button->setOnStateChange(PlayingState::attack);
 
-    if (PlayingState::game->needsInitialisation) {
-        PlayingState::game->needsInitialisation = false;
-
-        this->game->setSpaceship(7, 3);
+    if (game->needsInitialisation) {
+        game->needsInitialisation = false;
+        game->setSpaceship(7, 3);
     }
 
-    new Chicken(0, PlayingState::game->level);
+    new Chicken(0, game->level);
 }
 
 void PlayingState::handle() {
     joystick->handleJoystickMovements();
     gameEngine->run();
 
-    gameStatus->show(this->game->score, this->game->spaceship->lifes, 0);
+    gameStatus->show(game->score, game->spaceship->lifes, 0);
     graphicsEngine->renderChanges(gameEngine->changes);
 }
 
@@ -36,21 +33,21 @@ void PlayingState::cleanup() {
 }
 
 void PlayingState::moveUp() {
-    PlayingState::game->spaceship->move(-1, 0);
+    game->spaceship->move(-1, 0);
 }
 
 void PlayingState::moveRight() {
-    PlayingState::game->spaceship->move(0, 1);
+    game->spaceship->move(0, 1);
 }
 
 void PlayingState::moveDown() {
-    PlayingState::game->spaceship->move(1, 0);
+    game->spaceship->move(1, 0);
 }
 
 void PlayingState::moveLeft() {
-    PlayingState::game->spaceship->move(0, -1);
+    game->spaceship->move(0, -1);
 }
 
 void PlayingState::attack() {
-    PlayingState::game->spaceship->attack();
+    game->spaceship->attack();
 }

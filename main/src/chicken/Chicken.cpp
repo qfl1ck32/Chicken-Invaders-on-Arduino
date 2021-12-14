@@ -25,7 +25,7 @@ void Chicken::action() {
 void Chicken::behaviour(byte action) {
     switch (action) {
         case KILL:
-            PlayingState::game->score += 5;
+            game->score += 5;
 
             this->die();
 

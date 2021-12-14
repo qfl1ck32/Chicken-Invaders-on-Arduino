@@ -13,7 +13,7 @@ void LeaderboardState::setup() {
 
     const char *messages[numberOfHighscores == 0 ? 2 : 1 + numberOfHighscores];
 
-    static const char *const back PROGMEM = "Back";
+    static const char *const back = "Back";
 
     messages[0] = back;
 

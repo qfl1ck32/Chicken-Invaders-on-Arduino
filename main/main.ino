@@ -7,13 +7,13 @@
 #include "src/app/states/WelcomeState/WelcomeState.h"
 #include "src/constants/app.h"
 #include "src/lcd/LCD.h"
-// #include "src/modules/music-player/MusicPlayer.h"
-// #include "src/modules/music-player/songs.h"
+#include "src/modules/music-player/MusicPlayer.h"
+#include "src/modules/music-player/songs.h"
 
 Delayer buttonDelayer = Delayer(150);
 Delayer swDelayer = Delayer(300);
 
-// MusicPlayer musicPlayer = MusicPlayer(songBuzzer);
+MusicPlayer musicPlayer = MusicPlayer(songBuzzer);
 
 void handleSw() {
     if (swDelayer.canRun()) Joystick::swHandler(joystick);
@@ -34,18 +34,22 @@ void setup() {
 
     matrix->setup();
 
-    stateManager->changeState<MainMenuState>();
+    stateManager->changeState<WelcomeState>();
 
-    // musicPlayer.setSong(merryChristmas, sizeof(merryChristmas) / sizeof(int));
+    musicPlayer.setSong(merryChristmas, sizeof(merryChristmas) / sizeof(int));
 
-    // musicPlayer.setRepeat(true);
+    musicPlayer.setRepeat(true);
 
     // TODO:  maybe create a class ? 0 is not connected
+
+    // for (int i = 0; i < 1024; ++i) {
+    //     EEPROM.write(i, 255);
+    // }
+
     randomSeed(analogRead(0));
 }
 
 void loop() {
-    // musicPlayer.play();
-    Serial.println(millis());
+    musicPlayer.play();
     stateManager->handle();
 }

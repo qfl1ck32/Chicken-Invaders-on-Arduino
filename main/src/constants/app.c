@@ -1,6 +1,6 @@
 #include "./app.h"
 
-const byte heartCharArray[8] PROGMEM = {
+const byte heartCharArray[8] = {
     0b00000,
     0b01010,
     0b11111,

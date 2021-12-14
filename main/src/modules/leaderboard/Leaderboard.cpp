@@ -1,6 +1,6 @@
 #include "./Leaderboard.h"
 
-const char *const Leaderboard::nameAndScoreDelimiter PROGMEM = "|";
+const char *const Leaderboard::nameAndScoreDelimiter = "|";
 
 int Leaderboard::size = 3;
 

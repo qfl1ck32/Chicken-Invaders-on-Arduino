@@ -10,7 +10,9 @@ Game::Game() {
 }
 
 void Game::setSpaceship(short x, short y) {
-    this->spaceship = new Spaceship(x, y);
+    if (this->spaceship == 0) {
+        this->spaceship = new Spaceship(x, y);
+    }
 }
 
 void Game::setChicken(short x, short y) {

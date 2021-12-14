@@ -79,7 +79,7 @@ void NameSelector::handleInvalidFinish() {
 }
 
 void NameSelector::main() {
-    static const char *const msg PROGMEM = "Enter your name:";
+    static const char *const msg = "Enter your name:";
 
     this->lcd->printOnRow(msg, 0);
 

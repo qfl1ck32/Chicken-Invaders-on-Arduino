@@ -5,7 +5,7 @@
 void GameStatus::show(short score, short lifes, unsigned long startTime) {
     char scoreMessage[getNumberOfDigits(score) + 8];
 
-    static const char* const scoreStr PROGMEM = "Score";
+    static const char* const scoreStr = "Score";
 
     sprintf(scoreMessage, "%s: %d", scoreStr, score);
 
