@@ -1,8 +1,6 @@
 #ifndef globals_h
 #define globals_h
 
-#include <LiquidCrystal.h>
-
 #include "../button/Button.h"
 #include "../buzzer/Buzzer.h"
 #include "../constants/pins.h"
