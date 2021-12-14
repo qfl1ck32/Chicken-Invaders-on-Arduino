@@ -23,7 +23,7 @@ class Button {
 
     void clearHandler();
 
-    static void handleStateChange(Button *);
+    static void handleStateChange(Button &);
 };
 
 #endif

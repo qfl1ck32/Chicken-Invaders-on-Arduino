@@ -39,7 +39,7 @@ void MusicPlayer::play() {
 
     this->buzzer->stop();
 
-    short divider = this->song[this->currentIndex + 1];
+    short divider = pgm_read_word_near(this->song + this->currentIndex + 1);
 
     short noteDuration = 0;
 
@@ -53,7 +53,7 @@ void MusicPlayer::play() {
         noteDuration *= 1.5;
     }
 
-    this->buzzer->buzz(this->song[this->currentIndex], noteDuration * 0.9);
+    this->buzzer->buzz(pgm_read_word_near(this->song + this->currentIndex), noteDuration * 0.9);
 
     this->delayer.updateInterval(noteDuration);
 

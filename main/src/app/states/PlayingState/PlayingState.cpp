@@ -3,51 +3,51 @@
 #include "../../globals.h"
 
 void PlayingState::setup() {
-    joystick->setHandlerOnYAxisChangeUp(PlayingState::moveUp);
-    joystick->setHandlerOnYAxisChangeDown(PlayingState::moveDown);
+    joystick.setOnChangeUp(PlayingState::moveUp);
+    joystick.setOnChangeDown(PlayingState::moveDown);
 
-    joystick->setHandlerOnXAxisChangeLeft(PlayingState::moveLeft);
-    joystick->setHandlerOnXAxisChangeRight(PlayingState::moveRight);
+    joystick.setOnChangeLeft(PlayingState::moveLeft);
+    joystick.setOnChangeRight(PlayingState::moveRight);
 
-    button->setOnStateChange(PlayingState::attack);
+    button.setOnStateChange(PlayingState::attack);
 
-    if (game->needsInitialisation) {
-        game->needsInitialisation = false;
-        game->setSpaceship(7, 3);
+    if (game.needsInitialisation) {
+        game.needsInitialisation = false;
+        game.setSpaceship(7, 3);
     }
 
-    new Chicken(0, game->level);
+    new Chicken(0, game.level);
 }
 
 void PlayingState::handle() {
-    joystick->handleJoystickMovements();
-    gameEngine->run();
+    joystick.handleJoystickMovements();
+    gameEngine.run();
 
-    gameStatus->show(game->score, game->spaceship->lifes, 0);
-    graphicsEngine->renderChanges(gameEngine->changes);
+    gameStatus.show(game.score, game.spaceship->lifes, 0);
+    graphicsEngine.renderChanges(gameEngine.changes, gameEngine.currentChangeIndex);
 }
 
 void PlayingState::cleanup() {
     lcd->clear();
-    joystick->clearHandlers();
+    joystick.clearHandlers();
 }
 
 void PlayingState::moveUp() {
-    game->spaceship->move(-1, 0);
+    game.spaceship->move(-1, 0);
 }
 
 void PlayingState::moveRight() {
-    game->spaceship->move(0, 1);
+    game.spaceship->move(0, 1);
 }
 
 void PlayingState::moveDown() {
-    game->spaceship->move(1, 0);
+    game.spaceship->move(1, 0);
 }
 
 void PlayingState::moveLeft() {
-    game->spaceship->move(0, -1);
+    game.spaceship->move(0, -1);
 }
 
 void PlayingState::attack() {
-    game->spaceship->attack();
+    game.spaceship->attack();
 }

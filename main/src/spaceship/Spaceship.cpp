@@ -10,9 +10,9 @@ void Spaceship::attack() {
     // TODO: dry
     if (this->x - 1 < 0) return;
 
-    if (this->engine->unitMatrix[this->x - 1][this->y] != 0) {
-        if (this->engine->unitMatrix[this->x - 1][this->y]->getType() == CHICKEN_TYPE) {
-            this->sendMessage(KILL, *this->engine->unitMatrix[this->x - 1][this->y]);
+    if (this->engine.unitMatrix[this->x - 1][this->y] != 0) {
+        if (this->engine.unitMatrix[this->x - 1][this->y]->getType() == CHICKEN_TYPE) {
+            this->sendMessage(KILL, *this->engine.unitMatrix[this->x - 1][this->y]);
         }
 
         return;
@@ -27,7 +27,7 @@ void Spaceship::behaviour(byte action) {
             --this->lifes;
 
             if (this->lifes == 0) {
-                stateManager->changeState<GameOverState>();
+                stateManager.changeState<GameOverState>();
             }
 
             return;
@@ -37,15 +37,17 @@ void Spaceship::behaviour(byte action) {
 void Spaceship::move(byte dx, byte dy) {
     if (!this->isValidPosition(this->x + dx, this->y + dy)) return;
 
+    Unit *unit = this->engine.unitMatrix[this->x + dx][this->y + dy];
+
     // TODO: DRY
-    if (this->engine->unitMatrix[this->x + dx][this->y + dy] &&
-        (this->engine->unitMatrix[this->x + dx][this->y + dy]->getType() == EGG_TYPE || this->engine->unitMatrix[this->x + dx][this->y + dy]->getType() == CHICKEN_TYPE)) {
+    if (unit &&
+        (unit->getType() == EGG_TYPE || unit->getType() == CHICKEN_TYPE)) {
         // we don't wanna hurt chickens
-        if (this->engine->unitMatrix[this->x + dx][this->y + dy]->getType() == EGG_TYPE) {
-            this->sendMessage(KILL, *this->engine->unitMatrix[this->x + dx][this->y + dy]);
+        if (unit->getType() == EGG_TYPE) {
+            this->sendMessage(KILL, *unit);
         }
 
-        this->sendMessage(KILL, *this->engine->unitMatrix[this->x][this->y]);
+        this->sendMessage(KILL, *this->engine.unitMatrix[this->x][this->y]);
         return;
     }
 

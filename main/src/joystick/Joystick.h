@@ -7,58 +7,58 @@
 class Joystick {
    public:
     byte pinSw;
-    short pinX;
-    short pinY;
+    byte pinX;
+    byte pinY;
 
-    Joystick(byte pinSw, short pinX, short pinY) {
+    Joystick(byte pinSw, byte pinX, byte pinY) {
         this->pinSw = pinSw;
         this->pinX = pinX;
         this->pinY = pinY;
 
-        this->handlerXAxisChangeLeft = nullptr;
-        this->handlerXAxisChangeRight = nullptr;
+        this->handlerChangeLeft = nullptr;
+        this->handlerChangeRight = nullptr;
 
-        this->handlerYAxisChangeUp = nullptr;
-        this->handlerYAxisChangeDown = nullptr;
+        this->handlerChangeUp = nullptr;
+        this->handlerChangeDown = nullptr;
     }
 
     bool swState = false;
 
-    void setup(void (*swHandler)());
+    void setup(HandlerFunction);
 
     void handleJoystickMovements();
     void clearHandlers();
 
-    void clearHandlerSwStateChange();
+    void clearSwHandler();
 
-    void setHandlerOnXAxisChangeLeft(HandlerFunction);
-    void setHandlerOnXAxisChangeRight(HandlerFunction);
+    void setOnChangeLeft(HandlerFunction);
+    void setOnChangeRight(HandlerFunction);
 
-    void setHandlerOnYAxisChangeUp(HandlerFunction);
-    void setHandlerOnYAxisChangeDown(HandlerFunction);
+    void setOnChangeUp(HandlerFunction);
+    void setOnChangeDown(HandlerFunction);
 
-    void setHandlerSwStateChange(HandlerFunction);
+    void setOnSwStateChange(HandlerFunction);
 
     void handleJoystickMovementOnAxisY();
     void handleJoystickMovementOnAxisX();
 
     void handleSw();
 
-    void (*handlerXAxisChangeLeft)();
-    void (*handlerXAxisChangeRight)();
+    void (*handlerChangeLeft)();
+    void (*handlerChangeRight)();
 
-    void (*handlerYAxisChangeUp)();
-    void (*handlerYAxisChangeDown)();
+    void (*handlerChangeUp)();
+    void (*handlerChangeDown)();
 
     void (*handlerSwStateChange)();
 
     bool joyMovedOnXAxis = false;
     bool joyMovedOnYAxis = false;
 
-    int minThreshold = 400;
-    int maxThreshold = 600;
+    short minThreshold = 400;
+    short maxThreshold = 600;
 
-    static void swHandler(Joystick *);
+    static void swHandler(Joystick &);
 };
 
 #endif

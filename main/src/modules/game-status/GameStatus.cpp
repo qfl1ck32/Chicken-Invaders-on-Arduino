@@ -2,7 +2,7 @@
 
 #include "../../app/globals.h"
 
-void GameStatus::show(short score, short lifes, unsigned long startTime) {
+void GameStatus::show(short score, byte lifes, unsigned int startTime) {
     char scoreMessage[getNumberOfDigits(score) + 8];
 
     static const char* const scoreStr = "Score";

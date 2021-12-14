@@ -5,15 +5,18 @@ const char *const Leaderboard::nameAndScoreDelimiter = "|";
 int Leaderboard::size = 3;
 
 int Leaderboard::getHighscore() {
-    LinkedList<NameAndScore> *scores = this->get();
+    NameAndScore *scores = this->get();
+
     int maxScore = 0;
 
-    while (scores->size()) {
-        NameAndScore element = scores->remove(0);
+    while (scores) {
+        NameAndScore element = *scores;
 
         if (element.score > maxScore) {
             maxScore = element.score;
         }
+
+        ++scores;
     }
 
     free(scores);
@@ -21,10 +24,13 @@ int Leaderboard::getHighscore() {
     return maxScore;
 }
 
-LinkedList<NameAndScore> *Leaderboard::get() {
-    LinkedList<NameAndScore> *leaderboard = new LinkedList<NameAndScore>();
+NameAndScore *Leaderboard::get() {
+    // FIXME: constant
+    NameAndScore *leaderboard = new NameAndScore[5];
 
     char *str;
+
+    int currentIndex = 0;
 
     while ((str = this->eeprom->readNext())) {
         char *pointerToDelimiter = strchr(str, Leaderboard::nameAndScoreDelimiter[0]);
@@ -39,7 +45,7 @@ LinkedList<NameAndScore> *Leaderboard::get() {
 
         short score = atoi(str + delimiterIndex);
 
-        leaderboard->add(NameAndScore(name, score));
+        leaderboard[currentIndex++] = NameAndScore(name, score);
 
         free(str);
     }

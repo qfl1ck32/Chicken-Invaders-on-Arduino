@@ -14,21 +14,20 @@
 #include "../menu/Menu.h"
 #include "../modules/game-status/GameStatus.h"
 #include "../modules/game/Game.h"
-#include "../modules/greeter/Greeter.h"
 #include "../modules/leaderboard/Leaderboard.h"
 #include "../modules/name-selection/NameSelector.h"
 #include "../state-manager/StateManager.h"
 #include "./typedefs.h"
 
-extern StateManager *stateManager;
+extern StateManager stateManager;
 
 extern LCD *lcd;
 
-extern Joystick *joystick;
+extern Joystick joystick;
 
 extern NameSelector *nameSelector;
 
-extern Menu *menu;
+extern Menu menu;
 
 extern void menuGoUp();
 
@@ -36,24 +35,22 @@ extern void menuGoDown();
 
 extern void menuSelect();
 
-extern Button *button;
-
-extern Greeter *greeter;
+extern Button button;
 
 extern Matrix *matrix;
 
-extern Leaderboard *leaderboard;
+extern Leaderboard leaderboard;
 
 extern Buzzer *songBuzzer;
 
 extern Buzzer *gameSoundsBuzzer;
 
-extern GameEngine *gameEngine;
+extern GameEngine gameEngine;
 
-extern GraphicsEngine *graphicsEngine;
+extern GraphicsEngine graphicsEngine;
 
-extern GameStatus *gameStatus;
+extern GameStatus gameStatus;
 
-extern Game *game;
+extern Game game;
 
 #endif

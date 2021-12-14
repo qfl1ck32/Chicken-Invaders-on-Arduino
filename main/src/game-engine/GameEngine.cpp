@@ -1,6 +1,6 @@
 #include "./GameEngine.h"
 
-GameEngine::GameEngine(short rows, short columns) {
+GameEngine::GameEngine(byte rows, byte columns) {
     this->rows = rows;
     this->columns = columns;
 
@@ -21,8 +21,7 @@ GameEngine::GameEngine(short rows, short columns) {
     }
 
     this->numberOfUnits = 0;
-
-    this->changes = new LinkedList<PixelChange>();
+    this->currentChangeIndex = 0;
 }
 
 void GameEngine::resetState() {
@@ -60,8 +59,8 @@ void GameEngine::run() {
             continue;
         }
 
-        int x = this->unitArray[i]->x;
-        int y = this->unitArray[i]->y;
+        byte x = this->unitArray[i]->x;
+        byte y = this->unitArray[i]->y;
 
         this->unitMatrix[x][y] = 0;
 
@@ -73,13 +72,17 @@ void GameEngine::run() {
             this->unitArray[j - 1] = this->unitArray[j];
         }
 
-        this->changes->add(PixelChange(x, y, false));
+        this->changes[this->currentChangeIndex++] = PixelChange(x, y, false);
 
         --this->numberOfUnits;
         --i;
     }
 }
 
-bool GameEngine::isValidPosition(short x, short y) {
+void GameEngine::resetChanges() {
+    this->currentChangeIndex = 0;
+}
+
+bool GameEngine::isValidPosition(byte x, byte y) {
     return x >= 0 && y >= 0 && x < this->rows && y < this->columns;
 }

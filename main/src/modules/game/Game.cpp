@@ -9,14 +9,10 @@ Game::Game() {
     this->needsInitialisation = true;
 }
 
-void Game::setSpaceship(short x, short y) {
+void Game::setSpaceship(byte x, byte y) {
     if (this->spaceship == 0) {
         this->spaceship = new Spaceship(x, y);
     }
-}
-
-void Game::setChicken(short x, short y) {
-    new Chicken(x, y);
 }
 
 void Game::goToNextLevel() {

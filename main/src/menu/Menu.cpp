@@ -17,7 +17,7 @@ void Menu::setMessages(const char *const *messages, int numberOfMessages) {
     this->currentRow = 0;
 }
 
-void Menu::setHandlers(HandlerFunction handlers[], int numberOfHandlers) {
+void Menu::setOns(HandlerFunction handlers[], int numberOfHandlers) {
     if (this->handlers != nullptr) {
         free(this->handlers);
     }

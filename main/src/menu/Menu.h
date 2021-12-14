@@ -29,7 +29,7 @@ class Menu {
         this->currentRow = 0;
     }
 
-    void setHandlers(HandlerFunction *, int);
+    void setOns(HandlerFunction *, int);
 
     void setMessages(const char *const *, int);
 

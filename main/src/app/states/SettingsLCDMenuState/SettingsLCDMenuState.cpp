@@ -5,30 +5,30 @@
 void SettingsLCDMenuState::setup() {
     static const char *const messages[] = {"Go back", "Contrast -", "Contrast +", "Backlight -", "Backlight +"};
 
-    menu->setMessages(messages, sizeof(messages) / sizeof(char *));
+    menu.setMessages(messages, sizeof(messages) / sizeof(char *));
 
     HandlerFunction handlers[] = {SettingsLCDMenuState::goBack, SettingsLCDMenuState::decreaseContrast, SettingsLCDMenuState::increaseContrast,
                                   SettingsLCDMenuState::decreaseBacklight, SettingsLCDMenuState::increaseBacklight};
 
-    menu->setHandlers(handlers, sizeof(handlers) / sizeof(HandlerFunction));
+    menu.setOns(handlers, sizeof(handlers) / sizeof(HandlerFunction));
 
-    joystick->setHandlerOnYAxisChangeUp(menuGoUp);
-    joystick->setHandlerOnYAxisChangeDown(menuGoDown);
+    joystick.setOnChangeUp(menuGoUp);
+    joystick.setOnChangeDown(menuGoDown);
 
-    joystick->setHandlerSwStateChange(menuSelect);
+    joystick.setOnSwStateChange(menuSelect);
 }
 
 void SettingsLCDMenuState::handle() {
-    menu->run();
-    joystick->handleJoystickMovements();
+    menu.run();
+    joystick.handleJoystickMovements();
 }
 
 void SettingsLCDMenuState::cleanup() {
-    joystick->clearHandlers();
+    joystick.clearHandlers();
 }
 
 void SettingsLCDMenuState::goBack() {
-    stateManager->changeState<SettingsMenuState>();
+    stateManager.changeState<SettingsMenuState>();
 }
 
 void SettingsLCDMenuState::increaseContrast() {

@@ -8,8 +8,8 @@ void Bullet::action() {
         return;
     }
 
-    if (this->engine->unitMatrix[this->x - 1][this->y] != 0 && this->engine->unitMatrix[this->x - 1][this->y]->getType() == CHICKEN_TYPE) {
-        this->sendMessage(KILL, *this->engine->unitMatrix[this->x - 1][this->y]);
+    if (this->engine.unitMatrix[this->x - 1][this->y] != 0 && this->engine.unitMatrix[this->x - 1][this->y]->getType() == CHICKEN_TYPE) {
+        this->sendMessage(KILL, *this->engine.unitMatrix[this->x - 1][this->y]);
         this->die();
         return;
     }

@@ -1,12 +1,12 @@
 #ifndef GameEngine_h
 #define GameEngine_h
 
-#include <LinkedList.h>
-
 #include "../pixel-change/PixelChange.h"
 #include "../unit/Unit.h"
+#include "Arduino.h"
 
 #define MAX_UNITS 10
+#define MAX_CHANGES 10
 
 class Unit;
 
@@ -14,16 +14,18 @@ class PixelChange;
 
 class GameEngine {
    public:
-    short rows, columns;
+    byte rows, columns;
 
     Unit ***unitMatrix;
     Unit *unitArray[MAX_UNITS];
 
-    LinkedList<PixelChange> *changes;
+    byte currentChangeIndex;
 
-    int numberOfUnits;
+    PixelChange changes[MAX_CHANGES];
 
-    GameEngine(short, short);
+    byte numberOfUnits;
+
+    GameEngine(byte, byte);
 
     void resetState();
 
@@ -31,7 +33,9 @@ class GameEngine {
 
     void run();
 
-    bool isValidPosition(short, short);
+    bool isValidPosition(byte, byte);
+
+    void resetChanges();
 };
 
 #endif

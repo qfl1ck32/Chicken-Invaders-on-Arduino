@@ -9,7 +9,7 @@ class Buzzer {
 
     Buzzer(byte);
 
-    void buzz(unsigned int, unsigned long);
+    void buzz(unsigned int, unsigned int);
     void stop();
 };
 

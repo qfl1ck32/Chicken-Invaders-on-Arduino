@@ -5,16 +5,16 @@
 void SettingsMatrixMenuState::setup() {
     static const char *const messages[] = {"Back", "+", "-"};
 
-    menu->setMessages(messages, sizeof(messages) / sizeof(char *));
+    menu.setMessages(messages, sizeof(messages) / sizeof(char *));
 
     HandlerFunction handlers[] = {SettingsMatrixMenuState::goBack, SettingsMatrixMenuState::increaseIntensity, SettingsMatrixMenuState::decreaseIntensity};
 
-    menu->setHandlers(handlers, sizeof(handlers) / sizeof(HandlerFunction));
+    menu.setOns(handlers, sizeof(handlers) / sizeof(HandlerFunction));
 
-    joystick->setHandlerOnYAxisChangeUp(menuGoUp);
-    joystick->setHandlerOnYAxisChangeDown(menuGoDown);
+    joystick.setOnChangeUp(menuGoUp);
+    joystick.setOnChangeDown(menuGoDown);
 
-    joystick->setHandlerSwStateChange(menuSelect);
+    joystick.setOnSwStateChange(menuSelect);
 
     for (int i = 0; i < matrix->rows; ++i) {
         for (int j = 0; j < matrix->columns; ++j) {
@@ -24,12 +24,12 @@ void SettingsMatrixMenuState::setup() {
 }
 
 void SettingsMatrixMenuState::handle() {
-    menu->run();
-    joystick->handleJoystickMovements();
+    menu.run();
+    joystick.handleJoystickMovements();
 }
 
 void SettingsMatrixMenuState::cleanup() {
-    joystick->clearHandlers();
+    joystick.clearHandlers();
 
     for (int i = 0; i < matrix->rows; ++i) {
         for (int j = 0; j < matrix->columns; ++j) {
@@ -39,7 +39,7 @@ void SettingsMatrixMenuState::cleanup() {
 }
 
 void SettingsMatrixMenuState::goBack() {
-    stateManager->changeState<SettingsMenuState>();
+    stateManager.changeState<SettingsMenuState>();
 }
 
 void SettingsMatrixMenuState::increaseIntensity() {

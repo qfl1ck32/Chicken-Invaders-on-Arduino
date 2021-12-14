@@ -11,15 +11,13 @@ class Game {
    public:
     Spaceship *spaceship;
     short score;
-    short level;
+    byte level;
 
     bool needsInitialisation;
 
     Game();
 
-    void setSpaceship(short, short);
-
-    void setChicken(short, short);
+    void setSpaceship(byte, byte);
 
     void goToNextLevel();
 };

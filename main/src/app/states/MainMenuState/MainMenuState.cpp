@@ -5,41 +5,41 @@
 void MainMenuState::setup() {
     static const char *const messages[] = {"Play", "Settings", "Leaderboard", "About"};
 
-    menu->setMessages(messages, sizeof(messages) / sizeof(char *));
+    menu.setMessages(messages, sizeof(messages) / sizeof(char *));
 
     HandlerFunction handlers[] = {MainMenuState::goToPlay, MainMenuState::goToSettings, MainMenuState::goToLeaderboard, MainMenuState::goToAbout};
-    menu->setHandlers(handlers, sizeof(handlers) / sizeof(HandlerFunction));
+    menu.setOns(handlers, sizeof(handlers) / sizeof(HandlerFunction));
 
-    joystick->setHandlerOnYAxisChangeUp(menuGoUp);
-    joystick->setHandlerOnYAxisChangeDown(menuGoDown);
+    joystick.setOnChangeUp(menuGoUp);
+    joystick.setOnChangeDown(menuGoDown);
 
-    joystick->setHandlerSwStateChange(menuSelect);
+    joystick.setOnSwStateChange(menuSelect);
 }
 
 void MainMenuState::handle() {
-    menu->run();
-    joystick->handleJoystickMovements();
+    menu.run();
+    joystick.handleJoystickMovements();
 }
 
 void MainMenuState::cleanup() {
-    joystick->clearHandlers();
-    button->clearHandler();
+    joystick.clearHandlers();
+    button.clearHandler();
 
     lcd->clear();
 }
 
 void MainMenuState::goToPlay() {
-    stateManager->changeState<PlayingState>();
+    stateManager.changeState<PlayingState>();
 }
 
 void MainMenuState::goToSettings() {
-    stateManager->changeState<SettingsMenuState>();
+    stateManager.changeState<SettingsMenuState>();
 }
 
 void MainMenuState::goToLeaderboard() {
-    stateManager->changeState<LeaderboardState>();
+    stateManager.changeState<LeaderboardState>();
 }
 
 void MainMenuState::goToAbout() {
-    stateManager->changeState<AboutMenuState>();
+    stateManager.changeState<AboutMenuState>();
 }

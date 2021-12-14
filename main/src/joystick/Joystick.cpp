@@ -8,28 +8,28 @@ void Joystick::setup(HandlerFunction swHandler) {
     attachInterrupt(digitalPinToInterrupt(this->pinSw), swHandler, FALLING);
 }
 
-void Joystick::clearHandlerSwStateChange() {
+void Joystick::clearSwHandler() {
     this->handlerSwStateChange = nullptr;
 }
 
-void Joystick::setHandlerSwStateChange(HandlerFunction f) {
+void Joystick::setOnSwStateChange(HandlerFunction f) {
     this->handlerSwStateChange = f;
 }
 
-void Joystick::setHandlerOnXAxisChangeLeft(HandlerFunction f) {
-    this->handlerXAxisChangeLeft = f;
+void Joystick::setOnChangeLeft(HandlerFunction f) {
+    this->handlerChangeLeft = f;
 }
 
-void Joystick::setHandlerOnXAxisChangeRight(HandlerFunction f) {
-    this->handlerXAxisChangeRight = f;
+void Joystick::setOnChangeRight(HandlerFunction f) {
+    this->handlerChangeRight = f;
 }
 
-void Joystick::setHandlerOnYAxisChangeUp(HandlerFunction f) {
-    this->handlerYAxisChangeUp = f;
+void Joystick::setOnChangeUp(HandlerFunction f) {
+    this->handlerChangeUp = f;
 }
 
-void Joystick::setHandlerOnYAxisChangeDown(HandlerFunction f) {
-    this->handlerYAxisChangeDown = f;
+void Joystick::setOnChangeDown(HandlerFunction f) {
+    this->handlerChangeDown = f;
 }
 
 void Joystick::handleJoystickMovementOnAxisY() {
@@ -38,13 +38,13 @@ void Joystick::handleJoystickMovementOnAxisY() {
     if (yValue < this->minThreshold && !this->joyMovedOnYAxis) {
         this->joyMovedOnYAxis = true;
 
-        if (this->handlerYAxisChangeUp) this->handlerYAxisChangeUp();
+        if (this->handlerChangeUp) this->handlerChangeUp();
     }
 
     if (yValue > this->maxThreshold && !this->joyMovedOnYAxis) {
         this->joyMovedOnYAxis = true;
 
-        if (this->handlerYAxisChangeDown) this->handlerYAxisChangeDown();
+        if (this->handlerChangeDown) this->handlerChangeDown();
     }
 
     if (yValue >= this->minThreshold && yValue <= this->maxThreshold) {
@@ -58,13 +58,13 @@ void Joystick::handleJoystickMovementOnAxisX() {
     if (xValue < this->minThreshold && !this->joyMovedOnXAxis) {
         this->joyMovedOnXAxis = true;
 
-        if (this->handlerXAxisChangeLeft) this->handlerXAxisChangeLeft();
+        if (this->handlerChangeLeft) this->handlerChangeLeft();
     }
 
     if (xValue > this->maxThreshold && !this->joyMovedOnXAxis) {
         this->joyMovedOnXAxis = true;
 
-        if (this->handlerXAxisChangeRight) this->handlerXAxisChangeRight();
+        if (this->handlerChangeRight) this->handlerChangeRight();
     }
 
     if (xValue >= this->minThreshold && xValue <= this->maxThreshold) {
@@ -78,17 +78,17 @@ void Joystick::handleJoystickMovements() {
 }
 
 void Joystick::clearHandlers() {
-    this->handlerXAxisChangeLeft = nullptr;
-    this->handlerXAxisChangeRight = nullptr;
-    this->handlerYAxisChangeDown = nullptr;
-    this->handlerYAxisChangeUp = nullptr;
+    this->handlerChangeLeft = nullptr;
+    this->handlerChangeRight = nullptr;
+    this->handlerChangeDown = nullptr;
+    this->handlerChangeUp = nullptr;
 
     this->handlerSwStateChange = nullptr;
 }
 
-void Joystick::swHandler(Joystick *joystick) {
-    bool currentSwState = digitalRead(joystick->pinSw);
+void Joystick::swHandler(Joystick &joystick) {
+    bool currentSwState = digitalRead(joystick.pinSw);
 
-    joystick->swState = !joystick->swState;
-    if (joystick->handlerSwStateChange) joystick->handlerSwStateChange();
+    joystick.swState = !joystick.swState;
+    if (joystick.handlerSwStateChange) joystick.handlerSwStateChange();
 }

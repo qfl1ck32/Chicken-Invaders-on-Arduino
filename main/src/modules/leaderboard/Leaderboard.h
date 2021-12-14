@@ -5,7 +5,6 @@
 #include "../../eeprom-handler/EEPROMHandler.h"
 #include "../../utils/utils.h"
 #include "./NameAndScore.h"
-#include "LinkedList.h"
 
 class Leaderboard {
    public:
@@ -19,7 +18,7 @@ class Leaderboard {
         this->eeprom = new EEPROMHandler(EEPROM_LEADERBOARD_START_INDEX, 256);
     }
 
-    LinkedList<NameAndScore> *get();
+    NameAndScore *get();
 
     void write(const char *, int);
 

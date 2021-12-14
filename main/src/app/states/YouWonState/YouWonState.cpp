@@ -4,8 +4,8 @@
 
 void YouWonState::setup() {
     lcd->clear();
-    joystick->clearHandlers();
-    button->setOnStateChange(YouWonState::goToNextLevel);
+    joystick.clearHandlers();
+    button.setOnStateChange(YouWonState::goToNextLevel);
 
     // TODO: not here
     matrix->clear();
@@ -33,13 +33,13 @@ void YouWonState::handle() {
 }
 
 void YouWonState::cleanup() {
-    button->clearHandler();
+    button.clearHandler();
 }
 
 void YouWonState::goToNextLevel() {
-    game->goToNextLevel();
+    game.goToNextLevel();
 
-    stateManager->changeState<PlayingState>();
+    stateManager.changeState<PlayingState>();
 
-    // gameEngine->resetState();
+    // gameEngine.resetState();
 }

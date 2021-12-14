@@ -5,30 +5,30 @@
 void SettingsMenuState::setup() {
     static const char *const messages[] = {"Back", "Lvl", "LCD", "Matrix"};
 
-    menu->setMessages(messages, sizeof(messages) / sizeof(char *));
+    menu.setMessages(messages, sizeof(messages) / sizeof(char *));
 
     HandlerFunction handlers[] = {SettingsMenuState::goBack, SettingsMenuState::goToLevel, SettingsMenuState::goToLCD,
                                   SettingsMenuState::goToMatrix};
 
-    menu->setHandlers(handlers, sizeof(handlers) / sizeof(HandlerFunction));
+    menu.setOns(handlers, sizeof(handlers) / sizeof(HandlerFunction));
 
-    joystick->setHandlerOnYAxisChangeUp(menuGoUp);
-    joystick->setHandlerOnYAxisChangeDown(menuGoDown);
+    joystick.setOnChangeUp(menuGoUp);
+    joystick.setOnChangeDown(menuGoDown);
 
-    joystick->setHandlerSwStateChange(menuSelect);
+    joystick.setOnSwStateChange(menuSelect);
 }
 
 void SettingsMenuState::handle() {
-    menu->run();
-    joystick->handleJoystickMovements();
+    menu.run();
+    joystick.handleJoystickMovements();
 }
 
 void SettingsMenuState::cleanup() {
-    joystick->clearHandlers();
+    joystick.clearHandlers();
 }
 
 void SettingsMenuState::goBack() {
-    stateManager->changeState<MainMenuState>();
+    stateManager.changeState<MainMenuState>();
 }
 
 void SettingsMenuState::goToLevel() {
@@ -36,9 +36,9 @@ void SettingsMenuState::goToLevel() {
 }
 
 void SettingsMenuState::goToLCD() {
-    stateManager->changeState<SettingsLCDMenuState>();
+    stateManager.changeState<SettingsLCDMenuState>();
 }
 
 void SettingsMenuState::goToMatrix() {
-    stateManager->changeState<SettingsMatrixMenuState>();
+    stateManager.changeState<SettingsMatrixMenuState>();
 }

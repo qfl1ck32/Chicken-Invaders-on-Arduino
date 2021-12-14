@@ -2,47 +2,41 @@
 
 #include "../constants/app.h"
 
-const char *const pressXToContinue = "Press X to continue";
-
-const char *const welcome = "Welcome!";
-
-StateManager *stateManager = new StateManager();
+StateManager stateManager = StateManager();
 
 LCD *lcd = new LCD(RS, enable, d4, d5, d6, d7, contrast, backlight);
 
-Joystick *joystick = new Joystick(pinSW, pinX, pinY);
+Joystick joystick = Joystick(pinSW, pinX, pinY);
 
 NameSelector *nameSelector = new NameSelector(lcd, 1);
 
-Menu *menu = new Menu(lcd);
+Menu menu = Menu(lcd);
 
-Button *button = new Button(buttonPin);
-
-Greeter *greeter = new Greeter(lcd, welcome, pressXToContinue);
+Button button = Button(buttonPin);
 
 Matrix *matrix = new Matrix(dinPin, clockPin, loadPin, 1, matrixRows, matrixCols);
 
-Leaderboard *leaderboard = new Leaderboard();
+Leaderboard leaderboard = Leaderboard();
 
 Buzzer *songBuzzer = new Buzzer(songBuzzerPin);
 Buzzer *gameSoundsBuzzer = new Buzzer(gameSoundsBuzzerPin);
 
-GameEngine *gameEngine = new GameEngine(MATRIX_ROWS, MATRIX_COLUMNS);
+GameEngine gameEngine = GameEngine(MATRIX_ROWS, MATRIX_COLUMNS);
 
-GraphicsEngine *graphicsEngine = new GraphicsEngine(matrix);
+GraphicsEngine graphicsEngine = GraphicsEngine(matrix);
 
-GameStatus *gameStatus = new GameStatus(lcd);
+GameStatus gameStatus = GameStatus(lcd);
 
-Game *game = new Game();
+Game game = Game();
 
 void menuGoUp() {
-    menu->goUp();
+    menu.goUp();
 }
 
 void menuGoDown() {
-    menu->goDown();
+    menu.goDown();
 }
 
 void menuSelect() {
-    menu->select();
+    menu.select();
 }

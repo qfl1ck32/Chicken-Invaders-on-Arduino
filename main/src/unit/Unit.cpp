@@ -2,7 +2,7 @@
 
 #include "../app/globals.h"
 
-GameEngine* Unit::engine = gameEngine;
+GameEngine Unit::engine = gameEngine;
 
 void Unit::die() {
     this->isAlive = false;
@@ -20,7 +20,7 @@ void Unit::react() {
 
 // TODO: this is overridable (just a notice, not a todo, lol)
 bool Unit::isValidPosition(byte x, byte y) {
-    return Unit::engine->isValidPosition(x, y);
+    return Unit::engine.isValidPosition(x, y);
 }
 
 void Unit::move(byte dx, byte dy) {
@@ -28,14 +28,14 @@ void Unit::move(byte dx, byte dy) {
         return;
     }
 
-    Unit::engine->unitMatrix[this->x][this->y] = NULL;
-    Unit::engine->changes->add(PixelChange(this->x, this->y, false));
+    Unit::engine.unitMatrix[this->x][this->y] = NULL;
+    Unit::engine.changes[Unit::engine.currentChangeIndex++] = PixelChange(this->x, this->y, false);
 
     this->x += dx;
     this->y += dy;
 
-    Unit::engine->unitMatrix[this->x][this->y] = this;
-    Unit::engine->changes->add(PixelChange(this->x, this->y, true));
+    Unit::engine.unitMatrix[this->x][this->y] = this;
+    Unit::engine.changes[Unit::engine.currentChangeIndex++] = PixelChange(this->x, this->y, true);
 }
 
 void Unit::sendMessage(byte message, Unit& unit) {
@@ -59,10 +59,10 @@ Unit::Unit(byte x, byte y) {
         messages[i] = 0;
     }
 
-    if (Unit::engine->unitMatrix[x][y] == NULL && Unit::engine->numberOfUnits < MAX_UNITS) {
-        Unit::engine->unitArray[Unit::engine->numberOfUnits++] = this;
-        Unit::engine->unitMatrix[x][y] = this;
+    if (Unit::engine.unitMatrix[x][y] == NULL && Unit::engine.numberOfUnits < MAX_UNITS) {
+        Unit::engine.unitArray[Unit::engine.numberOfUnits++] = this;
+        Unit::engine.unitMatrix[x][y] = this;
     }
 
-    Unit::engine->changes->add(PixelChange(this->x, this->y, true));
+    Unit::engine.changes[Unit::engine.currentChangeIndex++] = PixelChange(this->x, this->y, true);
 }

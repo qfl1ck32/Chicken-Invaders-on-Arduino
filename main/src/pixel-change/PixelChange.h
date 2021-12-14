@@ -1,14 +1,16 @@
 #ifndef PixelChange_h
 #define PixelChange_h
 
+#include "Arduino.h"
+
 class PixelChange {
    public:
-    short x, y;
+    byte x, y;
     bool state;
 
     PixelChange() {}
 
-    PixelChange(short x, short y, bool state) {
+    PixelChange(byte x, byte y, bool state) {
         this->x = x;
         this->y = y;
 

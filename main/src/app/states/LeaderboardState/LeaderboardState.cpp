@@ -5,63 +5,65 @@
 void LeaderboardState::setup() {
     HandlerFunction handlers[] = {LeaderboardState::goBack};
 
-    menu->setHandlers(handlers, sizeof(handlers) / sizeof(HandlerFunction));
+    menu.setOns(handlers, sizeof(handlers) / sizeof(HandlerFunction));
 
-    LinkedList<NameAndScore> *scores = leaderboard->get();
+    NameAndScore *scores = leaderboard.get();
 
-    int numberOfHighscores = scores->size();
+    // FIXME keep in mind, max n scores, display "Missing" for the rest if needed
 
-    const char *messages[numberOfHighscores == 0 ? 2 : 1 + numberOfHighscores];
+    // int numberOfHighscores = scores->size();
 
-    static const char *const back = "Back";
+    // const char *messages[numberOfHighscores == 0 ? 2 : 1 + numberOfHighscores];
 
-    messages[0] = back;
+    // static const char *const back = "Back";
 
-    int index = 1;
+    // messages[0] = back;
 
-    while (scores->size()) {
-        NameAndScore entry = scores->remove(0);
+    // int index = 1;
 
-        // char leaderboardEntry[strlen(entry.name) + getNumberOfDigits(entry.score) + getNumberOfDigits(index) + 7];
+    // while (scores->size()) {
+    //     NameAndScore entry = scores->remove(0);
 
-        // sprintf(messages[index], "%d. %s - %d", index, entry.name, entry.score);
+    //     // char leaderboardEntry[strlen(entry.name) + getNumberOfDigits(entry.score) + getNumberOfDigits(index) + 7];
 
-        // TODO: come back and format w/ score too
-        messages[index] = entry.name;
+    //     // sprintf(messages[index], "%d. %s - %d", index, entry.name, entry.score);
 
-        // TODO: feels stupid
-        // free(entry.name);
+    //     // TODO: come back and format w/ score too
+    //     messages[index] = entry.name;
 
-        // show("Bag fix asta:::", entry.name);
+    //     // TODO: feels stupid
+    //     // free(entry.name);
 
-        ++index;
-    }
+    //     // show("Bag fix asta:::", entry.name);
 
-    if (index == 1) {
-        messages[index] = "No high scores";
-    }
+    //     ++index;
+    // }
 
-    free(scores);
+    // if (index == 1) {
+    //     messages[index] = "No high scores";
+    // }
 
-    menu->setMessages(messages, sizeof(messages) / sizeof(char *));
+    // free(scores);
 
-    joystick->setHandlerOnYAxisChangeUp(menuGoUp);
-    joystick->setHandlerOnYAxisChangeDown(menuGoDown);
+    // menu.setMessages(messages, sizeof(messages) / sizeof(char *));
 
-    joystick->setHandlerSwStateChange(menuSelect);
+    // joystick.setOnChangeUp(menuGoUp);
+    // joystick.setOnChangeDown(menuGoDown);
+
+    // joystick.setOnSwStateChange(menuSelect);
 }
 
 void LeaderboardState::handle() {
-    menu->run();
-    joystick->handleJoystickMovements();
+    menu.run();
+    joystick.handleJoystickMovements();
 }
 
 void LeaderboardState::cleanup() {
     lcd->clear();
 
-    joystick->clearHandlers();
+    joystick.clearHandlers();
 }
 
 void LeaderboardState::goBack() {
-    stateManager->changeState<MainMenuState>();
+    stateManager.changeState<MainMenuState>();
 }

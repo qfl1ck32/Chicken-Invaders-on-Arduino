@@ -1,7 +1,7 @@
 #include "./Delayer.h"
 
 bool Delayer::canRun() {
-    unsigned long currentTime = millis();
+    unsigned int currentTime = millis();
 
     bool canRun = currentTime - this->lastTime >= interval;
 
@@ -18,6 +18,6 @@ bool Delayer::canRun() {
     return false;
 }
 
-void Delayer::updateInterval(unsigned long newInterval) {
+void Delayer::updateInterval(unsigned int newInterval) {
     this->interval = newInterval;
 }

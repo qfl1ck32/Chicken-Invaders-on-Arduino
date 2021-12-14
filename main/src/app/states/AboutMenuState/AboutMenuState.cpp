@@ -10,32 +10,32 @@ void AboutMenuState::setup() {
         // "Github: https://github.com/qfl1ck32/Chicken-Invaders-on-Arduino",
     };
 
-    menu->setMessages(messages, sizeof(messages) / sizeof(char*));
+    menu.setMessages(messages, sizeof(messages) / sizeof(char*));
 
     HandlerFunction handlers[] = {AboutMenuState::goBack};
-    menu->setHandlers(handlers, sizeof(handlers) / sizeof(HandlerFunction));
+    menu.setOns(handlers, sizeof(handlers) / sizeof(HandlerFunction));
 
-    joystick->clearHandlers();
-    button->clearHandler();
+    joystick.clearHandlers();
+    button.clearHandler();
 
-    joystick->setHandlerOnYAxisChangeUp(menuGoUp);
-    joystick->setHandlerOnYAxisChangeDown(menuGoDown);
+    joystick.setOnChangeUp(menuGoUp);
+    joystick.setOnChangeDown(menuGoDown);
 
-    joystick->setHandlerSwStateChange(menuSelect);
+    joystick.setOnSwStateChange(menuSelect);
 }
 
 void AboutMenuState::handle() {
-    menu->run(true);
-    joystick->handleJoystickMovements();
+    menu.run(true);
+    joystick.handleJoystickMovements();
 }
 
 void AboutMenuState::cleanup() {
-    joystick->clearHandlers();
-    button->clearHandler();
+    joystick.clearHandlers();
+    button.clearHandler();
 
     lcd->clear();
 }
 
 void AboutMenuState::goBack() {
-    stateManager->changeState<MainMenuState>();
+    stateManager.changeState<MainMenuState>();
 }

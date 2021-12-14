@@ -13,8 +13,8 @@ void Button::setOnStateChange(void (*onStateChange)()) {
     this->onStateChange = onStateChange;
 }
 
-void Button::handleStateChange(Button *button) {
-    button->state = !button->state;
+void Button::handleStateChange(Button &button) {
+    button.state = !button.state;
 
-    if (button->onStateChange) button->onStateChange();
+    if (button.onStateChange) button.onStateChange();
 }

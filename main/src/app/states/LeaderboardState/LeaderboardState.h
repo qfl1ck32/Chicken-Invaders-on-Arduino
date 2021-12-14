@@ -3,7 +3,6 @@
 
 #include "../../../state/State.h"
 #include "../MainMenuState/MainMenuState.h"
-#include "LinkedList.h"
 
 class LeaderboardState : public State {
    public:

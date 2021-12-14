@@ -3,10 +3,8 @@
 
 #include "src/app/globals.h"
 #include "src/app/states/MainMenuState/MainMenuState.h"
-#include "src/app/states/PlayingState/PlayingState.h"
 #include "src/app/states/WelcomeState/WelcomeState.h"
 #include "src/constants/app.h"
-#include "src/lcd/LCD.h"
 #include "src/modules/music-player/MusicPlayer.h"
 #include "src/modules/music-player/songs.h"
 
@@ -26,15 +24,15 @@ void handleButtonStateChange() {
 void setup() {
     Serial.begin(baudRate);
 
-    joystick->setup(handleSw);
-    button->setup(handleButtonStateChange);
+    joystick.setup(handleSw);
+    button.setup(handleButtonStateChange);
     lcd->setup(ledRows, ledColumns);
 
     lcd->createChar(heartChar, heartCharArray);
 
     matrix->setup();
 
-    stateManager->changeState<WelcomeState>();
+    stateManager.changeState<WelcomeState>();
 
     musicPlayer.setSong(merryChristmas, sizeof(merryChristmas) / sizeof(int));
 
@@ -51,5 +49,5 @@ void setup() {
 
 void loop() {
     musicPlayer.play();
-    stateManager->handle();
+    stateManager.handle();
 }

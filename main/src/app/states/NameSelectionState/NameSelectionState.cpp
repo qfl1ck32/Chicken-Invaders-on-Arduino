@@ -3,26 +3,26 @@
 #include "../../globals.h"
 
 void NameSelectionState::handle() {
-    joystick->handleJoystickMovementOnAxisX();
-    joystick->handleJoystickMovementOnAxisY();
+    joystick.handleJoystickMovementOnAxisX();
+    joystick.handleJoystickMovementOnAxisY();
 
     nameSelector->main();
 }
 
 void NameSelectionState::setup() {
-    joystick->setHandlerOnXAxisChangeLeft(NameSelectionState::goLeft);
-    joystick->setHandlerOnXAxisChangeRight(NameSelectionState::goRight);
-    joystick->setHandlerOnYAxisChangeUp(NameSelectionState::goUp);
-    joystick->setHandlerOnYAxisChangeDown(NameSelectionState::goDown);
-    joystick->setHandlerSwStateChange(NameSelectionState::handleSwStateChange);
+    joystick.setOnChangeLeft(NameSelectionState::goLeft);
+    joystick.setOnChangeRight(NameSelectionState::goRight);
+    joystick.setOnChangeUp(NameSelectionState::goUp);
+    joystick.setOnChangeDown(NameSelectionState::goDown);
+    joystick.setOnSwStateChange(NameSelectionState::handleSwStateChange);
 
-    button->setOnStateChange(NameSelectionState::finish);
+    button.setOnStateChange(NameSelectionState::finish);
 }
 
 void NameSelectionState::cleanup() {
-    joystick->clearHandlers();
+    joystick.clearHandlers();
 
-    button->clearHandler();
+    button.clearHandler();
 
     lcd->clear();
     lcd->noBlink();
@@ -51,7 +51,7 @@ void NameSelectionState::handleSwStateChange() {
 void NameSelectionState::finish() {
     if (nameSelector->finish()) {
         // TODO: update logic
-        leaderboard->write(nameSelector->name, game->score);
-        stateManager->changeState<MainMenuState>();
+        leaderboard.write(nameSelector->name, game.score);
+        stateManager.changeState<MainMenuState>();
     }
 }

@@ -5,19 +5,19 @@
 
 class Delayer {
    public:
-    unsigned long lastTime = 0;
+    unsigned int lastTime = 0;
 
-    unsigned long interval;
+    unsigned int interval;
 
     bool isInCooldown = false;
 
-    Delayer(unsigned long interval) {
+    Delayer(unsigned int interval) {
         this->interval = interval;
     }
 
     bool canRun();
 
-    void updateInterval(unsigned long);
+    void updateInterval(unsigned int);
 };
 
 #endif
