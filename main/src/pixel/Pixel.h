@@ -1,4 +1,5 @@
-#pragma once
+#ifndef Pixel_h
+#define Pixel_h
 
 class Pixel {
    public:
@@ -11,3 +12,5 @@ class Pixel {
         this->y = y;
     }
 };
+
+#endif

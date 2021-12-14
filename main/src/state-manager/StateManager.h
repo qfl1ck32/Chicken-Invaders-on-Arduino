@@ -1,7 +1,7 @@
-#include "../state/State.h"
-
 #ifndef StateManager_h
 #define StateManager_h
+
+#include "../state/State.h"
 
 class StateManager {
    public:
@@ -12,7 +12,16 @@ class StateManager {
     }
 
     template <class S>
-    void changeState();
+    void changeState() {
+        if (this->currentState != 0) {
+            this->currentState->cleanup();
+            delete this->currentState;
+        }
+
+        this->currentState = new S();
+
+        this->currentState->setup();
+    }
 
     void handle();
 };

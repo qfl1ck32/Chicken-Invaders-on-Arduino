@@ -1,7 +1,13 @@
-#pragma once
+#ifndef Spaceship_h
+#define Spaceship_h
 
+#include "../app/states/GameOverState/GameOverState.h"
+#include "../bullet/Bullet.h"
+#include "../constants/app.h"
 #include "../pixel/Pixel.h"
 #include "../unit/Unit.h"
+
+class GameOverState;
 
 class Spaceship : public Unit {
    public:
@@ -20,3 +26,5 @@ class Spaceship : public Unit {
 
     unsigned char getType();
 };
+
+#endif

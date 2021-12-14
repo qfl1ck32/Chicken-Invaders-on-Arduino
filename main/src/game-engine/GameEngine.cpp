@@ -1,7 +1,5 @@
 #include "./GameEngine.h"
 
-#include "../unit/Unit.h"
-
 GameEngine::GameEngine(short rows, short columns) {
     this->rows = rows;
     this->columns = columns;

@@ -1,8 +1,6 @@
 #include "./Spaceship.h"
 
-#include "../app/states/GameOverState/GameOverState.cpp"
-#include "../bullet/Bullet.cpp"
-#include "../unit/Unit.cpp"
+#include "../app/globals.h"
 
 void Spaceship::action(){
 

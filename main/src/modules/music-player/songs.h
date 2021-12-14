@@ -1,6 +1,6 @@
 #include "./notes.h"
 
-static const short merryChristmas[] PROGMEM = {
+static const short merryChristmas[] = {
     NOTE_C5, 4,  // 1
     NOTE_F5, 4, NOTE_F5, 8, NOTE_G5, 8, NOTE_F5, 8, NOTE_E5, 8,
     NOTE_D5, 4, NOTE_D5, 4, NOTE_D5, 4,

@@ -1,4 +1,5 @@
-#pragma once
+#ifndef PixelChange_h
+#define PixelChange_h
 
 class PixelChange {
    public:
@@ -14,3 +15,5 @@ class PixelChange {
         this->state = state;
     }
 };
+
+#endif

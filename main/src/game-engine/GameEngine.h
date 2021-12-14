@@ -1,13 +1,16 @@
-#pragma once
+#ifndef GameEngine_h
+#define GameEngine_h
 
 #include <LinkedList.h>
 
-#include "../app/globals.h"
 #include "../pixel-change/PixelChange.h"
+#include "../unit/Unit.h"
 
 #define MAX_UNITS 10
 
 class Unit;
+
+class PixelChange;
 
 class GameEngine {
    public:
@@ -30,3 +33,5 @@ class GameEngine {
 
     bool isValidPosition(short, short);
 };
+
+#endif

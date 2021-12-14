@@ -1,5 +1,7 @@
-#pragma once
+#ifndef Bullet_h
+#define Bullet_h
 
+#include "../constants/app.h"
 #include "../delayer/Delayer.h"
 #include "../pixel/Pixel.h"
 #include "../unit/Unit.h"
@@ -18,3 +20,5 @@ class Bullet : public Unit {
 
     unsigned char getType();
 };
+
+#endif

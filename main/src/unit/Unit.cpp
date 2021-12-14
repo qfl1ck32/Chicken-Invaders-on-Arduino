@@ -1,6 +1,6 @@
 #include "Unit.h"
 
-#include "../game-engine/GameEngine.h"
+#include "../app/globals.h"
 
 GameEngine* Unit::engine = gameEngine;
 

@@ -1,16 +1,6 @@
 #include "./LCD.h"
 
-const byte heartCharArray[8] PROGMEM = {
-    0b00000,
-    0b01010,
-    0b11111,
-    0b11111,
-    0b01110,
-    0b00100,
-    0b00000,
-    0b00000};
-
-byte heartChar = 1;
+#include "../constants/app.h"
 
 void LCD::createChar(uint8_t location, const byte *charMap) {
     location &= 0x7;  // we only have 8 locations 0-7

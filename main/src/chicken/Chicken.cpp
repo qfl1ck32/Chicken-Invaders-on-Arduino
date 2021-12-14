@@ -1,7 +1,6 @@
 #include "./Chicken.h"
 
-#include "../app/states/YouWonState/YouWonState.h"
-#include "../egg/Egg.h"
+#include "../app/globals.h"
 
 void Chicken::action() {
     if (this->eggDelayer.canRun()) {

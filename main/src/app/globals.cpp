@@ -40,8 +40,8 @@ Buzzer *songBuzzer = new Buzzer(songBuzzerPin);
 Buzzer *gameSoundsBuzzer = new Buzzer(gameSoundsBuzzerPin);
 
 // TODO: constants
-// GameEngine *gameEngine = new GameEngine(8, 8);
+GameEngine *gameEngine = new GameEngine(8, 8);
 
-// GraphicsEngine *graphicsEngine = new GraphicsEngine(matrix);
+GraphicsEngine *graphicsEngine = new GraphicsEngine(matrix);
 
 // GameStatus *gameStatus = new GameStatus(lcd);

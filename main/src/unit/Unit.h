@@ -1,15 +1,10 @@
-#pragma once
+#ifndef Unit_h
+#define Unit_h
 
 #include "../game-engine/GameEngine.h"
+#include "Arduino.h"
 
-#define MAX_MESSAGES 5
-
-#define BULLET_TYPE 0
-#define CHICKEN_TYPE 1
-#define EGG_TYPE 2
-#define SPACESHIP_TYPE 3
-
-#define KILL 1
+class GameEngine;
 
 class Unit {
    public:
@@ -44,3 +39,5 @@ class Unit {
 
     void react();
 };
+
+#endif
