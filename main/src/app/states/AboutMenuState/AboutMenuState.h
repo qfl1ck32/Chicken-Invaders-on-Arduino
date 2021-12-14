@@ -6,8 +6,6 @@
 #include "../../../state/State.h"
 #include "../MainMenuState/MainMenuState.h"
 
-class MainMenuState;
-
 class AboutMenuState : public State {
    public:
     void setup();

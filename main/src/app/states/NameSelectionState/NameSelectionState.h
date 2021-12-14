@@ -4,8 +4,6 @@
 #include "../MainMenuState/MainMenuState.h"
 #include "../PlayingState/PlayingState.h"
 
-class PlayingState;
-
 class NameSelectionState : public State {
    public:
     void setup();

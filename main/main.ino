@@ -2,12 +2,13 @@
 // #include <avr_debugger.h>
 
 #include "src/app/globals.h"
+#include "src/app/states/MainMenuState/MainMenuState.h"
+#include "src/app/states/PlayingState/PlayingState.h"
 #include "src/app/states/WelcomeState/WelcomeState.h"
 #include "src/constants/app.h"
 #include "src/lcd/LCD.h"
 // #include "src/modules/music-player/MusicPlayer.h"
 // #include "src/modules/music-player/songs.h"
-#include "src/state-manager/StateManager.h"
 
 Delayer buttonDelayer = Delayer(150);
 Delayer swDelayer = Delayer(300);
@@ -33,7 +34,7 @@ void setup() {
 
     matrix->setup();
 
-    stateManager->changeState<WelcomeState>();
+    stateManager->changeState<MainMenuState>();
 
     // musicPlayer.setSong(merryChristmas, sizeof(merryChristmas) / sizeof(int));
 
@@ -44,7 +45,7 @@ void setup() {
 }
 
 void loop() {
-    Serial.println(millis());
     // musicPlayer.play();
+    Serial.println(millis());
     stateManager->handle();
 }

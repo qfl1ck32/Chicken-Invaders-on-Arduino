@@ -6,7 +6,6 @@
 #include "../SettingsLCDMenuState/SettingsLCDMenuState.h"
 #include "../SettingsMatrixMenuState/SettingsMatrixMenuState.h"
 
-class MainMenuState;
 class SettingsLCDMenuState;
 class SettingsMatrixMenuState;
 

@@ -5,8 +5,6 @@
 #include "../MainMenuState/MainMenuState.h"
 #include "LinkedList.h"
 
-class MainMenuState;
-
 class LeaderboardState : public State {
    public:
     void setup();

@@ -9,7 +9,6 @@
 
 class AboutMenuState;
 class LeaderboardState;
-class PlayingState;
 class SettingsMenuState;
 
 class MainMenuState : public State {

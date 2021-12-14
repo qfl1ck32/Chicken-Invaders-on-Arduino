@@ -4,8 +4,6 @@
 #include "../../../state/State.h"
 #include "../MainMenuState/MainMenuState.h"
 
-class MainMenuState;
-
 class WelcomeState : public State {
    public:
     void setup();

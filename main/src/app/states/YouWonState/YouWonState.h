@@ -6,8 +6,6 @@
 #include "../../../utils/utils.h"
 #include "../PlayingState/PlayingState.h"
 
-class PlayingState;
-
 class YouWonState : public State {
    public:
     Delayer delayer = Delayer(350);
