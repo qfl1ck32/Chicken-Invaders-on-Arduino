@@ -16,3 +16,6 @@
 
 extern const byte heartCharArray[8];
 extern byte heartChar;
+
+#define MATRIX_ROWS 8
+#define MATRIX_COLUMNS 8
