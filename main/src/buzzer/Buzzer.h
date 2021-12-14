@@ -1,18 +1,16 @@
-#pragma once
+#ifndef Buzzer_h
+#define Buzzer_h
+
+#include "Arduino.h"
 
 class Buzzer {
    public:
     byte pin;
 
-    Buzzer(byte pin) {
-        this->pin = pin;
-    }
+    Buzzer(byte);
 
-    void buzz(unsigned int frequency, unsigned long duration) {
-        tone(this->pin, frequency, duration);
-    }
-
-    void stop() {
-        noTone(this->pin);
-    }
+    void buzz(unsigned int, unsigned long);
+    void stop();
 };
+
+#endif
