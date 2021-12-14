@@ -1,6 +1,7 @@
 #ifndef Joystick_h
 #define Joystick_h
 
+#include "../app/typedefs.h"
 #include "Arduino.h"
 
 class Joystick {
@@ -30,13 +31,13 @@ class Joystick {
 
     void clearHandlerSwStateChange();
 
-    void setHandlerOnXAxisChangeLeft(void (*)());
-    void setHandlerOnXAxisChangeRight(void (*)());
+    void setHandlerOnXAxisChangeLeft(HandlerFunction);
+    void setHandlerOnXAxisChangeRight(HandlerFunction);
 
-    void setHandlerOnYAxisChangeUp(void (*)());
-    void setHandlerOnYAxisChangeDown(void (*)());
+    void setHandlerOnYAxisChangeUp(HandlerFunction);
+    void setHandlerOnYAxisChangeDown(HandlerFunction);
 
-    void setHandlerSwStateChange(void (*)());
+    void setHandlerSwStateChange(HandlerFunction);
 
     void handleJoystickMovementOnAxisY();
     void handleJoystickMovementOnAxisX();

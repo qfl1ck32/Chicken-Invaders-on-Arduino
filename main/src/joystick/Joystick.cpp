@@ -1,6 +1,6 @@
 #include "./Joystick.h"
 
-void Joystick::setup(void (*swHandler)()) {
+void Joystick::setup(HandlerFunction swHandler) {
     pinMode(this->pinSw, INPUT_PULLUP);
     pinMode(this->pinX, INPUT);
     pinMode(this->pinY, INPUT);
@@ -12,23 +12,23 @@ void Joystick::clearHandlerSwStateChange() {
     this->handlerSwStateChange = nullptr;
 }
 
-void Joystick::setHandlerSwStateChange(void (*f)()) {
+void Joystick::setHandlerSwStateChange(HandlerFunction f) {
     this->handlerSwStateChange = f;
 }
 
-void Joystick::setHandlerOnXAxisChangeLeft(void (*f)()) {
+void Joystick::setHandlerOnXAxisChangeLeft(HandlerFunction f) {
     this->handlerXAxisChangeLeft = f;
 }
 
-void Joystick::setHandlerOnXAxisChangeRight(void (*f)()) {
+void Joystick::setHandlerOnXAxisChangeRight(HandlerFunction f) {
     this->handlerXAxisChangeRight = f;
 }
 
-void Joystick::setHandlerOnYAxisChangeUp(void (*f)()) {
+void Joystick::setHandlerOnYAxisChangeUp(HandlerFunction f) {
     this->handlerYAxisChangeUp = f;
 }
 
-void Joystick::setHandlerOnYAxisChangeDown(void (*f)()) {
+void Joystick::setHandlerOnYAxisChangeDown(HandlerFunction f) {
     this->handlerYAxisChangeDown = f;
 }
 
