@@ -1,11 +1,15 @@
 #ifndef Game_h
 #define Game_h
 
-// #include "../../spaceship/Spaceship.h"
+#include "../../chicken/Chicken.h"
+#include "../../spaceship/Spaceship.h"
+
+class Chicken;
+class Spaceship;
 
 class Game {
    public:
-    // Spaceship *spaceship;
+    Spaceship *spaceship;
     short score;
     short level;
 

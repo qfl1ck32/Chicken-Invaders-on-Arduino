@@ -1,21 +1,23 @@
 #include "./GameStatus.h"
 
+#include "../../app/globals.h"
+
 void GameStatus::show(short score, short lifes, unsigned long startTime) {
-    // char scoreMessage[getNumberOfDigits(score) + 8];
+    char scoreMessage[getNumberOfDigits(score) + 8];
 
-    // static const char* const scoreStr PROGMEM = "Score";
+    static const char* const scoreStr PROGMEM = "Score";
 
-    // sprintf(scoreMessage, "%s: %d", scoreStr, score);
+    sprintf(scoreMessage, "%s: %d", scoreStr, score);
 
-    // this->lcd->printOnRow(scoreMessage, 0);
+    this->lcd->printOnRow(scoreMessage, 0);
 
-    // char lifesMessage[getNumberOfDigits(lifes) + 1];
+    char lifesMessage[getNumberOfDigits(lifes) + 1];
 
-    // sprintf(lifesMessage, "%d", lifes);
+    sprintf(lifesMessage, "%d", lifes);
 
-    // // this->lcd->printOnRow("|", 0, strlen(scoreMessage) + 3);
+    // this->lcd->printOnRow("|", 0, strlen(scoreMessage) + 3);
 
-    // this->lcd->printOnRow(lifesMessage, 1);
+    this->lcd->printOnRow(lifesMessage, 1);
 
     // this->lcd->printOnRowAndColumn(heartChar, 1, strlen(lifesMessage) + 1, true);
 }

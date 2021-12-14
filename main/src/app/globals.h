@@ -51,4 +51,6 @@ extern GameEngine *gameEngine;
 
 extern GraphicsEngine *graphicsEngine;
 
+extern GameStatus *gameStatus;
+
 #endif

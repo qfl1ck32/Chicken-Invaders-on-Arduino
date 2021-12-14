@@ -4,6 +4,8 @@
 #include "../../../modules/game/Game.h"
 #include "../../../state/State.h"
 
+class Game;
+
 class PlayingState : public State {
    public:
     static Game *game;

@@ -1,10 +1,7 @@
 #include "./Game.h"
 
-// #include "../../chicken/Chicken.h"
-// #include "../../spaceship/Spaceship.h"
-
 Game::Game() {
-    // this->spaceship = 0;
+    this->spaceship = 0;
     this->score = 0;
 
     this->level = 1;
@@ -13,11 +10,11 @@ Game::Game() {
 }
 
 void Game::setSpaceship(short x, short y) {
-    // this->spaceship = new Spaceship(x, y);
+    this->spaceship = new Spaceship(x, y);
 }
 
 void Game::setChicken(short x, short y) {
-    // new Chicken(x, y);
+    new Chicken(x, y);
 }
 
 void Game::goToNextLevel() {

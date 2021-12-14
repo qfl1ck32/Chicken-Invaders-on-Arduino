@@ -1,8 +1,6 @@
 #ifndef GameStatus_h
 #define GameStatus_h
 
-#include "../../app/globals.h"
-// #include "../../game-engine/GameEngine.h"
 #include "../../lcd/LCD.h"
 #include "../../utils/utils.h"
 

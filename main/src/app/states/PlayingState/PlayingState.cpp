@@ -19,17 +19,15 @@ void PlayingState::setup() {
         this->game->setSpaceship(7, 3);
     }
 
-    // new Chicken(0, PlayingState::game->level);
+    new Chicken(0, PlayingState::game->level);
 }
 
 void PlayingState::handle() {
     joystick->handleJoystickMovements();
-    // FIXME
-    // gameEngine->run();
+    gameEngine->run();
 
-    // TODO: add startTime
-    // gameStatus->show(this->game->score, this->game->spaceship->lifes, 0);
-    // graphicsEngine->renderChanges(gameEngine->changes);
+    gameStatus->show(this->game->score, this->game->spaceship->lifes, 0);
+    graphicsEngine->renderChanges(gameEngine->changes);
 }
 
 void PlayingState::cleanup() {
@@ -38,21 +36,21 @@ void PlayingState::cleanup() {
 }
 
 void PlayingState::moveUp() {
-    // PlayingState::game->spaceship->move(-1, 0);
+    PlayingState::game->spaceship->move(-1, 0);
 }
 
 void PlayingState::moveRight() {
-    // PlayingState::game->spaceship->move(0, 1);
+    PlayingState::game->spaceship->move(0, 1);
 }
 
 void PlayingState::moveDown() {
-    // PlayingState::game->spaceship->move(1, 0);
+    PlayingState::game->spaceship->move(1, 0);
 }
 
 void PlayingState::moveLeft() {
-    // PlayingState::game->spaceship->move(0, -1);
+    PlayingState::game->spaceship->move(0, -1);
 }
 
 void PlayingState::attack() {
-    // PlayingState::game->spaceship->attack();
+    PlayingState::game->spaceship->attack();
 }

@@ -44,4 +44,4 @@ GameEngine *gameEngine = new GameEngine(8, 8);
 
 GraphicsEngine *graphicsEngine = new GraphicsEngine(matrix);
 
-// GameStatus *gameStatus = new GameStatus(lcd);
+GameStatus *gameStatus = new GameStatus(lcd);

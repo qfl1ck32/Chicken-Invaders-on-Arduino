@@ -1,6 +1,8 @@
 #ifndef LCD_h
 #define LCD_h
 
+#include <avr/pgmspace.h>
+
 #include "../constants/app.h"
 #include "Arduino.h"
 #include "EEPROM.h"
