@@ -11,8 +11,6 @@ void Chicken::action() {
 
     short direction = rand == 0 ? -1 : 1;
 
-    return;
-
     if (this->moveDelayer.canRun()) {
         if (!this->engine->isValidPosition(this->x, this->y + direction) || this->engine->unitMatrix[this->x][this->y + direction] != 0) {
             return;

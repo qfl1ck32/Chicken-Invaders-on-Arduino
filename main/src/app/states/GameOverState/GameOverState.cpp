@@ -12,16 +12,17 @@ void GameOverState::setup() {
     // TODO: not here
     matrix->clear();
 
-    game.needsInitialisation = true;
+    game.reset();
+    gameEngine->resetState();
 }
 
 void GameOverState::handle() {
     // TODO: modularization
     int numberOfDigitsInScore = getNumberOfDigits(game.score);
 
-    char gameOverMessage[20 + numberOfDigitsInScore];
+    char gameOverMessage[21 + numberOfDigitsInScore];
 
-    const char* const gameOverMsg = "Game over. Score:";
+    const char* const gameOverMsg = "Game over. Score: ";
     const char* const pressXToContinue = "Press X to continue.";
 
     sprintf(gameOverMessage, "%s: %d.", gameOverMsg, game.score);
@@ -43,19 +44,9 @@ void GameOverState::cleanup() {
 }
 
 void GameOverState::goToNextStep() {
-    // TODO: please do something, lol
-    if (game.score + 5 > leaderboard.getHighscore()) {
-        // TODO: add logic
-        // leaderboard.write(nameSelector->name, game.score + 5);
+    if (leaderboard.isHighScore(game.score)) {
         stateManager.changeState(nameSelectionStateId);
-        ;
-    }
-
-    else {
+    } else {
         stateManager.changeState(mainMenuStateId);
-        ;
     }
-
-    // FIXME
-    // gameEngine.resetState();
 }

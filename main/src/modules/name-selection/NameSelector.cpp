@@ -57,7 +57,7 @@ void NameSelector::select() {
         this->name[this->currentColumn] = 'A';
     }
 
-    if (this->currentColumn == this->currentLetterIndex) {
+    if (this->currentColumn == this->currentLetterIndex && this->currentColumn < NAME_MAX_LENGTH) {
         ++this->currentLetterIndex;
     }
 }
@@ -76,6 +76,15 @@ void NameSelector::handleInvalidFinish() {
     if (this->errorDelayer.canRun()) {
         // this->lcd->printOnRow("Invalid name.", 1);
     }
+}
+
+void NameSelector::reset() {
+    for (int i = 0; i < NAME_MAX_LENGTH; ++i) {
+        this->name[i] = 0;
+    }
+
+    this->currentLetterIndex = 0;
+    this->currentColumn = 0;
 }
 
 void NameSelector::main() {

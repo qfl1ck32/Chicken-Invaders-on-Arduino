@@ -4,7 +4,7 @@
 #include "../state/State.h"
 #include "Arduino.h"
 
-#define MAX_STATES 15
+#define MAX_STATES 18
 
 class StateManager {
    public:

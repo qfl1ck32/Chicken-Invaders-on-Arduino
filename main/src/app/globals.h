@@ -29,6 +29,7 @@
 #define settingsMenuStateId 8
 #define welcomeStateId 9
 #define youWonStateId 10
+#define settingsLevelMenuStateId 11
 
 extern StateManager stateManager;
 

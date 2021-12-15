@@ -13,11 +13,19 @@ class Game {
     short score;
     byte level;
 
+    static byte maxLevel;
+
     bool needsInitialisation;
 
     Game();
 
     void setSpaceship(byte, byte);
+
+    void reset();
+
+    void setupLevel();
+
+    void changeLevel(int level);
 
     void goToNextLevel();
 };

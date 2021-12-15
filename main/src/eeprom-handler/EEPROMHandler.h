@@ -15,7 +15,7 @@ class EEPROMHandler {
 
         this->readIndex = startAt;
 
-        for (int i = 0; i < 1024; ++i) {
+        for (int i = this->startAt; i < this->limit; ++i) {
             if (EEPROM.read(i) == 255) {
                 this->writeIndex = i;
                 break;

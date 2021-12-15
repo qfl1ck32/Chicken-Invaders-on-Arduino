@@ -50,6 +50,8 @@ char* EEPROMHandler::readNext() {
 
 void EEPROMHandler::clear() {
     for (int i = 0; i < this->limit; ++i) EEPROM.write(i, 255);
+
+    this->writeIndex = this->startAt;
 }
 
 byte EEPROMHandler::read(int offset) {

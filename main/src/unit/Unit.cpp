@@ -2,8 +2,6 @@
 
 #include "../app/globals.h"
 
-GameEngine* Unit::engine = gameEngine;
-
 void Unit::die() {
     this->isAlive = false;
 }
@@ -45,24 +43,28 @@ void Unit::sendMessage(byte message, Unit& unit) {
 }
 
 Unit::Unit(byte x, byte y) {
-    isAlive = true;
-
-    this->x = x;
-    this->y = y;
-
-    this->numberOfMessages = 0;
-
-    this->messages = new byte[MAX_MESSAGES];
-
-    // TODO: needs init.?
-    for (int i = 0; i < MAX_MESSAGES; ++i) {
-        messages[i] = 0;
-    }
-
     if (Unit::engine->unitMatrix[x][y] == NULL && Unit::engine->numberOfUnits < MAX_UNITS) {
+        isAlive = true;
+
+        this->x = x;
+        this->y = y;
+
+        this->numberOfMessages = 0;
+
+        this->messages = new byte[MAX_MESSAGES];
+
+        for (int i = 0; i < MAX_MESSAGES; ++i) {
+            messages[i] = 0;
+        }
+
         Unit::engine->unitArray[Unit::engine->numberOfUnits++] = this;
         Unit::engine->unitMatrix[x][y] = this;
+
+        Unit::engine->pixelChanges->add(PixelChange(this->x, this->y, true));
     }
 
-    Unit::engine->pixelChanges->add(PixelChange(this->x, this->y, true));
+    // Dragulici!!!
+    else {
+        delete this;
+    }
 }

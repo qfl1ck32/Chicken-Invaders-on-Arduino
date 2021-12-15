@@ -29,11 +29,10 @@ void SettingsMenuState::cleanup() {
 
 void SettingsMenuState::goBack() {
     stateManager.changeState(mainMenuStateId);
-    ;
 }
 
 void SettingsMenuState::goToLevel() {
-    // TODO
+    stateManager.changeState(settingsLevelMenuStateId);
 }
 
 void SettingsMenuState::goToLCD() {

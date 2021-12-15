@@ -7,50 +7,40 @@ void LeaderboardState::setup() {
 
     menu.setOns(handlers, sizeof(handlers) / sizeof(HandlerFunction));
 
-    NameAndScore *scores = leaderboard.get();
+    leaderboard.generate();
 
-    // FIXME keep in mind, max n scores, display "Missing" for the rest if needed
+    int numberOfHighscores = leaderboard.scores->size();
 
-    // int numberOfHighscores = scores->size();
+    const char *messages[numberOfHighscores == 0 ? 2 : 1 + numberOfHighscores];
 
-    // const char *messages[numberOfHighscores == 0 ? 2 : 1 + numberOfHighscores];
+    static const char *const back = "Back";
 
-    // static const char *const back = "Back";
+    messages[0] = back;
 
-    // messages[0] = back;
+    int index = 1;
 
-    // int index = 1;
+    while (leaderboard.scores->size()) {
+        NameAndScore entry = leaderboard.scores->remove(0);
 
-    // while (scores->size()) {
-    //     NameAndScore entry = scores->remove(0);
+        char leaderboardEntry[strlen(entry.name) + getNumberOfDigits(entry.score) + getNumberOfDigits(index) + 7];
 
-    //     // char leaderboardEntry[strlen(entry.name) + getNumberOfDigits(entry.score) + getNumberOfDigits(index) + 7];
+        sprintf((char *)messages[index], "%d. %s - %d", index, entry.name, entry.score);
 
-    //     // sprintf(messages[index], "%d. %s - %d", index, entry.name, entry.score);
+        free(entry.name);
 
-    //     // TODO: come back and format w/ score too
-    //     messages[index] = entry.name;
+        ++index;
+    }
 
-    //     // TODO: feels stupid
-    //     // free(entry.name);
+    if (index == 1) {
+        messages[index] = "No high scores";
+    }
 
-    //     // show("Bag fix asta:::", entry.name);
+    menu.setMessages(messages, sizeof(messages) / sizeof(char *));
 
-    //     ++index;
-    // }
+    joystick.setOnChangeUp(menuGoUp);
+    joystick.setOnChangeDown(menuGoDown);
 
-    // if (index == 1) {
-    //     messages[index] = "No high scores";
-    // }
-
-    // free(scores);
-
-    // menu.setMessages(messages, sizeof(messages) / sizeof(char *));
-
-    // joystick.setOnChangeUp(menuGoUp);
-    // joystick.setOnChangeDown(menuGoDown);
-
-    // joystick.setOnSwStateChange(menuSelect);
+    joystick.setOnSwStateChange(menuSelect);
 }
 
 void LeaderboardState::handle() {

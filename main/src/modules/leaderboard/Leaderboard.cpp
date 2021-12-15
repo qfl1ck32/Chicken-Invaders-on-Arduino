@@ -4,29 +4,33 @@ const char *const Leaderboard::nameAndScoreDelimiter = "|";
 
 int Leaderboard::size = 3;
 
-int Leaderboard::getHighscore() {
-    NameAndScore *scores = this->get();
-
-    int maxScore = 0;
-
-    while (scores) {
-        NameAndScore element = *scores;
-
-        if (element.score > maxScore) {
-            maxScore = element.score;
-        }
-
-        ++scores;
+int Leaderboard::getWorstHighscore() {
+    if (!this->scores->size()) {
+        this->generate();
     }
 
-    free(scores);
+    if (!this->scores->size()) return -1;
 
-    return maxScore;
+    // TODO: a constant? inf?
+    int minScore = 2500;
+
+    while (this->scores->size()) {
+        NameAndScore element = this->scores->remove(0);
+
+        if (element.score < minScore) {
+            minScore = element.score;
+        }
+    }
+
+    return minScore;
 }
 
-NameAndScore *Leaderboard::get() {
-    // FIXME: constant
-    NameAndScore *leaderboard = new NameAndScore[5];
+void Leaderboard::generate() {
+    while (this->scores->size()) {
+        this->scores->remove(0);
+    }
+
+    this->eeprom->resetReadHead();
 
     char *str;
 
@@ -45,17 +49,17 @@ NameAndScore *Leaderboard::get() {
 
         short score = atoi(str + delimiterIndex);
 
-        leaderboard[currentIndex++] = NameAndScore(name, score);
+        this->scores->add(NameAndScore(name, score));
 
         free(str);
     }
-
-    this->eeprom->resetReadHead();
-
-    return leaderboard;
 }
 
+// FIXME: this is not efficient at all, but it's less error-prone
+// FIXME: also, not DRY
 void Leaderboard::write(const char *name, int score) {
+    show("Scriu ", name, ", cu scor ", score);
+
     char entry[strlen(name) + getNumberOfDigits(score) + 2];
 
     strncpy(entry, name, strlen(name));
@@ -65,4 +69,51 @@ void Leaderboard::write(const char *name, int score) {
     sprintf(entry + strlen(name) + 1, "%d", score);
 
     this->eeprom->writeString(entry, strlen(entry));
+
+    this->generate();
+
+    this->eeprom->clear();
+
+    this->scores->sort(Leaderboard::sort);
+
+    Serial.println(this->scores->size());
+
+    int repeat = min(this->scores->size(), 3);
+
+    while (repeat--) {
+        NameAndScore nameAndScore = this->scores->remove(0);
+
+        Serial.println("I have a score.");
+        Serial.println(nameAndScore.name);
+        Serial.println(nameAndScore.score);
+
+        char entry[strlen(nameAndScore.name) + getNumberOfDigits(nameAndScore.score) + 2];
+
+        strncpy(entry, nameAndScore.name, strlen(nameAndScore.name));
+
+        strncpy(entry + strlen(nameAndScore.name), Leaderboard::nameAndScoreDelimiter, 1);
+
+        sprintf(entry + strlen(nameAndScore.name) + 1, "%d", nameAndScore.score);
+
+        this->eeprom->writeString(entry, strlen(entry));
+    }
+}
+
+bool Leaderboard::isHighScore(int score) {
+    int worstHighScore = this->getWorstHighscore();
+
+    Serial.println(worstHighScore);
+
+    if (worstHighScore == -1) return true;
+
+    this->generate();
+
+    Serial.println(score);
+    Serial.println(this->scores->size());
+
+    return score > worstHighScore || this->scores->size() < MAX_HIGHSCORES;
+}
+
+int Leaderboard::sort(NameAndScore &a, NameAndScore &b) {
+    return a.score < b.score;
 }

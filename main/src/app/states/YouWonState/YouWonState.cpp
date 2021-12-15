@@ -5,6 +5,7 @@
 void YouWonState::setup() {
     lcd->clear();
     joystick.clearHandlers();
+
     button.setOnStateChange(YouWonState::goToNextLevel);
 
     // TODO: not here
@@ -12,15 +13,12 @@ void YouWonState::setup() {
 }
 
 void YouWonState::handle() {
-    // TODO: modularization
-    // FIXME: hmm
-    // short numberOfDigitsInLevel = getNumberOfDigits(playingState->level);
+    short numberOfDigitsInLevel = getNumberOfDigits(game.level);
 
-    // char message[16 + numberOfDigitsInLevel];
+    char youWon[16 + numberOfDigitsInLevel];
 
-    // sprintf(message, "You won level %d!", playingState->level);
+    sprintf(youWon, "You won level %d!", game.level);
 
-    const char* const youWon = "You won!";
     const char* const pressXToContinue = "Press X to continue.";
 
     lcd->printOnRow(youWon, 0);
@@ -41,5 +39,5 @@ void YouWonState::goToNextLevel() {
 
     stateManager.changeState(playingStateId);
 
-    // gameEngine.resetState();
+    gameEngine->resetState();
 }

@@ -8,7 +8,7 @@
 
 class Bullet : public Unit {
    public:
-    Bullet(byte x, byte y) : Unit(x, y) {}
+    Bullet(byte, byte);
 
     Delayer delayer = Delayer(250);
 

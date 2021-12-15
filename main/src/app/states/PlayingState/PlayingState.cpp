@@ -11,21 +11,16 @@ void PlayingState::setup() {
 
     button.setOnStateChange(PlayingState::attack);
 
-    // if (game.needsInitialisation) {
-    //     game.needsInitialisation = false;
-    //     game.setSpaceship(7, 3);
-    // }
-
-    // new Chicken(0, game.level);
+    game.setupLevel();
 }
 
 void PlayingState::handle() {
     joystick.handleJoystickMovements();
 
-    // Unit::engine->run();
+    Unit::engine->run();
 
     gameStatus.show(game.score, game.spaceship->lifes, 0);
-    // graphicsEngine.renderChanges(Unit::engine->pixelChanges);
+    graphicsEngine.renderChanges(Unit::engine->pixelChanges);
 }
 
 void PlayingState::cleanup() {

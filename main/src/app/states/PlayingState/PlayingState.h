@@ -2,6 +2,7 @@
 #define PlayingState_h
 
 #include "../../../state/State.h"
+#include "../../../unit/Unit.h"
 
 class PlayingState : public State {
    public:

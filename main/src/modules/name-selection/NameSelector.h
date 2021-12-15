@@ -5,6 +5,8 @@
 #include "../../lcd/LCD.h"
 #include "Arduino.h"
 
+#define NAME_MAX_LENGTH 5
+
 class NameSelector {
    public:
     LCD *lcd;
@@ -27,14 +29,9 @@ class NameSelector {
         this->lcd = lcd;
         this->row = row;
 
-        this->name = new char[this->lcd->columns];
+        this->name = new char[NAME_MAX_LENGTH];
 
-        for (int i = 0; i < this->lcd->columns; ++i) {
-            this->name[i] = 0;
-        }
-
-        this->currentLetterIndex = 0;
-        this->currentColumn = 0;
+        this->reset();
     }
 
     void goUp();
@@ -45,6 +42,8 @@ class NameSelector {
     void select();
 
     bool finish();
+
+    void reset();
 
     void handleInvalidFinish();
 

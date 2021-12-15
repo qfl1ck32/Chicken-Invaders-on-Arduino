@@ -9,6 +9,7 @@
 #include "src/app/states/NameSelectionState/NameSelectionState.h"
 #include "src/app/states/PlayingState/PlayingState.h"
 #include "src/app/states/SettingsLCDMenuState/SettingsLCDMenuState.h"
+#include "src/app/states/SettingsLevelMenuState/SettingsLevelMenuState.h"
 #include "src/app/states/SettingsMatrixMenuState/SettingsMatrixMenuState.h"
 #include "src/app/states/SettingsMenuState/SettingsMenuState.h"
 #include "src/app/states/WelcomeState/WelcomeState.h"
@@ -17,10 +18,12 @@
 #include "src/modules/music-player/MusicPlayer.h"
 #include "src/modules/music-player/songs.h"
 
-Delayer buttonDelayer = Delayer(150);
+Delayer buttonDelayer = Delayer(300);
 Delayer swDelayer = Delayer(300);
 
-// MusicPlayer musicPlayer = MusicPlayer(songBuzzer);
+GameEngine* Unit::engine = gameEngine;
+
+MusicPlayer musicPlayer = MusicPlayer(songBuzzer);
 
 void handleSw() {
     if (swDelayer.canRun()) Joystick::swHandler(joystick);
@@ -31,45 +34,50 @@ void handleButtonStateChange() {
 }
 
 void setup() {
-    Serial.begin(baudRate);
-
-    joystick.setup(handleSw);
-    button.setup(handleButtonStateChange);
-    lcd->setup(ledRows, ledColumns);
-
-    lcd->createChar(heartChar, heartCharArray);
-
-    matrix->setup();
-
-    // stateManager.addState(new WelcomeState(welcomeStateId));
-    // stateManager.addState(new AboutMenuState(aboutMenuStateId));
-    // stateManager.addState(new GameOverState(gameOverStateId));
-    stateManager.addState(new PlayingState(playingStateId));
-    stateManager.addState(new MainMenuState(mainMenuStateId));
-    stateManager.addState(new YouWonState(youWonStateId));
-    // stateManager.addState(new LeaderboardState(leaderboardStateId));
-    stateManager.addState(new SettingsMenuState(settingsMenuStateId));
-    // stateManager.addState(new SettingsMatrixMenuState(settingsMatrixMenuStateId));
-    // stateManager.addState(new SettingsLCDMenuState(settingsLCDMenuStateId));
-    // stateManager.addState(new NameSelectionState(nameSelectionStateId));
-
-    // musicPlayer.setSong(merryChristmas, sizeof(merryChristmas) / sizeof(int));
-
-    // musicPlayer.setRepeat(true);
-
-    // TODO:  maybe create a class ? 0 is not connected
-
     // for (int i = 0; i < 1024; ++i) {
     //     EEPROM.write(i, 255);
     // }
 
+    // leaderboard.eeprom->clear();
+
+    Serial.begin(baudRate);
+
+    joystick.setup(handleSw);
+    button.setup(handleButtonStateChange);
+
+    lcd->setup(ledRows, ledColumns);
+    lcd->createChar(heartChar, heartCharArray);
+
+    matrix->setup();
+
+    stateManager.addState(new WelcomeState(welcomeStateId));
+
+    stateManager.addState(new AboutMenuState(aboutMenuStateId));
+
+    stateManager.addState(new GameOverState(gameOverStateId));
+    stateManager.addState(new PlayingState(playingStateId));
+    stateManager.addState(new YouWonState(youWonStateId));
+
+    stateManager.addState(new MainMenuState(mainMenuStateId));
+    stateManager.addState(new LeaderboardState(leaderboardStateId));
+
+    stateManager.addState(new SettingsMenuState(settingsMenuStateId));
+    stateManager.addState(new SettingsLevelMenuState(settingsLevelMenuStateId));
+    stateManager.addState(new SettingsMatrixMenuState(settingsMatrixMenuStateId));
+    stateManager.addState(new SettingsLCDMenuState(settingsLCDMenuStateId));
+
+    stateManager.addState(new NameSelectionState(nameSelectionStateId));
+
+    musicPlayer.setSong(silentNight, sizeof(silentNight) / sizeof(silentNight[0]));
+    musicPlayer.setRepeat(true);
+
+    // TODO:  maybe create a class ? 0 is not connected
     randomSeed(analogRead(0));
 
-    stateManager.changeState(playingStateId);
+    stateManager.changeState(mainMenuStateId);
 }
 
 void loop() {
-    Serial.println(millis());
-    // musicPlayer.play();
+    musicPlayer.play();
     stateManager.handle();
 }

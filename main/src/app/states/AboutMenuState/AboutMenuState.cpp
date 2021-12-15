@@ -3,9 +3,10 @@
 #include "../../globals.h"
 
 void AboutMenuState::setup() {
+    // FIXME PROGMEM
     static const char* const messages[] = {
         "Back",
-        "App Name: Chicken Invaders",
+        "App Name: Invaders",
         "Programmer: Rusu Andrei-Cristian",
         "Github: https://github.com/qfl1ck32/Chicken-Invaders-on-Arduino",
     };
