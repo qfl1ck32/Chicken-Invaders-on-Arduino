@@ -8,7 +8,7 @@ class GameEngine;
 
 class Unit {
    public:
-    static GameEngine engine;
+    static GameEngine *engine;
 
     virtual unsigned char getType() = 0;
 

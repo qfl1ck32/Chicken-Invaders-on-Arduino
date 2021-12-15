@@ -1,8 +1,8 @@
 #include "./GraphicsEngine.h"
 
-void GraphicsEngine::renderChanges(PixelChange changes[], int numberOfChanges) {
-    for (int i = 0; i < numberOfChanges; ++i) {
-        PixelChange change = changes[i];
+void GraphicsEngine::renderChanges(LinkedList<PixelChange> *pixelChanges) {
+    while (pixelChanges->size()) {
+        PixelChange change = pixelChanges->remove(0);
 
         this->matrix->setLed(0, change.x, change.y, change.state);
     }

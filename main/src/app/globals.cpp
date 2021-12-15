@@ -21,7 +21,7 @@ Leaderboard leaderboard = Leaderboard();
 Buzzer *songBuzzer = new Buzzer(songBuzzerPin);
 Buzzer *gameSoundsBuzzer = new Buzzer(gameSoundsBuzzerPin);
 
-GameEngine gameEngine = GameEngine(MATRIX_ROWS, MATRIX_COLUMNS);
+GameEngine *gameEngine = new GameEngine(MATRIX_ROWS, MATRIX_COLUMNS);
 
 GraphicsEngine graphicsEngine = GraphicsEngine(matrix);
 

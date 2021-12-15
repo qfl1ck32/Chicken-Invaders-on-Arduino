@@ -69,6 +69,7 @@ void setup() {
 }
 
 void loop() {
+    Serial.println(millis());
     // musicPlayer.play();
     stateManager.handle();
 }

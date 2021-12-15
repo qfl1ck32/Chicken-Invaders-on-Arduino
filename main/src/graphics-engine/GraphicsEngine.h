@@ -3,6 +3,7 @@
 
 #include "../matrix/Matrix.h"
 #include "../pixel-change/PixelChange.h"
+#include "LinkedList.h"
 
 class GraphicsEngine {
    public:
@@ -12,7 +13,7 @@ class GraphicsEngine {
         this->matrix = matrix;
     }
 
-    void renderChanges(PixelChange *, int);
+    void renderChanges(LinkedList<PixelChange> *);
 };
 
 #endif

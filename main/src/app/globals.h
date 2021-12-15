@@ -56,7 +56,7 @@ extern Buzzer *songBuzzer;
 
 extern Buzzer *gameSoundsBuzzer;
 
-extern GameEngine gameEngine;
+extern GameEngine *gameEngine;
 
 extern GraphicsEngine graphicsEngine;
 

@@ -14,7 +14,7 @@ void Chicken::action() {
     return;
 
     if (this->moveDelayer.canRun()) {
-        if (!this->engine.isValidPosition(this->x, this->y + direction) || this->engine.unitMatrix[this->x][this->y + direction] != 0) {
+        if (!this->engine->isValidPosition(this->x, this->y + direction) || this->engine->unitMatrix[this->x][this->y + direction] != 0) {
             return;
         }
 
@@ -47,8 +47,8 @@ unsigned char Chicken::getType() {
 short Chicken::getNumberOfChickensAlive() {
     short answer = 0;
 
-    for (int i = 0; i < Unit::engine.numberOfUnits; ++i) {
-        if (Unit::engine.unitArray[i]->getType() == CHICKEN_TYPE && Unit::engine.unitArray[i]->isAlive) answer += 1;
+    for (int i = 0; i < Unit::engine->numberOfUnits; ++i) {
+        if (Unit::engine->unitArray[i]->getType() == CHICKEN_TYPE && Unit::engine->unitArray[i]->isAlive) answer += 1;
     }
 
     return answer;

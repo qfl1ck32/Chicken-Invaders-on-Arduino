@@ -4,11 +4,11 @@ GameEngine::GameEngine(byte rows, byte columns) {
     this->rows = rows;
     this->columns = columns;
 
-    // this->unitMatrix = new Unit**[rows];
+    this->unitMatrix = new Unit**[rows];
 
-    // for (int i = 0; i < rows; ++i) {
-    //     this->unitMatrix[i] = new Unit*[columns];
-    // }
+    for (int i = 0; i < rows; ++i) {
+        this->unitMatrix[i] = new Unit*[columns];
+    }
 
     for (int i = 0; i < this->rows; ++i) {
         for (int j = 0; j < this->columns; ++j) {
@@ -21,7 +21,8 @@ GameEngine::GameEngine(byte rows, byte columns) {
     }
 
     this->numberOfUnits = 0;
-    this->currentChangeIndex = 0;
+
+    this->pixelChanges = new LinkedList<PixelChange>();
 }
 
 void GameEngine::resetState() {
@@ -72,15 +73,11 @@ void GameEngine::run() {
             this->unitArray[j - 1] = this->unitArray[j];
         }
 
-        this->changes[this->currentChangeIndex++] = PixelChange(x, y, false);
+        this->pixelChanges->add(PixelChange(x, y, false));
 
         --this->numberOfUnits;
         --i;
     }
-}
-
-void GameEngine::resetChanges() {
-    this->currentChangeIndex = 0;
 }
 
 bool GameEngine::isValidPosition(byte x, byte y) {
