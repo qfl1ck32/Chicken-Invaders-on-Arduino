@@ -39,7 +39,7 @@ void YouWonState::cleanup() {
 void YouWonState::goToNextLevel() {
     game.goToNextLevel();
 
-    stateManager.changeState<PlayingState>();
+    stateManager.changeState(playingStateId);
 
     // gameEngine.resetState();
 }

@@ -28,7 +28,7 @@ void SettingsLCDMenuState::cleanup() {
 }
 
 void SettingsLCDMenuState::goBack() {
-    stateManager.changeState<SettingsMenuState>();
+    stateManager.changeState(settingsMenuStateId);
 }
 
 void SettingsLCDMenuState::increaseContrast() {

@@ -5,9 +5,9 @@
 void AboutMenuState::setup() {
     static const char* const messages[] = {
         "Back",
-        // "App Name: Chicken Invaders",
-        // "Programmer: Rusu Andrei-Cristian",
-        // "Github: https://github.com/qfl1ck32/Chicken-Invaders-on-Arduino",
+        "App Name: Chicken Invaders",
+        "Programmer: Rusu Andrei-Cristian",
+        "Github: https://github.com/qfl1ck32/Chicken-Invaders-on-Arduino",
     };
 
     menu.setMessages(messages, sizeof(messages) / sizeof(char*));
@@ -37,5 +37,6 @@ void AboutMenuState::cleanup() {
 }
 
 void AboutMenuState::goBack() {
-    stateManager.changeState<MainMenuState>();
+    stateManager.changeState(mainMenuStateId);
+    ;
 }

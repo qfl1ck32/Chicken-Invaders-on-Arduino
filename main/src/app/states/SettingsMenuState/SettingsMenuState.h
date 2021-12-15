@@ -2,15 +2,11 @@
 #define SettingsMenuState_h
 
 #include "../../../state/State.h"
-#include "../MainMenuState/MainMenuState.h"
-#include "../SettingsLCDMenuState/SettingsLCDMenuState.h"
-#include "../SettingsMatrixMenuState/SettingsMatrixMenuState.h"
-
-class SettingsLCDMenuState;
-class SettingsMatrixMenuState;
 
 class SettingsMenuState : public State {
    public:
+    SettingsMenuState(byte id) : State(id) {}
+
     void setup();
     void handle();
     void cleanup();

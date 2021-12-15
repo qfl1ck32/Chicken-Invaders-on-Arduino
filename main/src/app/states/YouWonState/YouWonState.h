@@ -4,11 +4,12 @@
 #include "../../../delayer/Delayer.h"
 #include "../../../state/State.h"
 #include "../../../utils/utils.h"
-#include "../PlayingState/PlayingState.h"
 
 class YouWonState : public State {
    public:
     Delayer delayer = Delayer(350);
+
+    YouWonState(byte id) : State(id) {}
 
     void setup();
     void handle();

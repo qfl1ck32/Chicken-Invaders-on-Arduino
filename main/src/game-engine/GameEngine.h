@@ -1,6 +1,7 @@
 #ifndef GameEngine_h
 #define GameEngine_h
 
+#include "../constants/app.h"
 #include "../pixel-change/PixelChange.h"
 #include "../unit/Unit.h"
 #include "Arduino.h"
@@ -16,7 +17,7 @@ class GameEngine {
    public:
     byte rows, columns;
 
-    Unit ***unitMatrix;
+    Unit *unitMatrix[MATRIX_ROWS][MATRIX_COLUMNS];
     Unit *unitArray[MAX_UNITS];
 
     byte currentChangeIndex;

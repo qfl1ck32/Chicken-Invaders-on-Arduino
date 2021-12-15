@@ -27,5 +27,6 @@ void WelcomeState::cleanup() {
 }
 
 void WelcomeState::moveToEnterYourNameState() {
-    stateManager.changeState<MainMenuState>();
+    stateManager.changeState(mainMenuStateId);
+    ;
 }

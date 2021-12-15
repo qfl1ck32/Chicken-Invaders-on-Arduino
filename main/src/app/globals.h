@@ -17,6 +17,19 @@
 #include "../state-manager/StateManager.h"
 #include "./typedefs.h"
 
+// TODO: move
+#define aboutMenuStateId 0
+#define gameOverStateId 1
+#define leaderboardStateId 2
+#define mainMenuStateId 3
+#define nameSelectionStateId 4
+#define playingStateId 5
+#define settingsLCDMenuStateId 6
+#define settingsMatrixMenuStateId 7
+#define settingsMenuStateId 8
+#define welcomeStateId 9
+#define youWonStateId 10
+
 extern StateManager stateManager;
 
 extern LCD *lcd;

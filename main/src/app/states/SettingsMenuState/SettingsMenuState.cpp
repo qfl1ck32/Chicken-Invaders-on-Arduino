@@ -28,7 +28,8 @@ void SettingsMenuState::cleanup() {
 }
 
 void SettingsMenuState::goBack() {
-    stateManager.changeState<MainMenuState>();
+    stateManager.changeState(mainMenuStateId);
+    ;
 }
 
 void SettingsMenuState::goToLevel() {
@@ -36,9 +37,9 @@ void SettingsMenuState::goToLevel() {
 }
 
 void SettingsMenuState::goToLCD() {
-    stateManager.changeState<SettingsLCDMenuState>();
+    stateManager.changeState(settingsLCDMenuStateId);
 }
 
 void SettingsMenuState::goToMatrix() {
-    stateManager.changeState<SettingsMatrixMenuState>();
+    stateManager.changeState(settingsMatrixMenuStateId);
 }

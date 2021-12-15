@@ -47,11 +47,13 @@ void GameOverState::goToNextStep() {
     if (game.score + 5 > leaderboard.getHighscore()) {
         // TODO: add logic
         // leaderboard.write(nameSelector->name, game.score + 5);
-        stateManager.changeState<NameSelectionState>();
+        stateManager.changeState(nameSelectionStateId);
+        ;
     }
 
     else {
-        stateManager.changeState<MainMenuState>();
+        stateManager.changeState(mainMenuStateId);
+        ;
     }
 
     // FIXME

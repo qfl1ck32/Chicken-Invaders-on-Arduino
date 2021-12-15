@@ -4,11 +4,11 @@ GameEngine::GameEngine(byte rows, byte columns) {
     this->rows = rows;
     this->columns = columns;
 
-    this->unitMatrix = new Unit**[rows];
+    // this->unitMatrix = new Unit**[rows];
 
-    for (int i = 0; i < rows; ++i) {
-        this->unitMatrix[i] = new Unit*[columns];
-    }
+    // for (int i = 0; i < rows; ++i) {
+    //     this->unitMatrix[i] = new Unit*[columns];
+    // }
 
     for (int i = 0; i < this->rows; ++i) {
         for (int j = 0; j < this->columns; ++j) {

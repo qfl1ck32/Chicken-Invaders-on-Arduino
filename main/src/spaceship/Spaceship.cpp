@@ -27,7 +27,7 @@ void Spaceship::behaviour(byte action) {
             --this->lifes;
 
             if (this->lifes == 0) {
-                stateManager.changeState<GameOverState>();
+                stateManager.changeState(gameOverStateId);
             }
 
             return;

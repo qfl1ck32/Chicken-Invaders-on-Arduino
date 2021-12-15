@@ -33,7 +33,7 @@ void Chicken::behaviour(byte action) {
             short numberOfChickensAlive = Chicken::getNumberOfChickensAlive();
 
             if (numberOfChickensAlive == 0) {
-                stateManager.changeState<YouWonState>();
+                stateManager.changeState(youWonStateId);
             }
 
             return;

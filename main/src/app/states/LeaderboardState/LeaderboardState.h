@@ -2,10 +2,11 @@
 #define LeaderboardState_h
 
 #include "../../../state/State.h"
-#include "../MainMenuState/MainMenuState.h"
 
 class LeaderboardState : public State {
    public:
+    LeaderboardState(byte id) : State(id) {}
+
     void setup();
     void handle();
     void cleanup();

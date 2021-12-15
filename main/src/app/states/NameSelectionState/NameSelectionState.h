@@ -1,11 +1,12 @@
 #ifndef NameSelectionState_h
 #define NameSelectionState_h
 
-#include "../MainMenuState/MainMenuState.h"
-#include "../PlayingState/PlayingState.h"
+#include "../../../state/State.h"
 
 class NameSelectionState : public State {
    public:
+    NameSelectionState(byte id) : State(id) {}
+
     void setup();
     void handle();
     void cleanup();

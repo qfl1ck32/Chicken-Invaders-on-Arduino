@@ -65,5 +65,6 @@ void LeaderboardState::cleanup() {
 }
 
 void LeaderboardState::goBack() {
-    stateManager.changeState<MainMenuState>();
+    stateManager.changeState(mainMenuStateId);
+    ;
 }

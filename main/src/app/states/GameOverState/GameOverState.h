@@ -5,13 +5,12 @@
 #include "../../../delayer/Delayer.h"
 #include "../../../state/State.h"
 #include "../../../utils/utils.h"
-#include "../MainMenuState/MainMenuState.h"
-#include "../NameSelectionState/NameSelectionState.h"
-#include "../PlayingState/PlayingState.h"
 
 class GameOverState : public State {
    public:
     Delayer delayer = Delayer(500);
+
+    GameOverState(byte id) : State(id) {}
 
     void setup();
     void handle();

@@ -52,6 +52,6 @@ void NameSelectionState::finish() {
     if (nameSelector->finish()) {
         // TODO: update logic
         leaderboard.write(nameSelector->name, game.score);
-        stateManager.changeState<MainMenuState>();
-    }
+        stateManager.changeState(mainMenuStateId);
+        }
 }

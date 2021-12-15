@@ -3,11 +3,12 @@
 
 #include "../../../delayer/Delayer.h"
 #include "../../../state/State.h"
-#include "../MainMenuState/MainMenuState.h"
 
 class WelcomeState : public State {
    public:
     Delayer delayer = Delayer(350);
+
+    WelcomeState(byte id) : State(id) {}
 
     void setup();
     void handle();

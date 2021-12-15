@@ -5,6 +5,8 @@
 
 class PlayingState : public State {
    public:
+    PlayingState(byte id) : State(id) {}
+
     void setup();
     void handle();
     void cleanup();
