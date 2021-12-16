@@ -16,8 +16,8 @@
 #include "src/app/states/WelcomeState/WelcomeState.h"
 #include "src/app/states/YouWonState/YouWonState.h"
 #include "src/constants/app.h"
-#include "src/modules/music-player/MusicPlayer.h"
-#include "src/modules/music-player/songs.h"
+// #include "src/modules/music-player/MusicPlayer.h"
+// #include "src/modules/music-player/songs.h"
 
 Delayer buttonDelayer = Delayer(300);
 Delayer swDelayer = Delayer(300);
@@ -35,14 +35,11 @@ void handleButtonStateChange() {
 }
 
 void setup() {
-    while (!Serial) {
-    }
-
     // for (int i = 0; i < 1024; ++i) {
     //     EEPROM.write(i, 255);
     // }
 
-    // leaderboard.eeprom->clear();
+    // leaderboard.eeprom->mainclear();
 
     Serial.begin(baudRate);
 
@@ -59,7 +56,7 @@ void setup() {
 
     stateManager.addState(new WelcomeState(welcomeStateId));
 
-    // stateManager.addState(new AboutMenuState(aboutMenuStateId));
+    stateManager.addState(new AboutMenuState(aboutMenuStateId));
 
     stateManager.addState(new GameOverState(gameOverStateId));
     stateManager.addState(new PlayingState(playingStateId));
@@ -74,7 +71,7 @@ void setup() {
     // stateManager.addState(new SettingsLCDMenuState(settingsLCDMenuStateId));
     // stateManager.addState(new SettingsSoundsMenuState(settingsSoundsMenuStateId));
 
-    // stateManager.addState(new NameSelectionState(nameSelectionStateId));
+    stateManager.addState(new NameSelectionState(nameSelectionStateId));
 
     // musicPlayer.setSong(silentNight, sizeof(silentNight) / sizeof(silentNight[0]));
     // musicPlayer.setRepeat(true);
@@ -86,7 +83,7 @@ void setup() {
 
 void loop() {
     // if (usesMusic) {
-    //     musicPlayer.play();
+    // musicPlayer.play();
     // }
 
     stateManager.handle();

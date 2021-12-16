@@ -10,6 +10,8 @@
 
 class Chicken : public Unit {
    public:
+    static byte count;
+
     Delayer eggDelayer = Delayer(CHICKEN_INITIAL_EGG_DELAYER_INTERVAL);
     Delayer moveDelayer = Delayer(CHICKEN_INITIAL_MOVE_DELAYER_INTERVAL);
 

@@ -1,3 +1,5 @@
+#include "./utils.h"
+
 short getNumberOfDigits(short number) {
     if (number == 0) return 1;
 

@@ -3,6 +3,8 @@
 #include "../../globals.h"
 
 void GameOverState::setup() {
+    // TODO: progmem :)
+
     lcd->clear();
 
     button.setOnStateChange(GameOverState::goToNextStep);
@@ -12,9 +14,7 @@ void GameOverState::setup() {
     game.reset();
 
     Unit::engine->resetState();
-}
 
-void GameOverState::handle() {
     int numberOfDigitsInScore = getNumberOfDigits(game.score);
 
     char gameOverMessage[21 + numberOfDigitsInScore];
@@ -26,7 +26,9 @@ void GameOverState::handle() {
 
     lcd->printOnRow(gameOverMessage, 0);
     lcd->printOnRow(pressXToContinue, 1);
+}
 
+void GameOverState::handle() {
     if (this->delayer.canRun()) {
         lcd->scrollRow(0);
         lcd->scrollRow(1);

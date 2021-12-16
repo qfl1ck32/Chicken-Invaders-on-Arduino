@@ -12,6 +12,8 @@ void PlayingState::setup() {
     button.setOnStateChange(PlayingState::attack);
 
     game.setupLevel();
+
+    lcd->shouldClearRowOnPrint = false;
 }
 
 void PlayingState::handle() {
@@ -19,13 +21,16 @@ void PlayingState::handle() {
 
     Unit::engine->run();
 
-    gameStatus.show(game.score, game.spaceship->lifes, 0);
+    gameStatus.show(game.score, game.spaceship->lifes, game.level, game.timeSinceLastStart);
     graphicsEngine.renderChanges(Unit::engine->pixelChanges);
 }
 
 void PlayingState::cleanup() {
     lcd->clear();
     joystick.clearHandlers();
+
+    // TODO: should put it back how it was, not necessarily true
+    lcd->shouldClearRowOnPrint = true;
 }
 
 void PlayingState::moveUp() {

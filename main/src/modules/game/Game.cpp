@@ -23,6 +23,8 @@ void Game::setupLevel() {
     static byte spaceshipDefaultX = 7;
     static byte spaceshipDefaultY = 2;
 
+    this->timeSinceLastStart = millis();
+
     if (this->needsInitialisation) {
         this->needsInitialisation = false;
         this->setSpaceship(spaceshipDefaultX, spaceshipDefaultY);

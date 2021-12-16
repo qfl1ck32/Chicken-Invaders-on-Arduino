@@ -13,6 +13,8 @@ class Game {
     short score;
     byte level;
 
+    unsigned long timeSinceLastStart;
+
     static byte maxLevel;
 
     bool needsInitialisation;

@@ -22,40 +22,27 @@ class LCD : public LiquidCrystal {
     char **lastStrings;
     byte *scrollOffsets;
 
-    LCD(uint8_t rs, uint8_t enable,
-        uint8_t d0, uint8_t d1, uint8_t d2, uint8_t d3, int contrast, int backlight) : LiquidCrystal(rs, enable, d0, d1, d2, d3) {
-        this->contrastPin = contrast;
-        this->backlightPin = backlight;
+    bool shouldClearRowOnPrint;
 
-        pinMode(this->contrastPin, OUTPUT);
-        pinMode(this->backlightPin, OUTPUT);
+    LCD(uint8_t, uint8_t, uint8_t, uint8_t, uint8_t, uint8_t, int, int);
 
-        byte savedContrast = EEPROM.read(EEPROM_LCD_CONTRAST_INDEX);
+    void changeContrast(byte);
+    void changeBacklight(byte);
 
-        this->contrast = savedContrast == EEPROM_MISSING_VALUE ? 100 : savedContrast;
+    void printOnRow(const char *, byte, byte, bool);
+    void printOnRow(const char *, byte, byte);
+    void printOnRow(const char *, byte);
 
-        byte savedBacklight = EEPROM.read(EEPROM_LCD_BACKLIGHT_INDEX);
-
-        this->backlight = savedBacklight == EEPROM_MISSING_VALUE ? 50 : savedBacklight;
-
-        this->changeContrast(0);
-        this->changeBacklight(0);
-    }
-
-    void changeContrast(int);
-    void changeBacklight(int);
-
-    void printOnRow(const char *, int, int, bool);
-    void printOnRow(const char *, int);
+    // void printOnRowAndColumn(char, int, int, bool);
 
     void setup(byte, byte);
     void scrollDisplayLeft();
 
-    void scrollRow(int row, int skip);
-    void scrollRow(int row);
+    void scrollRow(byte row, byte skip);
+    void scrollRow(byte row);
 
-    void clearRow(int, bool);
-    void clearRow(int, int, bool);
+    void clearRow(byte, bool);
+    void clearRow(byte, byte, bool);
 
     void createChar(uint8_t, const byte *);
 };
