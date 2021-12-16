@@ -34,6 +34,9 @@ void handleButtonStateChange() {
 }
 
 void setup() {
+    while (!Serial) {
+    }
+
     // for (int i = 0; i < 1024; ++i) {
     //     EEPROM.write(i, 255);
     // }
@@ -54,9 +57,9 @@ void setup() {
 
     stateManager.addState(new AboutMenuState(aboutMenuStateId));
 
-    stateManager.addState(new GameOverState(gameOverStateId));
-    stateManager.addState(new PlayingState(playingStateId));
-    stateManager.addState(new YouWonState(youWonStateId));
+    // stateManager.addState(new GameOverState(gameOverStateId));
+    // stateManager.addState(new PlayingState(playingStateId));
+    // stateManager.addState(new YouWonState(youWonStateId));
 
     stateManager.addState(new MainMenuState(mainMenuStateId));
     stateManager.addState(new LeaderboardState(leaderboardStateId));
@@ -66,7 +69,7 @@ void setup() {
     stateManager.addState(new SettingsMatrixMenuState(settingsMatrixMenuStateId));
     stateManager.addState(new SettingsLCDMenuState(settingsLCDMenuStateId));
 
-    stateManager.addState(new NameSelectionState(nameSelectionStateId));
+    // stateManager.addState(new NameSelectionState(nameSelectionStateId));
 
     musicPlayer.setSong(silentNight, sizeof(silentNight) / sizeof(silentNight[0]));
     musicPlayer.setRepeat(true);

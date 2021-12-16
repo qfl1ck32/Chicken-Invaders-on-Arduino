@@ -3,7 +3,7 @@
 #include "../../globals.h"
 
 void SettingsLevelMenuState::setup() {
-    static const char *const messages[] = {"Go back", "Increase lvl", "Decrease lvl"};
+    static const char *const messages[] PROGMEM = {"Go back", "Increase lvl", "Decrease lvl"};
 
     menu.setMessages(messages, sizeof(messages) / sizeof(char *));
 

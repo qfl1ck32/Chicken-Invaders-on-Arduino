@@ -5,10 +5,12 @@ void Menu::setMessages(const char *const *messages, int numberOfMessages) {
         delete[] this->messages;
     }
 
-    this->messages = new const char *[numberOfMessages];
+    this->messages = new char *[numberOfMessages];
 
     for (int i = 0; i < numberOfMessages; ++i) {
-        this->messages[i] = messages[i];
+        // Serial.println((char *)pgm_read_word(&(messages[i])));
+        strcpy_P(this->messages[i], (char *)pgm_read_word(&(messages[i])));
+        Serial.println(this->messages[i]);
     }
 
     this->numberOfMessages = numberOfMessages;

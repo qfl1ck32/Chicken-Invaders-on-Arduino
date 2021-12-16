@@ -1,6 +1,8 @@
 #ifndef Menu_h
 #define Menu_h
 
+#include <avr/pgmspace.h>
+
 #include "../app/typedefs.h"
 #include "../delayer/Delayer.h"
 #include "../lcd/LCD.h"
@@ -12,7 +14,7 @@ class Menu {
 
     int currentRow;
 
-    const char **messages = nullptr;
+    char **messages = nullptr;
     HandlerFunction *handlers = nullptr;
 
     int numberOfMessages;

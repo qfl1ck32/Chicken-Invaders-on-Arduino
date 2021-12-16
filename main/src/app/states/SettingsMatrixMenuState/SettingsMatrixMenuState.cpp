@@ -3,7 +3,7 @@
 #include "../../globals.h"
 
 void SettingsMatrixMenuState::setup() {
-    static const char *const messages[] = {"Back", "+", "-"};
+    static const char *const messages[] PROGMEM = {"Back", "Increase", "Decrease"};
 
     menu.setMessages(messages, sizeof(messages) / sizeof(char *));
 

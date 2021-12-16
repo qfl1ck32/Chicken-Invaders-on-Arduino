@@ -4,11 +4,11 @@
 
 void AboutMenuState::setup() {
     // FIXME PROGMEM
-    static const char* const messages[] = {
+    static const char* const messages[] PROGMEM = {
         "Back",
         "App Name: Invaders",
         "Programmer: Rusu Andrei-Cristian",
-        "Github: https://github.com/qfl1ck32/Chicken-Invaders-on-Arduino",
+        "Github: https://github.com/qfl1ck32/Invaders-on-Arduino",
     };
 
     menu.setMessages(messages, sizeof(messages) / sizeof(char*));

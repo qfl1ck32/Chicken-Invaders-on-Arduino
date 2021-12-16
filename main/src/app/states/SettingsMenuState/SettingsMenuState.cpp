@@ -3,7 +3,7 @@
 #include "../../globals.h"
 
 void SettingsMenuState::setup() {
-    static const char *const messages[] = {"Back", "Lvl", "LCD", "Matrix"};
+    static const char *const messages[] PROGMEM = {"Back", "Level", "LCD", "Matrix"};
 
     menu.setMessages(messages, sizeof(messages) / sizeof(char *));
 
