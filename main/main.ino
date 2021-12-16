@@ -24,7 +24,7 @@ Delayer swDelayer = Delayer(300);
 
 GameEngine* Unit::engine = gameEngine;
 
-// MusicPlayer musicPlayer = MusicPlayer(songBuzzer);
+MusicPlayer musicPlayer = MusicPlayer(songBuzzer);
 
 void handleSw() {
     if (swDelayer.canRun()) Joystick::swHandler(joystick);
@@ -76,23 +76,18 @@ void setup() {
 
     stateManager.addState(new NameSelectionState(nameSelectionStateId));
 
-    // musicPlayer.setSong(silentNight, sizeof(silentNight) / sizeof(silentNight[0]));
-    // musicPlayer.setRepeat(true);
+    musicPlayer.setSong(merryChristmas, sizeof(merryChristmas) / sizeof(merryChristmas[0]));
+    musicPlayer.setRepeat(true);
 
     stateManager.changeState(mainMenuStateId);
 
     initialiseRandomSeed();
 }
 
-Delayer t = Delayer(1000);
-
 void loop() {
-    // if (t.canRun()) {
-    //     Serial.println(millis());
-    // }
-    // if (usesMusic) {
-    //     musicPlayer.play();
-    // }
+    if (usesMusic) {
+        musicPlayer.play();
+    }
 
     stateManager.handle();
 }

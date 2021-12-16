@@ -8,6 +8,8 @@ void SettingsLCDMenuState::setup() {
     static const char bMinus[] PROGMEM = "Backlight -";
     static const char bPlus[] PROGMEM = "Backlight +";
 
+    static const uint64_t image PROGMEM = 0x182424424242423c;
+
     static const char *const messages[] PROGMEM = {backMessage, cMinus, cPlus, bMinus, bPlus};
 
     menu.setMessages(messages, sizeof(messages) / sizeof(char *));
@@ -21,6 +23,10 @@ void SettingsLCDMenuState::setup() {
     joystick.setOnChangeDown(menuGoDown);
 
     joystick.setOnSwStateChange(menuSelect);
+
+    uint64_t imageFromPROGMEM = readImageFromPROGMEM(&image);
+
+    matrix->displayImage(imageFromPROGMEM);
 }
 
 void SettingsLCDMenuState::handle() {
@@ -30,6 +36,8 @@ void SettingsLCDMenuState::handle() {
 
 void SettingsLCDMenuState::cleanup() {
     joystick.clearHandlers();
+
+    matrix->clear();
 }
 
 void SettingsLCDMenuState::goBack() {

@@ -6,7 +6,7 @@ const char SettingsSoundsMenuState::turnMusicOn[] PROGMEM = "Turn music on";
 const char SettingsSoundsMenuState::turnMusicOff[] PROGMEM = "Turn music off";
 
 void SettingsSoundsMenuState::setup() {
-    SettingsSoundsMenuState::setMessages();
+    SettingsSoundsMenuState::setMessages(true);
 
     HandlerFunction handlers[] = {SettingsSoundsMenuState::goBack, SettingsSoundsMenuState::switchMusicPlaying};
 
@@ -18,10 +18,11 @@ void SettingsSoundsMenuState::setup() {
     joystick.setOnSwStateChange(menuSelect);
 }
 
-void SettingsSoundsMenuState::setMessages() {
-    static const char *const messages[] = {backMessage, usesMusic ? SettingsSoundsMenuState::turnMusicOff : SettingsSoundsMenuState::turnMusicOff};
+void SettingsSoundsMenuState::setMessages(bool isFirst) {
+    // TODO: refactor the logic for messages in menus, generally. please.
+    static const char *const messages[] PROGMEM = {backMessage, usesMusic ? SettingsSoundsMenuState::turnMusicOff : SettingsSoundsMenuState::turnMusicOff};
 
-    menu.setMessages(messages, sizeof(messages) / sizeof(char *));
+    menu.setMessages(messages, sizeof(messages) / sizeof(char *), !isFirst);
 }
 
 void SettingsSoundsMenuState::handle() {
@@ -42,5 +43,5 @@ void SettingsSoundsMenuState::switchMusicPlaying() {
 
     EEPROM.write(EEPROM_MUSIC_PLAYING_INDEX, usesMusic);
 
-    SettingsSoundsMenuState::setMessages();
+    SettingsSoundsMenuState::setMessages(false);
 }

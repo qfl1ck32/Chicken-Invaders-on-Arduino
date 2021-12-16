@@ -70,3 +70,11 @@ void readFromPROGMEM(const char progmemPointer[], char *buffer, int length) {
 
     buffer[length + 1] = '\0';
 }
+
+uint64_t readImageFromPROGMEM(const uint64_t *image) {
+    uint64_t buffer;
+
+    memcpy_P(&buffer, *&image, 8);
+
+    return buffer;
+}

@@ -44,3 +44,7 @@ extern byte heartChar;
 #define CHICKEN_INITIAL_EGG_DELAYER_INTERVAL 2000
 #define CHICKEN_INITIAL_MOVE_DELAYER_INTERVAL 1250
 #define INT_MAX 0x7FFF
+
+// TODO: add constants from globals, here.
+
+extern const uint64_t matrixNumbers[];

@@ -3,7 +3,7 @@
 void Menu::setMessages(const char *const *messages, int numberOfMessages, bool resetCurrentRow) {
     if (this->messages) {
         for (int i = 0; i < this->numberOfMessages; ++i) {
-            delete this->messages[i];
+            delete[] this->messages[i];
         }
         delete[] this->messages;
     }
@@ -28,7 +28,7 @@ void Menu::setMessages(const char *const *messages, int numberOfMessages, bool r
 }
 
 void Menu::setMessages(const char *const *messages, int numberOfMessages) {
-    Menu::setMessages(messages, numberOfMessages, false);
+    Menu::setMessages(messages, numberOfMessages, true);
 }
 
 void Menu::setOns(HandlerFunction handlers[], int numberOfHandlers) {

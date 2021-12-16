@@ -10,6 +10,8 @@ void MainMenuState::setup() {
 
     static const char *const messages[] PROGMEM = {play, settings, leaderboard, about};
 
+    static const uint64_t mainImage PROGMEM = 0x004c424242024c00;
+
     menu.setMessages(messages, sizeof(messages) / sizeof(char *));
 
     HandlerFunction handlers[] = {MainMenuState::goToPlay, MainMenuState::goToSettings, MainMenuState::goToLeaderboard, MainMenuState::goToAbout};
@@ -19,6 +21,10 @@ void MainMenuState::setup() {
     joystick.setOnChangeDown(menuGoDown);
 
     joystick.setOnSwStateChange(menuSelect);
+
+    uint64_t image = readImageFromPROGMEM(&mainImage);
+
+    matrix->displayImage(image);
 }
 
 void MainMenuState::handle() {
@@ -31,6 +37,8 @@ void MainMenuState::cleanup() {
     button.clearHandler();
 
     lcd->clear();
+
+    matrix->clear();
 }
 
 void MainMenuState::goToPlay() {
