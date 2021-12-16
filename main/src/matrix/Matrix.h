@@ -5,6 +5,7 @@
 #include "EEPROM.h"
 #include "LedControl.h"
 
+// FIXME: this class was not thought to be used with more that one matrix
 class Matrix : public LedControl {
    public:
     byte rows;
@@ -13,16 +14,14 @@ class Matrix : public LedControl {
     byte intensity;
 
     Matrix(int dataPin, int clkPin, int csPin, int numDevices, byte rows, byte columns) : LedControl(dataPin, clkPin, csPin, numDevices) {
+        static byte defaultIntensity = 8;
+
         this->rows = rows;
         this->columns = columns;
 
-        // TODO: addr
-        this->setIntensity(0, 15);
-
         byte savedIntensity = EEPROM.read(EEPROM_MATRIX_INTENSITY_INDEX);
 
-        // FIXME: hackish
-        this->intensity = savedIntensity == 255 ? 8 : savedIntensity;
+        this->intensity = savedIntensity == EEPROM_MISSING_VALUE ? defaultIntensity : savedIntensity;
 
         this->increaseIntensity(0);
     }

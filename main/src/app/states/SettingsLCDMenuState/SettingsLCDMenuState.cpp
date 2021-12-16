@@ -3,7 +3,12 @@
 #include "../../globals.h"
 
 void SettingsLCDMenuState::setup() {
-    static const char *const messages[] PROGMEM = {"Go back", "Contrast -", "Contrast +", "Backlight -", "Backlight +"};
+    static const char cMinus[] PROGMEM = "Contrast -";
+    static const char cPlus[] PROGMEM = "Contrast +";
+    static const char bMinus[] PROGMEM = "Backlight -";
+    static const char bPlus[] PROGMEM = "Backlight +";
+
+    static const char *const messages[] PROGMEM = {backMessage, cMinus, cPlus, bMinus, bPlus};
 
     menu.setMessages(messages, sizeof(messages) / sizeof(char *));
 

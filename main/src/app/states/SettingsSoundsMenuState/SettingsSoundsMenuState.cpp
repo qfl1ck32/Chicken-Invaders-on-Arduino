@@ -2,10 +2,11 @@
 
 #include "../../globals.h"
 
-void SettingsSoundsMenuState::setup() {
-    static const char *const messages[] = {"Go back", usesMusic ? "Turn music off" : "Turn music on"};
+const char SettingsSoundsMenuState::turnMusicOn[] PROGMEM = "Turn music on";
+const char SettingsSoundsMenuState::turnMusicOff[] PROGMEM = "Turn music off";
 
-    menu.setMessages(messages, sizeof(messages) / sizeof(char *));
+void SettingsSoundsMenuState::setup() {
+    SettingsSoundsMenuState::setMessages();
 
     HandlerFunction handlers[] = {SettingsSoundsMenuState::goBack, SettingsSoundsMenuState::switchMusicPlaying};
 
@@ -15,6 +16,12 @@ void SettingsSoundsMenuState::setup() {
     joystick.setOnChangeDown(menuGoDown);
 
     joystick.setOnSwStateChange(menuSelect);
+}
+
+void SettingsSoundsMenuState::setMessages() {
+    static const char *const messages[] = {backMessage, usesMusic ? SettingsSoundsMenuState::turnMusicOff : SettingsSoundsMenuState::turnMusicOff};
+
+    menu.setMessages(messages, sizeof(messages) / sizeof(char *));
 }
 
 void SettingsSoundsMenuState::handle() {
@@ -35,8 +42,5 @@ void SettingsSoundsMenuState::switchMusicPlaying() {
 
     EEPROM.write(EEPROM_MUSIC_PLAYING_INDEX, usesMusic);
 
-    // FIXME: dry
-    const char *const messages[] = {"Go back", usesMusic ? "Turn music off" : "Turn music on"};
-
-    menu.setMessages(messages, sizeof(messages) / sizeof(char *));
+    SettingsSoundsMenuState::setMessages();
 }

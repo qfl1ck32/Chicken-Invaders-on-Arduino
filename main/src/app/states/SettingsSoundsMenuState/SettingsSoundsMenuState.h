@@ -24,6 +24,11 @@ class SettingsSoundsMenuState : public State {
     static void decreaseBacklight();
 
     static void switchMusicPlaying();
+
+    static const char turnMusicOn[];
+    static const char turnMusicOff[];
+
+    static void setMessages();
 };
 
 #endif

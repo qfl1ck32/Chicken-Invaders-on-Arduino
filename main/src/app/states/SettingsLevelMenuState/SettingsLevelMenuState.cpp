@@ -2,8 +2,9 @@
 
 #include "../../globals.h"
 
+// TODO: show the level on the matrix
 void SettingsLevelMenuState::setup() {
-    static const char *const messages[] PROGMEM = {"Go back", "Increase lvl", "Decrease lvl"};
+    static const char *const messages[] PROGMEM = {backMessage, increaseMessage, decreaseMessage};
 
     menu.setMessages(messages, sizeof(messages) / sizeof(char *));
 

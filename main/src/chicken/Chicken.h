@@ -10,18 +10,18 @@
 
 class Chicken : public Unit {
    public:
+    static byte count;
+
     Delayer eggDelayer = Delayer(2000);
     Delayer moveDelayer = Delayer(1250);
 
-    Chicken(byte x, byte y) : Unit(x, y) {}
-
-    Chicken() {}
+    Chicken(byte, byte);
 
     void action();
     void behaviour(byte);
     unsigned char getType();
 
-    static short getNumberOfChickensAlive();
+    void die();
 };
 
 #endif

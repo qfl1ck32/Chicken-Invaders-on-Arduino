@@ -24,7 +24,7 @@ Delayer swDelayer = Delayer(300);
 
 GameEngine* Unit::engine = gameEngine;
 
-MusicPlayer musicPlayer = MusicPlayer(songBuzzer);
+// MusicPlayer musicPlayer = MusicPlayer(songBuzzer);
 
 void handleSw() {
     if (swDelayer.canRun()) Joystick::swHandler(joystick);
@@ -59,35 +59,35 @@ void setup() {
 
     stateManager.addState(new WelcomeState(welcomeStateId));
 
-    stateManager.addState(new AboutMenuState(aboutMenuStateId));
+    // stateManager.addState(new AboutMenuState(aboutMenuStateId));
 
-    // stateManager.addState(new GameOverState(gameOverStateId));
-    // stateManager.addState(new PlayingState(playingStateId));
-    // stateManager.addState(new YouWonState(youWonStateId));
+    stateManager.addState(new GameOverState(gameOverStateId));
+    stateManager.addState(new PlayingState(playingStateId));
+    stateManager.addState(new YouWonState(youWonStateId));
 
     stateManager.addState(new MainMenuState(mainMenuStateId));
     stateManager.addState(new LeaderboardState(leaderboardStateId));
 
     stateManager.addState(new SettingsMenuState(settingsMenuStateId));
-    stateManager.addState(new SettingsLevelMenuState(settingsLevelMenuStateId));
-    stateManager.addState(new SettingsMatrixMenuState(settingsMatrixMenuStateId));
-    stateManager.addState(new SettingsLCDMenuState(settingsLCDMenuStateId));
-    stateManager.addState(new SettingsSoundsMenuState(settingsSoundsMenuStateId));
+    // stateManager.addState(new SettingsLevelMenuState(settingsLevelMenuStateId));
+    // stateManager.addState(new SettingsMatrixMenuState(settingsMatrixMenuStateId));
+    // stateManager.addState(new SettingsLCDMenuState(settingsLCDMenuStateId));
+    // stateManager.addState(new SettingsSoundsMenuState(settingsSoundsMenuStateId));
 
     // stateManager.addState(new NameSelectionState(nameSelectionStateId));
 
-    musicPlayer.setSong(silentNight, sizeof(silentNight) / sizeof(silentNight[0]));
-    musicPlayer.setRepeat(true);
+    // musicPlayer.setSong(merryChristmas, sizeof(merryChristmas) / sizeof(merryChristmas[0]));
+    // musicPlayer.setRepeat(true);
 
-    stateManager.changeState(playingStateId);
+    stateManager.changeState(mainMenuStateId);
 
     initialiseRandomSeed();
 }
 
 void loop() {
-    if (usesMusic) {
-        musicPlayer.play();
-    }
+    // if (usesMusic) {
+    // musicPlayer.play();
+    // }
 
     stateManager.handle();
 }

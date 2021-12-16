@@ -2,6 +2,12 @@
 
 #include "../app/globals.h"
 
+byte Chicken::count = 0;
+
+Chicken::Chicken(byte x, byte y) : Unit(x, y) {
+    ++Chicken::count;
+}
+
 void Chicken::action() {
     if (this->eggDelayer.canRun()) {
         new Egg(this->x + 1, this->y);
@@ -22,17 +28,21 @@ void Chicken::action() {
     }
 };
 
+void Chicken::die() {
+    Unit::die();
+
+    --Chicken::count;
+}
+
 void Chicken::behaviour(byte action) {
     switch (action) {
         case KILL:
+            // TODO: it would be very nice to have an event manager.
             game.score += 5;
 
             this->die();
 
-            // TODO: static "count" on the class, + on new, - on delete
-            short numberOfChickensAlive = Chicken::getNumberOfChickensAlive();
-
-            if (numberOfChickensAlive == 0) {
+            if (Chicken::count == 0) {
                 stateManager.changeState(youWonStateId);
             }
 
@@ -42,14 +52,4 @@ void Chicken::behaviour(byte action) {
 
 unsigned char Chicken::getType() {
     return CHICKEN_TYPE;
-}
-
-short Chicken::getNumberOfChickensAlive() {
-    short answer = 0;
-
-    for (int i = 0; i < Unit::engine->numberOfUnits; ++i) {
-        if (Unit::engine->unitArray[i]->getType() == CHICKEN_TYPE && Unit::engine->unitArray[i]->isAlive) answer += 1;
-    }
-
-    return answer;
 }

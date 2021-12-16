@@ -20,10 +20,12 @@ void Game::reset() {
 }
 
 void Game::setupLevel() {
-    // FIXME coordinates for spaceship?
+    static byte spaceshipDefaultX = 7;
+    static byte spaceshipDefaultY = 2;
+
     if (this->needsInitialisation) {
         this->needsInitialisation = false;
-        this->setSpaceship(6, 2);
+        this->setSpaceship(spaceshipDefaultX, spaceshipDefaultY);
     }
 
     switch (this->level) {
@@ -55,6 +57,5 @@ void Game::changeLevel(int level) {
 void Game::goToNextLevel() {
     ++this->level;
 
-    // FIXME: you earn a life when you win. move the logic?
     this->spaceship->lifes += 1;
 }

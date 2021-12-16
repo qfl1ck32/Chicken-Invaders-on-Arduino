@@ -1,15 +1,18 @@
 #include "./WelcomeState.h"
 
-#include <avr/pgmspace.h>
-
 #include "../../globals.h"
 
 void WelcomeState::setup() {
     button.setOnStateChange(WelcomeState::moveToEnterYourNameState);
 
-    static const char *const pressXToContinue PROGMEM = "Press X to continue";
+    static const char welcomeMessage[] PROGMEM = "Welcome!";
 
-    static const char *const welcome PROGMEM = "Welcome!";
+    char welcome[9];
+
+    char pressXToContinue[21];
+
+    readFromPROGMEM(pressXToContinueMessage, pressXToContinue, 20);
+    readFromPROGMEM(welcomeMessage, welcome, 8);
 
     lcd->printOnRow(welcome, 0);
     lcd->printOnRow(pressXToContinue, 1);
@@ -28,5 +31,4 @@ void WelcomeState::cleanup() {
 
 void WelcomeState::moveToEnterYourNameState() {
     stateManager.changeState(mainMenuStateId);
-    ;
 }

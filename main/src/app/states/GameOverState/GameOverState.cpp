@@ -5,25 +5,22 @@
 void GameOverState::setup() {
     lcd->clear();
 
-    // TODO: add logic to first show the person another screen
-    // if he has the highest score
     button.setOnStateChange(GameOverState::goToNextStep);
 
-    // TODO: not here
     matrix->clear();
 
     game.reset();
-    gameEngine->resetState();
+
+    Unit::engine->resetState();
 }
 
 void GameOverState::handle() {
-    // TODO: modularization
     int numberOfDigitsInScore = getNumberOfDigits(game.score);
 
     char gameOverMessage[21 + numberOfDigitsInScore];
 
-    const char* const gameOverMsg = "Game over. Score: ";
-    const char* const pressXToContinue = "Press X to continue.";
+    static const char *gameOverMsg = "Game over. Score: ";
+    static const char *pressXToContinue = "Press X to continue.";
 
     sprintf(gameOverMessage, "%s: %d.", gameOverMsg, game.score);
 

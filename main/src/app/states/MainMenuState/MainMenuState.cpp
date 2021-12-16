@@ -3,7 +3,12 @@
 #include "../../globals.h"
 
 void MainMenuState::setup() {
-    static const char *const messages[] PROGMEM = {"Play", "Settings", "Leaderboard", "About"};
+    static const char play[] PROGMEM = "Play";
+    static const char settings[] PROGMEM = "Settings";
+    static const char leaderboard[] PROGMEM = "Leaderboard";
+    static const char about[] PROGMEM = "About";
+
+    static const char *const messages[] PROGMEM = {play, settings, leaderboard, about};
 
     menu.setMessages(messages, sizeof(messages) / sizeof(char *));
 

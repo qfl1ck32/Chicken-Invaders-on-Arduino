@@ -11,9 +11,9 @@ class Delayer {
 
     bool isInCooldown = false;
 
-    Delayer(unsigned int interval) {
-        this->interval = interval;
-    }
+    Delayer(unsigned int);
+
+    Delayer();
 
     bool canRun();
 

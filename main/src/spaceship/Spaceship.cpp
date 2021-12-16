@@ -7,12 +7,13 @@ void Spaceship::action(){
 };
 
 void Spaceship::attack() {
-    // TODO: dry
     if (this->x - 1 < 0) return;
 
-    if (this->engine->unitMatrix[this->x - 1][this->y] != 0) {
-        if (this->engine->unitMatrix[this->x - 1][this->y]->getType() == CHICKEN_TYPE) {
-            this->sendMessage(KILL, *this->engine->unitMatrix[this->x - 1][this->y]);
+    Unit *unit = this->engine->unitMatrix[this->x - 1][this->y];
+
+    if (unit != 0) {
+        if (unit->getType() == CHICKEN_TYPE) {
+            this->sendMessage(KILL, *unit);
         }
 
         return;

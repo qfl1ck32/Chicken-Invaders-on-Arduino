@@ -17,8 +17,6 @@ void PlayingState::setup() {
 void PlayingState::handle() {
     joystick.handleJoystickMovements();
 
-    // Serial.println(Unit::engine->numberOfUnits);
-
     Unit::engine->run();
 
     gameStatus.show(game.score, game.spaceship->lifes, 0);

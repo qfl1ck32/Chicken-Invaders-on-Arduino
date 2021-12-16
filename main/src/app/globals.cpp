@@ -42,15 +42,31 @@ void menuSelect() {
 }
 
 void initialiseRandomSeed() {
-    // FIXME: 0 is used because it's not used
-    randomSeed(analogRead(0));
+    static const byte unusedPin = 0;
+    randomSeed(analogRead(unusedPin));
 }
 
 bool getUsesMusic() {
+    static bool defaultValue = true;
+
     byte value = EEPROM.read(EEPROM_MUSIC_PLAYING_INDEX);
 
-    // TODO: "true" is the default value
-    return value == 255 ? true : value == 1;
+    return value == 255 ? defaultValue : value == 1;
 }
 
 bool usesMusic = getUsesMusic();
+
+const char backMessage[] PROGMEM = "Back";
+
+const char increaseMessage[] PROGMEM = "Increase";
+const char decreaseMessage[] PROGMEM = "Decrease";
+
+const char pressXToContinueMessage[] PROGMEM = "Press X to continue.";
+
+void readFromPROGMEM(const char progmemPointer[], char *buffer, int length) {
+    for (int i = 0; i < length; ++i) {
+        buffer[i] = (char)pgm_read_byte_near(progmemPointer + i);
+    }
+
+    buffer[length + 1] = '\0';
+}
