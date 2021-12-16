@@ -26,24 +26,10 @@ void Game::setupLevel() {
         this->setSpaceship(6, 2);
     }
 
-    switch (this->level) {
-        case 1:
-            new Chicken(0, random(Unit::engine->columns));
-            break;
+    Chicken *chicken = new Chicken(0, random(Unit::engine->columns));
 
-        case 2:
-            new Chicken(0, random(Unit::engine->columns));
-            new Chicken(1, random(Unit::engine->columns));
-            break;
-
-        default:
-            new Chicken(0, random(Unit::engine->columns / 2));
-            new Chicken(0, random(Unit::engine->columns / 2, Unit::engine->columns));
-
-            new Chicken(1, random(Unit::engine->columns / 2));
-            new Chicken(1, random(Unit::engine->columns / 2, Unit::engine->columns));
-            return;
-    }
+    chicken->eggDelayer.updateInterval(CHICKEN_INITIAL_EGG_DELAYER_INTERVAL / this->level);
+    chicken->moveDelayer.updateInterval(CHICKEN_INITIAL_MOVE_DELAYER_INTERVAL / this->level);
 }
 
 void Game::changeLevel(int level) {
