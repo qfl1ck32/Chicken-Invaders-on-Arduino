@@ -3,9 +3,9 @@
 #include "../app/globals.h"
 
 void Chicken::action() {
-    // if (this->eggDelayer.canRun()) {
-    //     new Egg(this->x + 1, this->y);
-    // }
+    if (this->eggDelayer.canRun()) {
+        new Egg(this->x + 1, this->y);
+    }
 
     short rand = random(3);
 
