@@ -1,6 +1,6 @@
 #include "./Menu.h"
 
-void Menu::setMessages(const char *const *messages, int numberOfMessages) {
+void Menu::setMessages(const char *const *messages, int numberOfMessages, bool resetCurrentRow = false) {
     if (this->messages) {
         delete[] this->messages;
     }
@@ -15,8 +15,14 @@ void Menu::setMessages(const char *const *messages, int numberOfMessages) {
 
     this->numberOfMessages = numberOfMessages;
 
-    // TODO: this assumes that you actually set the messages when switching menus
-    this->currentRow = 0;
+    if (resetCurrentRow) {
+        this->currentRow = 0;
+    }
+}
+
+// TODO: find out why "= false" isn't working?
+void Menu::setMessages(const char *const *messages, int numberOfMessages) {
+    Menu::setMessages(messages, numberOfMessages, false);
 }
 
 void Menu::setOns(HandlerFunction handlers[], int numberOfHandlers) {

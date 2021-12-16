@@ -1,9 +1,9 @@
 #ifndef GraphicsEngine_h
 #define GraphicsEngine_h
 
+#include "../linked-list/LinkedList.h"
 #include "../matrix/Matrix.h"
 #include "../pixel-change/PixelChange.h"
-#include "LinkedList.h"
 
 class GraphicsEngine {
    public:

@@ -18,6 +18,8 @@ class SettingsMenuState : public State {
     static void goToLCD();
 
     static void goToMatrix();
+
+    static void goToSounds();
 };
 
 #endif

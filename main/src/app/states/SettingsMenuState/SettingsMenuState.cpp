@@ -3,12 +3,12 @@
 #include "../../globals.h"
 
 void SettingsMenuState::setup() {
-    static const char *const messages[] PROGMEM = {"Back", "Level", "LCD", "Matrix"};
+    static const char *const messages[] = {"Back", "Level", "LCD", "Matrix", "Sounds"};
 
     menu.setMessages(messages, sizeof(messages) / sizeof(char *));
 
     HandlerFunction handlers[] = {SettingsMenuState::goBack, SettingsMenuState::goToLevel, SettingsMenuState::goToLCD,
-                                  SettingsMenuState::goToMatrix};
+                                  SettingsMenuState::goToMatrix, SettingsMenuState::goToSounds};
 
     menu.setOns(handlers, sizeof(handlers) / sizeof(HandlerFunction));
 
@@ -41,4 +41,8 @@ void SettingsMenuState::goToLCD() {
 
 void SettingsMenuState::goToMatrix() {
     stateManager.changeState(settingsMatrixMenuStateId);
+}
+
+void SettingsMenuState::goToSounds() {
+    stateManager.changeState(settingsSoundsMenuStateId);
 }

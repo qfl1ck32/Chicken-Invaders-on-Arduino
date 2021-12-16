@@ -9,7 +9,7 @@ void LeaderboardState::setup() {
 
     leaderboard.generate();
 
-    int numberOfHighscores = leaderboard.scores->size();
+    int numberOfHighscores = leaderboard.scores->size;
 
     const char *messages[numberOfHighscores == 0 ? 2 : 1 + numberOfHighscores];
 
@@ -19,8 +19,8 @@ void LeaderboardState::setup() {
 
     int index = 1;
 
-    while (leaderboard.scores->size()) {
-        NameAndScore entry = leaderboard.scores->remove(0);
+    while (leaderboard.scores->size) {
+        NameAndScore entry = leaderboard.scores->removeHead();
 
         char leaderboardEntry[strlen(entry.name) + getNumberOfDigits(entry.score) + getNumberOfDigits(index) + 7];
 

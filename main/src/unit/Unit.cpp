@@ -21,7 +21,7 @@ bool Unit::isValidPosition(byte x, byte y) {
     return Unit::engine->isValidPosition(x, y);
 }
 
-void Unit::move(byte dx, byte dy) {
+void Unit::move(short dx, short dy) {
     if (!this->isValidPosition(this->x + dx, this->y + dy)) {
         return;
     }
@@ -44,7 +44,7 @@ void Unit::sendMessage(byte message, Unit& unit) {
 
 Unit::Unit(byte x, byte y) {
     if (Unit::engine->unitMatrix[x][y] == NULL && Unit::engine->numberOfUnits < MAX_UNITS) {
-        isAlive = true;
+        this->isAlive = true;
 
         this->x = x;
         this->y = y;

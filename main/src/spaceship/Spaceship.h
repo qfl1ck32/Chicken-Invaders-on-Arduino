@@ -22,7 +22,7 @@ class Spaceship : public Unit {
 
     void behaviour(byte);
 
-    void move(byte, byte);
+    void move(short, short);
 
     unsigned char getType();
 };

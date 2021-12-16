@@ -12,6 +12,7 @@
 #include "src/app/states/SettingsLevelMenuState/SettingsLevelMenuState.h"
 #include "src/app/states/SettingsMatrixMenuState/SettingsMatrixMenuState.h"
 #include "src/app/states/SettingsMenuState/SettingsMenuState.h"
+#include "src/app/states/SettingsSoundsMenuState/SettingsSoundsMenuState.h"
 #include "src/app/states/WelcomeState/WelcomeState.h"
 #include "src/app/states/YouWonState/YouWonState.h"
 #include "src/constants/app.h"
@@ -41,7 +42,7 @@ void setup() {
     //     EEPROM.write(i, 255);
     // }
 
-    // leaderboard.eeprom->clear();
+    leaderboard.eeprom->clear();
 
     Serial.begin(baudRate);
 
@@ -52,6 +53,9 @@ void setup() {
     lcd->createChar(heartChar, heartCharArray);
 
     matrix->setup();
+
+    lcd->clear();
+    matrix->clear();
 
     stateManager.addState(new WelcomeState(welcomeStateId));
 
@@ -68,19 +72,22 @@ void setup() {
     stateManager.addState(new SettingsLevelMenuState(settingsLevelMenuStateId));
     stateManager.addState(new SettingsMatrixMenuState(settingsMatrixMenuStateId));
     stateManager.addState(new SettingsLCDMenuState(settingsLCDMenuStateId));
+    stateManager.addState(new SettingsSoundsMenuState(settingsSoundsMenuStateId));
 
     // stateManager.addState(new NameSelectionState(nameSelectionStateId));
 
     musicPlayer.setSong(silentNight, sizeof(silentNight) / sizeof(silentNight[0]));
     musicPlayer.setRepeat(true);
 
-    // TODO:  maybe create a class ? 0 is not connected
-    randomSeed(analogRead(0));
+    stateManager.changeState(playingStateId);
 
-    stateManager.changeState(mainMenuStateId);
+    initialiseRandomSeed();
 }
 
 void loop() {
-    musicPlayer.play();
+    if (usesMusic) {
+        musicPlayer.play();
+    }
+
     stateManager.handle();
 }

@@ -21,7 +21,7 @@ const byte ledRows = 2;
 const byte ledColumns = 16;
 
 const byte dinPin = 12;
-const byte clockPin = A2;  // 11
+const byte clockPin = A2;
 const byte loadPin = 10;
 
 const byte matrixRows = 8;

@@ -7,9 +7,11 @@ void Chicken::action() {
         new Egg(this->x + 1, this->y);
     }
 
-    short rand = random(2);
+    short rand = random(3);
 
-    short direction = rand == 0 ? -1 : 1;
+    if (rand == 0) return;
+
+    short direction = rand == 1 ? -1 : 1;
 
     if (this->moveDelayer.canRun()) {
         if (!this->engine->isValidPosition(this->x, this->y + direction) || this->engine->unitMatrix[this->x][this->y + direction] != 0) {

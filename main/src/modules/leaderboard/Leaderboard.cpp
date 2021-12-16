@@ -5,17 +5,17 @@ const char *const Leaderboard::nameAndScoreDelimiter = "|";
 int Leaderboard::size = 3;
 
 int Leaderboard::getWorstHighscore() {
-    if (!this->scores->size()) {
+    if (!this->scores->size) {
         this->generate();
     }
 
-    if (!this->scores->size()) return -1;
+    if (!this->scores->size) return -1;
 
     // TODO: a constant? inf?
     int minScore = 2500;
 
-    while (this->scores->size()) {
-        NameAndScore element = this->scores->remove(0);
+    while (this->scores->size) {
+        NameAndScore element = this->scores->removeHead();
 
         if (element.score < minScore) {
             minScore = element.score;
@@ -26,8 +26,8 @@ int Leaderboard::getWorstHighscore() {
 }
 
 void Leaderboard::generate() {
-    while (this->scores->size()) {
-        this->scores->remove(0);
+    while (this->scores->size) {
+        this->scores->removeHead();
     }
 
     this->eeprom->resetReadHead();
@@ -76,12 +76,10 @@ void Leaderboard::write(const char *name, int score) {
 
     this->scores->sort(Leaderboard::sort);
 
-    Serial.println(this->scores->size());
-
-    int repeat = min(this->scores->size(), 3);
+    int repeat = min(this->scores->size, 3);
 
     while (repeat--) {
-        NameAndScore nameAndScore = this->scores->remove(0);
+        NameAndScore nameAndScore = this->scores->removeHead();
 
         Serial.println("I have a score.");
         Serial.println(nameAndScore.name);
@@ -109,9 +107,9 @@ bool Leaderboard::isHighScore(int score) {
     this->generate();
 
     Serial.println(score);
-    Serial.println(this->scores->size());
+    Serial.println(this->scores->size);
 
-    return score > worstHighScore || this->scores->size() < MAX_HIGHSCORES;
+    return score > worstHighScore || this->scores->size < MAX_HIGHSCORES;
 }
 
 int Leaderboard::sort(NameAndScore &a, NameAndScore &b) {
