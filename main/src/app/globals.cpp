@@ -41,6 +41,11 @@ void menuSelect() {
     menu.select();
 }
 
+void initialiseRandomSeed() {
+    // FIXME: 0 is used because it's not used
+    randomSeed(analogRead(0));
+}
+
 bool getUsesMusic() {
     byte value = EEPROM.read(EEPROM_MUSIC_PLAYING_INDEX);
 

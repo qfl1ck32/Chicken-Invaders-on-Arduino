@@ -68,4 +68,6 @@ extern Game game;
 
 extern bool usesMusic;
 
+extern void initialiseRandomSeed();
+
 #endif

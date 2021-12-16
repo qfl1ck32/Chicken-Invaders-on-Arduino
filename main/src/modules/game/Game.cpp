@@ -14,7 +14,7 @@ void Game::setSpaceship(byte x, byte y) {
 
 void Game::reset() {
     this->score = 0;
-    this->level = 2;
+    this->level = 1;
     this->spaceship = 0;
     this->needsInitialisation = true;
 }
