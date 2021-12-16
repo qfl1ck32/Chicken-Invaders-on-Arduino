@@ -6,6 +6,7 @@ const char SettingsSoundsMenuState::turnMusicOn[] PROGMEM = "Turn music on";
 const char SettingsSoundsMenuState::turnMusicOff[] PROGMEM = "Turn music off";
 
 void SettingsSoundsMenuState::setup() {
+    static const uint64_t icon PROGMEM = 0x0406354545350604;
     SettingsSoundsMenuState::setMessages(true);
 
     HandlerFunction handlers[] = {SettingsSoundsMenuState::goBack, SettingsSoundsMenuState::switchMusicPlaying};
@@ -16,6 +17,10 @@ void SettingsSoundsMenuState::setup() {
     joystick.setOnChangeDown(menuGoDown);
 
     joystick.setOnSwStateChange(menuSelect);
+
+    uint64_t image = readImageFromPROGMEM(&icon);
+
+    matrix->displayImage(image);
 }
 
 void SettingsSoundsMenuState::setMessages(bool isFirst) {
@@ -32,6 +37,8 @@ void SettingsSoundsMenuState::handle() {
 
 void SettingsSoundsMenuState::cleanup() {
     joystick.clearHandlers();
+
+    matrix->clear();
 }
 
 void SettingsSoundsMenuState::goBack() {
