@@ -35,9 +35,9 @@ void handleButtonStateChange() {
 }
 
 void setup() {
-    for (int i = 0; i < 1024; ++i) {
-        EEPROM.write(i, 255);
-    }
+    // for (int i = 0; i < 1024; ++i) {
+    //     EEPROM.write(i, 255);
+    // }
 
     leaderboard.eeprom->clear();
 
@@ -65,11 +65,11 @@ void setup() {
     stateManager.addState(new MainMenuState(mainMenuStateId));
     stateManager.addState(new LeaderboardState(leaderboardStateId));
 
-    // stateManager.addState(new SettingsMenuState(settingsMenuStateId));
-    // stateManager.addState(new SettingsLevelMenuState(settingsLevelMenuStateId));
-    // stateManager.addState(new SettingsMatrixMenuState(settingsMatrixMenuStateId));
-    // stateManager.addState(new SettingsLCDMenuState(settingsLCDMenuStateId));
-    // stateManager.addState(new SettingsSoundsMenuState(settingsSoundsMenuStateId));
+    stateManager.addState(new SettingsMenuState(settingsMenuStateId));
+    stateManager.addState(new SettingsLevelMenuState(settingsLevelMenuStateId));
+    stateManager.addState(new SettingsMatrixMenuState(settingsMatrixMenuStateId));
+    stateManager.addState(new SettingsLCDMenuState(settingsLCDMenuStateId));
+    stateManager.addState(new SettingsSoundsMenuState(settingsSoundsMenuStateId));
 
     stateManager.addState(new NameSelectionState(nameSelectionStateId));
 

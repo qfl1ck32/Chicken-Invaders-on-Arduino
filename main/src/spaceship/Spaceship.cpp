@@ -34,21 +34,23 @@ void Spaceship::behaviour(byte action) {
     }
 };
 
-void Spaceship::move(byte dx, byte dy) {
+void Spaceship::move(short dx, short dy) {
     if (!this->isValidPosition(this->x + dx, this->y + dy)) return;
 
-    // Unit *unit = this->engine->unitMatrix[this->x + dx][this->y + dy];
+    Unit *unitOnSpot = this->engine->unitMatrix[this->x + dx][this->y + dy];
 
-    // if (unit &&
-    //     (unit->getType() == EGG_TYPE || unit->getType() == CHICKEN_TYPE)) {
-    //     // we don't wanna hurt chickens
-    //     if (unit->getType() == EGG_TYPE) {
-    //         this->sendMessage(KILL, *unit);
-    //     }
+    if (unitOnSpot != 0) {
+        unsigned char type = unitOnSpot->getType();
 
-    //     this->sendMessage(KILL, *this->engine->unitMatrix[this->x][this->y]);
-    //     return;
-    // }
+        if (type == CHICKEN_TYPE || type == EGG_TYPE) {
+            if (type == EGG_TYPE) {
+                this->sendMessage(KILL, *this->engine->unitMatrix[this->x + dx][this->y + dy]);
+            }
+
+            this->sendMessage(KILL, *this->engine->unitMatrix[this->x][this->y]);
+            return;
+        }
+    }
 
     Unit::move(dx, dy);
 }

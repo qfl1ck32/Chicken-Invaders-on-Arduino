@@ -21,7 +21,7 @@ bool Unit::isValidPosition(byte x, byte y) {
     return Unit::engine->isValidPosition(x, y);
 }
 
-void Unit::move(byte dx, byte dy) {
+void Unit::move(short dx, short dy) {
     if (!this->isValidPosition(this->x + dx, this->y + dy)) {
         return;
     }

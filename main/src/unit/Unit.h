@@ -28,7 +28,7 @@ class Unit {
 
     void die();
 
-    void move(byte, byte);
+    void move(short, short);
 
     bool isValidPosition(byte, byte);
 
