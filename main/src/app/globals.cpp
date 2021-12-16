@@ -40,3 +40,12 @@ void menuGoDown() {
 void menuSelect() {
     menu.select();
 }
+
+bool getUsesMusic() {
+    byte value = EEPROM.read(EEPROM_MUSIC_PLAYING_INDEX);
+
+    // TODO: "false" is the default value
+    return value == 255 ? false : value == 1;
+}
+
+bool usesMusic = getUsesMusic();
