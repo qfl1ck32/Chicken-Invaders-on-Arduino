@@ -22,7 +22,7 @@ void SettingsSoundsMenuState::setMessages(bool isFirst) {
     // TODO: refactor the logic for messages in menus, generally. please.
     static const char *const messages[] PROGMEM = {backMessage, usesMusic ? SettingsSoundsMenuState::turnMusicOff : SettingsSoundsMenuState::turnMusicOff};
 
-    menu.setMessages(messages, sizeof(messages) / sizeof(char *), !isFirst);
+    menu.setMessages(messages, sizeof(messages) / sizeof(char *), isFirst);
 }
 
 void SettingsSoundsMenuState::handle() {
