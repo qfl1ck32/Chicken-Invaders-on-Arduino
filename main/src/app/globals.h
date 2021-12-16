@@ -17,21 +17,6 @@
 #include "../state-manager/StateManager.h"
 #include "./typedefs.h"
 
-// TODO: move
-#define aboutMenuStateId 0
-#define gameOverStateId 1
-#define leaderboardStateId 2
-#define mainMenuStateId 3
-#define nameSelectionStateId 4
-#define playingStateId 5
-#define settingsLCDMenuStateId 6
-#define settingsMatrixMenuStateId 7
-#define settingsMenuStateId 8
-#define welcomeStateId 9
-#define youWonStateId 10
-#define settingsLevelMenuStateId 11
-#define settingsSoundsMenuStateId 12
-
 extern StateManager stateManager;
 
 extern LCD *lcd;
@@ -69,5 +54,13 @@ extern Game game;
 extern bool usesMusic;
 
 extern void initialiseRandomSeed();
+
+extern const char backMessage[];
+
+extern const char increaseMessage[];
+extern const char decreaseMessage[];
+extern const char pressXToContinueMessage[];
+
+extern void readFromPROGMEM(const char[], char *, int);
 
 #endif

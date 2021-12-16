@@ -1,14 +1,22 @@
 #include "./Menu.h"
 
-void Menu::setMessages(const char *const *messages, int numberOfMessages, bool resetCurrentRow = false) {
+void Menu::setMessages(const char *const *messages, int numberOfMessages, bool resetCurrentRow) {
     if (this->messages) {
+        for (int i = 0; i < this->numberOfMessages; ++i) {
+            delete this->messages[i];
+        }
         delete[] this->messages;
     }
 
-    this->messages = new const char *[numberOfMessages];
+    this->messages = new char *[numberOfMessages];
 
     for (int i = 0; i < numberOfMessages; ++i) {
-        this->messages[i] = messages[i];
+        char *msg = (char *)pgm_read_word(&messages[i]);
+
+        // TODO: do something with the [100];
+        this->messages[i] = new char[100];
+
+        strcpy_P(this->messages[i], msg);
     }
 
     this->numberOfMessages = numberOfMessages;
@@ -18,7 +26,6 @@ void Menu::setMessages(const char *const *messages, int numberOfMessages, bool r
     }
 }
 
-// TODO: find out why "= false" isn't working?
 void Menu::setMessages(const char *const *messages, int numberOfMessages) {
     Menu::setMessages(messages, numberOfMessages, false);
 }

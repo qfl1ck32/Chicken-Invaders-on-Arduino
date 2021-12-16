@@ -6,8 +6,8 @@ Bullet::Bullet(byte x, byte y) : Unit(x, y) {
     static short frequency = 400;
     static byte duration = 125;
 
-    // TODO: maybe move this logic somewhere?
     songBuzzer->stop();
+
     gameSoundsBuzzer->buzz(frequency, duration);
 }
 

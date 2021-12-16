@@ -3,13 +3,11 @@
 #include "../../globals.h"
 
 void AboutMenuState::setup() {
-    // FIXME PROGMEM
-    static const char* const messages[] = {
-        "Back",
-        "App Name: Invaders",
-        "Programmer: Rusu Andrei-Cristian",
-        "Github: https://github.com/qfl1ck32/Chicken-Invaders-on-Arduino",
-    };
+    static const char appName[] PROGMEM = "App Name: Invaders";
+    static const char programmer[] PROGMEM = "Programmer: Rusu Andrei-Cristian";
+    static const char github[] PROGMEM = "Github: https://github.com/qfl1ck32/Invaders-on-Arduino";
+
+    static const char* const messages[] PROGMEM = {backMessage, appName, programmer, github};
 
     menu.setMessages(messages, sizeof(messages) / sizeof(char*));
 

@@ -16,8 +16,7 @@ class MusicPlayer {
 
     bool repeat;
 
-    // TODO: should have 0 by default, in the class
-    Delayer delayer = Delayer(0);
+    Delayer delayer = Delayer();
     Buzzer *buzzer;
 
     MusicPlayer(Buzzer *);

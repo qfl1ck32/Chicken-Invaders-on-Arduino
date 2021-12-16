@@ -32,12 +32,11 @@ class LCD : public LiquidCrystal {
 
         byte savedContrast = EEPROM.read(EEPROM_LCD_CONTRAST_INDEX);
 
-        // TODO: "== 255" <=> "== EEPROM_MISSING_VALUE"
-        this->contrast = savedContrast == 255 ? 100 : savedContrast;
+        this->contrast = savedContrast == EEPROM_MISSING_VALUE ? 100 : savedContrast;
 
         byte savedBacklight = EEPROM.read(EEPROM_LCD_BACKLIGHT_INDEX);
 
-        this->backlight = savedBacklight == 255 ? 50 : savedBacklight;
+        this->backlight = savedBacklight == EEPROM_MISSING_VALUE ? 50 : savedBacklight;
 
         this->changeContrast(0);
         this->changeBacklight(0);

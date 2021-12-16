@@ -3,6 +3,8 @@
 #include "../../globals.h"
 
 void LeaderboardState::setup() {
+    static const char noHighScoresMessage[] PROGMEM = "No high scores";
+
     HandlerFunction handlers[] = {LeaderboardState::goBack};
 
     menu.setOns(handlers, sizeof(handlers) / sizeof(HandlerFunction));
@@ -11,11 +13,13 @@ void LeaderboardState::setup() {
 
     int numberOfHighscores = leaderboard.scores->size;
 
-    const char *messages[numberOfHighscores == 0 ? 2 : 1 + numberOfHighscores];
+    char *messages[numberOfHighscores == 0 ? 2 : 1 + numberOfHighscores];
 
-    static const char *const back = "Back";
+    char backMessageBuffer[5];
 
-    messages[0] = back;
+    readFromPROGMEM(backMessage, backMessageBuffer, 4);
+
+    messages[0] = backMessageBuffer;
 
     int index = 1;
 
@@ -32,7 +36,11 @@ void LeaderboardState::setup() {
     }
 
     if (index == 1) {
-        messages[index] = "No high scores";
+        char buffer[15];
+
+        readFromPROGMEM(noHighScoresMessage, buffer, 14);
+
+        messages[index] = buffer;
     }
 
     menu.setMessages(messages, sizeof(messages) / sizeof(char *));

@@ -3,10 +3,12 @@
 #include "../constants/app.h"
 
 void LCD::createChar(uint8_t location, const byte *charMap) {
-    location &= 0x7;  // we only have 8 locations 0-7
+    location &= 0x7;
+
     command(LCD_SETCGRAMADDR | (location << 3));
+
     for (int i = 0; i < 8; i++) {
-        write(pgm_read_byte_near(charMap++));  // reading from progmem
+        write(pgm_read_byte_near(charMap++));
     }
 }
 
@@ -57,7 +59,7 @@ void LCD::printOnRow(const char *msg, int row, int startAtColumn = 0, bool reset
         return;
     }
 
-    // TODO: why. you should only clear the interval left from the prev. message
+    // TODO: you should only clear the interval left from the prev. message
     this->clearRow(row, false);
 
     strncpy(this->lastStrings[row] + startAtColumn, msg, messageLength);
@@ -89,7 +91,7 @@ void LCD::scrollRow(int row, int skip = 0) {
         return;
     }
 
-    // TODO: be smarter, only turn off positions that are currently used
+    // TODO: only turn off positions that are currently used
     this->clearRow(row, skip, false);
 
     if (this->scrollOffsets[row] < strlen(str)) {
@@ -131,7 +133,6 @@ void LCD::setup(byte rows, byte columns) {
     this->columns = columns;
 
     for (size_t i = 0; i < rows; ++i) {
-        // TODO: minimum size? works?
         this->lastStrings[i] = new char[1];
 
         this->lastStrings[i][0] = '\0';

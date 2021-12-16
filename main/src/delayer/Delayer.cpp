@@ -1,5 +1,13 @@
 #include "./Delayer.h"
 
+Delayer::Delayer(unsigned int interval) {
+    this->interval = interval;
+}
+
+Delayer::Delayer() {
+    this->interval = 0;
+}
+
 bool Delayer::canRun() {
     unsigned int currentTime = millis();
 

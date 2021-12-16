@@ -13,15 +13,13 @@ class Chicken : public Unit {
     Delayer eggDelayer = Delayer(CHICKEN_INITIAL_EGG_DELAYER_INTERVAL);
     Delayer moveDelayer = Delayer(CHICKEN_INITIAL_MOVE_DELAYER_INTERVAL);
 
-    Chicken(byte x, byte y) : Unit(x, y) {}
-
-    Chicken() {}
+    Chicken(byte, byte);
 
     void action();
     void behaviour(byte);
     unsigned char getType();
 
-    static short getNumberOfChickensAlive();
+    void die();
 };
 
 #endif

@@ -11,8 +11,7 @@ int Leaderboard::getWorstHighscore() {
 
     if (!this->scores->size) return -1;
 
-    // TODO: a constant? inf?
-    int minScore = 2500;
+    int minScore = INT_MAX;
 
     while (this->scores->size) {
         NameAndScore element = this->scores->removeHead();
@@ -55,11 +54,8 @@ void Leaderboard::generate() {
     }
 }
 
-// FIXME: this is not efficient at all, but it's less error-prone
-// FIXME: also, not DRY
+// FIXME: this is not efficient at all, also not dry - but it's less error-prone
 void Leaderboard::write(const char *name, int score) {
-    show("Scriu ", name, ", cu scor ", score);
-
     char entry[strlen(name) + getNumberOfDigits(score) + 2];
 
     strncpy(entry, name, strlen(name));
@@ -81,10 +77,6 @@ void Leaderboard::write(const char *name, int score) {
     while (repeat--) {
         NameAndScore nameAndScore = this->scores->removeHead();
 
-        Serial.println("I have a score.");
-        Serial.println(nameAndScore.name);
-        Serial.println(nameAndScore.score);
-
         char entry[strlen(nameAndScore.name) + getNumberOfDigits(nameAndScore.score) + 2];
 
         strncpy(entry, nameAndScore.name, strlen(nameAndScore.name));
@@ -100,14 +92,9 @@ void Leaderboard::write(const char *name, int score) {
 bool Leaderboard::isHighScore(int score) {
     int worstHighScore = this->getWorstHighscore();
 
-    Serial.println(worstHighScore);
-
     if (worstHighScore == -1) return true;
 
     this->generate();
-
-    Serial.println(score);
-    Serial.println(this->scores->size);
 
     return score > worstHighScore || this->scores->size < MAX_HIGHSCORES;
 }

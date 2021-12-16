@@ -7,7 +7,7 @@
 #include "../unit/Unit.h"
 #include "Arduino.h"
 
-#define MAX_UNITS 10
+#define MAX_UNITS 6
 
 class Unit;
 
