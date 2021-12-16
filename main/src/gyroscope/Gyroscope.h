@@ -1,4 +1,4 @@
-#include <Wire.h>
+// #include <Wire.h>
 
 const int MPU = 0x68;
 
@@ -8,13 +8,13 @@ class Gyroscope {
 };
 
 void Gyroscope::setup() {
-    Wire.begin();
+    // Wire.begin();
 
-    Wire.beginTransmission(MPU);
+    // Wire.beginTransmission(MPU);
 
-    Wire.write(0x6B);
+    // Wire.write(0x6B);
 
-    Write.write(0);
+    // Write.write(0);
 
-    Wire.endTransmission(true);
+    // Wire.endTransmission(true);
 }
