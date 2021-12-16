@@ -51,7 +51,7 @@ Node<T>::Node(T data) {
 
 template <class T>
 void LinkedList<T>::add(T data) {
-    if (this->last == nullptr) {
+    if (this->head == nullptr) {
         this->head = new Node<T>(data);
         this->last = head;
     }
@@ -70,7 +70,14 @@ T LinkedList<T>::removeHead() {
 
     T data = this->head->data;
 
-    if (this->head->next) {
+    if (this->size == 1) {
+        delete this->head;
+
+        this->head = nullptr;
+        this->last = nullptr;
+    }
+
+    else {
         Node<T> *temp = head;
         this->head = this->head->next;
         delete temp;

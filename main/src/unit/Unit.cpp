@@ -44,7 +44,7 @@ void Unit::sendMessage(byte message, Unit& unit) {
 
 Unit::Unit(byte x, byte y) {
     if (Unit::engine->unitMatrix[x][y] == NULL && Unit::engine->numberOfUnits < MAX_UNITS) {
-        isAlive = true;
+        this->isAlive = true;
 
         this->x = x;
         this->y = y;
