@@ -2,10 +2,10 @@
 #define GameEngine_h
 
 #include "../constants/app.h"
+#include "../linked-list/LinkedList.h"
 #include "../pixel-change/PixelChange.h"
 #include "../unit/Unit.h"
 #include "Arduino.h"
-#include "LinkedList.h"
 
 #define MAX_UNITS 10
 

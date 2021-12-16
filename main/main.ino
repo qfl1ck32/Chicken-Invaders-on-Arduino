@@ -16,15 +16,15 @@
 #include "src/app/states/WelcomeState/WelcomeState.h"
 #include "src/app/states/YouWonState/YouWonState.h"
 #include "src/constants/app.h"
-// #include "src/modules/music-player/MusicPlayer.h"
-// #include "src/modules/music-player/songs.h"
+#include "src/modules/music-player/MusicPlayer.h"
+#include "src/modules/music-player/songs.h"
 
 Delayer buttonDelayer = Delayer(300);
 Delayer swDelayer = Delayer(300);
 
 GameEngine* Unit::engine = gameEngine;
 
-// MusicPlayer musicPlayer = MusicPlayer(songBuzzer);
+MusicPlayer musicPlayer = MusicPlayer(songBuzzer);
 
 void handleSw() {
     if (swDelayer.canRun()) Joystick::swHandler(joystick);
@@ -65,26 +65,26 @@ void setup() {
     stateManager.addState(new MainMenuState(mainMenuStateId));
     stateManager.addState(new LeaderboardState(leaderboardStateId));
 
-    // stateManager.addState(new SettingsMenuState(settingsMenuStateId));
-    // stateManager.addState(new SettingsLevelMenuState(settingsLevelMenuStateId));
-    // stateManager.addState(new SettingsMatrixMenuState(settingsMatrixMenuStateId));
-    // stateManager.addState(new SettingsLCDMenuState(settingsLCDMenuStateId));
-    // stateManager.addState(new SettingsSoundsMenuState(settingsSoundsMenuStateId));
+    stateManager.addState(new SettingsMenuState(settingsMenuStateId));
+    stateManager.addState(new SettingsLevelMenuState(settingsLevelMenuStateId));
+    stateManager.addState(new SettingsMatrixMenuState(settingsMatrixMenuStateId));
+    stateManager.addState(new SettingsLCDMenuState(settingsLCDMenuStateId));
+    stateManager.addState(new SettingsSoundsMenuState(settingsSoundsMenuStateId));
 
     stateManager.addState(new NameSelectionState(nameSelectionStateId));
 
-    // musicPlayer.setSong(silentNight, sizeof(silentNight) / sizeof(silentNight[0]));
-    // musicPlayer.setRepeat(true);
+    musicPlayer.setSong(silentNight, sizeof(silentNight) / sizeof(silentNight[0]));
+    musicPlayer.setRepeat(true);
 
-    stateManager.changeState(mainMenuStateId);
+    stateManager.changeState(playingStateId);
 
     initialiseRandomSeed();
 }
 
 void loop() {
-    // if (usesMusic) {
-    // musicPlayer.play();
-    // }
+    if (usesMusic) {
+        musicPlayer.play();
+    }
 
     stateManager.handle();
 }

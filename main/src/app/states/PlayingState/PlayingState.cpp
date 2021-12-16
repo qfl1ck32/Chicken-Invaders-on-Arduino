@@ -15,8 +15,9 @@ void PlayingState::setup() {
 }
 
 void PlayingState::handle() {
-    Serial.println(Unit::engine->numberOfUnits);
     joystick.handleJoystickMovements();
+
+    // Serial.println(Unit::engine->numberOfUnits);
 
     Unit::engine->run();
 

@@ -3,10 +3,10 @@
 
 #include "../../constants/app.h"
 #include "../../eeprom-handler/EEPROMHandler.h"
+#include "../../linked-list/LinkedList.h"
 #include "../../printer/SerialPrinter.h"
 #include "../../utils/utils.h"
 #include "./NameAndScore.h"
-#include "LinkedList.h"
 
 #define MAX_HIGHSCORES 3
 
