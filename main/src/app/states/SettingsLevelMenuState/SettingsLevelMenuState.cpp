@@ -16,6 +16,8 @@ void SettingsLevelMenuState::setup() {
     joystick.setOnChangeDown(menuGoDown);
 
     joystick.setOnSwStateChange(menuSelect);
+
+    SettingsLevelMenuState::showNumberOnMatrix(game.level);
 }
 
 void SettingsLevelMenuState::handle() {
@@ -25,6 +27,8 @@ void SettingsLevelMenuState::handle() {
 
 void SettingsLevelMenuState::cleanup() {
     joystick.clearHandlers();
+
+    matrix->clear();
 }
 
 void SettingsLevelMenuState::goBack() {
@@ -33,8 +37,28 @@ void SettingsLevelMenuState::goBack() {
 
 void SettingsLevelMenuState::increaseLevel() {
     game.changeLevel(game.level + 1);
+
+    SettingsLevelMenuState::showNumberOnMatrix(game.level);
 }
 
 void SettingsLevelMenuState::decreaseLevel() {
     game.changeLevel(game.level - 1);
+
+    SettingsLevelMenuState::showNumberOnMatrix(game.level);
+}
+
+void SettingsLevelMenuState::showNumberOnMatrix(byte number) {
+    static const uint64_t matrixNumbers[] PROGMEM = {
+        0x0010101014181000,
+        0x00003c0810243800,
+        0x00003c203c203c00,
+        0x001010101c040400,
+        0x00003c203c043c00,
+
+    };
+
+    uint64_t image;
+    memcpy_P(&image, &matrixNumbers[number - 1], 8);
+
+    matrix->displayImage(image);
 }

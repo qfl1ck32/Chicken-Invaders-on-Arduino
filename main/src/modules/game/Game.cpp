@@ -37,7 +37,7 @@ void Game::setupLevel() {
 }
 
 void Game::changeLevel(int level) {
-    if (this->level < 1 || this->level > Game::maxLevel) return;
+    if (level < 1 || level > Game::maxLevel) return;
 
     this->level = level;
 }

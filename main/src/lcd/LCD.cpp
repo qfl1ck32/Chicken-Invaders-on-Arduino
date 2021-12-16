@@ -70,7 +70,7 @@ void LCD::printOnRow(const char *msg, byte row, byte startAtColumn = 0, bool res
             strncpy(newString, this->lastStrings[row], stringLength);
         }
 
-        delete[] this->lastStrings[row];
+        delete this->lastStrings[row];
 
         this->lastStrings[row] = newString;
     }

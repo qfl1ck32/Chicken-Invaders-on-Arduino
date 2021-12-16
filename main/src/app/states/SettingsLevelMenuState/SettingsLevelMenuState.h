@@ -18,6 +18,8 @@ class SettingsLevelMenuState : public State {
     static void increaseLevel();
 
     static void decreaseLevel();
+
+    static void showNumberOnMatrix(byte);
 };
 
 #endif

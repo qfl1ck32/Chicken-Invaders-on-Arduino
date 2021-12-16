@@ -10,6 +10,7 @@ void Menu::setMessages(const char *const *messages, int numberOfMessages, bool r
 
     this->messages = new char *[numberOfMessages];
 
+    // TODO: make this into a function, use in MenuStates
     for (int i = 0; i < numberOfMessages; ++i) {
         char *msg = (char *)pgm_read_word(&messages[i]);
 

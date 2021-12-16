@@ -33,6 +33,8 @@ class Matrix : public LedControl {
     void clear();
 
     void increaseIntensity(short);
+
+    void displayImage(uint64_t);
 };
 
 #endif

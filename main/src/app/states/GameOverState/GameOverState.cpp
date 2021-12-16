@@ -5,11 +5,7 @@
 void GameOverState::setup() {
     // TODO: progmem :)
 
-    lcd->clear();
-
     button.setOnStateChange(GameOverState::goToNextStep);
-
-    matrix->clear();
 
     game.reset();
 
@@ -19,10 +15,9 @@ void GameOverState::setup() {
 
     char gameOverMessage[21 + numberOfDigitsInScore];
 
-    static const char *gameOverMsg = "Game over. Score: ";
     static const char *pressXToContinue = "Press X to continue.";
 
-    sprintf(gameOverMessage, "%s: %d.", gameOverMsg, game.score);
+    sprintf(gameOverMessage, "Game over. Score: %d.", game.score);
 
     lcd->printOnRow(gameOverMessage, 0);
     lcd->printOnRow(pressXToContinue, 1);

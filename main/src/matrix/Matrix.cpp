@@ -24,3 +24,13 @@ void Matrix::clear() {
         }
     }
 }
+
+void Matrix::displayImage(uint64_t image) {
+    for (int row = 0; row < this->rows; ++row) {
+        byte rowByte = (image >> row * this->columns) & 0xFF;
+
+        for (int column = 0; column < this->columns; ++column) {
+            this->setLed(0, row, column, bitRead(rowByte, column));
+        }
+    }
+}

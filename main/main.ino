@@ -16,8 +16,8 @@
 #include "src/app/states/WelcomeState/WelcomeState.h"
 #include "src/app/states/YouWonState/YouWonState.h"
 #include "src/constants/app.h"
-// #include "src/modules/music-player/MusicPlayer.h"
-// #include "src/modules/music-player/songs.h"
+#include "src/modules/music-player/MusicPlayer.h"
+#include "src/modules/music-player/songs.h"
 
 Delayer buttonDelayer = Delayer(300);
 Delayer swDelayer = Delayer(300);
@@ -35,11 +35,14 @@ void handleButtonStateChange() {
 }
 
 void setup() {
+    while (!Serial) {
+    }
+
     // for (int i = 0; i < 1024; ++i) {
     //     EEPROM.write(i, 255);
     // }
 
-    // leaderboard.eeprom->mainclear();
+    // leaderboard.eeprom->clear();
 
     Serial.begin(baudRate);
 
@@ -58,18 +61,18 @@ void setup() {
 
     stateManager.addState(new AboutMenuState(aboutMenuStateId));
 
-    stateManager.addState(new GameOverState(gameOverStateId));
-    stateManager.addState(new PlayingState(playingStateId));
-    stateManager.addState(new YouWonState(youWonStateId));
+    // stateManager.addState(new GameOverState(gameOverStateId));
+    // stateManager.addState(new PlayingState(playingStateId));
+    // stateManager.addState(new YouWonState(youWonStateId));
 
     stateManager.addState(new MainMenuState(mainMenuStateId));
     stateManager.addState(new LeaderboardState(leaderboardStateId));
 
-    // stateManager.addState(new SettingsMenuState(settingsMenuStateId));
-    // stateManager.addState(new SettingsLevelMenuState(settingsLevelMenuStateId));
-    // stateManager.addState(new SettingsMatrixMenuState(settingsMatrixMenuStateId));
-    // stateManager.addState(new SettingsLCDMenuState(settingsLCDMenuStateId));
-    // stateManager.addState(new SettingsSoundsMenuState(settingsSoundsMenuStateId));
+    stateManager.addState(new SettingsMenuState(settingsMenuStateId));
+    stateManager.addState(new SettingsLevelMenuState(settingsLevelMenuStateId));
+    stateManager.addState(new SettingsMatrixMenuState(settingsMatrixMenuStateId));
+    stateManager.addState(new SettingsLCDMenuState(settingsLCDMenuStateId));
+    stateManager.addState(new SettingsSoundsMenuState(settingsSoundsMenuStateId));
 
     stateManager.addState(new NameSelectionState(nameSelectionStateId));
 
@@ -81,9 +84,14 @@ void setup() {
     initialiseRandomSeed();
 }
 
+Delayer t = Delayer(1000);
+
 void loop() {
+    // if (t.canRun()) {
+    //     Serial.println(millis());
+    // }
     // if (usesMusic) {
-    // musicPlayer.play();
+    //     musicPlayer.play();
     // }
 
     stateManager.handle();

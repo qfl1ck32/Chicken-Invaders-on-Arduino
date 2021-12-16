@@ -27,6 +27,8 @@ void PlayingState::handle() {
 
 void PlayingState::cleanup() {
     lcd->clear();
+    matrix->clear();
+
     joystick.clearHandlers();
 
     // TODO: should put it back how it was, not necessarily true
