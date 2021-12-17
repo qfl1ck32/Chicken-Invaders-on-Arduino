@@ -1,5 +1,18 @@
 #include "./Matrix.h"
 
+Matrix::Matrix(int dataPin, int clkPin, int csPin, int numDevices, int8_t rows, int8_t columns) : LedControl(dataPin, clkPin, csPin, numDevices) {
+    static int8_t defaultIntensity = 8;
+
+    this->rows = rows;
+    this->columns = columns;
+
+    int8_t savedIntensity = EEPROM.read(EEPROM_MATRIX_INTENSITY_INDEX);
+
+    this->intensity = savedIntensity == EEPROM_MISSING_VALUE ? defaultIntensity : savedIntensity;
+
+    this->increaseIntensity(0);
+}
+
 void Matrix::increaseIntensity(short amount) {
     this->intensity = constrain(this->intensity + amount, 0, 15);
 

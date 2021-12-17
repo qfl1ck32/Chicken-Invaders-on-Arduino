@@ -1,6 +1,3 @@
-// #include <app_api.h>
-// #include <avr_debugger.h>
-
 #include "src/app/globals.h"
 #include "src/app/states/PlayingState/PlayingState.h"
 #include "src/app/states/WelcomeState/WelcomeState.h"
@@ -24,6 +21,10 @@ void handleButtonStateChange() {
 }
 
 void setup() {
+    for (int i = 0; i < 1024; ++i) {
+        EEPROM.write(i, 255);
+    }
+
     Serial.begin(baudRate);
 
     joystick.setup(handleSw);

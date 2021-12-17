@@ -10,7 +10,8 @@ class Bullet : public Unit {
    public:
     Bullet(int8_t, int8_t);
 
-    Delayer delayer;
+    // FIXME: if I put it in the constructor, the bullets are super-sonic
+    Delayer delayer = Delayer(250);
 
     Bullet();
 

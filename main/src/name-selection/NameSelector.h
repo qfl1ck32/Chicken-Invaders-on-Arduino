@@ -19,8 +19,6 @@ class NameSelector {
 
     bool isInvalid = false;
 
-    Delayer errorDelayer = Delayer(2000);
-
     char *name;
 
     short currentLetterIndex;
@@ -38,8 +36,6 @@ class NameSelector {
     bool finish();
 
     void reset();
-
-    void handleInvalidFinish();
 
     void main();
 };

@@ -231,7 +231,6 @@ void PlayingState::setupLevel() {
 }
 
 void PlayingState::goToNextLevel() {
-    // TODO: handle when level == MAX_LEVEL
     if (level == MAX_LEVEL) {
         if (PlayingState::leaderboard->isHighScore(PlayingState::score)) {
             stateManager.changeState<NameSelectionState>();
@@ -246,7 +245,19 @@ void PlayingState::goToNextLevel() {
 
     setLevel(level + 1);
 
-    // TODO: remove all bullets / eggs that are still there. KEEP the spaceship.
+    for (uint8_t i = 0; i < Unit::engine->numberOfUnits; ++i) {
+        Unit* unit = Unit::engine->unitArray[i];
+
+        if (!unit) continue;
+
+        unsigned char type = unit->getType();
+
+        if (type == CHICKEN_TYPE || type == EGG_TYPE || type == BULLET_TYPE) {
+            unit->die();
+        }
+    }
+
+    Unit::engine->run();
 
     PlayingState::updateState(PLAYING);
 }

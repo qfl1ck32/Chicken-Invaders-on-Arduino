@@ -75,20 +75,9 @@ void NameSelector::select() {
     }
 }
 
+// TODO: should first check if the input is not empty?
 bool NameSelector::finish() {
-    // TODO: handle the case when it's not 0, but it only got spaces
-    // if (this->name.length() == 0) {
-    //     this->handleInvalidFinish();
-    //     return false;
-    // }
-
     return true;
-}
-
-void NameSelector::handleInvalidFinish() {
-    if (this->errorDelayer.canRun()) {
-        // this->lcd->printOnRow("Invalid name.", 1);
-    }
 }
 
 void NameSelector::reset() {
