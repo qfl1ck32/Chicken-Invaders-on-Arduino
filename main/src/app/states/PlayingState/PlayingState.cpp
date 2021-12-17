@@ -6,6 +6,7 @@ int8_t PlayingState::maxLevel = 5;
 uint8_t PlayingState::state = NOT_INITIALISED;
 uint8_t PlayingState::previousState = NOT_INITIALISED;
 short PlayingState::score = 0;
+uint8_t PlayingState::maxSecondsPerLevel = 30;
 
 Leaderboard* PlayingState::leaderboard = 0;
 Spaceship* PlayingState::spaceship = 0;
@@ -23,6 +24,8 @@ PlayingState::~PlayingState() {
     delete this->gameStatus;
     delete this->scrollDelayer;
     delete PlayingState::leaderboard;
+
+    this->reset();
 }
 
 void PlayingState::setup() {
@@ -59,7 +62,11 @@ void PlayingState::reset() {
     PlayingState::score = 0;
 
     PlayingState::updateState(NOT_INITIALISED);
-    PlayingState::spaceship = 0;
+
+    if (PlayingState::spaceship != 0) {
+        PlayingState::spaceship = 0;
+        delete PlayingState::spaceship;
+    }
 }
 
 void PlayingState::play() {
@@ -67,9 +74,16 @@ void PlayingState::play() {
 
     Unit::engine->run();
 
-    int timeSoFar = (int)((millis() - this->timeSinceLastStart) / 1000);
+    int timeSoFar = this->getTimeSoFar();
 
-    this->gameStatus->show(PlayingState::score, PlayingState::spaceship->lifes, level, timeSoFar);
+    int secondsLeft = this->maxSecondsPerLevel - timeSoFar;
+
+    if (secondsLeft == 0) {
+        this->switchToLostState();
+        return;
+    }
+
+    this->gameStatus->show(PlayingState::score, PlayingState::spaceship->lifes, level, secondsLeft);
     this->graphicsEngine->renderChanges(Unit::engine->pixelChanges);
 
     if (PlayingState::spaceship->lifes == 0) {
@@ -87,7 +101,13 @@ void PlayingState::play() {
     }
 }
 
+uint8_t PlayingState::getTimeSoFar() {
+    return (int)((millis() - this->timeSinceLastStart) / 1000);
+}
+
 void PlayingState::switchToLostState() {
+    static const uint64_t icon PROGMEM = 0x00423c0024242400;
+
     PlayingState::state = LOST;
 
     // TODO: maybe show an image ;)
@@ -98,17 +118,25 @@ void PlayingState::switchToLostState() {
 
     char gameOverMessage[21 + numberOfDigitsInScore];
 
-    const char* const gameOverMsg = "Game over. Score: ";
-    const char* const pressXToContinue = "Press X to continue.";
+    static const char gameOver[] PROGMEM = "Game over. Score: ";
+    static const char pressXToContinue[] PROGMEM = "Press X to continue.";
+
+    char* gameOverMsg = readStringFromPROGMEM(gameOver);
+    char* pressXToContinueMsg = readStringFromPROGMEM(pressXToContinue);
 
     sprintf(gameOverMessage, "%s: %d.", gameOverMsg, PlayingState::score);
 
     lcd->printOnRow(gameOverMessage, 0);
-    lcd->printOnRow(pressXToContinue, 1);
+    lcd->printOnRow(pressXToContinueMsg, 1);
 
     button.setOnStateChange(PlayingState::goToNextScreenAfterDeath);
+
+    uint64_t image = readImageFromPROGMEM(&icon);
+
+    matrix->displayImage(image);
 }
 
+// TODO: this is also duplicate, but oh well
 void PlayingState::goToNextScreenAfterDeath() {
     if (PlayingState::leaderboard->isHighScore(PlayingState::score)) {
         stateManager.changeState<NameSelectionState>();
@@ -118,6 +146,8 @@ void PlayingState::goToNextScreenAfterDeath() {
 }
 
 void PlayingState::switchToWonState() {
+    static const uint64_t icon PROGMEM = 0x003c420024242400;
+
     PlayingState::state = WON;
 
     // TODO: maybe show an image
@@ -136,6 +166,10 @@ void PlayingState::switchToWonState() {
     lcd->printOnRow(pressXToContinue, 1);
 
     button.setOnStateChange(PlayingState::goToNextLevel);
+
+    uint64_t image = readImageFromPROGMEM(&icon);
+
+    matrix->displayImage(image);
 }
 
 // TODO: both are the same.
@@ -167,6 +201,7 @@ void PlayingState::setupLevel() {
     button.setOnStateChange(PlayingState::attack);
 
     lcd->clear();
+    matrix->setAllLeds(false);
 
     static int8_t spaceshipDefaultX = 7;
     static int8_t spaceshipDefaultY = 2;
@@ -186,14 +221,9 @@ void PlayingState::setupLevel() {
 
     Chicken* chicken = new Chicken(0, random(Unit::engine->columns / 2));
 
-    Chicken* chicken2 = new Chicken(0, random(Unit::engine->columns / 2, Unit::engine->columns));
-
     // TODO: adjust, make constant
     chicken->eggDelayer.updateInterval(CHICKEN_INITIAL_EGG_DELAYER_INTERVAL - 150 * level);
     chicken->moveDelayer.updateInterval(CHICKEN_INITIAL_MOVE_DELAYER_INTERVAL - 150 * level);
-
-    chicken2->eggDelayer.updateInterval(CHICKEN_INITIAL_EGG_DELAYER_INTERVAL - 150 * level);
-    chicken2->moveDelayer.updateInterval(CHICKEN_INITIAL_MOVE_DELAYER_INTERVAL - 150 * level);
 
     this->lastNumberOfChickens = Chicken::count;
 
@@ -203,7 +233,13 @@ void PlayingState::setupLevel() {
 void PlayingState::goToNextLevel() {
     // TODO: handle when level == MAX_LEVEL
     if (level == MAX_LEVEL) {
-        // TODO:
+        if (PlayingState::leaderboard->isHighScore(PlayingState::score)) {
+            stateManager.changeState<NameSelectionState>();
+        } else {
+            stateManager.changeState<MainMenuState>();
+        }
+
+        setLevel(MIN_LEVEL);
 
         return;
     }

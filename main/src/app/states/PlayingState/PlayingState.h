@@ -32,6 +32,10 @@ class PlayingState : public State {
     static uint8_t previousState;
     static uint8_t state;
 
+    static uint8_t maxSecondsPerLevel;
+
+    uint8_t getTimeSoFar();
+
     void setup();
     void handle();
     void cleanup();

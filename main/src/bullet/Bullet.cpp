@@ -2,6 +2,10 @@
 
 #include "../app/globals.h"
 
+Bullet::Bullet() {
+    this->delayer.updateInterval(125);
+}
+
 Bullet::Bullet(int8_t x, int8_t y) : Unit(x, y) {
     static short frequency = 400;
     static int8_t duration = 125;

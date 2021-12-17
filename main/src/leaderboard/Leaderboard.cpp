@@ -83,7 +83,7 @@ void Leaderboard::write(const char *name, int score) {
 
     this->scores->sort(Leaderboard::sort);
 
-    int repeat = min(this->scores->size, 3);
+    int repeat = min(this->scores->size, Leaderboard::size);
 
     while (repeat--) {
         NameAndScore nameAndScore = this->scores->removeHead();

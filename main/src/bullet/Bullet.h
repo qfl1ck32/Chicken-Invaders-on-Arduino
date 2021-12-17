@@ -10,9 +10,9 @@ class Bullet : public Unit {
    public:
     Bullet(int8_t, int8_t);
 
-    Delayer delayer = Delayer(250);
+    Delayer delayer;
 
-    Bullet() {}
+    Bullet();
 
     void action();
 

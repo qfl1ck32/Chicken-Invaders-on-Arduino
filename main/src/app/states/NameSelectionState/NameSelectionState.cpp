@@ -30,6 +30,8 @@ void NameSelectionState::setup() {
     joystick.setOnSwStateChange(NameSelectionState::handleSwStateChange);
 
     button.setOnStateChange(NameSelectionState::finish);
+
+    lcd->clear();
 }
 
 void NameSelectionState::cleanup() {
