@@ -7,7 +7,7 @@
 
 class SettingsLCDMenuState : public State {
    public:
-    SettingsLCDMenuState(byte id) : State(id) {}
+    SettingsLCDMenuState(int8_t id) : State(id) {}
 
     void setup();
     void handle();

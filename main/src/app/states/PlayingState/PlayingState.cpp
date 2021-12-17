@@ -21,13 +21,13 @@ void PlayingState::handle() {
 
     Unit::engine->run();
 
-    gameStatus.show(game.score, game.spaceship->lifes, game.level, game.timeSinceLastStart);
+    // gameStatus.show(game.score, game.spaceship->lifes, game.level, game.timeSinceLastStart);
     graphicsEngine.renderChanges(Unit::engine->pixelChanges);
 }
 
 void PlayingState::cleanup() {
     lcd->clear();
-    matrix->clear();
+    matrix->setAllLeds(false);
 
     joystick.clearHandlers();
 

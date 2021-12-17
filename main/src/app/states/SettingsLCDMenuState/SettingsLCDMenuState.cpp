@@ -37,7 +37,7 @@ void SettingsLCDMenuState::handle() {
 void SettingsLCDMenuState::cleanup() {
     joystick.clearHandlers();
 
-    matrix->clear();
+    matrix->setAllLeds(false);
 }
 
 void SettingsLCDMenuState::goBack() {

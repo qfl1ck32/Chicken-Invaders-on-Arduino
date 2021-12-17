@@ -5,7 +5,7 @@
 
 class NameSelectionState : public State {
    public:
-    NameSelectionState(byte id) : State(id) {}
+    NameSelectionState(int8_t id) : State(id) {}
 
     void setup();
     void handle();

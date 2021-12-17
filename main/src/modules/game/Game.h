@@ -11,17 +11,17 @@ class Game {
    public:
     Spaceship *spaceship;
     short score;
-    byte level;
+    int8_t level;
 
     unsigned long timeSinceLastStart;
 
-    static byte maxLevel;
+    static int8_t maxLevel;
 
     bool needsInitialisation;
 
     Game();
 
-    void setSpaceship(byte, byte);
+    void setSpaceship(int8_t, int8_t);
 
     void reset();
 

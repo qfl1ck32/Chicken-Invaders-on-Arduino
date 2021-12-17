@@ -9,7 +9,7 @@ class YouWonState : public State {
    public:
     Delayer delayer = Delayer(350);
 
-    YouWonState(byte id) : State(id) {}
+    YouWonState(int8_t id) : State(id) {}
 
     void setup();
     void handle();

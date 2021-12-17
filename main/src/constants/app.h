@@ -35,8 +35,8 @@
 #define settingsLevelMenuStateId 11
 #define settingsSoundsMenuStateId 12
 
-extern const byte heartCharArray[8];
-extern byte heartChar;
+extern const int8_t heartCharArray[8];
+extern int8_t heartChar;
 
 #define MATRIX_ROWS 8
 #define MATRIX_COLUMNS 8

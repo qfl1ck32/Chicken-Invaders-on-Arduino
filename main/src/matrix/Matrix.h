@@ -8,18 +8,18 @@
 // FIXME: this class was not thought to be used with more that one matrix
 class Matrix : public LedControl {
    public:
-    byte rows;
-    byte columns;
+    int8_t rows;
+    int8_t columns;
 
-    byte intensity;
+    int8_t intensity;
 
-    Matrix(int dataPin, int clkPin, int csPin, int numDevices, byte rows, byte columns) : LedControl(dataPin, clkPin, csPin, numDevices) {
-        static byte defaultIntensity = 8;
+    Matrix(int dataPin, int clkPin, int csPin, int numDevices, int8_t rows, int8_t columns) : LedControl(dataPin, clkPin, csPin, numDevices) {
+        static int8_t defaultIntensity = 8;
 
         this->rows = rows;
         this->columns = columns;
 
-        byte savedIntensity = EEPROM.read(EEPROM_MATRIX_INTENSITY_INDEX);
+        int8_t savedIntensity = EEPROM.read(EEPROM_MATRIX_INTENSITY_INDEX);
 
         this->intensity = savedIntensity == EEPROM_MISSING_VALUE ? defaultIntensity : savedIntensity;
 
@@ -30,7 +30,7 @@ class Matrix : public LedControl {
 
     void setLed(int, int, int, boolean);
 
-    void clear();
+    void setAllLeds(bool);
 
     void increaseIntensity(short);
 

@@ -5,7 +5,7 @@
 
 class LeaderboardState : public State {
    public:
-    LeaderboardState(byte id) : State(id) {}
+    LeaderboardState(int8_t id) : State(id) {}
 
     void setup();
     void handle();

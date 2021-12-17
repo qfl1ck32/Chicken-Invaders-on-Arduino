@@ -10,15 +10,15 @@
 
 class Chicken : public Unit {
    public:
-    static byte count;
+    static int8_t count;
 
     Delayer eggDelayer = Delayer(CHICKEN_INITIAL_EGG_DELAYER_INTERVAL);
     Delayer moveDelayer = Delayer(CHICKEN_INITIAL_MOVE_DELAYER_INTERVAL);
 
-    Chicken(byte, byte);
+    Chicken(int8_t, int8_t);
 
     void action();
-    void behaviour(byte);
+    void behaviour(int8_t);
     unsigned char getType();
 
     void die();

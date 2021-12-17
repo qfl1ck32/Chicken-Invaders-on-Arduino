@@ -10,7 +10,7 @@ class GameOverState : public State {
    public:
     Delayer delayer = Delayer(500);
 
-    GameOverState(byte id) : State(id) {}
+    GameOverState(int8_t id) : State(id) {}
 
     void setup();
     void handle();

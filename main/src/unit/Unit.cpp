@@ -17,7 +17,7 @@ void Unit::react() {
 }
 
 // TODO: this is overridable (just a notice, not a todo, lol)
-bool Unit::isValidPosition(byte x, byte y) {
+bool Unit::isValidPosition(int8_t x, int8_t y) {
     return Unit::engine->isValidPosition(x, y);
 }
 
@@ -36,13 +36,13 @@ void Unit::move(short dx, short dy) {
     Unit::engine->pixelChanges->add(PixelChange(this->x, this->y, true));
 }
 
-void Unit::sendMessage(byte message, Unit& unit) {
+void Unit::sendMessage(int8_t message, Unit& unit) {
     if (unit.numberOfMessages != MAX_MESSAGES) {
         unit.messages[unit.numberOfMessages++] = message;
     }
 }
 
-Unit::Unit(byte x, byte y) {
+Unit::Unit(int8_t x, int8_t y) {
     if (Unit::engine->unitMatrix[x][y] == NULL && Unit::engine->numberOfUnits < MAX_UNITS) {
         this->isAlive = true;
 
@@ -51,7 +51,7 @@ Unit::Unit(byte x, byte y) {
 
         this->numberOfMessages = 0;
 
-        this->messages = new byte[MAX_MESSAGES];
+        this->messages = new int8_t[MAX_MESSAGES];
 
         for (int i = 0; i < MAX_MESSAGES; ++i) {
             messages[i] = 0;

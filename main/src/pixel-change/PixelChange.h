@@ -5,12 +5,12 @@
 
 class PixelChange {
    public:
-    byte x, y;
+    int8_t x, y;
     bool state;
 
     PixelChange() {}
 
-    PixelChange(byte x, byte y, bool state) {
+    PixelChange(int8_t x, int8_t y, bool state) {
         this->x = x;
         this->y = y;
 

@@ -12,7 +12,7 @@ void StateManager::handle() {
     this->currentState->handle();
 }
 
-void StateManager::changeState(byte stateId) {
+void StateManager::changeState(int8_t stateId) {
     if (this->currentState != 0) {
         this->currentState->cleanup();
     }

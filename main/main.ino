@@ -35,51 +35,42 @@ void handleButtonStateChange() {
 }
 
 void setup() {
-    while (!Serial) {
-    }
-
-    // for (int i = 0; i < 1024; ++i) {
-    //     EEPROM.write(i, 255);
-    // }
-
-    // leaderboard.eeprom->clear();
-
     Serial.begin(baudRate);
 
     joystick.setup(handleSw);
     button.setup(handleButtonStateChange);
 
     lcd->setup(ledRows, ledColumns);
-    lcd->createChar(heartChar, heartCharArray);
+    // lcd->createChar(heartChar, heartCharArray);
 
     matrix->setup();
 
     lcd->clear();
-    matrix->clear();
+    matrix->setAllLeds(false);
 
-    stateManager.addState(new WelcomeState(welcomeStateId));
+    // stateManager.addState(new WelcomeState(welcomeStateId));
 
-    stateManager.addState(new AboutMenuState(aboutMenuStateId));
+    // stateManager.addState(new AboutMenuState(aboutMenuStateId));
 
     // stateManager.addState(new GameOverState(gameOverStateId));
-    // stateManager.addState(new PlayingState(playingStateId));
+    stateManager.addState(new PlayingState(playingStateId));
     // stateManager.addState(new YouWonState(youWonStateId));
 
-    stateManager.addState(new MainMenuState(mainMenuStateId));
-    stateManager.addState(new LeaderboardState(leaderboardStateId));
+    // stateManager.addState(new MainMenuState(mainMenuStateId));
+    // stateManager.addState(new LeaderboardState(leaderboardStateId));
 
-    stateManager.addState(new SettingsMenuState(settingsMenuStateId));
-    stateManager.addState(new SettingsLevelMenuState(settingsLevelMenuStateId));
-    stateManager.addState(new SettingsMatrixMenuState(settingsMatrixMenuStateId));
-    stateManager.addState(new SettingsLCDMenuState(settingsLCDMenuStateId));
-    stateManager.addState(new SettingsSoundsMenuState(settingsSoundsMenuStateId));
+    // stateManager.addState(new SettingsMenuState(settingsMenuStateId));
+    // stateManager.addState(new SettingsLevelMenuState(settingsLevelMenuStateId));
+    // stateManager.addState(new SettingsMatrixMenuState(settingsMatrixMenuStateId));
+    // stateManager.addState(new SettingsLCDMenuState(settingsLCDMenuStateId));
+    // stateManager.addState(new SettingsSoundsMenuState(settingsSoundsMenuStateId));
 
-    stateManager.addState(new NameSelectionState(nameSelectionStateId));
+    // stateManager.addState(new NameSelectionState(nameSelectionStateId));
 
     musicPlayer.setSong(merryChristmas, sizeof(merryChristmas) / sizeof(merryChristmas[0]));
     musicPlayer.setRepeat(true);
 
-    stateManager.changeState(mainMenuStateId);
+    stateManager.changeState(playingStateId);
 
     initialiseRandomSeed();
 }

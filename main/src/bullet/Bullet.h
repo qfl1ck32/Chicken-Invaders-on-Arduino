@@ -8,7 +8,7 @@
 
 class Bullet : public Unit {
    public:
-    Bullet(byte, byte);
+    Bullet(int8_t, int8_t);
 
     Delayer delayer = Delayer(250);
 
@@ -16,7 +16,7 @@ class Bullet : public Unit {
 
     void action();
 
-    void behaviour(byte);
+    void behaviour(int8_t);
 
     unsigned char getType();
 };

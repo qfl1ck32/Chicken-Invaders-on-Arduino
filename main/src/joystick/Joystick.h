@@ -6,11 +6,11 @@
 
 class Joystick {
    public:
-    byte pinSw;
-    byte pinX;
-    byte pinY;
+    int8_t pinSw;
+    int8_t pinX;
+    int8_t pinY;
 
-    Joystick(byte pinSw, byte pinX, byte pinY) {
+    Joystick(int8_t pinSw, int8_t pinX, int8_t pinY) {
         this->pinSw = pinSw;
         this->pinX = pinX;
         this->pinY = pinY;

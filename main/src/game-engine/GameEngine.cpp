@@ -1,6 +1,6 @@
 #include "./GameEngine.h"
 
-GameEngine::GameEngine(byte rows, byte columns) {
+GameEngine::GameEngine(int8_t rows, int8_t columns) {
     this->rows = rows;
     this->columns = columns;
 
@@ -77,6 +77,6 @@ void GameEngine::run() {
     }
 }
 
-bool GameEngine::isValidPosition(byte x, byte y) {
+bool GameEngine::isValidPosition(int8_t x, int8_t y) {
     return x >= 0 && y >= 0 && x < this->rows && y < this->columns;
 }

@@ -15,16 +15,16 @@ class PixelChange;
 
 class GameEngine {
    public:
-    byte rows, columns;
+    int8_t rows, columns;
 
     Unit ***unitMatrix;
     Unit *unitArray[MAX_UNITS];
 
     LinkedList<PixelChange> *pixelChanges;
 
-    byte numberOfUnits;
+    int8_t numberOfUnits;
 
-    GameEngine(byte, byte);
+    GameEngine(int8_t, int8_t);
 
     void resetState();
 
@@ -32,7 +32,7 @@ class GameEngine {
 
     void run();
 
-    bool isValidPosition(byte, byte);
+    bool isValidPosition(int8_t, int8_t);
 };
 
 #endif

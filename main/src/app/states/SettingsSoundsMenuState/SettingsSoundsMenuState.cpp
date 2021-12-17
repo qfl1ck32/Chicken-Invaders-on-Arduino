@@ -38,7 +38,7 @@ void SettingsSoundsMenuState::handle() {
 void SettingsSoundsMenuState::cleanup() {
     joystick.clearHandlers();
 
-    matrix->clear();
+    matrix->setAllLeds(false);
 }
 
 void SettingsSoundsMenuState::goBack() {

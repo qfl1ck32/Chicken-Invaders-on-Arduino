@@ -42,14 +42,14 @@ void menuSelect() {
 }
 
 void initialiseRandomSeed() {
-    static const byte unusedPin = 0;
+    static const int8_t unusedPin = 0;
     randomSeed(analogRead(unusedPin));
 }
 
 bool getUsesMusic() {
     static bool defaultValue = true;
 
-    byte value = EEPROM.read(EEPROM_MUSIC_PLAYING_INDEX);
+    int8_t value = EEPROM.read(EEPROM_MUSIC_PLAYING_INDEX);
 
     return value == 255 ? defaultValue : value == 1;
 }

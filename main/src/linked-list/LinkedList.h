@@ -27,7 +27,7 @@ class LinkedList {
         this->size = 0;
     }
 
-    byte size;
+    int8_t size;
 
     void add(T data);
     T removeHead();

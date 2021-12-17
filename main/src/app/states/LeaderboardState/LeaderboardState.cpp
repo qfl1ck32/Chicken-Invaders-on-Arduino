@@ -67,7 +67,7 @@ void LeaderboardState::cleanup() {
 
     joystick.clearHandlers();
 
-    matrix->clear();
+    matrix->setAllLeds(false);
 }
 
 void LeaderboardState::goBack() {

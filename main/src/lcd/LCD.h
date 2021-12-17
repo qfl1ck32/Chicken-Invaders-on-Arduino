@@ -10,41 +10,41 @@
 
 class LCD : public LiquidCrystal {
    public:
-    byte rows;
-    byte columns;
+    int8_t rows;
+    int8_t columns;
 
-    byte contrastPin;
-    byte contrast;
+    int8_t contrastPin;
+    int8_t contrast;
 
-    byte backlightPin;
-    byte backlight;
+    int8_t backlightPin;
+    int8_t backlight;
 
     char **lastStrings;
-    byte *scrollOffsets;
+    int8_t *scrollOffsets;
 
     bool shouldClearRowOnPrint;
 
     LCD(uint8_t, uint8_t, uint8_t, uint8_t, uint8_t, uint8_t, int, int);
 
-    void changeContrast(byte);
-    void changeBacklight(byte);
+    void changeContrast(int8_t);
+    void changeBacklight(int8_t);
 
-    void printOnRow(const char *, byte, byte, bool);
-    void printOnRow(const char *, byte, byte);
-    void printOnRow(const char *, byte);
+    void printOnRow(const char *, int8_t, int8_t, bool);
+    void printOnRow(const char *, int8_t, int8_t);
+    void printOnRow(const char *, int8_t);
 
     // void printOnRowAndColumn(char, int, int, bool);
 
-    void setup(byte, byte);
+    void setup(int8_t, int8_t);
     void scrollDisplayLeft();
 
-    void scrollRow(byte row, byte skip);
-    void scrollRow(byte row);
+    void scrollRow(int8_t row, int8_t skip);
+    void scrollRow(int8_t row);
 
-    void clearRow(byte, bool);
-    void clearRow(byte, byte, bool);
+    void clearRow(int8_t, bool);
+    void clearRow(int8_t, int8_t, bool);
 
-    void createChar(uint8_t, const byte *);
+    void createChar(uint8_t, const int8_t *);
 };
 
 #endif

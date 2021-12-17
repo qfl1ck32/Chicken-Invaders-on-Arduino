@@ -16,11 +16,7 @@ void SettingsMatrixMenuState::setup() {
 
     joystick.setOnSwStateChange(menuSelect);
 
-    for (int i = 0; i < matrix->rows; ++i) {
-        for (int j = 0; j < matrix->columns; ++j) {
-            matrix->setLed(0, i, j, true);
-        }
-    }
+    matrix->setAllLeds(true);
 }
 
 void SettingsMatrixMenuState::handle() {
@@ -31,11 +27,7 @@ void SettingsMatrixMenuState::handle() {
 void SettingsMatrixMenuState::cleanup() {
     joystick.clearHandlers();
 
-    for (int i = 0; i < matrix->rows; ++i) {
-        for (int j = 0; j < matrix->columns; ++j) {
-            matrix->setLed(0, i, j, false);
-        }
-    }
+    matrix->setAllLeds(false);
 }
 
 void SettingsMatrixMenuState::goBack() {

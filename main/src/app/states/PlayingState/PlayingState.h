@@ -6,7 +6,7 @@
 
 class PlayingState : public State {
    public:
-    PlayingState(byte id) : State(id) {}
+    PlayingState(int8_t id) : State(id) {}
 
     void setup();
     void handle();

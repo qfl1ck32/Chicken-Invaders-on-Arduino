@@ -38,7 +38,7 @@ void MainMenuState::cleanup() {
 
     lcd->clear();
 
-    matrix->clear();
+    matrix->setAllLeds(false);
 }
 
 void MainMenuState::goToPlay() {

@@ -7,7 +7,7 @@
 
 class AboutMenuState : public State {
    public:
-    AboutMenuState(byte id) : State(id) {}
+    AboutMenuState(int8_t id) : State(id) {}
 
     void setup();
     void handle();

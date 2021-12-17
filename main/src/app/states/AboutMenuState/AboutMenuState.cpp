@@ -40,7 +40,7 @@ void AboutMenuState::cleanup() {
 
     lcd->clear();
 
-    matrix->clear();
+    matrix->setAllLeds(false);
 }
 
 void AboutMenuState::goBack() {

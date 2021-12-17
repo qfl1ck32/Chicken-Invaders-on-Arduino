@@ -1,12 +1,12 @@
 #include "./Game.h"
 
-byte Game::maxLevel = 5;
+int8_t Game::maxLevel = 5;
 
 Game::Game() {
     this->reset();
 }
 
-void Game::setSpaceship(byte x, byte y) {
+void Game::setSpaceship(int8_t x, int8_t y) {
     if (this->spaceship == 0) {
         this->spaceship = new Spaceship(x, y);
     }
@@ -20,8 +20,8 @@ void Game::reset() {
 }
 
 void Game::setupLevel() {
-    static byte spaceshipDefaultX = 7;
-    static byte spaceshipDefaultY = 2;
+    static int8_t spaceshipDefaultX = 7;
+    static int8_t spaceshipDefaultY = 2;
 
     this->timeSinceLastStart = millis();
 

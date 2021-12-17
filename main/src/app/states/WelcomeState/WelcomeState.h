@@ -8,7 +8,7 @@ class WelcomeState : public State {
    public:
     Delayer delayer = Delayer(350);
 
-    WelcomeState(byte id) : State(id) {}
+    WelcomeState(int8_t id) : State(id) {}
 
     void setup();
     void handle();

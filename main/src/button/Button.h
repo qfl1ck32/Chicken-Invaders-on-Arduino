@@ -5,14 +5,14 @@
 
 class Button {
    public:
-    byte pin;
+    int8_t pin;
 
     bool previousButtonState = LOW;
     bool state = LOW;
 
     void (*onStateChange)();
 
-    Button(byte pin) {
+    Button(int8_t pin) {
         this->pin = pin;
 
         this->onStateChange = nullptr;

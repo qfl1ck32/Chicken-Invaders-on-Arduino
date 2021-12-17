@@ -10,11 +10,11 @@ LCD::LCD(uint8_t rs, uint8_t enable,
     pinMode(this->contrastPin, OUTPUT);
     pinMode(this->backlightPin, OUTPUT);
 
-    byte savedContrast = EEPROM.read(EEPROM_LCD_CONTRAST_INDEX);
+    int8_t savedContrast = EEPROM.read(EEPROM_LCD_CONTRAST_INDEX);
 
     this->contrast = savedContrast == EEPROM_MISSING_VALUE ? 100 : savedContrast;
 
-    byte savedBacklight = EEPROM.read(EEPROM_LCD_BACKLIGHT_INDEX);
+    int8_t savedBacklight = EEPROM.read(EEPROM_LCD_BACKLIGHT_INDEX);
 
     this->backlight = savedBacklight == EEPROM_MISSING_VALUE ? 50 : savedBacklight;
 
@@ -24,7 +24,7 @@ LCD::LCD(uint8_t rs, uint8_t enable,
     this->shouldClearRowOnPrint = true;
 }
 
-void LCD::createChar(uint8_t location, const byte *charMap) {
+void LCD::createChar(uint8_t location, const int8_t *charMap) {
     location &= 0x7;
 
     command(LCD_SETCGRAMADDR | (location << 3));
@@ -34,7 +34,7 @@ void LCD::createChar(uint8_t location, const byte *charMap) {
     }
 }
 
-void LCD::changeContrast(byte value) {
+void LCD::changeContrast(int8_t value) {
     this->contrast = constrain(this->contrast + value, 20, 240);
 
     analogWrite(this->contrastPin, this->contrast);
@@ -42,7 +42,7 @@ void LCD::changeContrast(byte value) {
     EEPROM.write(EEPROM_LCD_CONTRAST_INDEX, this->contrast);
 }
 
-void LCD::changeBacklight(byte value) {
+void LCD::changeBacklight(int8_t value) {
     this->backlight = constrain(this->backlight + value, 10, 140);
 
     analogWrite(this->backlightPin, this->backlight);
@@ -50,7 +50,7 @@ void LCD::changeBacklight(byte value) {
     EEPROM.write(EEPROM_LCD_BACKLIGHT_INDEX, this->backlight);
 }
 
-void LCD::printOnRow(const char *msg, byte row, byte startAtColumn = 0, bool resetPreviousString = true) {
+void LCD::printOnRow(const char *msg, int8_t row, int8_t startAtColumn = 0, bool resetPreviousString = true) {
     short messageLength = strlen(msg);
 
     short stringLength = strlen(this->lastStrings[row]);
@@ -111,15 +111,15 @@ void LCD::printOnRow(const char *msg, byte row, byte startAtColumn = 0, bool res
     this->scrollOffsets[row] = 0;
 }
 
-void LCD::printOnRow(const char *msg, byte row, byte startAtColumn) {
+void LCD::printOnRow(const char *msg, int8_t row, int8_t startAtColumn) {
     LCD::printOnRow(msg, row, startAtColumn, true);
 }
 
-void LCD::printOnRow(const char *msg, byte row) {
+void LCD::printOnRow(const char *msg, int8_t row) {
     LCD::printOnRow(msg, row, 0, true);
 }
 
-void LCD::scrollRow(byte row, byte skip = 0) {
+void LCD::scrollRow(int8_t row, int8_t skip = 0) {
     char *str = this->lastStrings[row] + skip;
 
     if (this->scrollOffsets[row] == strlen(str) + this->columns - skip) {
@@ -155,15 +155,15 @@ void LCD::scrollRow(byte row, byte skip = 0) {
     ++this->scrollOffsets[row];
 }
 
-void LCD::scrollRow(byte row) {
+void LCD::scrollRow(int8_t row) {
     LCD::scrollRow(row, 0);
 }
 
-void LCD::setup(byte rows, byte columns) {
+void LCD::setup(int8_t rows, int8_t columns) {
     LiquidCrystal::begin(columns, rows);
 
     this->lastStrings = new char *[rows];
-    this->scrollOffsets = new byte[rows];
+    this->scrollOffsets = new int8_t[rows];
 
     this->rows = rows;
     this->columns = columns;
@@ -177,11 +177,11 @@ void LCD::setup(byte rows, byte columns) {
     }
 }
 
-void LCD::clearRow(byte row, bool deleteLastString = false) {
+void LCD::clearRow(int8_t row, bool deleteLastString = false) {
     this->clearRow(row, 0, deleteLastString);
 }
 
-void LCD::clearRow(byte row, byte startAtColumn, bool deleteLastString = false) {
+void LCD::clearRow(int8_t row, int8_t startAtColumn, bool deleteLastString = false) {
     for (int column = startAtColumn; column < this->columns; ++column) {
         this->setCursor(column, row);
         this->print(" ");

@@ -28,7 +28,7 @@ void SettingsLevelMenuState::handle() {
 void SettingsLevelMenuState::cleanup() {
     joystick.clearHandlers();
 
-    matrix->clear();
+    matrix->setAllLeds(false);
 }
 
 void SettingsLevelMenuState::goBack() {

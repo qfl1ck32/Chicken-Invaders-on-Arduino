@@ -39,7 +39,7 @@ void YouWonState::setup() {
 
     button.setOnStateChange(YouWonState::goToNextLevel);
 
-    matrix->clear();
+    matrix->setAllLeds(false);
 
     // TODO: add logic for finishing last level!
     matrix->displayImage(matrixNumbers[game.level + 1]);

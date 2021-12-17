@@ -5,13 +5,13 @@
 
 class State {
    public:
-    byte id;
+    int8_t id;
 
     virtual void setup() = 0;
     virtual void handle() = 0;
     virtual void cleanup() = 0;
 
-    State(byte id) { this->id = id; }
+    State(int8_t id) { this->id = id; }
 
     virtual ~State() {}
 };

@@ -7,7 +7,7 @@
 
 class SettingsMatrixMenuState : public State {
    public:
-    SettingsMatrixMenuState(byte id) : State(id) {}
+    SettingsMatrixMenuState(int8_t id) : State(id) {}
 
     void setup();
     void handle();

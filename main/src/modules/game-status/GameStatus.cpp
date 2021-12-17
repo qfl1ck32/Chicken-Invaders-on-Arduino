@@ -2,7 +2,7 @@
 
 #include "../../app/globals.h"
 
-void GameStatus::show(short score, byte lifes, byte level, unsigned int startTime) {
+void GameStatus::show(short score, int8_t lifes, int8_t level, unsigned int startTime) {
     // TODO: progmem :)
 
     char messageFirstRow[this->lcd->columns];

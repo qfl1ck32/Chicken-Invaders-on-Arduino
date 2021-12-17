@@ -7,7 +7,7 @@
 
 class SettingsSoundsMenuState : public State {
    public:
-    SettingsSoundsMenuState(byte id) : State(id) {}
+    SettingsSoundsMenuState(int8_t id) : State(id) {}
 
     void setup();
     void handle();

@@ -3,9 +3,9 @@
 
 class Pixel {
    public:
-    byte x, y;
+    int8_t x, y;
 
-    Pixel(byte x, byte y) {
+    Pixel(int8_t x, int8_t y) {
         this->x = x;
         this->y = y;
     }

@@ -2,9 +2,9 @@
 
 #include "../app/globals.h"
 
-Bullet::Bullet(byte x, byte y) : Unit(x, y) {
+Bullet::Bullet(int8_t x, int8_t y) : Unit(x, y) {
     static short frequency = 400;
-    static byte duration = 125;
+    static int8_t duration = 125;
 
     songBuzzer->stop();
 
@@ -28,7 +28,7 @@ void Bullet::action() {
     this->move(-1, 0);
 };
 
-void Bullet::behaviour(byte action){
+void Bullet::behaviour(int8_t action){
 
 };
 

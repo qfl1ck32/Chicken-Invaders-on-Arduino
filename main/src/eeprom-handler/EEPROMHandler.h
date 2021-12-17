@@ -34,7 +34,7 @@ class EEPROMHandler {
 
     void clear();
 
-    byte read(int);
+    int8_t read(int);
 };
 
 #endif

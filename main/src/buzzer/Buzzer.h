@@ -5,9 +5,9 @@
 
 class Buzzer {
    public:
-    byte pin;
+    int8_t pin;
 
-    Buzzer(byte);
+    Buzzer(int8_t);
 
     void buzz(unsigned int, unsigned int);
     void stop();

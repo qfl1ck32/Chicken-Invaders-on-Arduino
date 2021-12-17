@@ -23,7 +23,7 @@ void EEPROMHandler::writeString(const char* str, int length) {
 }
 
 char* EEPROMHandler::readString(int position) {
-    byte length = EEPROM.read(position);
+    int8_t length = EEPROM.read(position);
 
     char* str = new char[length + 1];
 
@@ -35,9 +35,9 @@ char* EEPROMHandler::readString(int position) {
 }
 
 char* EEPROMHandler::readNext() {
-    byte oldIndex = this->readIndex;
+    int8_t oldIndex = this->readIndex;
 
-    byte length = EEPROM.read(this->readIndex);
+    int8_t length = EEPROM.read(this->readIndex);
 
     if (length == 255) return nullptr;
 
@@ -54,7 +54,7 @@ void EEPROMHandler::clear() {
     this->writeIndex = this->startAt;
 }
 
-byte EEPROMHandler::read(int offset) {
+int8_t EEPROMHandler::read(int offset) {
     if (offset > this->limit) return 0;
 
     return EEPROM.read(offset);

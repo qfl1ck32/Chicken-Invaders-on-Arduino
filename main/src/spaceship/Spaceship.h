@@ -13,14 +13,14 @@ class Spaceship : public Unit {
    public:
     short lifes;
 
-    Spaceship(byte x, byte y) : Unit(x, y) {
+    Spaceship(int8_t x, int8_t y) : Unit(x, y) {
         this->lifes = 3;
     }
 
     void action();
     void attack();
 
-    void behaviour(byte);
+    void behaviour(int8_t);
 
     void move(short, short);
 

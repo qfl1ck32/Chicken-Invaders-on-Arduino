@@ -9,7 +9,7 @@ class SettingsMenuState;
 
 class MainMenuState : public State {
    public:
-    MainMenuState(byte id) : State(id) {}
+    MainMenuState(int8_t id) : State(id) {}
 
     void setup();
     void handle();

@@ -12,11 +12,11 @@ class Unit {
 
     virtual unsigned char getType() = 0;
 
-    byte x, y, numberOfMessages;
+    int8_t x, y, numberOfMessages;
 
     bool isAlive;
 
-    byte *messages;
+    int8_t *messages;
 
     Unit() {}
 
@@ -24,18 +24,18 @@ class Unit {
         delete[] this->messages;
     }
 
-    Unit(byte, byte);
+    Unit(int8_t, int8_t);
 
     void die();
 
     void move(short, short);
 
-    bool isValidPosition(byte, byte);
+    bool isValidPosition(int8_t, int8_t);
 
-    void sendMessage(byte, Unit &);
+    void sendMessage(int8_t, Unit &);
 
     virtual void action() = 0;
-    virtual void behaviour(byte) = 0;
+    virtual void behaviour(int8_t) = 0;
 
     void react();
 };

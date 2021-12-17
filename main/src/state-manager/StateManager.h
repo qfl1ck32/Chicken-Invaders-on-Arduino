@@ -4,11 +4,11 @@
 #include "../state/State.h"
 #include "Arduino.h"
 
-#define MAX_STATES 18
+#define MAX_STATES 4
 
 class StateManager {
    public:
-    byte numberOfStates;
+    int8_t numberOfStates;
 
     State *states[MAX_STATES];
 
@@ -21,7 +21,7 @@ class StateManager {
 
     void addState(State *);
 
-    void changeState(byte);
+    void changeState(int8_t);
 
     void handle();
 };

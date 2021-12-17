@@ -7,7 +7,7 @@
 
 class SettingsLevelMenuState : public State {
    public:
-    SettingsLevelMenuState(byte id) : State(id) {}
+    SettingsLevelMenuState(int8_t id) : State(id) {}
 
     void setup();
     void handle();

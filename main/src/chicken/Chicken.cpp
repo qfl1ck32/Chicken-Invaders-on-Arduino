@@ -2,9 +2,9 @@
 
 #include "../app/globals.h"
 
-byte Chicken::count = 0;
+int8_t Chicken::count = 0;
 
-Chicken::Chicken(byte x, byte y) : Unit(x, y) {
+Chicken::Chicken(int8_t x, int8_t y) : Unit(x, y) {
     ++Chicken::count;
 }
 
@@ -34,7 +34,7 @@ void Chicken::die() {
     --Chicken::count;
 }
 
-void Chicken::behaviour(byte action) {
+void Chicken::behaviour(int8_t action) {
     switch (action) {
         case KILL:
             // TODO: it would be very nice to have an event manager.

@@ -22,7 +22,7 @@ void Spaceship::attack() {
     new Bullet(this->x - 2, this->y);
 }
 
-void Spaceship::behaviour(byte action) {
+void Spaceship::behaviour(int8_t action) {
     switch (action) {
         case KILL:
             --this->lifes;

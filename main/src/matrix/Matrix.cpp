@@ -17,20 +17,20 @@ void Matrix::setLed(int addr, int row, int column, boolean state) {
     LedControl::setLed(addr, this->columns - column - 1, row, state);
 }
 
-void Matrix::clear() {
+void Matrix::setAllLeds(bool val) {
     for (int i = 0; i < this->rows; ++i) {
         for (int j = 0; j < this->columns; ++j) {
-            this->setLed(0, i, j, false);
+            this->setLed(0, i, j, val);
         }
     }
 }
 
 void Matrix::displayImage(uint64_t image) {
     for (int row = 0; row < this->rows; ++row) {
-        byte rowByte = (image >> row * this->columns) & 0xFF;
+        int8_t rowint8_t = (image >> row * this->columns) & 0xFF;
 
         for (int column = 0; column < this->columns; ++column) {
-            this->setLed(0, row, column, bitRead(rowByte, column));
+            this->setLed(0, row, column, bitRead(rowint8_t, column));
         }
     }
 }
