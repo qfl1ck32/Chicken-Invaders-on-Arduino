@@ -9,6 +9,8 @@ void AboutMenuState::setup() {
 
     static const char* const messages[] PROGMEM = {backMessage, appName, programmer, github};
 
+    static const uint64_t icon PROGMEM = 0x0800081820202418;
+
     menu.setMessages(messages, sizeof(messages) / sizeof(char*));
 
     HandlerFunction handlers[] = {AboutMenuState::goBack};
@@ -21,6 +23,10 @@ void AboutMenuState::setup() {
     joystick.setOnChangeDown(menuGoDown);
 
     joystick.setOnSwStateChange(menuSelect);
+
+    uint64_t image = readImageFromPROGMEM(&icon);
+
+    matrix->displayImage(image);
 }
 
 void AboutMenuState::handle() {
@@ -33,6 +39,8 @@ void AboutMenuState::cleanup() {
     button.clearHandler();
 
     lcd->clear();
+
+    matrix->clear();
 }
 
 void AboutMenuState::goBack() {

@@ -5,6 +5,8 @@
 void LeaderboardState::setup() {
     static const char noHighScoresMessage[] PROGMEM = "No high scores";
 
+    static const uint64_t icon = 0xa5a5e52527243c00;
+
     HandlerFunction handlers[] = {LeaderboardState::goBack};
 
     menu.setOns(handlers, sizeof(handlers) / sizeof(HandlerFunction));
@@ -49,6 +51,10 @@ void LeaderboardState::setup() {
     joystick.setOnChangeDown(menuGoDown);
 
     joystick.setOnSwStateChange(menuSelect);
+
+    uint64_t image = readImageFromPROGMEM(&icon);
+
+    matrix->displayImage(image);
 }
 
 void LeaderboardState::handle() {
@@ -60,6 +66,8 @@ void LeaderboardState::cleanup() {
     lcd->clear();
 
     joystick.clearHandlers();
+
+    matrix->clear();
 }
 
 void LeaderboardState::goBack() {
