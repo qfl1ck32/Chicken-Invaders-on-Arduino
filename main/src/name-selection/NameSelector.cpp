@@ -1,5 +1,18 @@
 #include "./NameSelector.h"
 
+NameSelector::NameSelector(LCD *lcd, int row) {
+    this->lcd = lcd;
+    this->row = row;
+
+    this->name = new char[NAME_MAX_LENGTH];
+
+    this->reset();
+}
+
+NameSelector::~NameSelector() {
+    delete this->name;
+}
+
 void NameSelector::goUp() {
     if (!this->isSelected || this->isInvalid) return;
 

@@ -25,14 +25,8 @@ class NameSelector {
 
     short currentLetterIndex;
 
-    NameSelector(LCD *lcd, int row) {
-        this->lcd = lcd;
-        this->row = row;
-
-        this->name = new char[NAME_MAX_LENGTH];
-
-        this->reset();
-    }
+    NameSelector(LCD *, int);
+    ~NameSelector();
 
     void goUp();
     void goRight();
