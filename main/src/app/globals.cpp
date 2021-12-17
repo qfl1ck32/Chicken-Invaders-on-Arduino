@@ -59,12 +59,34 @@ const char decreaseMessage[] PROGMEM = "Decrease";
 
 const char pressXToContinueMessage[] PROGMEM = "Press X to continue.";
 
-void readFromPROGMEM(const char progmemPointer[], char *buffer, int length) {
-    for (int i = 0; i < length; ++i) {
-        buffer[i] = (char)pgm_read_byte_near(progmemPointer + i);
-    }
+char *readStringFromPROGMEM(const char *progmemString) {
+    byte length = strlen_P(progmemString);
 
-    buffer[length + 1] = '\0';
+    char *ans = new char[length + 1];
+
+    memcpy_P(ans, progmemString, length);
+
+    ans[length] = '\0';
+
+    return ans;
+}
+
+char **readArrayOfStringsFromPROGMEM(const char *const *progmemArray, int length) {
+    char **arr = new char *[length];
+
+    for (unsigned char i = 0; i < length; ++i) {
+        PGM_P word = (PGM_P)pgm_read_word(&(progmemArray[i]));
+        size_t length = strlen_P(word);
+
+        char *buffer = new char[length + 1];
+
+        strncpy_P(buffer, word, length);
+
+        buffer[length] = '\0';
+
+        arr[i] = buffer;
+    }
+    return arr;
 }
 
 uint64_t readImageFromPROGMEM(const uint64_t *image) {

@@ -59,8 +59,11 @@ void LeaderboardState::setup() {
     // }
 
     static const char *const messages[] PROGMEM = {backMessage, noHighScoresMessage};
+    static byte numberOfMessages = sizeof(messages) / sizeof(char *);
 
-    menu.setMessages(messages, sizeof(messages) / sizeof(char *));
+    char **msgs = readArrayOfStringsFromPROGMEM(messages, numberOfMessages);
+
+    menu.setMessages(msgs, numberOfMessages);
 
     joystick.setOnChangeUp(menuGoUp);
     joystick.setOnChangeDown(menuGoDown);

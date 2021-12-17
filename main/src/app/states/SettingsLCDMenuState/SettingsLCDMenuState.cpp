@@ -11,8 +11,11 @@ void SettingsLCDMenuState::setup() {
     static const uint64_t image PROGMEM = 0x182424424242423c;
 
     static const char *const messages[] PROGMEM = {backMessage, cMinus, cPlus, bMinus, bPlus};
+    static byte numberOfMessages = sizeof(messages) / sizeof(char *);
 
-    menu.setMessages(messages, sizeof(messages) / sizeof(char *));
+    char **msgs = readArrayOfStringsFromPROGMEM(messages, numberOfMessages);
+
+    menu.setMessages(msgs, numberOfMessages);
 
     HandlerFunction handlers[] = {SettingsLCDMenuState::goBack, SettingsLCDMenuState::decreaseContrast, SettingsLCDMenuState::increaseContrast,
                                   SettingsLCDMenuState::decreaseBacklight, SettingsLCDMenuState::increaseBacklight};

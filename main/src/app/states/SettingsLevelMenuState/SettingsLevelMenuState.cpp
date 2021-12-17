@@ -5,8 +5,11 @@
 // TODO: show the level on the matrix
 void SettingsLevelMenuState::setup() {
     static const char *const messages[] PROGMEM = {backMessage, increaseMessage, decreaseMessage};
+    static byte numberOfMessages = sizeof(messages) / sizeof(char *);
 
-    menu.setMessages(messages, sizeof(messages) / sizeof(char *));
+    char **msgs = readArrayOfStringsFromPROGMEM(messages, numberOfMessages);
+
+    menu.setMessages(msgs, numberOfMessages);
 
     HandlerFunction handlers[] = {SettingsLevelMenuState::goBack, SettingsLevelMenuState::increaseLevel, SettingsLevelMenuState::decreaseLevel};
 

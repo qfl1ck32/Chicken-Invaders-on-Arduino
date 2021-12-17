@@ -24,10 +24,14 @@ void SettingsSoundsMenuState::setup() {
 }
 
 void SettingsSoundsMenuState::setMessages(bool isFirst) {
-    // TODO: refactor the logic for messages in menus, generally. please.
-    static const char *const messages[] PROGMEM = {backMessage, usesMusic ? SettingsSoundsMenuState::turnMusicOff : SettingsSoundsMenuState::turnMusicOff};
+    static const char *const messagesTurnOff[] PROGMEM = {backMessage, SettingsSoundsMenuState::turnMusicOff};
+    static const char *const messagesTurnOn[] PROGMEM = {backMessage, SettingsSoundsMenuState::turnMusicOn};
 
-    menu.setMessages(messages, sizeof(messages) / sizeof(char *), isFirst);
+    static byte numberOfMessages = sizeof(messagesTurnOn) / sizeof(char *);
+
+    char **msgs = readArrayOfStringsFromPROGMEM(usesMusic ? messagesTurnOff : messagesTurnOn, numberOfMessages);
+
+    menu.setMessages(msgs, numberOfMessages, isFirst);
 }
 
 void SettingsSoundsMenuState::handle() {

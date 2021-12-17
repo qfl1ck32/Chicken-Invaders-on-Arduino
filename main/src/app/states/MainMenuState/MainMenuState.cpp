@@ -9,10 +9,13 @@ void MainMenuState::setup() {
     static const char about[] PROGMEM = "About";
 
     static const char *const messages[] PROGMEM = {play, settings, leaderboard, about};
+    static byte numberOfMessages = sizeof(messages) / sizeof(char *);
 
     static const uint64_t mainImage PROGMEM = 0x004c424242024c00;
 
-    menu.setMessages(messages, sizeof(messages) / sizeof(char *));
+    char **msgs = readArrayOfStringsFromPROGMEM(messages, sizeof(messages) / sizeof(char *));
+
+    menu.setMessages(msgs, numberOfMessages);
 
     HandlerFunction handlers[] = {MainMenuState::goToPlay, MainMenuState::goToSettings, MainMenuState::goToLeaderboard, MainMenuState::goToAbout};
     menu.setOns(handlers, sizeof(handlers) / sizeof(HandlerFunction));

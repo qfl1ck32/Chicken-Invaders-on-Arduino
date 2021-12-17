@@ -9,10 +9,13 @@ void SettingsMenuState::setup() {
     static const char sounds[] PROGMEM = "Sounds";
 
     static const char *const messages[] PROGMEM = {backMessage, level, lcd, matrixStr, sounds};
+    static byte numberOfMessages = sizeof(messages) / sizeof(char *);
 
     static const uint64_t hammerImage PROGMEM = 0x0345aa5428140a04;
 
-    menu.setMessages(messages, sizeof(messages) / sizeof(char *));
+    char **msgs = readArrayOfStringsFromPROGMEM(messages, numberOfMessages);
+
+    menu.setMessages(msgs, numberOfMessages);
 
     HandlerFunction handlers[] = {SettingsMenuState::goBack, SettingsMenuState::goToLevel, SettingsMenuState::goToLCD,
                                   SettingsMenuState::goToMatrix, SettingsMenuState::goToSounds};

@@ -1,6 +1,6 @@
 #include "./Menu.h"
 
-void Menu::setMessages(const char *const *messages, int numberOfMessages, bool resetCurrentRow) {
+void Menu::setMessages(char **messages, int numberOfMessages, bool resetCurrentRow) {
     if (this->messages) {
         for (int i = 0; i < this->numberOfMessages; ++i) {
             delete[] this->messages[i];
@@ -8,17 +8,7 @@ void Menu::setMessages(const char *const *messages, int numberOfMessages, bool r
         delete[] this->messages;
     }
 
-    this->messages = new char *[numberOfMessages];
-
-    // TODO: make this into a function, use in MenuStates
-    for (int i = 0; i < numberOfMessages; ++i) {
-        char *msg = (char *)pgm_read_word(&messages[i]);
-
-        // TODO: do something with the [100];
-        this->messages[i] = new char[100];
-
-        strcpy_P(this->messages[i], msg);
-    }
+    this->messages = messages;
 
     this->numberOfMessages = numberOfMessages;
 
@@ -27,7 +17,7 @@ void Menu::setMessages(const char *const *messages, int numberOfMessages, bool r
     }
 }
 
-void Menu::setMessages(const char *const *messages, int numberOfMessages) {
+void Menu::setMessages(char **messages, int numberOfMessages) {
     Menu::setMessages(messages, numberOfMessages, true);
 }
 

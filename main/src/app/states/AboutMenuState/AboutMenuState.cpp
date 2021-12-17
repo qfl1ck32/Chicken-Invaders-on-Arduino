@@ -8,10 +8,13 @@ void AboutMenuState::setup() {
     static const char github[] PROGMEM = "Github: https://github.com/qfl1ck32/Invaders-on-Arduino";
 
     static const char* const messages[] PROGMEM = {backMessage, appName, programmer, github};
+    static byte numberOfMessages = sizeof(messages) / sizeof(char*);
 
     static const uint64_t icon PROGMEM = 0x0800081820202418;
 
-    menu.setMessages(messages, sizeof(messages) / sizeof(char*));
+    char** msgs = readArrayOfStringsFromPROGMEM(messages, numberOfMessages);
+
+    menu.setMessages(msgs, numberOfMessages);
 
     HandlerFunction handlers[] = {AboutMenuState::goBack};
     menu.setOns(handlers, sizeof(handlers) / sizeof(HandlerFunction));
