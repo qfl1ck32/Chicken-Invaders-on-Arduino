@@ -11,7 +11,6 @@ LeaderboardState::~LeaderboardState() {
 }
 
 void LeaderboardState::setup() {
-    // TODO: progmem
     static const char noHighScoresMessage[] PROGMEM = "No high scores";
 
     static const uint64_t icon PROGMEM = 0xa5a5e52527243c00;
@@ -24,46 +23,33 @@ void LeaderboardState::setup() {
 
     int numberOfHighscores = this->leaderboard->scores->size;
 
-    while (this->leaderboard->scores->size) {
-        NameAndScore str = this->leaderboard->scores->removeHead();
+    int messagesLength = numberOfHighscores == 0 ? 2 : 1 + numberOfHighscores;
 
-        Serial.println(str.name);
-        Serial.println(str.score);
-        Serial.println("<<<");
+    char **messages = new char *[messagesLength];
+
+    messages[0] = readStringFromPROGMEM(backMessage);
+
+    int index = 1;
+
+    while (leaderboard->scores->size) {
+        NameAndScore entry = leaderboard->scores->removeHead();
+
+        char leaderboardEntry[strlen(entry.name) + getNumberOfDigits(entry.score) + getNumberOfDigits(index) + 7];
+
+        sprintf((char *)messages[index], "%d. %s - %d", index, entry.name, entry.score);
+
+        free(entry.name);
+
+        ++index;
     }
 
-    // char *messages[numberOfHighscores == 0 ? 2 : 1 + numberOfHighscores];
+    if (index == 1) {
+        messages[index] = readStringFromPROGMEM(noHighScoresMessage);
+    }
 
-    // // TODO: backMessage
-    // const char *goBak = "Go back";
+    Serial.println(messagesLength);
 
-    // messages[0] = (char *)goBak;
-
-    // int index = 1;
-
-    // while (leaderboard->scores->size) {
-    //     NameAndScore entry = leaderboard->scores->removeHead();
-
-    //     char leaderboardEntry[strlen(entry.name) + getNumberOfDigits(entry.score) + getNumberOfDigits(index) + 7];
-
-    //     sprintf((char *)messages[index], "%d. %s - %d", index, entry.name, entry.score);
-
-    //     free(entry.name);
-
-    //     ++index;
-    // }
-
-    // // TODO: progmem
-    // if (index == 1) {
-    //     messages[index] = (char *)noHighScoresMessage;
-    // }
-
-    static const char *const messages[] PROGMEM = {backMessage, noHighScoresMessage};
-    static byte numberOfMessages = sizeof(messages) / sizeof(char *);
-
-    char **msgs = readArrayOfStringsFromPROGMEM(messages, numberOfMessages);
-
-    menu.setMessages(msgs, numberOfMessages);
+    menu.setMessages(messages, messagesLength);
 
     joystick.setOnChangeUp(menuGoUp);
     joystick.setOnChangeDown(menuGoDown);

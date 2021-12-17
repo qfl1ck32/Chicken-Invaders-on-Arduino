@@ -27,6 +27,12 @@ class LinkedList {
         this->size = 0;
     }
 
+    ~LinkedList() {
+        while (this->size) {
+            this->removeHead();
+        }
+    }
+
     int8_t size;
 
     void add(T data);
