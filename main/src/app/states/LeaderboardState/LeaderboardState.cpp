@@ -11,44 +11,44 @@ void LeaderboardState::setup() {
 
     menu.setOns(handlers, sizeof(handlers) / sizeof(HandlerFunction));
 
-    leaderboard.generate();
+    // leaderboard.generate();
 
-    int numberOfHighscores = leaderboard.scores->size;
+    // int numberOfHighscores = leaderboard.scores->size;
 
-    char *messages[numberOfHighscores == 0 ? 2 : 1 + numberOfHighscores];
+    // char *messages[numberOfHighscores == 0 ? 2 : 1 + numberOfHighscores];
 
-    char backMessageBuffer[5];
+    // char backMessageBuffer[5];
 
-    readFromPROGMEM(backMessage, backMessageBuffer, 4);
+    // readFromPROGMEM(backMessage, backMessageBuffer, 4);
 
-    messages[0] = backMessageBuffer;
+    // messages[0] = backMessageBuffer;
 
-    int index = 1;
+    // int index = 1;
 
-    while (leaderboard.scores->size) {
-        NameAndScore entry = leaderboard.scores->removeHead();
+    // while (leaderboard.scores->size) {
+    //     NameAndScore entry = leaderboard.scores->removeHead();
 
-        char leaderboardEntry[strlen(entry.name) + getNumberOfDigits(entry.score) + getNumberOfDigits(index) + 7];
+    //     char leaderboardEntry[strlen(entry.name) + getNumberOfDigits(entry.score) + getNumberOfDigits(index) + 7];
 
-        sprintf((char *)messages[index], "%d. %s - %d", index, entry.name, entry.score);
+    //     sprintf((char *)messages[index], "%d. %s - %d", index, entry.name, entry.score);
 
-        free(entry.name);
+    //     free(entry.name);
 
-        ++index;
-    }
+    //     ++index;
+    // }
 
-    if (index == 1) {
-        char buffer[15];
+    // if (index == 1) {
+    //     char buffer[15];
 
-        readFromPROGMEM(noHighScoresMessage, buffer, 14);
+    //     readFromPROGMEM(noHighScoresMessage, buffer, 14);
 
-        messages[index] = buffer;
-    }
+    //     messages[index] = buffer;
+    // }
 
-    menu.setMessages(messages, sizeof(messages) / sizeof(char *));
+    // menu.setMessages(messages, sizeof(messages) / sizeof(char *));
 
-    joystick.setOnChangeUp(menuGoUp);
-    joystick.setOnChangeDown(menuGoDown);
+    // joystick.setOnChangeUp(menuGoUp);
+    // joystick.setOnChangeDown(menuGoDown);
 
     joystick.setOnSwStateChange(menuSelect);
 
@@ -71,6 +71,5 @@ void LeaderboardState::cleanup() {
 }
 
 void LeaderboardState::goBack() {
-    stateManager.changeState(mainMenuStateId);
-    ;
+    stateManager.changeState<MainMenuState>();
 }

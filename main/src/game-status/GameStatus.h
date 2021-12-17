@@ -1,8 +1,8 @@
 #ifndef GameStatus_h
 #define GameStatus_h
 
-#include "../../lcd/LCD.h"
-#include "../../utils/utils.h"
+#include "../lcd/LCD.h"
+#include "../utils/utils.h"
 
 class GameStatus {
    public:

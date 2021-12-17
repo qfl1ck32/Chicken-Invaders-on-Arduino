@@ -42,17 +42,17 @@ void MainMenuState::cleanup() {
 }
 
 void MainMenuState::goToPlay() {
-    stateManager.changeState(playingStateId);
+    stateManager.changeState<PlayingState>();
 }
 
 void MainMenuState::goToSettings() {
-    stateManager.changeState(settingsMenuStateId);
+    stateManager.changeState<SettingsMenuState>();
 }
 
 void MainMenuState::goToLeaderboard() {
-    stateManager.changeState(leaderboardStateId);
+    stateManager.changeState<LeaderboardState>();
 }
 
 void MainMenuState::goToAbout() {
-    stateManager.changeState(aboutMenuStateId);
+    stateManager.changeState<AboutMenuState>();
 }

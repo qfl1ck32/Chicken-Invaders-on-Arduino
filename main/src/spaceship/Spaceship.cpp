@@ -2,6 +2,10 @@
 
 #include "../app/globals.h"
 
+Spaceship::Spaceship(int8_t x, int8_t y) : Unit(x, y) {
+    this->lifes = 3;
+}
+
 void Spaceship::action(){
 
 };
@@ -26,11 +30,6 @@ void Spaceship::behaviour(int8_t action) {
     switch (action) {
         case KILL:
             --this->lifes;
-
-            if (this->lifes == 0) {
-                stateManager.changeState(gameOverStateId);
-            }
-
             return;
     }
 };

@@ -1,11 +1,20 @@
 #ifndef NameSelectionState_h
 #define NameSelectionState_h
 
+#include "../../../leaderboard/Leaderboard.h"
+#include "../../../name-selection/NameSelector.h"
 #include "../../../state/State.h"
+#include "../../states/MainMenuState/MainMenuState.h"
 
 class NameSelectionState : public State {
    public:
-    NameSelectionState(int8_t id) : State(id) {}
+    NameSelectionState();
+
+    ~NameSelectionState();
+
+    static Leaderboard *leaderboard;
+
+    static NameSelector *nameSelector;
 
     void setup();
     void handle();

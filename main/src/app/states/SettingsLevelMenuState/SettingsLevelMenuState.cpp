@@ -32,23 +32,23 @@ void SettingsLevelMenuState::cleanup() {
 }
 
 void SettingsLevelMenuState::goBack() {
-    stateManager.changeState(settingsMenuStateId);
+    stateManager.changeState<SettingsMenuState>();
 }
 
 void SettingsLevelMenuState::increaseLevel() {
-    game.changeLevel(game.level + 1);
+    setLevel(level + 1);
 
     SettingsLevelMenuState::showLevel();
 }
 
 void SettingsLevelMenuState::decreaseLevel() {
-    game.changeLevel(game.level - 1);
+    setLevel(level - 1);
 
     SettingsLevelMenuState::showLevel();
 }
 
 void SettingsLevelMenuState::showLevel() {
-    uint64_t image = readImageFromPROGMEM(&matrixNumbers[game.level - 1]);
+    uint64_t image = readImageFromPROGMEM(&matrixNumbers[level - 1]);
 
     matrix->displayImage(image);
 }

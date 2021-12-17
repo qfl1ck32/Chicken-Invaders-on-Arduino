@@ -1,8 +1,8 @@
 #ifndef NameSelector_h
 #define NameSelector_h
 
-#include "../../delayer/Delayer.h"
-#include "../../lcd/LCD.h"
+#include "../delayer/Delayer.h"
+#include "../lcd/LCD.h"
 #include "Arduino.h"
 
 #define NAME_MAX_LENGTH 5

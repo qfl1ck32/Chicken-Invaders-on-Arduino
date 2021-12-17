@@ -25,6 +25,7 @@ class GameEngine {
     int8_t numberOfUnits;
 
     GameEngine(int8_t, int8_t);
+    ~GameEngine();
 
     void resetState();
 

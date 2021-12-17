@@ -2,27 +2,15 @@
 // #include <avr_debugger.h>
 
 #include "src/app/globals.h"
-#include "src/app/states/AboutMenuState/AboutMenuState.h"
-#include "src/app/states/GameOverState/GameOverState.h"
-#include "src/app/states/LeaderboardState/LeaderboardState.h"
 #include "src/app/states/MainMenuState/MainMenuState.h"
-#include "src/app/states/NameSelectionState/NameSelectionState.h"
-#include "src/app/states/PlayingState/PlayingState.h"
-#include "src/app/states/SettingsLCDMenuState/SettingsLCDMenuState.h"
-#include "src/app/states/SettingsLevelMenuState/SettingsLevelMenuState.h"
-#include "src/app/states/SettingsMatrixMenuState/SettingsMatrixMenuState.h"
-#include "src/app/states/SettingsMenuState/SettingsMenuState.h"
-#include "src/app/states/SettingsSoundsMenuState/SettingsSoundsMenuState.h"
-#include "src/app/states/WelcomeState/WelcomeState.h"
-#include "src/app/states/YouWonState/YouWonState.h"
 #include "src/constants/app.h"
-#include "src/modules/music-player/MusicPlayer.h"
-#include "src/modules/music-player/songs.h"
+#include "src/music-player/MusicPlayer.h"
+#include "src/music-player/songs.h"
 
 Delayer buttonDelayer = Delayer(300);
 Delayer swDelayer = Delayer(300);
 
-GameEngine* Unit::engine = gameEngine;
+GameEngine* Unit::engine = new GameEngine(MATRIX_ROWS, MATRIX_COLUMNS);
 
 MusicPlayer musicPlayer = MusicPlayer(songBuzzer);
 
@@ -48,29 +36,10 @@ void setup() {
     lcd->clear();
     matrix->setAllLeds(false);
 
-    stateManager.addState(new WelcomeState(welcomeStateId));
-
-    stateManager.addState(new AboutMenuState(aboutMenuStateId));
-
-    stateManager.addState(new GameOverState(gameOverStateId));
-    stateManager.addState(new PlayingState(playingStateId));
-    stateManager.addState(new YouWonState(youWonStateId));
-
-    stateManager.addState(new MainMenuState(mainMenuStateId));
-    stateManager.addState(new LeaderboardState(leaderboardStateId));
-
-    stateManager.addState(new SettingsMenuState(settingsMenuStateId));
-    stateManager.addState(new SettingsLevelMenuState(settingsLevelMenuStateId));
-    stateManager.addState(new SettingsMatrixMenuState(settingsMatrixMenuStateId));
-    stateManager.addState(new SettingsLCDMenuState(settingsLCDMenuStateId));
-    stateManager.addState(new SettingsSoundsMenuState(settingsSoundsMenuStateId));
-
-    stateManager.addState(new NameSelectionState(nameSelectionStateId));
-
     musicPlayer.setSong(merryChristmas, sizeof(merryChristmas) / sizeof(merryChristmas[0]));
     musicPlayer.setRepeat(true);
 
-    stateManager.changeState(playingStateId);
+    stateManager.changeState<MainMenuState>();
 
     initialiseRandomSeed();
 }

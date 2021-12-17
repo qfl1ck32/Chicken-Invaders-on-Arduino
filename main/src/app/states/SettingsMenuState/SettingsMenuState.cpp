@@ -41,21 +41,21 @@ void SettingsMenuState::cleanup() {
 }
 
 void SettingsMenuState::goBack() {
-    stateManager.changeState(mainMenuStateId);
+    stateManager.changeState<MainMenuState>();
 }
 
 void SettingsMenuState::goToLevel() {
-    stateManager.changeState(settingsLevelMenuStateId);
+    stateManager.changeState<SettingsLevelMenuState>();
 }
 
 void SettingsMenuState::goToLCD() {
-    stateManager.changeState(settingsLCDMenuStateId);
+    stateManager.changeState<SettingsLCDMenuState>();
 }
 
 void SettingsMenuState::goToMatrix() {
-    stateManager.changeState(settingsMatrixMenuStateId);
+    stateManager.changeState<SettingsMatrixMenuState>();
 }
 
 void SettingsMenuState::goToSounds() {
-    stateManager.changeState(settingsSoundsMenuStateId);
+    stateManager.changeState<SettingsSoundsMenuState>();
 }

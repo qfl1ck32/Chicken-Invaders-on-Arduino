@@ -2,6 +2,10 @@
 #define MainMenuState_h
 
 #include "../../../state/State.h"
+#include "../../states/AboutMenuState/AboutMenuState.h"
+#include "../../states/LeaderboardState/LeaderboardState.h"
+#include "../../states/PlayingState/PlayingState.h"
+#include "../../states/SettingsMenuState/SettingsMenuState.h"
 
 class AboutMenuState;
 class LeaderboardState;
@@ -9,8 +13,6 @@ class SettingsMenuState;
 
 class MainMenuState : public State {
    public:
-    MainMenuState(int8_t id) : State(id) {}
-
     void setup();
     void handle();
     void cleanup();

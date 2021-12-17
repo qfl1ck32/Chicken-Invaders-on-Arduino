@@ -1,11 +1,11 @@
 #ifndef Leaderboard_h
 #define Leaderboard_h
 
-#include "../../constants/app.h"
-#include "../../eeprom-handler/EEPROMHandler.h"
-#include "../../linked-list/LinkedList.h"
-#include "../../printer/SerialPrinter.h"
-#include "../../utils/utils.h"
+#include "../constants/app.h"
+#include "../eeprom-handler/EEPROMHandler.h"
+#include "../linked-list/LinkedList.h"
+#include "../printer/SerialPrinter.h"
+#include "../utils/utils.h"
 #include "./NameAndScore.h"
 
 #define MAX_HIGHSCORES 3
@@ -18,11 +18,8 @@ class Leaderboard {
 
     static int size;
 
-    Leaderboard() {
-        this->eeprom = new EEPROMHandler(EEPROM_LEADERBOARD_START_INDEX, 256);
-
-        this->scores = new LinkedList<NameAndScore>();
-    }
+    Leaderboard();
+    ~Leaderboard();
 
     LinkedList<NameAndScore> *scores;
 

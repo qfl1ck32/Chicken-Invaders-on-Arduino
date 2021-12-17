@@ -2,28 +2,31 @@
 #define StateManager_h
 
 #include "../state/State.h"
-#include "Arduino.h"
-
-#define MAX_STATES 4
 
 class StateManager {
    public:
-    int8_t numberOfStates;
-
-    State *states[MAX_STATES];
-
     State *currentState;
 
     StateManager() {
         this->currentState = 0;
-        this->numberOfStates = 0;
     }
 
-    void addState(State *);
-
-    void changeState(int8_t);
+    template <class S>
+    void changeState();
 
     void handle();
 };
+
+template <class S>
+void StateManager::changeState() {
+    if (this->currentState != 0) {
+        this->currentState->cleanup();
+        delete this->currentState;
+    }
+
+    this->currentState = new S();
+
+    this->currentState->setup();
+}
 
 #endif

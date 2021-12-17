@@ -21,20 +21,6 @@
 #define MATRIX_ROWS 8
 #define MATRIX_COLUMNS 8
 
-#define aboutMenuStateId 0
-#define gameOverStateId 1
-#define leaderboardStateId 2
-#define mainMenuStateId 3
-#define nameSelectionStateId 4
-#define playingStateId 5
-#define settingsLCDMenuStateId 6
-#define settingsMatrixMenuStateId 7
-#define settingsMenuStateId 8
-#define welcomeStateId 9
-#define youWonStateId 10
-#define settingsLevelMenuStateId 11
-#define settingsSoundsMenuStateId 12
-
 extern const int8_t heartCharArray[8];
 extern int8_t heartChar;
 
@@ -44,6 +30,9 @@ extern int8_t heartChar;
 #define CHICKEN_INITIAL_EGG_DELAYER_INTERVAL 2000
 #define CHICKEN_INITIAL_MOVE_DELAYER_INTERVAL 1250
 #define INT_MAX 0x7FFF
+
+#define MIN_LEVEL 1
+#define MAX_LEVEL 5
 
 // TODO: add constants from globals, here.
 

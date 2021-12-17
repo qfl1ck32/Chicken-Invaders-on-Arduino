@@ -31,7 +31,7 @@ void SettingsMatrixMenuState::cleanup() {
 }
 
 void SettingsMatrixMenuState::goBack() {
-    stateManager.changeState(settingsMenuStateId);
+    stateManager.changeState<SettingsMenuState>();
 }
 
 void SettingsMatrixMenuState::increaseIntensity() {

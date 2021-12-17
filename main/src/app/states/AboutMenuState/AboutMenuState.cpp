@@ -44,6 +44,5 @@ void AboutMenuState::cleanup() {
 }
 
 void AboutMenuState::goBack() {
-    stateManager.changeState(mainMenuStateId);
-    ;
+    stateManager.changeState<MainMenuState>();
 }

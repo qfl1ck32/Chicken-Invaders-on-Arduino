@@ -4,11 +4,10 @@
 #include <avr/pgmspace.h>
 
 #include "../../../state/State.h"
+#include "../../states/MainMenuState/MainMenuState.h"
 
 class AboutMenuState : public State {
    public:
-    AboutMenuState(int8_t id) : State(id) {}
-
     void setup();
     void handle();
     void cleanup();

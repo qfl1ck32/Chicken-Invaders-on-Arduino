@@ -2,20 +2,18 @@
 
 #include "../../globals.h"
 
+WelcomeState::WelcomeState() {
+    this->delayer.updateInterval(350);
+}
+
 void WelcomeState::setup() {
     button.setOnStateChange(WelcomeState::moveToEnterYourNameState);
 
-    static const char welcomeMessage[] PROGMEM = "Welcome!";
+    // FIXME: add PROGMEM
+    static const char welcomeMessage[] = "Welcome!";
 
-    char welcome[9];
-
-    char pressXToContinue[21];
-
-    readFromPROGMEM(pressXToContinueMessage, pressXToContinue, 20);
-    readFromPROGMEM(welcomeMessage, welcome, 8);
-
-    lcd->printOnRow(welcome, 0);
-    lcd->printOnRow(pressXToContinue, 1);
+    lcd->printOnRow(welcomeMessage, 0);
+    // lcd->printOnRow(pressXToContinue, 1);
 }
 
 void WelcomeState::handle() {
@@ -30,5 +28,5 @@ void WelcomeState::cleanup() {
 }
 
 void WelcomeState::moveToEnterYourNameState() {
-    stateManager.changeState(mainMenuStateId);
+    stateManager.changeState<MainMenuState>();
 }

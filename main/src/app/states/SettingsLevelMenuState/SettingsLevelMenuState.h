@@ -1,14 +1,11 @@
 #ifndef SettingsLevelMenuState_h
 #define SettingsLevelMenuState_h
 
-#include <avr/pgmspace.h>
-
 #include "../../../state/State.h"
+#include "../../states/SettingsMenuState/SettingsMenuState.h"
 
 class SettingsLevelMenuState : public State {
    public:
-    SettingsLevelMenuState(int8_t id) : State(id) {}
-
     void setup();
     void handle();
     void cleanup();

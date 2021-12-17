@@ -4,11 +4,10 @@
 #include <avr/pgmspace.h>
 
 #include "../../../state/State.h"
+#include "../../states/SettingsMenuState/SettingsMenuState.h"
 
 class SettingsMatrixMenuState : public State {
    public:
-    SettingsMatrixMenuState(int8_t id) : State(id) {}
-
     void setup();
     void handle();
     void cleanup();

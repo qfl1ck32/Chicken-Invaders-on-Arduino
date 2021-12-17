@@ -6,6 +6,9 @@ int8_t Chicken::count = 0;
 
 Chicken::Chicken(int8_t x, int8_t y) : Unit(x, y) {
     ++Chicken::count;
+
+    this->eggDelayer.updateInterval(CHICKEN_INITIAL_EGG_DELAYER_INTERVAL);
+    this->moveDelayer.updateInterval(CHICKEN_INITIAL_MOVE_DELAYER_INTERVAL);
 }
 
 void Chicken::action() {
@@ -37,14 +40,7 @@ void Chicken::die() {
 void Chicken::behaviour(int8_t action) {
     switch (action) {
         case KILL:
-            // TODO: it would be very nice to have an event manager.
-            game.score += 5;
-
             this->die();
-
-            if (Chicken::count == 0) {
-                stateManager.changeState(youWonStateId);
-            }
 
             return;
     }

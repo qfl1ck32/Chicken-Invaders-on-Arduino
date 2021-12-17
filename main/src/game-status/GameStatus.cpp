@@ -1,6 +1,6 @@
 #include "./GameStatus.h"
 
-#include "../../app/globals.h"
+#include "../app/globals.h"
 
 void GameStatus::show(short score, int8_t lifes, int8_t level, unsigned int startTime) {
     // TODO: progmem :)

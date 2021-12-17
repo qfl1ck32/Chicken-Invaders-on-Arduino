@@ -42,7 +42,7 @@ void SettingsSoundsMenuState::cleanup() {
 }
 
 void SettingsSoundsMenuState::goBack() {
-    stateManager.changeState(settingsMenuStateId);
+    stateManager.changeState<SettingsMenuState>();
 }
 
 void SettingsSoundsMenuState::switchMusicPlaying() {

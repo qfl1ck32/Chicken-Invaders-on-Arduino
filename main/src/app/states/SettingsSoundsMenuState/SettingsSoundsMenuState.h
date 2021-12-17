@@ -1,14 +1,11 @@
 #ifndef SettingsSoundsMenuState_h
 #define SettingsSoundsMenuState_h
 
-#include <avr/pgmspace.h>
-
 #include "../../../state/State.h"
+#include "../../states/SettingsMenuState/SettingsMenuState.h"
 
 class SettingsSoundsMenuState : public State {
    public:
-    SettingsSoundsMenuState(int8_t id) : State(id) {}
-
     void setup();
     void handle();
     void cleanup();

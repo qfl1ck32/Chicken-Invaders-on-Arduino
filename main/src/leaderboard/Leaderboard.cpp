@@ -4,6 +4,17 @@ const char *const Leaderboard::nameAndScoreDelimiter = "|";
 
 int Leaderboard::size = 3;
 
+Leaderboard::Leaderboard() {
+    this->eeprom = new EEPROMHandler(EEPROM_LEADERBOARD_START_INDEX, 256);
+
+    this->scores = new LinkedList<NameAndScore>();
+}
+
+Leaderboard::~Leaderboard() {
+    delete this->eeprom;
+    delete this->scores;
+}
+
 int Leaderboard::getWorstHighscore() {
     if (!this->scores->size) {
         this->generate();

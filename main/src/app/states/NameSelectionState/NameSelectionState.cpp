@@ -2,6 +2,18 @@
 
 #include "../../globals.h"
 
+NameSelector* NameSelectionState::nameSelector = nullptr;
+
+NameSelectionState::NameSelectionState() {
+    NameSelectionState::leaderboard = new Leaderboard();
+    NameSelectionState::nameSelector = new NameSelector(lcd, 1);
+}
+
+NameSelectionState::~NameSelectionState() {
+    delete NameSelectionState::leaderboard;
+    delete NameSelectionState::nameSelector;
+}
+
 void NameSelectionState::handle() {
     joystick.handleJoystickMovementOnAxisX();
     joystick.handleJoystickMovementOnAxisY();
@@ -29,28 +41,29 @@ void NameSelectionState::cleanup() {
 }
 
 void NameSelectionState::goUp() {
-    nameSelector->goUp();
+    NameSelectionState::nameSelector->goUp();
 }
 
 void NameSelectionState::goDown() {
-    nameSelector->goDown();
+    NameSelectionState::nameSelector->goDown();
 }
 
 void NameSelectionState::goLeft() {
-    nameSelector->goLeft();
+    NameSelectionState::nameSelector->goLeft();
 }
 
 void NameSelectionState::goRight() {
-    nameSelector->goRight();
+    NameSelectionState::nameSelector->goRight();
 }
 
 void NameSelectionState::handleSwStateChange() {
-    nameSelector->select();
+    NameSelectionState::nameSelector->select();
 }
 
 void NameSelectionState::finish() {
-    if (nameSelector->finish()) {
-        leaderboard.write(nameSelector->name, game.score);
-        stateManager.changeState(mainMenuStateId);
+    if (NameSelectionState::nameSelector->finish()) {
+        // TODO: fix; do this in PlayingState?
+        NameSelectionState::leaderboard->write(NameSelectionState::nameSelector->name, 0);
+        stateManager.changeState<MainMenuState>();
     }
 }

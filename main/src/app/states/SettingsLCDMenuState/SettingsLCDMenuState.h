@@ -1,14 +1,11 @@
 #ifndef SettingsLCDMenuState_h
 #define SettingsLCDMenuState_h
 
-#include <avr/pgmspace.h>
-
 #include "../../../state/State.h"
+#include "../../states/SettingsMenuState/SettingsMenuState.h"
 
 class SettingsLCDMenuState : public State {
    public:
-    SettingsLCDMenuState(int8_t id) : State(id) {}
-
     void setup();
     void handle();
     void cleanup();

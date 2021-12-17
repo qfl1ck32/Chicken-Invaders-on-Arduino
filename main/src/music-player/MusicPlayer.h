@@ -1,8 +1,8 @@
 #ifndef MusicPlayer_h
 #define MusicPlayer_h
 
-#include "../../app/globals.h"
-#include "../../delayer/Delayer.h"
+#include "../app/globals.h"
+#include "../delayer/Delayer.h"
 
 class MusicPlayer {
    public:
@@ -16,7 +16,7 @@ class MusicPlayer {
 
     bool repeat;
 
-    Delayer delayer = Delayer();
+    Delayer delayer;
     Buzzer *buzzer;
 
     MusicPlayer(Buzzer *);

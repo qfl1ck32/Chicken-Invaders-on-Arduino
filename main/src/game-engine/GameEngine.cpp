@@ -23,6 +23,20 @@ GameEngine::GameEngine(int8_t rows, int8_t columns) {
     }
 }
 
+GameEngine::~GameEngine() {
+    delete this->pixelChanges;
+
+    for (int i = 0; i < rows; ++i) {
+        for (int j = 0; j < columns; ++j) {
+            delete this->unitMatrix[i][j];
+        }
+
+        delete this->unitMatrix[i];
+    }
+
+    delete this->unitMatrix;
+}
+
 void GameEngine::resetState() {
     this->numberOfUnits = 0;
 
