@@ -12,24 +12,26 @@ Chicken::Chicken(int8_t x, int8_t y) : Unit(x, y) {
 }
 
 void Chicken::action() {
+    static byte maxRow = 2;
+
     if (this->eggDelayer.canRun()) {
         new Egg(this->x + 1, this->y);
     }
 
-    return;
+    short rand = random(2);
+    short rand2 = random(2);
 
-    short rand = random(4);
-
-    if (rand & 1) return;
-
-    short direction = rand == 0 ? -1 : 1;
+    short xDirection = rand & 1 ? 1 : -1;
+    short yDirection = rand2 & 1 ? 1 : -1;
 
     if (this->moveDelayer.canRun()) {
-        if (!this->engine->isValidPosition(this->x, this->y + direction) || this->engine->unitMatrix[this->x][this->y + direction] != 0) {
+        if (this->x + xDirection >= maxRow) return;
+
+        if (!this->engine->isValidPosition(this->x + xDirection, this->y + yDirection) || this->engine->unitMatrix[this->x + xDirection][this->y + yDirection] != 0) {
             return;
         }
 
-        this->move(0, direction);
+        this->move(xDirection, yDirection);
     }
 };
 

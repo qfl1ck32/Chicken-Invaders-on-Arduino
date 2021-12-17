@@ -23,7 +23,7 @@ void Spaceship::attack() {
         return;
     }
 
-    new Bullet(this->x - 2, this->y);
+    new Bullet(this->x - 1, this->y);
 }
 
 void Spaceship::behaviour(int8_t action) {

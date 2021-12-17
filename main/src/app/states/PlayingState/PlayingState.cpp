@@ -184,10 +184,16 @@ void PlayingState::setupLevel() {
         this->graphicsEngine->renderChanges(Unit::engine->pixelChanges);
     }
 
-    Chicken* chicken = new Chicken(0, random(Unit::engine->columns));
+    Chicken* chicken = new Chicken(0, random(Unit::engine->columns / 2));
 
-    chicken->eggDelayer.updateInterval(CHICKEN_INITIAL_EGG_DELAYER_INTERVAL / level);
-    chicken->moveDelayer.updateInterval(CHICKEN_INITIAL_MOVE_DELAYER_INTERVAL / level);
+    Chicken* chicken2 = new Chicken(0, random(Unit::engine->columns / 2, Unit::engine->columns));
+
+    // TODO: adjust, make constant
+    chicken->eggDelayer.updateInterval(CHICKEN_INITIAL_EGG_DELAYER_INTERVAL - 150 * level);
+    chicken->moveDelayer.updateInterval(CHICKEN_INITIAL_MOVE_DELAYER_INTERVAL - 150 * level);
+
+    chicken2->eggDelayer.updateInterval(CHICKEN_INITIAL_EGG_DELAYER_INTERVAL - 150 * level);
+    chicken2->moveDelayer.updateInterval(CHICKEN_INITIAL_MOVE_DELAYER_INTERVAL - 150 * level);
 
     this->lastNumberOfChickens = Chicken::count;
 
