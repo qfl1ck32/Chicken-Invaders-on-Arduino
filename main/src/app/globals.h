@@ -61,7 +61,8 @@ extern const char increaseMessage[];
 extern const char decreaseMessage[];
 extern const char pressXToContinueMessage[];
 
-extern void readFromPROGMEM(const char[], char *, int);
+extern char *readStringFromPROGMEM(const char *);
+extern char **readArrayOfStringsFromPROGMEM(const char *const *, int);
 extern uint64_t readImageFromPROGMEM(const uint64_t *);
 
 #endif

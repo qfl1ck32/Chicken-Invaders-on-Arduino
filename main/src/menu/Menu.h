@@ -33,8 +33,8 @@ class Menu {
 
     void setOns(HandlerFunction *, int);
 
-    void setMessages(const char *const *, int, bool);
-    void setMessages(const char *const *, int);
+    void setMessages(char **, int, bool);
+    void setMessages(char **, int);
 
     void run(bool shouldScrollCurrentRow);
 

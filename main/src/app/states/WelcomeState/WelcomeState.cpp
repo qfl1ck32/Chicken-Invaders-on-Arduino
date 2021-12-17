@@ -11,8 +11,8 @@ void WelcomeState::setup() {
 
     char pressXToContinue[21];
 
-    readFromPROGMEM(pressXToContinueMessage, pressXToContinue, 20);
-    readFromPROGMEM(welcomeMessage, welcome, 8);
+    // readFromPROGMEM(pressXToContinueMessage, pressXToContinue, 20);
+    // readFromPROGMEM(welcomeMessage, welcome, 8);
 
     lcd->printOnRow(welcome, 0);
     lcd->printOnRow(pressXToContinue, 1);

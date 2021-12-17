@@ -51,7 +51,7 @@ bool getUsesMusic() {
 
     byte value = EEPROM.read(EEPROM_MUSIC_PLAYING_INDEX);
 
-    return value == 255 ? defaultValue : value == 1;
+    return value == EEPROM_MISSING_VALUE ? defaultValue : value == 1;
 }
 
 bool usesMusic = getUsesMusic();
@@ -63,12 +63,28 @@ const char decreaseMessage[] PROGMEM = "Decrease";
 
 const char pressXToContinueMessage[] PROGMEM = "Press X to continue.";
 
-void readFromPROGMEM(const char progmemPointer[], char *buffer, int length) {
-    for (int i = 0; i < length; ++i) {
-        buffer[i] = (char)pgm_read_byte_near(progmemPointer + i);
+char *readStringFromPROGMEM(const char *progmemString) {
+    byte length = strlen_P(progmemString);
+
+    char *ans = new char[length + 1];
+
+    memcpy_P(ans, progmemString, length);
+
+    ans[length] = '\0';
+
+    return ans;
+}
+
+char **readArrayOfStringsFromPROGMEM(const char *const *progmemArray, int length) {
+    char **arr = new char *[length];
+
+    for (byte i = 0; i < length; ++i) {
+        char *str = readStringFromPROGMEM(*&progmemArray[i]);
+
+        arr[i] = str;
     }
 
-    buffer[length + 1] = '\0';
+    return arr;
 }
 
 uint64_t readImageFromPROGMEM(const uint64_t *image) {

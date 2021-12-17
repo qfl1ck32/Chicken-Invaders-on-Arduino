@@ -3,15 +3,15 @@
 #include "../../globals.h"
 
 void AboutMenuState::setup() {
-    static const char appName[] PROGMEM = "App Name: Invaders";
-    static const char programmer[] PROGMEM = "Programmer: Rusu Andrei-Cristian";
-    static const char github[] PROGMEM = "Github: https://github.com/qfl1ck32/Invaders-on-Arduino";
+    // static const char appName[] PROGMEM = "App Name: Invaders";
+    // static const char programmer[] PROGMEM = "Programmer: Rusu Andrei-Cristian";
+    // static const char github[] PROGMEM = "Github: https://github.com/qfl1ck32/Invaders-on-Arduino";
 
-    static const char* const messages[] PROGMEM = {backMessage, appName, programmer, github};
+    static const char* const messages[] PROGMEM = {backMessage};
 
     static const uint64_t icon PROGMEM = 0x0800081820202418;
 
-    menu.setMessages(messages, sizeof(messages) / sizeof(char*));
+    // menu.setMessages(messages, sizeof(messages) / sizeof(char*));
 
     HandlerFunction handlers[] = {AboutMenuState::goBack};
     menu.setOns(handlers, sizeof(handlers) / sizeof(HandlerFunction));
