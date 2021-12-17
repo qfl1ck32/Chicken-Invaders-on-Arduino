@@ -48,24 +48,24 @@ void setup() {
     lcd->clear();
     matrix->setAllLeds(false);
 
-    // stateManager.addState(new WelcomeState(welcomeStateId));
+    stateManager.addState(new WelcomeState(welcomeStateId));
 
-    // stateManager.addState(new AboutMenuState(aboutMenuStateId));
+    stateManager.addState(new AboutMenuState(aboutMenuStateId));
 
-    // stateManager.addState(new GameOverState(gameOverStateId));
+    stateManager.addState(new GameOverState(gameOverStateId));
     stateManager.addState(new PlayingState(playingStateId));
-    // stateManager.addState(new YouWonState(youWonStateId));
+    stateManager.addState(new YouWonState(youWonStateId));
 
-    // stateManager.addState(new MainMenuState(mainMenuStateId));
-    // stateManager.addState(new LeaderboardState(leaderboardStateId));
+    stateManager.addState(new MainMenuState(mainMenuStateId));
+    stateManager.addState(new LeaderboardState(leaderboardStateId));
 
-    // stateManager.addState(new SettingsMenuState(settingsMenuStateId));
-    // stateManager.addState(new SettingsLevelMenuState(settingsLevelMenuStateId));
-    // stateManager.addState(new SettingsMatrixMenuState(settingsMatrixMenuStateId));
-    // stateManager.addState(new SettingsLCDMenuState(settingsLCDMenuStateId));
-    // stateManager.addState(new SettingsSoundsMenuState(settingsSoundsMenuStateId));
+    stateManager.addState(new SettingsMenuState(settingsMenuStateId));
+    stateManager.addState(new SettingsLevelMenuState(settingsLevelMenuStateId));
+    stateManager.addState(new SettingsMatrixMenuState(settingsMatrixMenuStateId));
+    stateManager.addState(new SettingsLCDMenuState(settingsLCDMenuStateId));
+    stateManager.addState(new SettingsSoundsMenuState(settingsSoundsMenuStateId));
 
-    // stateManager.addState(new NameSelectionState(nameSelectionStateId));
+    stateManager.addState(new NameSelectionState(nameSelectionStateId));
 
     musicPlayer.setSong(merryChristmas, sizeof(merryChristmas) / sizeof(merryChristmas[0]));
     musicPlayer.setRepeat(true);
