@@ -7,9 +7,9 @@
 
 class Egg : public Unit {
    public:
-    Delayer delayer = Delayer(500);
+    Delayer delayer;
 
-    Egg(int8_t x, int8_t y) : Unit(x, y) {}
+    Egg(int8_t, int8_t);
 
     void action();
     void behaviour(int8_t);

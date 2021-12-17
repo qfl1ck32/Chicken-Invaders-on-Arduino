@@ -3,7 +3,7 @@
 #include "../app/globals.h"
 
 Bullet::Bullet() {
-    this->delayer.updateInterval(125);
+    this->delayer.updateInterval(250);
 }
 
 Bullet::Bullet(int8_t x, int8_t y) : Unit(x, y) {

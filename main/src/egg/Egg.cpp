@@ -1,5 +1,9 @@
 #include "./Egg.h"
 
+Egg ::Egg(int8_t x, int8_t y) : Unit(x, y) {
+    this->delayer.updateInterval(200);
+}
+
 void Egg::action() {
     if (!this->delayer.canRun()) return;
 

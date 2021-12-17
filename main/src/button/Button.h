@@ -1,6 +1,7 @@
 #ifndef Button_h
 #define Button_h
 
+#include "../app/typedefs.h"
 #include "Arduino.h"
 
 class Button {
@@ -10,7 +11,7 @@ class Button {
     bool previousButtonState = LOW;
     bool state = LOW;
 
-    void (*onStateChange)();
+    HandlerFunction onStateChange;
 
     Button(int8_t pin) {
         this->pin = pin;
@@ -18,8 +19,8 @@ class Button {
         this->onStateChange = nullptr;
     }
 
-    void setup(void (*)());
-    void setOnStateChange(void (*)());
+    void setup(HandlerFunction);
+    void setOnStateChange(HandlerFunction);
 
     void clearHandler();
 

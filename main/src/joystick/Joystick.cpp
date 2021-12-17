@@ -90,5 +90,6 @@ void Joystick::swHandler(Joystick &joystick) {
     bool currentSwState = digitalRead(joystick.pinSw);
 
     joystick.swState = !joystick.swState;
+
     if (joystick.handlerSwStateChange) joystick.handlerSwStateChange();
 }
