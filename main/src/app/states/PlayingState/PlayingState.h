@@ -4,13 +4,17 @@
 #include "../../../chicken/Chicken.h"
 #include "../../../game-status/GameStatus.h"
 #include "../../../graphics-engine/GraphicsEngine.h"
+#include "../../../leaderboard/Leaderboard.h"
 #include "../../../spaceship/Spaceship.h"
 #include "../../../state/State.h"
 #include "../../../unit/Unit.h"
+#include "../../states/MainMenuState/MainMenuState.h"
+#include "../../states/NameSelectionState/NameSelectionState.h"
 
-#define PLAYING 0
-#define WON 1
-#define LOST 2
+#define NOT_INITIALISED 0
+#define PLAYING 1
+#define WON 2
+#define LOST 4
 
 class PlayingState : public State {
    public:
@@ -19,24 +23,37 @@ class PlayingState : public State {
 
     GraphicsEngine *graphicsEngine;
     GameStatus *gameStatus;
+    Delayer *scrollDelayer;
 
-    uint8_t state;
+    static Leaderboard *leaderboard;
+
+    uint8_t lastNumberOfChickens;
+
+    static uint8_t previousState;
+    static uint8_t state;
 
     void setup();
     void handle();
     void cleanup();
 
+    void play();
+    void handleLostState();
+    void handleWonState();
+
+    void switchToWonState();
+    void switchToLostState();
+
+    void updateScore();
+
     static Spaceship *spaceship;
 
-    short score;
+    static short score;
 
     unsigned long timeSinceLastStart;
 
     static int8_t maxLevel;
 
     bool needsInitialisation;
-
-    void setSpaceship(int8_t, int8_t);
 
     void reset();
 
@@ -51,6 +68,12 @@ class PlayingState : public State {
     static void moveLeft();
 
     static void attack();
+
+    static void goToNextLevel();
+
+    static void goToNextScreenAfterDeath();
+
+    static void updateState(uint8_t);
 };
 
 #endif

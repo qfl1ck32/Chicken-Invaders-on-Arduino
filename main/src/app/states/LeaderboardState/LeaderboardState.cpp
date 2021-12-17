@@ -2,31 +2,47 @@
 
 #include "../../globals.h"
 
+LeaderboardState::LeaderboardState() {
+    this->leaderboard = new Leaderboard();
+}
+
+LeaderboardState::~LeaderboardState() {
+    delete this->leaderboard;
+}
+
 void LeaderboardState::setup() {
+    // TODO: progmem
     static const char noHighScoresMessage[] PROGMEM = "No high scores";
 
-    static const uint64_t icon = 0xa5a5e52527243c00;
+    static const uint64_t icon PROGMEM = 0xa5a5e52527243c00;
 
     HandlerFunction handlers[] = {LeaderboardState::goBack};
 
     menu.setOns(handlers, sizeof(handlers) / sizeof(HandlerFunction));
 
-    // leaderboard.generate();
+    this->leaderboard->generate();
 
-    // int numberOfHighscores = leaderboard.scores->size;
+    int numberOfHighscores = this->leaderboard->scores->size;
+
+    while (this->leaderboard->scores->size) {
+        NameAndScore str = this->leaderboard->scores->removeHead();
+
+        Serial.println(str.name);
+        Serial.println(str.score);
+        Serial.println("<<<");
+    }
 
     // char *messages[numberOfHighscores == 0 ? 2 : 1 + numberOfHighscores];
 
-    // char backMessageBuffer[5];
+    // // TODO: backMessage
+    // const char *goBak = "Go back";
 
-    // readFromPROGMEM(backMessage, backMessageBuffer, 4);
-
-    // messages[0] = backMessageBuffer;
+    // messages[0] = (char *)goBak;
 
     // int index = 1;
 
-    // while (leaderboard.scores->size) {
-    //     NameAndScore entry = leaderboard.scores->removeHead();
+    // while (leaderboard->scores->size) {
+    //     NameAndScore entry = leaderboard->scores->removeHead();
 
     //     char leaderboardEntry[strlen(entry.name) + getNumberOfDigits(entry.score) + getNumberOfDigits(index) + 7];
 
@@ -37,18 +53,17 @@ void LeaderboardState::setup() {
     //     ++index;
     // }
 
+    // // TODO: progmem
     // if (index == 1) {
-    //     char buffer[15];
-
-    //     readFromPROGMEM(noHighScoresMessage, buffer, 14);
-
-    //     messages[index] = buffer;
+    //     messages[index] = (char *)noHighScoresMessage;
     // }
 
-    // menu.setMessages(messages, sizeof(messages) / sizeof(char *));
+    static const char *const messages[] PROGMEM = {backMessage, noHighScoresMessage};
 
-    // joystick.setOnChangeUp(menuGoUp);
-    // joystick.setOnChangeDown(menuGoDown);
+    menu.setMessages(messages, sizeof(messages) / sizeof(char *));
+
+    joystick.setOnChangeUp(menuGoUp);
+    joystick.setOnChangeDown(menuGoDown);
 
     joystick.setOnSwStateChange(menuSelect);
 

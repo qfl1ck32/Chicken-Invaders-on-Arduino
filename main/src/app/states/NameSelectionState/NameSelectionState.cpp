@@ -3,6 +3,7 @@
 #include "../../globals.h"
 
 NameSelector* NameSelectionState::nameSelector = nullptr;
+Leaderboard* NameSelectionState::leaderboard = nullptr;
 
 NameSelectionState::NameSelectionState() {
     NameSelectionState::leaderboard = new Leaderboard();
@@ -63,7 +64,7 @@ void NameSelectionState::handleSwStateChange() {
 void NameSelectionState::finish() {
     if (NameSelectionState::nameSelector->finish()) {
         // TODO: fix; do this in PlayingState?
-        NameSelectionState::leaderboard->write(NameSelectionState::nameSelector->name, 0);
+        NameSelectionState::leaderboard->write(NameSelectionState::nameSelector->name, PlayingState::score);
         stateManager.changeState<MainMenuState>();
     }
 }

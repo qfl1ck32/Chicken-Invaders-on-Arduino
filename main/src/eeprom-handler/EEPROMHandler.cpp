@@ -1,5 +1,21 @@
 #include "./EEPROMHandler.h"
 
+#include "../constants/app.h"
+
+EEPROMHandler::EEPROMHandler(int startAt, int limit) {
+    this->startAt = startAt;
+    this->limit = limit;
+
+    this->readIndex = startAt;
+
+    for (int i = this->startAt; i < this->limit; ++i) {
+        if (EEPROM.read(i) == 255) {
+            this->writeIndex = i;
+            break;
+        }
+    }
+}
+
 void EEPROMHandler::resetReadHead() {
     this->readIndex = this->startAt;
 }
@@ -37,9 +53,9 @@ char* EEPROMHandler::readString(int position) {
 char* EEPROMHandler::readNext() {
     int8_t oldIndex = this->readIndex;
 
-    int8_t length = EEPROM.read(this->readIndex);
+    int8_t length = EEPROM.read(oldIndex);
 
-    if (length == 255) return nullptr;
+    if (length == -1) return nullptr;
 
     this->readIndex += length + 1;
 

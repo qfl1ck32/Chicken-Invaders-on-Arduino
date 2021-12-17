@@ -7,21 +7,9 @@
 
 class EEPROMHandler {
    public:
-    short startAt, limit, writeIndex, readIndex;
+    int startAt, limit, writeIndex, readIndex;
 
-    EEPROMHandler(int startAt, int limit) {
-        this->startAt = startAt;
-        this->limit = limit;
-
-        this->readIndex = startAt;
-
-        for (int i = this->startAt; i < this->limit; ++i) {
-            if (EEPROM.read(i) == 255) {
-                this->writeIndex = i;
-                break;
-            }
-        }
-    }
+    EEPROMHandler(int, int);
 
     char* readString(int);
 

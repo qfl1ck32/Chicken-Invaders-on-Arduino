@@ -12,7 +12,7 @@ class GameStatus {
         this->lcd = lcd;
     }
 
-    void show(short, int8_t, int8_t, unsigned int);
+    void show(short, int8_t, int8_t, int);
 };
 
 #endif
