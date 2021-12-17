@@ -3,7 +3,7 @@
 #include "../app/globals.h"
 
 void GameStatus::show(short score, int8_t lifes, int8_t level, int time) {
-    const char msg[] PROGMEM = "Lvl Pts Secs Lfs";
+    static const char msg[] PROGMEM = "Lvl Pts Secs Lfs";
 
     char messageSecondRow[this->lcd->columns];
 
