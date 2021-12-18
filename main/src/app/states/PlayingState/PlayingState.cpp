@@ -182,7 +182,7 @@ void PlayingState::handleNotPlayingState() {
 }
 
 void PlayingState::updateScore() {
-    PlayingState::score += this->maxSecondsPerLevel - this->getTimeSoFar();
+    PlayingState::score += (this->maxSecondsPerLevel - this->getTimeSoFar()) / 3;
 
     if (Chicken::count == 0) {
         byte shotBullets = Bullet::numberOfBulletsShotSoFar;
@@ -192,6 +192,8 @@ void PlayingState::updateScore() {
         if (shotsBonus > 0) {
             PlayingState::score += shotsBonus;
         }
+
+        Bullet::numberOfBulletsShotSoFar = 0;
     }
 }
 

@@ -18,7 +18,7 @@ void handleButtonStateChange() {
 }
 
 void setup() {
-    // for (int i = 0; i < 256; ++i) {
+    // for (int i = 0; i < 400; ++i) {
     //     EEPROM.write(i, 255);
     // }
 
