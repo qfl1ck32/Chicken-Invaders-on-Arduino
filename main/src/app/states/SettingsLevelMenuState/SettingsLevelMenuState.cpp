@@ -39,13 +39,13 @@ void SettingsLevelMenuState::goBack() {
 }
 
 void SettingsLevelMenuState::increaseLevel() {
-    setLevel(level + 1);
+    setSettingsLevel(settingsLevel + 1);
 
     SettingsLevelMenuState::showLevel();
 }
 
 void SettingsLevelMenuState::decreaseLevel() {
-    setLevel(level - 1);
+    setSettingsLevel(settingsLevel - 1);
 
     SettingsLevelMenuState::showLevel();
 }

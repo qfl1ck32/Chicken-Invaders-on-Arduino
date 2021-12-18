@@ -37,8 +37,10 @@ extern Buzzer *gameSoundsBuzzer;
 extern bool usesMusic;
 
 extern uint8_t level;
+extern uint8_t settingsLevel;
 
 extern void setLevel(uint8_t);
+extern void setSettingsLevel(uint8_t);
 
 extern void initialiseRandomSeed();
 

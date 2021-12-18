@@ -61,7 +61,7 @@ void PlayingState::handle() {
 void PlayingState::reset() {
     PlayingState::score = 0;
 
-    setLevel(MIN_LEVEL);
+    setLevel(settingsLevel);
 
     PlayingState::updateState(NOT_INITIALISED);
 

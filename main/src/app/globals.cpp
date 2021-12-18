@@ -45,11 +45,18 @@ bool getUsesMusic() {
 bool usesMusic = getUsesMusic();
 
 uint8_t level = MIN_LEVEL;
+uint8_t settingsLevel = level;
 
 void setLevel(uint8_t _level) {
     if (_level < MIN_LEVEL || _level > MAX_LEVEL) return;
 
     level = _level;
+}
+
+void setSettingsLevel(uint8_t _level) {
+    if (_level < MIN_LEVEL || _level > MAX_LEVEL) return;
+
+    settingsLevel = _level;
 }
 
 const char backMessage[] PROGMEM = "Back";
