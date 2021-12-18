@@ -126,8 +126,7 @@ void LCD::scrollRow(int8_t row, int8_t skip = 0) {
     uint8_t length = strlen(str);
 
     if (this->scrollOffsets[row] == length + this->columns - skip) {
-        this->scrollOffsets[row] = 0;
-        return;
+        this->scrollOffsets[row] = 1;
     }
 
     // TODO: only turn off positions that are currently used
