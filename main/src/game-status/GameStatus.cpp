@@ -9,8 +9,6 @@ void GameStatus::displayHeader() {
 
     this->lcd->printOnRow(firstRowString, 0);
 
-    Serial.println("Wut?");
-
     delete firstRowString;
 }
 
