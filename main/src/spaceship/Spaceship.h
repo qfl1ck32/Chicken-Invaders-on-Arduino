@@ -3,7 +3,6 @@
 
 #include "../bullet/Bullet.h"
 #include "../constants/app.h"
-#include "../pixel/Pixel.h"
 #include "../unit/Unit.h"
 
 class Spaceship : public Unit {

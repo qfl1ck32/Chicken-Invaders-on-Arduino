@@ -4,7 +4,6 @@
 #include "../constants/app.h"
 #include "../delayer/Delayer.h"
 #include "../egg/Egg.h"
-#include "../pixel/Pixel.h"
 #include "../unit/Unit.h"
 
 class Chicken : public Unit {
