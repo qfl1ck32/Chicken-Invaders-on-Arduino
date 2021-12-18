@@ -17,7 +17,7 @@ void AboutMenuState::setup() {
     menu.setMessages(msgs, numberOfMessages);
 
     HandlerFunction handlers[] = {goToMainMenu};
-    menu.setOns(handlers, sizeof(handlers) / sizeof(HandlerFunction));
+    menu.setHandlers(handlers, sizeof(handlers) / sizeof(HandlerFunction));
 
     joystick.clearHandlers();
     button.clearHandler();

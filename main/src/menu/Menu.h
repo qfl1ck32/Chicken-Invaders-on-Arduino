@@ -24,7 +24,7 @@ class Menu {
 
     Menu(LCD *);
 
-    void setOns(HandlerFunction *, int);
+    void setHandlers(HandlerFunction *, int);
 
     void setMessages(char **, int, bool);
     void setMessages(char **, int);

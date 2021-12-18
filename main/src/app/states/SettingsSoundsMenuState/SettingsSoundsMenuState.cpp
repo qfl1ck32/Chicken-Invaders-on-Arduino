@@ -11,7 +11,7 @@ void SettingsSoundsMenuState::setup() {
 
     HandlerFunction handlers[] = {SettingsSoundsMenuState::goBack, SettingsSoundsMenuState::switchMusicPlaying};
 
-    menu.setOns(handlers, sizeof(handlers) / sizeof(HandlerFunction));
+    menu.setHandlers(handlers, sizeof(handlers) / sizeof(HandlerFunction));
 
     joystick.setOnChangeUp(menuGoUp);
     joystick.setOnChangeDown(menuGoDown);

@@ -20,7 +20,7 @@ void SettingsLCDMenuState::setup() {
     HandlerFunction handlers[] = {goToSettingsMenu, SettingsLCDMenuState::decreaseContrast, SettingsLCDMenuState::increaseContrast,
                                   SettingsLCDMenuState::decreaseBacklight, SettingsLCDMenuState::increaseBacklight};
 
-    menu.setOns(handlers, sizeof(handlers) / sizeof(HandlerFunction));
+    menu.setHandlers(handlers, sizeof(handlers) / sizeof(HandlerFunction));
 
     joystick.setOnChangeUp(menuGoUp);
     joystick.setOnChangeDown(menuGoDown);

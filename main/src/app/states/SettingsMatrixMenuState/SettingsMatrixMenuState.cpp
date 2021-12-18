@@ -12,7 +12,7 @@ void SettingsMatrixMenuState::setup() {
 
     HandlerFunction handlers[] = {goToSettingsMenu, SettingsMatrixMenuState::increaseIntensity, SettingsMatrixMenuState::decreaseIntensity};
 
-    menu.setOns(handlers, sizeof(handlers) / sizeof(HandlerFunction));
+    menu.setHandlers(handlers, sizeof(handlers) / sizeof(HandlerFunction));
 
     joystick.setOnChangeUp(menuGoUp);
     joystick.setOnChangeDown(menuGoDown);

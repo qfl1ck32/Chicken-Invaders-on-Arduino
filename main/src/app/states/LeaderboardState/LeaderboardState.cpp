@@ -9,7 +9,7 @@ void LeaderboardState::setup() {
 
     HandlerFunction handlers[] = {goToMainMenu};
 
-    menu.setOns(handlers, sizeof(handlers) / sizeof(HandlerFunction));
+    menu.setHandlers(handlers, sizeof(handlers) / sizeof(HandlerFunction));
 
     this->leaderboard.generate();
 

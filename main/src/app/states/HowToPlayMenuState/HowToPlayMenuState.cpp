@@ -50,7 +50,7 @@ void HowToPlayMenuState::setup() {
 
     HandlerFunction handlers[] = {goToMainMenu};
 
-    menu.setOns(handlers, sizeof(handlers) / sizeof(HandlerFunction));
+    menu.setHandlers(handlers, sizeof(handlers) / sizeof(HandlerFunction));
 
     joystick.setOnChangeUp(menuGoUp);
     joystick.setOnChangeDown(menuGoDown);

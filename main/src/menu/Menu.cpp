@@ -32,7 +32,7 @@ void Menu::setMessages(char **messages, int numberOfMessages) {
     Menu::setMessages(messages, numberOfMessages, true);
 }
 
-void Menu::setOns(HandlerFunction handlers[], int numberOfHandlers) {
+void Menu::setHandlers(HandlerFunction handlers[], int numberOfHandlers) {
     if (this->handlers != nullptr) {
         free(this->handlers);
     }

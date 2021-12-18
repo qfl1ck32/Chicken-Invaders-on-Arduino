@@ -13,7 +13,7 @@ void SettingsLevelMenuState::setup() {
 
     HandlerFunction handlers[] = {goToSettingsMenu, SettingsLevelMenuState::increaseLevel, SettingsLevelMenuState::decreaseLevel};
 
-    menu.setOns(handlers, sizeof(handlers) / sizeof(HandlerFunction));
+    menu.setHandlers(handlers, sizeof(handlers) / sizeof(HandlerFunction));
 
     joystick.setOnChangeUp(menuGoUp);
     joystick.setOnChangeDown(menuGoDown);
