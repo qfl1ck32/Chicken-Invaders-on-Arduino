@@ -67,13 +67,15 @@ void Leaderboard::generate() {
 
 // FIXME: this is not efficient at all, also not dry - but it's less error-prone
 void Leaderboard::write(const char *name, int score) {
-    char entry[strlen(name) + getNumberOfDigits(score) + 2];
+    uint8_t nameLength = strlen(name);
+
+    char entry[nameLength + getNumberOfDigits(score) + 2];
 
     strncpy(entry, name, strlen(name));
 
-    strncpy(entry + strlen(name), Leaderboard::nameAndScoreDelimiter, 1);
+    strncpy(entry + nameLength, Leaderboard::nameAndScoreDelimiter, 1);
 
-    sprintf(entry + strlen(name) + 1, "%d", score);
+    sprintf(entry + nameLength + 1, "%d", score);
 
     this->eeprom->writeString(entry, strlen(entry));
 

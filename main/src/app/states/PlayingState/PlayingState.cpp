@@ -24,8 +24,6 @@ PlayingState::~PlayingState() {
     delete this->gameStatus;
     delete this->scrollDelayer;
     delete PlayingState::leaderboard;
-
-    this->reset();
 }
 
 void PlayingState::setup() {
@@ -62,6 +60,8 @@ void PlayingState::handle() {
 
 void PlayingState::reset() {
     PlayingState::score = 0;
+
+    setLevel(MIN_LEVEL);
 
     PlayingState::updateState(NOT_INITIALISED);
 
@@ -140,7 +140,7 @@ void PlayingState::switchToLostState() {
 // TODO: this is also duplicate, but oh well
 void PlayingState::goToNextScreenAfterDeath() {
     if (PlayingState::leaderboard->isHighScore(PlayingState::score)) {
-        stateManager.changeState<MainMenuState>();
+        stateManager.changeState<NameSelectionState>();
     } else {
         stateManager.changeState<MainMenuState>();
     }

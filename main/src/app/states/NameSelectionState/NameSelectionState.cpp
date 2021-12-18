@@ -10,9 +10,10 @@ NameSelectionState::NameSelectionState() {
     NameSelectionState::nameSelector = new NameSelector(lcd, 1);
 }
 
+// TODO: fix this. why are they breaking the app?
 NameSelectionState::~NameSelectionState() {
-    delete NameSelectionState::leaderboard;
-    delete NameSelectionState::nameSelector;
+    // delete NameSelectionState::leaderboard;
+    // delete NameSelectionState::nameSelector;
 }
 
 void NameSelectionState::handle() {
@@ -64,7 +65,8 @@ void NameSelectionState::handleSwStateChange() {
 
 void NameSelectionState::finish() {
     if (NameSelectionState::nameSelector->finish()) {
-        // NameSelectionState::leaderboard->write(NameSelectionState::nameSelector->name, PlayingState::score);
+        NameSelectionState::leaderboard->write(NameSelectionState::nameSelector->name, PlayingState::score);
+
         stateManager.changeState<MainMenuState>();
     }
 }

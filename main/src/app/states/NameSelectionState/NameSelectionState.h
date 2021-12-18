@@ -5,6 +5,7 @@
 #include "../../../name-selection/NameSelector.h"
 #include "../../../state/State.h"
 #include "../../states/MainMenuState/MainMenuState.h"
+#include "../../states/WelcomeState/WelcomeState.h"
 
 class NameSelectionState : public State {
    public:

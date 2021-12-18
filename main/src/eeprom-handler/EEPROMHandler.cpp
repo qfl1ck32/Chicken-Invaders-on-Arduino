@@ -9,7 +9,7 @@ EEPROMHandler::EEPROMHandler(int startAt, int limit) {
     this->readIndex = startAt;
 
     for (int i = this->startAt; i < this->limit; ++i) {
-        if (EEPROM.read(i) == 255) {
+        if (EEPROM.read(i) == EEPROM_MISSING_VALUE) {
             this->writeIndex = i;
             break;
         }
@@ -53,19 +53,17 @@ char* EEPROMHandler::readString(int position) {
 char* EEPROMHandler::readNext() {
     int8_t oldIndex = this->readIndex;
 
-    int8_t length = EEPROM.read(oldIndex);
+    int length = EEPROM.read(oldIndex);
 
-    if (length == -1) return nullptr;
+    if (length == EEPROM_MISSING_VALUE) return 0;
 
     this->readIndex += length + 1;
 
-    char* ans = this->readString(oldIndex);
-
-    return ans;
+    return this->readString(oldIndex);
 }
 
 void EEPROMHandler::clear() {
-    for (int i = 0; i < this->limit; ++i) EEPROM.write(i, 255);
+    for (int i = this->startAt; i < this->limit; ++i) EEPROM.write(i, EEPROM_MISSING_VALUE);
 
     this->writeIndex = this->startAt;
 }

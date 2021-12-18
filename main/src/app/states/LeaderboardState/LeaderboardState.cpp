@@ -34,13 +34,23 @@ void LeaderboardState::setup() {
     while (leaderboard->scores->size) {
         NameAndScore entry = leaderboard->scores->removeHead();
 
-        char leaderboardEntry[strlen(entry.name) + getNumberOfDigits(entry.score) + getNumberOfDigits(index) + 7];
+        Serial.print(entry.name);
+        Serial.print(", ");
+        Serial.println(entry.score);
 
-        sprintf((char *)messages[index], "%d. %s - %d", index, entry.name, entry.score);
+        char *entryToPrint = new char[strlen(entry.name) + getNumberOfDigits(entry.score) + 6];
+
+        sprintf(entryToPrint, "%d. %s - %d", index, entry.name, entry.score);
+
+        messages[index] = entryToPrint;
 
         free(entry.name);
 
         ++index;
+    }
+
+    for (int i = 0; i < index; ++i) {
+        Serial.println(messages[i]);
     }
 
     if (index == 1) {

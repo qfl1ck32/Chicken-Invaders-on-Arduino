@@ -14,6 +14,7 @@ class Chicken : public Unit {
     Delayer moveDelayer;
 
     Chicken(int8_t, int8_t);
+    ~Chicken();
 
     void action();
     void behaviour(int8_t);

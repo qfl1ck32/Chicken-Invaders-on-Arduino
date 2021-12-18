@@ -1,16 +1,25 @@
 #include "./NameSelector.h"
 
+#include "../app/globals.h"
+
+NameSelector::~NameSelector() {
+    delete[] this->name;
+}
+
 NameSelector::NameSelector(LCD *lcd, int row) {
     this->lcd = lcd;
     this->row = row;
 
-    this->name = new char[NAME_MAX_LENGTH];
+    this->name = new char[NAME_MAX_LENGTH + 1];
 
-    this->reset();
-}
+    for (int i = 0; i < NAME_MAX_LENGTH; ++i) {
+        this->name[i] = 0;
+    }
 
-NameSelector::~NameSelector() {
-    delete this->name;
+    this->name[NAME_MAX_LENGTH] = '\0';
+
+    this->currentLetterIndex = 0;
+    this->currentColumn = 0;
 }
 
 void NameSelector::goUp() {
@@ -77,24 +86,18 @@ void NameSelector::select() {
 
 // TODO: should first check if the input is not empty?
 bool NameSelector::finish() {
+    // this->name[this->currentLetterIndex + 1] = '\0';
     return true;
 }
 
-void NameSelector::reset() {
-    for (int i = 0; i < NAME_MAX_LENGTH; ++i) {
-        this->name[i] = 0;
-    }
-
-    this->currentLetterIndex = 0;
-    this->currentColumn = 0;
-}
-
 void NameSelector::main() {
-    static const char *const msg = "Enter your name:";
+    static const char msg[] PROGMEM = "Enter your name:";
 
-    this->lcd->printOnRow(msg, 0);
+    char *message = readStringFromPROGMEM(msg);
 
-    this->isInvalid = false;
+    this->lcd->printOnRow(message, 0);
+
+    delete message;
 
     if (this->isSelected) {
         this->lcd->noBlink();

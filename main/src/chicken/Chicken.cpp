@@ -35,10 +35,12 @@ void Chicken::action() {
     }
 };
 
+Chicken::~Chicken() {
+    --Chicken::count;
+}
+
 void Chicken::die() {
     Unit::die();
-
-    --Chicken::count;
 }
 
 void Chicken::behaviour(int8_t action) {

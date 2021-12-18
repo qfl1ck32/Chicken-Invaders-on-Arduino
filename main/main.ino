@@ -5,8 +5,8 @@
 #include "src/music-player/MusicPlayer.h"
 #include "src/music-player/songs.h"
 
-Delayer buttonDelayer = Delayer(300);
-Delayer swDelayer = Delayer(300);
+Delayer buttonDelayer = Delayer(200);
+Delayer swDelayer = Delayer(200);
 
 MusicPlayer musicPlayer = MusicPlayer(songBuzzer);
 
@@ -19,9 +19,9 @@ void handleButtonStateChange() {
 }
 
 void setup() {
-    // for (int i = 0; i < 1024; ++i) {
-    //     EEPROM.write(i, 255);
-    // }
+    for (int i = 0; i < 256; ++i) {
+        EEPROM.write(i, 255);
+    }
 
     Serial.begin(baudRate);
 
@@ -39,7 +39,7 @@ void setup() {
     musicPlayer.setSong(merryChristmas, sizeof(merryChristmas) / sizeof(merryChristmas[0]));
     musicPlayer.setRepeat(true);
 
-    stateManager.changeState<MainMenuState>();
+    stateManager.changeState<WelcomeState>();
 
     initialiseRandomSeed();
 }
