@@ -13,13 +13,11 @@ void GameStatus::displayHeader() {
 }
 
 void GameStatus::show(short score, int8_t lifes, int8_t level, int time) {
-    char *messageSecondRow = new char[this->lcd->columns + 1];
+    char messageSecondRow[this->lcd->columns + 1];
 
     sprintf(messageSecondRow, " %d   %d   %d   %d", level, score, time, lifes);
 
     messageSecondRow[this->lcd->columns] = '\0';
 
     this->lcd->printOnRow(messageSecondRow, 1);
-
-    delete messageSecondRow;
 }
