@@ -197,6 +197,8 @@ void PlayingState::setupLevel() {
 
     lcd->clear();
 
+    this->gameStatus->displayHeader();
+
     matrix->setAllLeds(false);
 
     static int8_t spaceshipDefaultX = 7;

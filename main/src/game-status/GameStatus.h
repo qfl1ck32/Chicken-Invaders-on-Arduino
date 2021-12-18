@@ -12,6 +12,7 @@ class GameStatus {
         this->lcd = lcd;
     }
 
+    void displayHeader();
     void show(short, int8_t, int8_t, int);
 };
 
