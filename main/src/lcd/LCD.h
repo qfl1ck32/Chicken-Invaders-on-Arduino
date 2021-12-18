@@ -44,7 +44,7 @@ class LCD : public LiquidCrystal {
     void clearRow(int8_t, bool);
     void clearRow(int8_t, int8_t, bool);
 
-    void createChar(uint8_t, const int8_t *);
+    void createChar(uint8_t, const byte *);
 };
 
 #endif

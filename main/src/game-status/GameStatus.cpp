@@ -3,11 +3,14 @@
 #include "../app/globals.h"
 
 void GameStatus::displayHeader() {
-    static const char msg[] PROGMEM = "Lvl Pts Secs Lfs";
+    static const char msg[] PROGMEM = "Lvl Pts Time";
 
     char *firstRowString = readStringFromPROGMEM(msg);
 
     this->lcd->printOnRow(firstRowString, 0);
+
+    this->lcd->setCursor(strlen(firstRowString) + 2, 0);
+    this->lcd->write(heartChar);
 
     delete firstRowString;
 }

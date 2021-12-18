@@ -24,7 +24,7 @@ LCD::LCD(uint8_t rs, uint8_t enable,
     this->shouldClearRowOnPrint = true;
 }
 
-void LCD::createChar(uint8_t location, const int8_t *charMap) {
+void LCD::createChar(uint8_t location, const byte *charMap) {
     location &= 0x7;
 
     command(LCD_SETCGRAMADDR | (location << 3));

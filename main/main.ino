@@ -28,7 +28,7 @@ void setup() {
     button.setup(handleButtonStateChange);
 
     lcd->setup(ledRows, ledColumns);
-    // lcd->createChar(heartChar, heartCharArray);
+    lcd->createChar(heartChar, heartCharArray);
 
     matrix->setup();
 

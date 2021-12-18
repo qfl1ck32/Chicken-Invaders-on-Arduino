@@ -1,6 +1,6 @@
 #include "./app.h"
 
-const int8_t heartCharArray[8] = {
+const byte heartCharArray[8] PROGMEM = {
     0b00000,
     0b01010,
     0b11111,
@@ -10,7 +10,7 @@ const int8_t heartCharArray[8] = {
     0b00000,
     0b00000};
 
-int8_t heartChar = 1;
+byte heartChar = 1;
 
 const uint64_t matrixNumbers[] PROGMEM = {
     0x0010101014181000,

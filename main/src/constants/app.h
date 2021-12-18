@@ -21,8 +21,8 @@
 #define MATRIX_ROWS 8
 #define MATRIX_COLUMNS 8
 
-extern const int8_t heartCharArray[8];
-extern int8_t heartChar;
+extern const byte heartCharArray[8];
+extern byte heartChar;
 
 #define MATRIX_ROWS 8
 #define MATRIX_COLUMNS 8
