@@ -18,10 +18,6 @@ void handleButtonStateChange() {
 }
 
 void setup() {
-    // for (int i = 0; i < 400; ++i) {
-    //     EEPROM.write(i, 255);
-    // }
-
     Serial.begin(baudRate);
 
     joystick.setup(handleSw);
@@ -38,7 +34,7 @@ void setup() {
     musicPlayer.setSong(silentNight, sizeof(silentNight) / sizeof(silentNight[0]));
     musicPlayer.setRepeat(true);
 
-    stateManager.changeState<WelcomeState>();
+    stateManager.changeState<NameSelectionState>();
 
     initialiseRandomSeed();
 }

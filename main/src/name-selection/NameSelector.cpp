@@ -79,7 +79,7 @@ void NameSelector::select() {
         this->name[this->currentColumn] = 'A';
     }
 
-    if (this->currentColumn == this->currentLetterIndex && this->currentColumn < NAME_MAX_LENGTH) {
+    if (this->currentColumn == this->currentLetterIndex && this->currentColumn < NAME_MAX_LENGTH - 1) {
         ++this->currentLetterIndex;
     }
 }

@@ -24,6 +24,8 @@ void NameSelectionState::handle() {
 }
 
 void NameSelectionState::setup() {
+    static const uint64_t icon PROGMEM = 0x00003c4200240000;
+
     joystick.setOnChangeLeft(NameSelectionState::goLeft);
     joystick.setOnChangeRight(NameSelectionState::goRight);
     joystick.setOnChangeUp(NameSelectionState::goUp);
@@ -31,6 +33,10 @@ void NameSelectionState::setup() {
     joystick.setOnSwStateChange(NameSelectionState::handleSwStateChange);
 
     button.setOnStateChange(NameSelectionState::finish);
+
+    uint64_t image = readImageFromPROGMEM(&icon);
+
+    matrix->displayImage(image);
 
     lcd->clear();
 }
@@ -41,6 +47,8 @@ void NameSelectionState::cleanup() {
 
     lcd->clear();
     lcd->noBlink();
+
+    matrix->setAllLeds(false);
 }
 
 void NameSelectionState::goUp() {
