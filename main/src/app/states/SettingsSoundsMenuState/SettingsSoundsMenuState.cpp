@@ -2,8 +2,8 @@
 
 #include "../../globals.h"
 
-const char SettingsSoundsMenuState::turnMusicOn[] PROGMEM = "Turn sounds on";
-const char SettingsSoundsMenuState::turnMusicOff[] PROGMEM = "Turn sounds off";
+const char SettingsSoundsMenuState::turnMusicOn[] PROGMEM = "Turn sound on";
+const char SettingsSoundsMenuState::turnMusicOff[] PROGMEM = "Turn sound off";
 
 void SettingsSoundsMenuState::setup() {
     static const uint64_t icon PROGMEM = 0x0406354545350604;
