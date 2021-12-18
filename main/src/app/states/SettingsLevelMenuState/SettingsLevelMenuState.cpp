@@ -51,7 +51,7 @@ void SettingsLevelMenuState::decreaseLevel() {
 }
 
 void SettingsLevelMenuState::showLevel() {
-    uint64_t image = readImageFromPROGMEM(&matrixNumbers[level - 1]);
+    uint64_t image = readImageFromPROGMEM(&matrixNumbers[settingsLevel - 1]);
 
     matrix->displayImage(image);
 }
