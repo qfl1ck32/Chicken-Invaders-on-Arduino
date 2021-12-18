@@ -6,9 +6,10 @@ void MainMenuState::setup() {
     static const char play[] PROGMEM = "Play";
     static const char settings[] PROGMEM = "Settings";
     static const char leaderboard[] PROGMEM = "Leaderboard";
+    static const char howToPlay[] PROGMEM = "How to play";
     static const char about[] PROGMEM = "About";
 
-    static const char *const messages[] PROGMEM = {play, settings, leaderboard, about};
+    static const char *const messages[] PROGMEM = {play, settings, leaderboard, howToPlay, about};
     static byte numberOfMessages = sizeof(messages) / sizeof(char *);
 
     static const uint64_t mainImage PROGMEM = 0x004c424242024c00;
@@ -17,7 +18,7 @@ void MainMenuState::setup() {
 
     menu.setMessages(msgs, numberOfMessages);
 
-    HandlerFunction handlers[] = {MainMenuState::goToPlay, MainMenuState::goToSettings, MainMenuState::goToLeaderboard, MainMenuState::goToAbout};
+    HandlerFunction handlers[] = {MainMenuState::goToPlay, MainMenuState::goToSettings, MainMenuState::goToLeaderboard, MainMenuState::goToHowToPlay, MainMenuState::goToAbout};
     menu.setOns(handlers, sizeof(handlers) / sizeof(HandlerFunction));
 
     joystick.setOnChangeUp(menuGoUp);
@@ -54,6 +55,10 @@ void MainMenuState::goToSettings() {
 
 void MainMenuState::goToLeaderboard() {
     stateManager.changeState<LeaderboardState>();
+}
+
+void MainMenuState::goToHowToPlay() {
+    stateManager.changeState<HowToPlayMenuState>();
 }
 
 void MainMenuState::goToAbout() {

@@ -3,6 +3,7 @@
 
 #include "../../../state/State.h"
 #include "../../states/AboutMenuState/AboutMenuState.h"
+#include "../../states/HowToPlayMenuState/HowToPlayMenuState.h"
 #include "../../states/LeaderboardState/LeaderboardState.h"
 #include "../../states/PlayingState/PlayingState.h"
 #include "../../states/SettingsMenuState/SettingsMenuState.h"
@@ -22,6 +23,8 @@ class MainMenuState : public State {
     static void goToSettings();
 
     static void goToLeaderboard();
+
+    static void goToHowToPlay();
 
     static void goToAbout();
 };

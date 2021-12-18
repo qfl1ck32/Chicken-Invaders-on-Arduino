@@ -21,9 +21,9 @@ void handleButtonStateChange() {
 }
 
 void setup() {
-    for (int i = 0; i < 1024; ++i) {
-        EEPROM.write(i, 255);
-    }
+    // for (int i = 0; i < 1024; ++i) {
+    //     EEPROM.write(i, 255);
+    // }
 
     Serial.begin(baudRate);
 
