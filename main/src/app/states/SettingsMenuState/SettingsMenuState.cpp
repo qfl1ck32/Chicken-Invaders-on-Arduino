@@ -17,7 +17,7 @@ void SettingsMenuState::setup() {
 
     menu.setMessages(msgs, numberOfMessages);
 
-    HandlerFunction handlers[] = {SettingsMenuState::goBack, SettingsMenuState::goToLevel, SettingsMenuState::goToLCD,
+    HandlerFunction handlers[] = {goToMainMenu, SettingsMenuState::goToLevel, SettingsMenuState::goToLCD,
                                   SettingsMenuState::goToMatrix, SettingsMenuState::goToSounds};
 
     menu.setOns(handlers, sizeof(handlers) / sizeof(HandlerFunction));
@@ -41,10 +41,6 @@ void SettingsMenuState::cleanup() {
     joystick.clearHandlers();
 
     matrix->setAllLeds(false);
-}
-
-void SettingsMenuState::goBack() {
-    stateManager.changeState<MainMenuState>();
 }
 
 void SettingsMenuState::goToLevel() {

@@ -10,7 +10,7 @@ void SettingsMatrixMenuState::setup() {
 
     menu.setMessages(msgs, numberOfMessages);
 
-    HandlerFunction handlers[] = {SettingsMatrixMenuState::goBack, SettingsMatrixMenuState::increaseIntensity, SettingsMatrixMenuState::decreaseIntensity};
+    HandlerFunction handlers[] = {goToSettingsMenu, SettingsMatrixMenuState::increaseIntensity, SettingsMatrixMenuState::decreaseIntensity};
 
     menu.setOns(handlers, sizeof(handlers) / sizeof(HandlerFunction));
 
@@ -31,10 +31,6 @@ void SettingsMatrixMenuState::cleanup() {
     joystick.clearHandlers();
 
     matrix->setAllLeds(false);
-}
-
-void SettingsMatrixMenuState::goBack() {
-    stateManager.changeState<SettingsMenuState>();
 }
 
 void SettingsMatrixMenuState::increaseIntensity() {

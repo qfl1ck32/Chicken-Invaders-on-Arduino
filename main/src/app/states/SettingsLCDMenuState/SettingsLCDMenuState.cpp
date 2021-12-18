@@ -17,7 +17,7 @@ void SettingsLCDMenuState::setup() {
 
     menu.setMessages(msgs, numberOfMessages);
 
-    HandlerFunction handlers[] = {SettingsLCDMenuState::goBack, SettingsLCDMenuState::decreaseContrast, SettingsLCDMenuState::increaseContrast,
+    HandlerFunction handlers[] = {goToSettingsMenu, SettingsLCDMenuState::decreaseContrast, SettingsLCDMenuState::increaseContrast,
                                   SettingsLCDMenuState::decreaseBacklight, SettingsLCDMenuState::increaseBacklight};
 
     menu.setOns(handlers, sizeof(handlers) / sizeof(HandlerFunction));
@@ -41,10 +41,6 @@ void SettingsLCDMenuState::cleanup() {
     joystick.clearHandlers();
 
     matrix->setAllLeds(false);
-}
-
-void SettingsLCDMenuState::goBack() {
-    stateManager.changeState<SettingsMenuState>();
 }
 
 void SettingsLCDMenuState::increaseContrast() {

@@ -18,7 +18,7 @@ void MainMenuState::setup() {
 
     menu.setMessages(msgs, numberOfMessages);
 
-    HandlerFunction handlers[] = {MainMenuState::goToPlay, MainMenuState::goToSettings, MainMenuState::goToLeaderboard, MainMenuState::goToHowToPlay, MainMenuState::goToAbout};
+    HandlerFunction handlers[] = {MainMenuState::goToPlay, goToSettingsMenu, MainMenuState::goToLeaderboard, MainMenuState::goToHowToPlay, MainMenuState::goToAbout};
     menu.setOns(handlers, sizeof(handlers) / sizeof(HandlerFunction));
 
     joystick.setOnChangeUp(menuGoUp);
@@ -47,10 +47,6 @@ void MainMenuState::cleanup() {
 
 void MainMenuState::goToPlay() {
     stateManager.changeState<PlayingState>();
-}
-
-void MainMenuState::goToSettings() {
-    stateManager.changeState<SettingsMenuState>();
 }
 
 void MainMenuState::goToLeaderboard() {

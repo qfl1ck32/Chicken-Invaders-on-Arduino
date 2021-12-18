@@ -16,7 +16,7 @@ void AboutMenuState::setup() {
 
     menu.setMessages(msgs, numberOfMessages);
 
-    HandlerFunction handlers[] = {AboutMenuState::goBack};
+    HandlerFunction handlers[] = {goToMainMenu};
     menu.setOns(handlers, sizeof(handlers) / sizeof(HandlerFunction));
 
     joystick.clearHandlers();
@@ -44,8 +44,4 @@ void AboutMenuState::cleanup() {
     lcd->clear();
 
     matrix->setAllLeds(false);
-}
-
-void AboutMenuState::goBack() {
-    stateManager.changeState<MainMenuState>();
 }

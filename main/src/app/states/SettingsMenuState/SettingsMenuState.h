@@ -2,7 +2,6 @@
 #define SettingsMenuState_h
 
 #include "../../../state/State.h"
-#include "../../states/MainMenuState/MainMenuState.h"
 #include "../../states/SettingsLCDMenuState/SettingsLCDMenuState.h"
 #include "../../states/SettingsLevelMenuState/SettingsLevelMenuState.h"
 #include "../../states/SettingsMatrixMenuState/SettingsMatrixMenuState.h"
@@ -13,8 +12,6 @@ class SettingsMenuState : public State {
     void setup();
     void handle();
     void cleanup();
-
-    static void goBack();
 
     static void goToLevel();
 

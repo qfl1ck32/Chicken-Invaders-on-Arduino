@@ -11,7 +11,7 @@ void SettingsLevelMenuState::setup() {
 
     menu.setMessages(msgs, numberOfMessages);
 
-    HandlerFunction handlers[] = {SettingsLevelMenuState::goBack, SettingsLevelMenuState::increaseLevel, SettingsLevelMenuState::decreaseLevel};
+    HandlerFunction handlers[] = {goToSettingsMenu, SettingsLevelMenuState::increaseLevel, SettingsLevelMenuState::decreaseLevel};
 
     menu.setOns(handlers, sizeof(handlers) / sizeof(HandlerFunction));
 
@@ -32,10 +32,6 @@ void SettingsLevelMenuState::cleanup() {
     joystick.clearHandlers();
 
     matrix->setAllLeds(false);
-}
-
-void SettingsLevelMenuState::goBack() {
-    stateManager.changeState<SettingsMenuState>();
 }
 
 void SettingsLevelMenuState::increaseLevel() {

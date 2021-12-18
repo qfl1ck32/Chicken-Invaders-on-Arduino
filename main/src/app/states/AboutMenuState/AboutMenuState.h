@@ -4,15 +4,12 @@
 #include <avr/pgmspace.h>
 
 #include "../../../state/State.h"
-#include "../../states/MainMenuState/MainMenuState.h"
 
 class AboutMenuState : public State {
    public:
     void setup();
     void handle();
     void cleanup();
-
-    static void goBack();
 };
 
 #endif

@@ -42,6 +42,9 @@ extern uint8_t settingsLevel;
 extern void setLevel(uint8_t);
 extern void setSettingsLevel(uint8_t);
 
+extern void goToSettingsMenu();
+extern void goToMainMenu();
+
 extern void initialiseRandomSeed();
 
 extern const char backMessage[];

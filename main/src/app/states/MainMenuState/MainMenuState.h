@@ -20,8 +20,6 @@ class MainMenuState : public State {
 
     static void goToPlay();
 
-    static void goToSettings();
-
     static void goToLeaderboard();
 
     static void goToHowToPlay();

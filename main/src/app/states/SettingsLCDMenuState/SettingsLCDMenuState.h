@@ -10,8 +10,6 @@ class SettingsLCDMenuState : public State {
     void handle();
     void cleanup();
 
-    static void goBack();
-
     static void increaseContrast();
 
     static void decreaseContrast();

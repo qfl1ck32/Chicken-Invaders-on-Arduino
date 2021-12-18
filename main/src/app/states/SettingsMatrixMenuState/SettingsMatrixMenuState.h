@@ -12,7 +12,6 @@ class SettingsMatrixMenuState : public State {
     void handle();
     void cleanup();
 
-    static void goBack();
     static void increaseIntensity();
     static void decreaseIntensity();
 };

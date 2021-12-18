@@ -1,6 +1,8 @@
 #include "./globals.h"
 
 #include "../constants/app.h"
+#include "./states/MainMenuState/MainMenuState.h"
+#include "./states/SettingsMenuState/SettingsMenuState.h"
 
 StateManager stateManager = StateManager();
 
@@ -57,6 +59,14 @@ void setSettingsLevel(uint8_t _level) {
     if (_level < MIN_LEVEL || _level > MAX_LEVEL) return;
 
     settingsLevel = _level;
+}
+
+void goToSettingsMenu() {
+    stateManager.changeState<SettingsMenuState>();
+}
+
+void goToMainMenu() {
+    stateManager.changeState<MainMenuState>();
 }
 
 const char backMessage[] PROGMEM = "Back";

@@ -10,8 +10,6 @@ class SettingsLevelMenuState : public State {
     void handle();
     void cleanup();
 
-    static void goBack();
-
     static void increaseLevel();
 
     static void decreaseLevel();

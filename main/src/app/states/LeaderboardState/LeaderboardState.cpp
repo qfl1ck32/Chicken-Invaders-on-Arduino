@@ -15,7 +15,7 @@ void LeaderboardState::setup() {
 
     static const uint64_t icon PROGMEM = 0xa5a5e52527243c00;
 
-    HandlerFunction handlers[] = {LeaderboardState::goBack};
+    HandlerFunction handlers[] = {goToMainMenu};
 
     menu.setOns(handlers, sizeof(handlers) / sizeof(HandlerFunction));
 
@@ -82,8 +82,4 @@ void LeaderboardState::cleanup() {
     joystick.clearHandlers();
 
     matrix->setAllLeds(false);
-}
-
-void LeaderboardState::goBack() {
-    stateManager.changeState<MainMenuState>();
 }
