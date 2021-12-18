@@ -29,6 +29,8 @@ PlayingState::~PlayingState() {
 }
 
 void PlayingState::setup() {
+    Unit::engine = new GameEngine(MATRIX_ROWS, MATRIX_COLUMNS);
+
     this->reset();
 
     this->setupLevel();
@@ -138,7 +140,7 @@ void PlayingState::switchToLostState() {
 // TODO: this is also duplicate, but oh well
 void PlayingState::goToNextScreenAfterDeath() {
     if (PlayingState::leaderboard->isHighScore(PlayingState::score)) {
-        stateManager.changeState<NameSelectionState>();
+        stateManager.changeState<MainMenuState>();
     } else {
         stateManager.changeState<MainMenuState>();
     }
@@ -270,6 +272,8 @@ void PlayingState::cleanup() {
     joystick.clearHandlers();
 
     lcd->shouldClearRowOnPrint = true;
+
+    delete Unit::engine;
 }
 
 void PlayingState::moveUp() {

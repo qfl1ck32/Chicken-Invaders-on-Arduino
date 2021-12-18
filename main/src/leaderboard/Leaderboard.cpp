@@ -67,10 +67,6 @@ void Leaderboard::generate() {
 
 // FIXME: this is not efficient at all, also not dry - but it's less error-prone
 void Leaderboard::write(const char *name, int score) {
-    Serial.println(name);
-    Serial.println(score);
-
-    return;
     char entry[strlen(name) + getNumberOfDigits(score) + 2];
 
     strncpy(entry, name, strlen(name));

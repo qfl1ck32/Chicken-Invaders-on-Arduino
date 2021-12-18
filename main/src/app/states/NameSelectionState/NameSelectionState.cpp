@@ -36,7 +36,6 @@ void NameSelectionState::setup() {
 
 void NameSelectionState::cleanup() {
     joystick.clearHandlers();
-
     button.clearHandler();
 
     lcd->clear();
@@ -65,8 +64,7 @@ void NameSelectionState::handleSwStateChange() {
 
 void NameSelectionState::finish() {
     if (NameSelectionState::nameSelector->finish()) {
-        // TODO: fix; do this in PlayingState?
-        NameSelectionState::leaderboard->write(NameSelectionState::nameSelector->name, PlayingState::score);
+        // NameSelectionState::leaderboard->write(NameSelectionState::nameSelector->name, PlayingState::score);
         stateManager.changeState<MainMenuState>();
     }
 }

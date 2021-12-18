@@ -2,6 +2,8 @@
 
 #include "../app/globals.h"
 
+GameEngine* Unit::engine = nullptr;
+
 void Unit::die() {
     this->isAlive = false;
 }

@@ -8,8 +8,6 @@
 Delayer buttonDelayer = Delayer(300);
 Delayer swDelayer = Delayer(300);
 
-GameEngine* Unit::engine = new GameEngine(MATRIX_ROWS, MATRIX_COLUMNS);
-
 MusicPlayer musicPlayer = MusicPlayer(songBuzzer);
 
 void handleSw() {
