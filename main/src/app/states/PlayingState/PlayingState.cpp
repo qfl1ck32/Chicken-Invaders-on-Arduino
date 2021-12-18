@@ -206,6 +206,7 @@ void PlayingState::setupLevel() {
     button.setOnStateChange(PlayingState::attack);
 
     lcd->clear();
+
     matrix->setAllLeds(false);
 
     static int8_t spaceshipDefaultX = 7;
