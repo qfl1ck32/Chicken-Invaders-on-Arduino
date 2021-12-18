@@ -2,7 +2,10 @@
 
 #include "../app/globals.h"
 
+byte Bullet::numberOfBulletsShotSoFar = 0;
+
 Bullet::Bullet() {
+    ++Bullet::numberOfBulletsShotSoFar;
 }
 
 Bullet::Bullet(int8_t x, int8_t y) : Unit(x, y) {

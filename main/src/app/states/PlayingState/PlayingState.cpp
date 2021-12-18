@@ -181,9 +181,18 @@ void PlayingState::handleNotPlayingState() {
     }
 }
 
-// TODO: maybe account for the number of bullets used, too?
 void PlayingState::updateScore() {
     PlayingState::score += this->maxSecondsPerLevel - this->getTimeSoFar();
+
+    if (Chicken::count == 0) {
+        byte shotBullets = Bullet::numberOfBulletsShotSoFar;
+
+        byte shotsBonus = USED_BULLETS_INITIAL_BONUS - shotBullets;
+
+        if (shotsBonus > 0) {
+            PlayingState::score += shotsBonus;
+        }
+    }
 }
 
 void PlayingState::setupLevel() {
