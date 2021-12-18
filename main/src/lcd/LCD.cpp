@@ -119,10 +119,13 @@ void LCD::printOnRow(const char *msg, int8_t row) {
     LCD::printOnRow(msg, row, 0, true);
 }
 
+// TODO: this could have a refactorization tho, not dry enough
 void LCD::scrollRow(int8_t row, int8_t skip = 0) {
     char *str = this->lastStrings[row] + skip;
 
-    if (this->scrollOffsets[row] == strlen(str) + this->columns - skip) {
+    uint8_t length = strlen(str);
+
+    if (this->scrollOffsets[row] == length + this->columns - skip) {
         this->scrollOffsets[row] = 0;
         return;
     }
@@ -130,16 +133,25 @@ void LCD::scrollRow(int8_t row, int8_t skip = 0) {
     // TODO: only turn off positions that are currently used
     this->clearRow(row, skip, false);
 
-    if (this->scrollOffsets[row] < strlen(str)) {
+    if (this->scrollOffsets[row] < length) {
         char *msg = str + this->scrollOffsets[row];
 
+        int numberOfCharsToDisplay = min(strlen(msg), this->columns - skip);
+
+        char toDisplay[numberOfCharsToDisplay + 1];
+
+        strncpy(toDisplay, msg, numberOfCharsToDisplay);
+
+        toDisplay[numberOfCharsToDisplay] = '\0';
+
         this->setCursor(skip, row);
-        this->print(msg);
+
+        this->print(toDisplay);
     }
 
     else {
-        int startAt = this->columns - this->scrollOffsets[row] + strlen(str) - 1;
-        int numberOfCharsToDisplay = min(strlen(str), this->columns - startAt + 1);
+        int startAt = this->columns - this->scrollOffsets[row] + length - 1;
+        int numberOfCharsToDisplay = min(length, this->columns - startAt + 1);
 
         char toDisplay[numberOfCharsToDisplay + 1];
 
