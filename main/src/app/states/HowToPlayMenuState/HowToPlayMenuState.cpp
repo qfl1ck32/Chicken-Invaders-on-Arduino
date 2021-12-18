@@ -8,7 +8,7 @@ void HowToPlayMenuState::setup() {
     static const char *const messages[] PROGMEM = {backMessage, m1};
     static byte numberOfMessages = sizeof(messages) / sizeof(char *);
 
-    static const uint64_t hammerImage PROGMEM = 0x0345aa5428140a04;
+    static const uint64_t hammerImage PROGMEM = 0x00e7bd8181ff1818;
 
     char **msgs = readArrayOfStringsFromPROGMEM(messages, numberOfMessages);
 
