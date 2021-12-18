@@ -12,9 +12,11 @@ Bullet::Bullet(int8_t x, int8_t y) : Unit(x, y) {
     static short frequency = 400;
     static int8_t duration = 125;
 
-    songBuzzer->stop();
+    if (usesMusic) {
+        songBuzzer->stop();
 
-    gameSoundsBuzzer->buzz(frequency, duration);
+        gameSoundsBuzzer->buzz(frequency, duration);
+    }
 }
 
 void Bullet::action() {
