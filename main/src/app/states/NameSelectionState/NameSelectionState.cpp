@@ -10,9 +10,9 @@ NameSelectionState::NameSelectionState() {
     NameSelectionState::nameSelector = new NameSelector(lcd, 1);
 }
 
-// TODO: fix this. why are they breaking the app?
+// TODO: fix this. why is the last delete breaking the app?
 NameSelectionState::~NameSelectionState() {
-    // delete NameSelectionState::leaderboard;
+    delete NameSelectionState::leaderboard;
     // delete NameSelectionState::nameSelector;
 }
 

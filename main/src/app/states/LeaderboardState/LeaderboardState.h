@@ -6,10 +6,7 @@
 
 class LeaderboardState : public State {
    public:
-    Leaderboard *leaderboard;
-
-    LeaderboardState();
-    ~LeaderboardState();
+    Leaderboard leaderboard;
 
     void setup();
     void handle();

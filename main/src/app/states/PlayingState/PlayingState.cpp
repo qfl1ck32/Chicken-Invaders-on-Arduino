@@ -14,7 +14,7 @@ Spaceship* PlayingState::spaceship = 0;
 PlayingState::PlayingState() {
     this->graphicsEngine = new GraphicsEngine(matrix);
     this->gameStatus = new GameStatus(lcd);
-    this->scrollDelayer = new Delayer(350);
+    this->scrollDelayer.updateInterval(350);
 
     PlayingState::leaderboard = new Leaderboard();
 }
@@ -22,7 +22,6 @@ PlayingState::PlayingState() {
 PlayingState::~PlayingState() {
     delete this->graphicsEngine;
     delete this->gameStatus;
-    delete this->scrollDelayer;
     delete PlayingState::leaderboard;
 }
 
@@ -49,11 +48,10 @@ void PlayingState::handle() {
         case PLAYING:
             this->play();
             break;
-        case WON:
-            this->handleWonState();
+        case NOT_INITIALISED:
             break;
-        case LOST:
-            this->handleLostState();
+        default:
+            this->handleNotPlayingState();
             break;
     }
 }
@@ -176,16 +174,8 @@ void PlayingState::switchToWonState() {
     matrix->displayImage(image);
 }
 
-// TODO: both are the same.
-void PlayingState::handleWonState() {
-    if (this->scrollDelayer->canRun()) {
-        lcd->scrollRow(0);
-        lcd->scrollRow(1);
-    }
-}
-
-void PlayingState::handleLostState() {
-    if (this->scrollDelayer->canRun()) {
+void PlayingState::handleNotPlayingState() {
+    if (this->scrollDelayer.canRun()) {
         lcd->scrollRow(0);
         lcd->scrollRow(1);
     }

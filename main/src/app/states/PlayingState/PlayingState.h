@@ -23,7 +23,7 @@ class PlayingState : public State {
 
     GraphicsEngine *graphicsEngine;
     GameStatus *gameStatus;
-    Delayer *scrollDelayer;
+    Delayer scrollDelayer;
 
     static Leaderboard *leaderboard;
 
@@ -41,8 +41,7 @@ class PlayingState : public State {
     void cleanup();
 
     void play();
-    void handleLostState();
-    void handleWonState();
+    void handleNotPlayingState();
 
     void switchToWonState();
     void switchToLostState();

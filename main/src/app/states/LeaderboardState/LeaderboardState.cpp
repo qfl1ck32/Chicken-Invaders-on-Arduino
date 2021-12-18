@@ -2,14 +2,6 @@
 
 #include "../../globals.h"
 
-LeaderboardState::LeaderboardState() {
-    this->leaderboard = new Leaderboard();
-}
-
-LeaderboardState::~LeaderboardState() {
-    delete this->leaderboard;
-}
-
 void LeaderboardState::setup() {
     static const char noHighScoresMessage[] PROGMEM = "No high scores";
 
@@ -19,9 +11,9 @@ void LeaderboardState::setup() {
 
     menu.setOns(handlers, sizeof(handlers) / sizeof(HandlerFunction));
 
-    this->leaderboard->generate();
+    this->leaderboard.generate();
 
-    int numberOfHighscores = this->leaderboard->scores->size;
+    int numberOfHighscores = this->leaderboard.scores->size;
 
     int messagesLength = numberOfHighscores == 0 ? 2 : 1 + numberOfHighscores;
 
@@ -31,12 +23,8 @@ void LeaderboardState::setup() {
 
     int index = 1;
 
-    while (leaderboard->scores->size) {
-        NameAndScore entry = leaderboard->scores->removeHead();
-
-        Serial.print(entry.name);
-        Serial.print(", ");
-        Serial.println(entry.score);
+    while (leaderboard.scores->size) {
+        NameAndScore entry = leaderboard.scores->removeHead();
 
         char *entryToPrint = new char[strlen(entry.name) + getNumberOfDigits(entry.score) + 6];
 
@@ -49,15 +37,9 @@ void LeaderboardState::setup() {
         ++index;
     }
 
-    for (int i = 0; i < index; ++i) {
-        Serial.println(messages[i]);
-    }
-
     if (index == 1) {
         messages[index] = readStringFromPROGMEM(noHighScoresMessage);
     }
-
-    Serial.println(messagesLength);
 
     menu.setMessages(messages, messagesLength);
 
