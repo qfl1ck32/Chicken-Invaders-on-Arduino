@@ -1,5 +1,16 @@
 #include "./Menu.h"
 
+Menu::Menu(LCD *lcd) {
+    this->lcd = lcd;
+
+    this->numberOfMessages = 0;
+    this->numberOfHandlers = 0;
+
+    this->currentRow = 0;
+
+    this->scrollDelayer.updateInterval(350);
+}
+
 void Menu::setMessages(char **messages, int numberOfMessages, bool resetCurrentRow) {
     if (this->messages) {
         for (int i = 0; i < this->numberOfMessages; ++i) {

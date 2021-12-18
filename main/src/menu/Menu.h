@@ -20,16 +20,9 @@ class Menu {
     int numberOfMessages;
     int numberOfHandlers;
 
-    Delayer scrollDelayer = Delayer(200);
+    Delayer scrollDelayer;
 
-    Menu(LCD *lcd) {
-        this->lcd = lcd;
-
-        this->numberOfMessages = 0;
-        this->numberOfHandlers = 0;
-
-        this->currentRow = 0;
-    }
+    Menu(LCD *);
 
     void setOns(HandlerFunction *, int);
 
