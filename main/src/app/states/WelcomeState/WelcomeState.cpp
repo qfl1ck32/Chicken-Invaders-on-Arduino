@@ -7,8 +7,11 @@ WelcomeState::WelcomeState() {
 }
 
 void WelcomeState::setup() {
-    button.setOnStateChange(WelcomeState::moveToEnterYourNameState);
     static const char welcomeMessage[] PROGMEM = "Welcome!";
+
+    static const uint64_t icon PROGMEM = 0x00004a4a4e0a4a00;
+
+    button.setOnStateChange(WelcomeState::moveToEnterYourNameState);
 
     char *welcome = readStringFromPROGMEM(welcomeMessage);
     char *pressXToContinue = readStringFromPROGMEM(pressXToContinueMessage);
@@ -18,6 +21,10 @@ void WelcomeState::setup() {
 
     delete welcome;
     delete pressXToContinue;
+
+    uint64_t image = readImageFromPROGMEM(&icon);
+
+    matrix->displayImage(image);
 }
 
 void WelcomeState::handle() {
@@ -29,6 +36,8 @@ void WelcomeState::handle() {
 void WelcomeState::cleanup() {
     button.clearHandler();
     lcd->clear();
+
+    matrix->setAllLeds(false);
 }
 
 void WelcomeState::moveToEnterYourNameState() {

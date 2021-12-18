@@ -12,7 +12,7 @@ void MainMenuState::setup() {
     static const char *const messages[] PROGMEM = {play, settings, leaderboard, howToPlay, about};
     static byte numberOfMessages = sizeof(messages) / sizeof(char *);
 
-    static const uint64_t mainImage PROGMEM = 0x004c424242024c00;
+    static const uint64_t mainImage PROGMEM = 0x00007e007e007e00;
 
     char **msgs = readArrayOfStringsFromPROGMEM(messages, sizeof(messages) / sizeof(char *));
 
