@@ -1,5 +1,4 @@
 #include "src/app/globals.h"
-#include "src/app/states/PlayingState/PlayingState.h"
 #include "src/app/states/WelcomeState/WelcomeState.h"
 #include "src/constants/app.h"
 #include "src/music-player/MusicPlayer.h"
