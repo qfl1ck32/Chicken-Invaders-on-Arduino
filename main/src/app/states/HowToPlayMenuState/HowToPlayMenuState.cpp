@@ -12,10 +12,10 @@ void HowToPlayMenuState::setup() {
     static const char m7[] PROGMEM = "You are the";
     static const char m8[] PROGMEM = "spaceship in";
     static const char m9[] PROGMEM = "the first row!";
-    static const char m10[] PROGMEM = "Use the joy";
-    static const char m11[] PROGMEM = "to move, and";
+    static const char m10[] PROGMEM = "Use the joy to";
+    static const char m11[] PROGMEM = "move, and";
     static const char m12[] PROGMEM = "press X to";
-    static const char m13[] PROGMEM = "shoot bullets";
+    static const char m13[] PROGMEM = "shoot bullets!";
 
     static const char gl[] PROGMEM = "Good luck!";
     static const char hf[] PROGMEM = "Have fun!";
