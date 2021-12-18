@@ -36,7 +36,7 @@ void setup() {
     lcd->clear();
     matrix->setAllLeds(false);
 
-    musicPlayer.setSong(merryChristmas, sizeof(merryChristmas) / sizeof(merryChristmas[0]));
+    musicPlayer.setSong(silentNight, sizeof(silentNight) / sizeof(silentNight[0]));
     musicPlayer.setRepeat(true);
 
     stateManager.changeState<WelcomeState>();
