@@ -110,10 +110,6 @@ void PlayingState::switchToLostState() {
 
     PlayingState::state = LOST;
 
-    // TODO: maybe show an image ;)
-    matrix->setAllLeds(false);
-
-    // TODO: progmem
     int numberOfDigitsInScore = getNumberOfDigits(PlayingState::score);
 
     char gameOverMessage[21 + numberOfDigitsInScore];
@@ -128,6 +124,9 @@ void PlayingState::switchToLostState() {
 
     lcd->printOnRow(gameOverMessage, 0);
     lcd->printOnRow(pressXToContinueMsg, 1);
+
+    delete gameOverMsg;
+    delete pressXToContinueMsg;
 
     button.setOnStateChange(PlayingState::goToNextScreenAfterDeath);
 
@@ -148,22 +147,25 @@ void PlayingState::goToNextScreenAfterDeath() {
 void PlayingState::switchToWonState() {
     static const uint64_t icon PROGMEM = 0x003c420024242400;
 
+    static const char youWonLvl[] PROGMEM = "You won level ";
+
     PlayingState::state = WON;
 
-    // TODO: maybe show an image
-    matrix->setAllLeds(false);
-
-    // TODO: progmem
     short numberOfDigitsInLevel = getNumberOfDigits(level);
 
     char youWon[16 + numberOfDigitsInLevel];
 
-    sprintf(youWon, "You won level %d!", level);
+    char* youWonLevel = readStringFromPROGMEM(youWonLvl);
 
-    const char* const pressXToContinue = "Press X to continue.";
+    sprintf(youWon, "%s%d!", youWonLevel, level);
+
+    char* pressXToContinue = readStringFromPROGMEM(pressXToContinueMessage);
 
     lcd->printOnRow(youWon, 0);
     lcd->printOnRow(pressXToContinue, 1);
+
+    delete youWonLevel;
+    delete pressXToContinue;
 
     button.setOnStateChange(PlayingState::goToNextLevel);
 
@@ -221,9 +223,10 @@ void PlayingState::setupLevel() {
 
     Chicken* chicken = new Chicken(0, random(Unit::engine->columns / 2));
 
-    // TODO: adjust, make constant
-    chicken->eggDelayer.updateInterval(CHICKEN_INITIAL_EGG_DELAYER_INTERVAL - 150 * level);
-    chicken->moveDelayer.updateInterval(CHICKEN_INITIAL_MOVE_DELAYER_INTERVAL - 150 * level);
+    chicken->eggDelayer.updateInterval(CHICKEN_INITIAL_EGG_DELAYER_INTERVAL - CHICKEN_DELAYER_INTERVAL_DECREASE_FACTOR * level);
+    chicken->moveDelayer.updateInterval(CHICKEN_INITIAL_MOVE_DELAYER_INTERVAL - CHICKEN_DELAYER_INTERVAL_DECREASE_FACTOR * level);
+
+    Egg::fallSpeed = EGG_INITIAL_FALL_DELAYER_INTERVAL - EGG_DELAYER_INTERVAL_DECREASE_FACTOR * level;
 
     this->lastNumberOfChickens = Chicken::count;
 
@@ -247,8 +250,6 @@ void PlayingState::goToNextLevel() {
 
     for (uint8_t i = 0; i < Unit::engine->numberOfUnits; ++i) {
         Unit* unit = Unit::engine->unitArray[i];
-
-        if (!unit) continue;
 
         unsigned char type = unit->getType();
 

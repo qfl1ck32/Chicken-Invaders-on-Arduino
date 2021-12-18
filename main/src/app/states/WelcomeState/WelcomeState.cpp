@@ -8,12 +8,16 @@ WelcomeState::WelcomeState() {
 
 void WelcomeState::setup() {
     button.setOnStateChange(WelcomeState::moveToEnterYourNameState);
+    static const char welcomeMessage[] PROGMEM = "Welcome!";
 
-    // FIXME: add PROGMEM
-    static const char welcomeMessage[] = "Welcome!";
+    char *welcome = readStringFromPROGMEM(welcomeMessage);
+    char *pressXToContinue = readStringFromPROGMEM(pressXToContinueMessage);
 
-    lcd->printOnRow(welcomeMessage, 0);
-    // lcd->printOnRow(pressXToContinue, 1);
+    lcd->printOnRow(welcome, 0);
+    lcd->printOnRow(pressXToContinue, 1);
+
+    delete welcome;
+    delete pressXToContinue;
 }
 
 void WelcomeState::handle() {

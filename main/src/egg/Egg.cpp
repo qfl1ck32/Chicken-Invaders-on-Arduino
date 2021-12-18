@@ -1,7 +1,9 @@
 #include "./Egg.h"
 
+uint8_t Egg::fallSpeed = EGG_INITIAL_FALL_DELAYER_INTERVAL;
+
 Egg ::Egg(int8_t x, int8_t y) : Unit(x, y) {
-    this->delayer.updateInterval(200);
+    this->delayer.updateInterval(Egg::fallSpeed);
 }
 
 void Egg::action() {

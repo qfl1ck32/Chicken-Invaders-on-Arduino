@@ -7,6 +7,8 @@
 
 class Egg : public Unit {
    public:
+    static uint8_t fallSpeed;
+
     Delayer delayer;
 
     Egg(int8_t, int8_t);
