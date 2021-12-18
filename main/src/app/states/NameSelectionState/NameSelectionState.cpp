@@ -24,6 +24,8 @@ void NameSelectionState::handle() {
 }
 
 void NameSelectionState::setup() {
+    static const char msg[] PROGMEM = "Enter your name:";
+
     static const uint64_t icon PROGMEM = 0x00003c4200240000;
 
     joystick.setOnChangeLeft(NameSelectionState::goLeft);
@@ -34,11 +36,15 @@ void NameSelectionState::setup() {
 
     button.setOnStateChange(NameSelectionState::finish);
 
+    char* message = readStringFromPROGMEM(msg);
+
+    lcd->printOnRow(message, 0);
+
+    delete message;
+
     uint64_t image = readImageFromPROGMEM(&icon);
 
     matrix->displayImage(image);
-
-    lcd->clear();
 }
 
 void NameSelectionState::cleanup() {

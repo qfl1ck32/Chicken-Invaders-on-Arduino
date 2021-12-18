@@ -86,19 +86,10 @@ void NameSelector::select() {
 
 // TODO: should first check if the input is not empty?
 bool NameSelector::finish() {
-    // this->name[this->currentLetterIndex + 1] = '\0';
     return true;
 }
 
 void NameSelector::main() {
-    static const char msg[] PROGMEM = "Enter your name:";
-
-    char *message = readStringFromPROGMEM(msg);
-
-    this->lcd->printOnRow(message, 0);
-
-    delete message;
-
     if (this->isSelected) {
         this->lcd->noBlink();
     }
