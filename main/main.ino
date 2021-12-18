@@ -34,7 +34,7 @@ void setup() {
     musicPlayer.setSong(silentNight, sizeof(silentNight) / sizeof(silentNight[0]));
     musicPlayer.setRepeat(true);
 
-    stateManager.changeState<NameSelectionState>();
+    stateManager.changeState<WelcomeState>();
 
     initialiseRandomSeed();
 }
