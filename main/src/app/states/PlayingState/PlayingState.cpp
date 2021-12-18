@@ -153,7 +153,7 @@ void PlayingState::switchToWonState() {
 
     short numberOfDigitsInLevel = getNumberOfDigits(level);
 
-    char youWon[16 + numberOfDigitsInLevel];
+    char youWon[15 + numberOfDigitsInLevel];
 
     char* youWonLevel = readStringFromPROGMEM(youWonLvl);
 
