@@ -3,9 +3,24 @@
 #include "../../globals.h"
 
 void HowToPlayMenuState::setup() {
-    static const char m1[] PROGMEM = "Have fun!";
+    static const char m1[] PROGMEM = "On the upmost";
+    static const char m2[] PROGMEM = "two rows, we";
+    static const char m3[] PROGMEM = "have chickens";
+    static const char m4[] PROGMEM = "which move and";
+    static const char m5[] PROGMEM = "drop eggs!";
+    static const char m6[] PROGMEM = "Be careful!";
+    static const char m7[] PROGMEM = "You are the";
+    static const char m8[] PROGMEM = "spaceship in";
+    static const char m9[] PROGMEM = "the first row!";
+    static const char m10[] PROGMEM = "Use the joy";
+    static const char m11[] PROGMEM = "to move, and";
+    static const char m12[] PROGMEM = "press X to";
+    static const char m13[] PROGMEM = "shoot bullets";
 
-    static const char *const messages[] PROGMEM = {backMessage, m1};
+    static const char gl[] PROGMEM = "Good luck!";
+    static const char hf[] PROGMEM = "Have fun!";
+
+    static const char *const messages[] PROGMEM = {backMessage, m1, m2, m3, m4, m5, m6, m7, m8, m9, m10, m11, m12, m13, gl, hf};
     static byte numberOfMessages = sizeof(messages) / sizeof(char *);
 
     static const uint64_t hammerImage PROGMEM = 0x00e7bd8181ff1818;
