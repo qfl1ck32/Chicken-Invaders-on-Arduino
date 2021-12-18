@@ -191,8 +191,9 @@ void PlayingState::handleLostState() {
     }
 }
 
+// TODO: maybe account for the number of bullets used, too?
 void PlayingState::updateScore() {
-    PlayingState::score += level;
+    PlayingState::score += this->maxSecondsPerLevel - this->getTimeSoFar();
 }
 
 void PlayingState::setupLevel() {
