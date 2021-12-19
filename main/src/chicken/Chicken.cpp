@@ -18,21 +18,21 @@ void Chicken::action() {
         new Egg(this->x + 1, this->y);
     }
 
-    short rand = random(2);
-    short rand2 = random(2);
+    if (!this->moveDelayer.canRun()) return;
 
-    short xDirection = rand & 1 ? 1 : -1;
-    short yDirection = rand2 & 1 ? 1 : -1;
+    short rand = random(3);
+    short rand2 = random(3);
 
-    if (this->moveDelayer.canRun()) {
-        if (this->x + xDirection >= maxRow) return;
+    short xDirection = rand ? (rand & 1 ? 1 : -1) : 0;
+    short yDirection = rand2 ? (rand2 & 1 ? 1 : -1) : 0;
 
-        if (!this->engine->isValidPosition(this->x + xDirection, this->y + yDirection) || this->engine->unitMatrix[this->x + xDirection][this->y + yDirection] != 0) {
-            return;
-        }
+    if (this->x + xDirection >= maxRow) return;
 
-        this->move(xDirection, yDirection);
+    if (!this->engine->isValidPosition(this->x + xDirection, this->y + yDirection) || this->engine->unitMatrix[this->x + xDirection][this->y + yDirection] != 0) {
+        return;
     }
+
+    this->move(xDirection, yDirection);
 };
 
 Chicken::~Chicken() {

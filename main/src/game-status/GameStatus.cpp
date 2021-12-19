@@ -18,7 +18,7 @@ void GameStatus::displayHeader() {
 void GameStatus::show(short score, int8_t lifes, int8_t level, int time) {
     char messageSecondRow[this->lcd->columns + 1];
 
-    snprintf(messageSecondRow, this->lcd->columns, " %d %s%d   %d  %s%d", level, score >= 10 ? " " : "  ", score, time, time >= 10 ? " " : "  ", lifes);
+    snprintf(messageSecondRow, this->lcd->columns, " %d %s%d  %s%d  %s%d", level, score > 10 ? " " : "  ", score, score < 100 ? " " : "", time, time >= 10 ? " " : "  ", lifes);
 
     messageSecondRow[this->lcd->columns] = '\0';
 

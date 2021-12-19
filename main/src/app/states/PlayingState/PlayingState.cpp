@@ -135,7 +135,6 @@ void PlayingState::switchToLostState() {
     matrix->displayImage(image);
 }
 
-// TODO: this is also duplicate, but oh well
 void PlayingState::goToNextScreenAfterDeath() {
     if (PlayingState::leaderboard->isHighScore(PlayingState::score)) {
         stateManager.changeState<NameSelectionState>();
@@ -193,6 +192,8 @@ void PlayingState::updateScore() {
             PlayingState::score += shotsBonus;
         }
 
+        PlayingState::score += REMAINING_LIFES_SCORE_FACTOR * spaceship->lifes;
+
         Bullet::numberOfBulletsShotSoFar = 0;
     }
 }
@@ -224,6 +225,8 @@ void PlayingState::setupLevel() {
     }
 
     else {
+        spaceship->move(spaceshipDefaultX - spaceship->x, spaceshipDefaultY - spaceship->y);
+
         Unit::engine->pixelChanges->add(PixelChange(spaceship->x, spaceship->y, true));
         this->graphicsEngine->renderChanges(Unit::engine->pixelChanges);
     }
@@ -254,6 +257,8 @@ void PlayingState::goToNextLevel() {
     }
 
     setLevel(level + 1);
+
+    spaceship->lifes += 1;
 
     for (uint8_t i = 0; i < Unit::engine->numberOfUnits; ++i) {
         Unit* unit = Unit::engine->unitArray[i];

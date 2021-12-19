@@ -28,7 +28,7 @@ void LeaderboardState::setup() {
 
         char *entryToPrint = new char[strlen(entry.name) + getNumberOfDigits(entry.score) + 6];
 
-        sprintf(entryToPrint, "%d. %s - %d", index, entry.name, entry.score);
+        sprintf(entryToPrint, "%d. %s %d", index, entry.name, entry.score);
 
         messages[index] = entryToPrint;
 

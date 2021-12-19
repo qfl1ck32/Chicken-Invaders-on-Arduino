@@ -16,8 +16,6 @@
 #define WON 2
 #define LOST 4
 
-#define USED_BULLETS_INITIAL_BONUS 10
-
 class PlayingState : public State {
    public:
     PlayingState();
