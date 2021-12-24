@@ -122,6 +122,7 @@
         1. play() - a method which runs a round of the game engine, renders the changes on the matrix / LCD and handles the death / winning of a round (calling a `switchToX` method).
         
         2. reset() - self explanatory :)
+
         3. updateScore() - which uses:
             1. the number of seconds left in the round
             2. the number of bullets that were shot
