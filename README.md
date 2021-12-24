@@ -151,3 +151,6 @@
 ### Images and videos
 
     Here is a link to the [demo of the application](https://youtu.be/rKFl1tSSmDI) 😄
+    
+    This is how the setup looks like: ![setup](https://user-images.githubusercontent.com/56713436/147364341-3ec4178a-847c-404d-b326-c2f86f05044d.jpeg)
+
