@@ -86,11 +86,11 @@
       Behind the scenes, it has methods for scrolling through the messages, selecting an action, and so on.
 
 ### Game Engine
-
-    The game engine, and the way we create units is inspired from my second homework for _Object Oriented Programming_, a course from my first year @ Uni.
-    You can see how it works [here](https://github.com/qfl1ck32/Object-Oriented-Programming/tree/master/Homework%202).
+The game engine, and the way we create units is inspired from my second homework for _Object Oriented Programming_, a course from my first year @ Uni.
+You can see how it works [here](https://github.com/qfl1ck32/Object-Oriented-Programming/tree/master/Homework%202).
     
-    A simple explanation would be:
+A simple explanation would be:
+
         1) We have `Units`. `Unit` is an abstract class, which implements logic for moving, dying, sending messages to another unit, e.t.c.., having `abstract methods` for `action` and `behaviour` (how the unit should act on a particular message).
         
         2) The `GameEngine` has a NxM matrix of pointers to units, `unitsMatrix`, and an array of pointers to (the same) units: `unitsArray`.
@@ -150,7 +150,7 @@
     
 ### Images and videos
 
-    Here is a link to the [demo of the application](https://youtu.be/rKFl1tSSmDI) 😄
-    
-    This is how the setup looks like: ![setup](https://user-images.githubusercontent.com/56713436/147364341-3ec4178a-847c-404d-b326-c2f86f05044d.jpeg)
+Here is a link to the [demo of the application](https://youtu.be/rKFl1tSSmDI) 😄
+
+This is how the setup looks like: ![setup](https://user-images.githubusercontent.com/56713436/147364341-3ec4178a-847c-404d-b326-c2f86f05044d.jpeg)
 
