@@ -2,6 +2,17 @@
 
 ##### This is a game inspired from (and similar with) Chicken Invaders, playable on an Arduino Uno.
 
+### Components
+    1. 1x Arduino Uno
+    2. ~32x jumper
+    3. 2x buzzer (1x passive, 1x active)
+    4. 1x LCD 1602
+    5. 1x Max 7219 Matrix / Driver
+    6. 1x Joystick
+    7. 1x 10µf / 5v capacitor
+    8. 1x 104 ceramic capacitor
+    9. 1c 220Ω resistor
+
 ### The application has the following modules:
 
     1. The welcome screen
