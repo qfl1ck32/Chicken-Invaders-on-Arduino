@@ -120,7 +120,7 @@ void PlayingState::switchToLostState() {
     char* gameOverMsg = readStringFromPROGMEM(gameOver);
     char* pressXToContinueMsg = readStringFromPROGMEM(pressXToContinue);
 
-    sprintf(gameOverMessage, "%s: %d.", gameOverMsg, PlayingState::score);
+    sprintf(gameOverMessage, "%s%d.", gameOverMsg, PlayingState::score);
 
     lcd->printOnRow(gameOverMessage, 0);
     lcd->printOnRow(pressXToContinueMsg, 1);

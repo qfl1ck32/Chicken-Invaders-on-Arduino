@@ -9,8 +9,10 @@ Egg ::Egg(int8_t x, int8_t y) : Unit(x, y) {
 void Egg::action() {
     if (!this->delayer.canRun()) return;
 
-    if (this->engine->unitMatrix[this->x + 1][this->y] != 0 && this->engine->unitMatrix[this->x + 1][this->y]->getType() == SPACESHIP_TYPE) {
-        this->sendMessage(KILL, *this->engine->unitMatrix[this->x + 1][this->y]);
+    Unit *unit = this->engine->unitMatrix[this->x + 1][this->y];
+
+    if (unit != 0 && unit->getType() == SPACESHIP_TYPE) {
+        this->sendMessage(KILL, *unit);
         this->die();
         return;
     }

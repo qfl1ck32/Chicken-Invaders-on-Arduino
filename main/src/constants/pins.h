@@ -8,12 +8,12 @@ const int8_t d7 = 7;
 const int8_t contrast = 9;
 const int8_t backlight = 6;
 
-const int8_t pinSW = 2;
 const int8_t pinX = A0;
 const int8_t pinY = A1;
+const int8_t pinSW = 2;
 
 const int8_t songBuzzerPin = 11;
-const int8_t gameSoundsBuzzerPin = A3;
+const int8_t gameSoundsBuzzerPin = A4;
 
 const int8_t buttonPin = 3;
 
@@ -21,7 +21,7 @@ const int8_t ledRows = 2;
 const int8_t ledColumns = 16;
 
 const int8_t dinPin = 12;
-const int8_t clockPin = A2;
+const int8_t clockPin = A3;
 const int8_t loadPin = 10;
 
 const int8_t matrixRows = 8;
