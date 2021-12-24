@@ -11,7 +11,7 @@
     6. 1x Joystick
     7. 1x 10µf / 5v capacitor
     8. 1x 104 ceramic capacitor
-    9. 1c 220Ω resistor
+    9. 1c 220Ω resistor 
 
 ### The application has the following modules:
 
@@ -146,3 +146,8 @@
 
     We are using char* everywhere. No Strings. Also, no array of strings / numbers is saved directly into memory - we're using PROGMEM.
     Whenever we need a string from PROGMEM, we can use `readStringFromPROGMEM()`. :)
+    
+    
+### Images and videos
+
+    Here is a link to the [demo of the application](https://youtu.be/rKFl1tSSmDI) 😄
